@@ -11,27 +11,22 @@ export default function HeroSection() {
   const [statsContent, setStatsContent] = useState<HomepageContent | null>(null)
   const [loading, setLoading] = useState(true)
 
-  //   / Default slides as fallback
-  const defaultSlides = [
-    {
-      id: 1,
-      title: 'Tinh Hoa Ẩm Thực Việt Nam',
-      subtitle: 'Khám phá hương vị truyền thống được chế biến từ những nguyên liệu tươi ngon nhất',
-      ctaText: 'Khám phá ngay',
-      ctaLink: '/products',
-      imageUrl: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1200&h=600&fit=crop',
-      position: 0,
-      isActive: true,
-      createdAt: '',
-      updatedAt: ''
-    }
-  ]
-
-  useEffect(() => {
-    fetchHomepageData()
-  }, [])
-
   const fetchHomepageData = useCallback(async () => {
+    // Move defaultSlides here to avoid changing dependencies
+    const defaultSlides = [
+      {
+        id: 1,
+        title: 'Tinh Hoa Ẩm Thực Việt Nam',
+        subtitle: 'Khám phá hương vị truyền thống được chế biến từ những nguyên liệu tươi ngon nhất',
+        ctaText: 'Khám phá ngay',
+        ctaLink: '/products',
+        imageUrl: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=1200&h=600&fit=crop',
+        position: 0,
+        isActive: true,
+        createdAt: '',
+        updatedAt: ''
+      }
+    ];
     try {
       const response = await homepageService.getHomepageContent();
       if (response.success) {
@@ -50,7 +45,7 @@ export default function HeroSection() {
     } finally {
       setLoading(false);
     }
-  }, [defaultSlides]);
+  }, []);
 
   useEffect(() => {
     fetchHomepageData();

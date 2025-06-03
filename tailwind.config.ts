@@ -18,6 +18,7 @@ export default {
 			border: 'var(--color-border)',
 			'primary-white': 'var(--color-primary-white)',
 			'primary-black': 'var(--color-primary-black)',
+			'dark-red':'var(--color-dark-red)',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {

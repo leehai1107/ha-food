@@ -17,18 +17,18 @@ const AboutSection = () => {
       vision: 'Trở thành thương hiệu ẩm thực hàng đầu Việt Nam, được khách hàng tin tưởng và yêu mến trên toàn thế giới.',
 
       images: {
-        main: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&h=400&fit=crop',
+        main: '/image/noimage.png',
         gallery: [
           {
-            url: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop',
+            url: '/image/noimage.png',
             alt: 'Ẩm thực truyền thống Việt Nam'
           },
           {
-            url: 'https://images.unsplash.com/photo-1555507036-ab794f4afe5a?w=400&h=300&fit=crop',
+            url: '/image/noimage.png',
             alt: 'Quà tặng doanh nghiệp cao cấp'
           },
           {
-            url: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&h=300&fit=crop',
+            url: '/image/noimage.png',
             alt: 'Không gian sản xuất hiện đại'
           }
         ]
@@ -123,8 +123,10 @@ const AboutSection = () => {
               <div className="relative group">
                 <div className="rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300">
                   <Image
-                    src={content.content?.images?.main || 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&h=400&fit=crop'}
+                    src={content.content?.images?.main || '/image/noimage.png'}
                     alt="HA Food - Tinh hoa ẩm thực"
+                    width={600}
+                    height={400}
                     className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -140,15 +142,17 @@ const AboutSection = () => {
               <div className="grid grid-cols-2 gap-4">
                 {
                   (content.content?.images?.gallery || [
-                    { url: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop', alt: 'Ẩm thực truyền thống' },
-                    { url: 'https://images.unsplash.com/photo-1555507036-ab794f4afe5a?w=400&h=300&fit=crop', alt: 'Quà tặng doanh nghiệp' },
-                    { url: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&h=300&fit=crop', alt: 'Không gian sản xuất' }
+                    { url: '/image/noimage.png', alt: 'Ẩm thực truyền thống' },
+                    { url: '/image/noimage.png', alt: 'Quà tặng doanh nghiệp' },
+                    { url: '/image/noimage.png', alt: 'Không gian sản xuất' }
                   ] as GalleryImage[]).slice(0, 3).map((image: GalleryImage, index: number) => (
                     <div key={index} className={`relative group ${index === 2 ? 'col-span-2' : ''}`}>
                       <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
                         <Image
                           src={image.url}
                           alt={image.alt}
+                          width={400}
+                          height={300}
                           className={`w-full object-cover group-hover:scale-105 transition-transform duration-300 ${index === 2 ? 'h-32' : 'h-40'
                             }`}
                         />

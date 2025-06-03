@@ -29,7 +29,7 @@ const FeaturedClientsSection = () => {
     {
       id: 1,
       name: 'Vingroup',
-      logoUrl: 'https://placehold.co/200x80/f8f9fa/333333?text=VINGROUP&font=roboto',
+      logoUrl: '/image/noimage.png',
       websiteUrl: 'https://vingroup.net',
       description: 'Tập đoàn đa ngành hàng đầu Việt Nam',
       position: 0,
@@ -40,7 +40,7 @@ const FeaturedClientsSection = () => {
     {
       id: 2,
       name: 'FPT Corporation',
-      logoUrl: 'https://placehold.co/200x80/f8f9fa/ff6600?text=FPT&font=roboto',
+      logoUrl: '/image/noimage.png',
       websiteUrl: 'https://fpt.com.vn',
       description: 'Công ty công nghệ thông tin hàng đầu',
       position: 1,
@@ -51,7 +51,7 @@ const FeaturedClientsSection = () => {
     {
       id: 3,
       name: 'Techcombank',
-      logoUrl: 'https://placehold.co/200x80/f8f9fa/0066cc?text=TECHCOMBANK&font=roboto',
+      logoUrl: '/image/noimage.png',
       websiteUrl: 'https://techcombank.com.vn',
       description: 'Ngân hàng Kỹ thương Việt Nam',
       position: 2,
@@ -62,7 +62,7 @@ const FeaturedClientsSection = () => {
     {
       id: 4,
       name: 'Saigon Co.op',
-      logoUrl: 'https://placehold.co/200x80/f8f9fa/00aa44?text=SAIGON+COOP&font=roboto',
+      logoUrl: '/image/noimage.png',
       websiteUrl: 'https://saigoncoop.com.vn',
       description: 'Hệ thống siêu thị hàng đầu TP.HCM',
       position: 3,
@@ -73,7 +73,7 @@ const FeaturedClientsSection = () => {
     {
       id: 5,
       name: 'Lotte Mart',
-      logoUrl: 'https://placehold.co/200x80/f8f9fa/cc0000?text=LOTTE&font=roboto',
+      logoUrl: '/image/noimage.png',
       websiteUrl: 'https://lottemart.com.vn',
       description: 'Hệ thống siêu thị Hàn Quốc tại Việt Nam',
       position: 4,
@@ -84,7 +84,7 @@ const FeaturedClientsSection = () => {
     {
       id: 6,
       name: 'Big C',
-      logoUrl: 'https://placehold.co/200x80/f8f9fa/0099ff?text=BIG+C&font=roboto',
+      logoUrl: '/image/noimage.png',
       websiteUrl: 'https://bigc.vn',
       description: 'Hệ thống siêu thị lớn tại Việt Nam',
       position: 5,
@@ -95,7 +95,7 @@ const FeaturedClientsSection = () => {
     {
       id: 7,
       name: 'Viettel',
-      logoUrl: 'https://placehold.co/200x80/f8f9fa/ff3333?text=VIETTEL&font=roboto',
+      logoUrl: '/image/noimage.png',
       websiteUrl: 'https://viettel.com.vn',
       description: 'Tập đoàn viễn thông quân đội',
       position: 6,
@@ -106,7 +106,7 @@ const FeaturedClientsSection = () => {
     {
       id: 8,
       name: 'BIDV',
-      logoUrl: 'https://placehold.co/200x80/f8f9fa/004d99?text=BIDV&font=roboto',
+      logoUrl: '/image/noimage.png',
       websiteUrl: 'https://bidv.com.vn',
       description: 'Ngân hàng Đầu tư và Phát triển Việt Nam',
       position: 7,
@@ -162,10 +162,12 @@ const FeaturedClientsSection = () => {
                         <Image
                           src={client.logoUrl}
                           alt={client.name}
+                          width={100}
+                          height={100}
                           className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;
-                            target.src = 'https://placehold.co/200x80/f8f9fa/666666?text=' + encodeURIComponent(client.name) + '&font=roboto';
+                            target.src = '/image/noimage.png';
                           }}
                         />
                       </div>
@@ -184,10 +186,12 @@ const FeaturedClientsSection = () => {
                         <Image
                           src={client.logoUrl}
                           alt={client.name}
+                          width={100}
+                          height={100}
                           className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
                           onError={(e) => {
                             const target = e.target as HTMLImageElement;
-                            target.src = 'https://placehold.co/200x80/f8f9fa/666666?text=' + encodeURIComponent(client.name) + '&font=roboto';
+                            target.src = 'noimage.png';
                           }}
                         />
                       </div>

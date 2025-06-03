@@ -1,75 +1,71 @@
 "use client";
 import homepageService, { Testimonial } from '@/services/homepageService'
 import Image from 'next/image';
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
+
+// Move defaultTestimonials outside the component
+const defaultTestimonials: Testimonial[] = [
+  {
+    id: 1,
+    name: 'Chị Hân',
+    location: 'Hà Nội',
+    type: '',
+    content: 'Hộp vip của bánh trung thu Tại Thong năm nay rất sang trọng. Bánh có hương vị rất ngon, và mềm, nhân đậy đặn và phần trà kèm theo tham lắm. Bên cạnh đó, mẫu hộp vip có màu xanh navy bắt mắt, thiết kế mở phong tùi xách cũng rất sang tạo. Đặt trong tủ trưng bày của tôi không hề kém cạnh so với các thương hiệu nổi tiếng khác.',
+    avatarUrl: '/image/noimage.png',
+    rating: 5,
+    position: 0,
+    isActive: true,
+    createdAt: '',
+    updatedAt: ''
+  },
+  {
+    id: 2,
+    name: 'Giám Đốc Phòng Giao Dịch ngân hàng VCB',
+    location: 'Quận 2',
+    type: '',
+    content: 'Bánh rất ngon và giá cả phù hợp với ngân sách để ra, có thể tặng cho khách hàng để tri ân khách hàng. Mình cũng chọn thêm cho nhân viên vì vị bánh mới lạ và khác biệt so với các loại từng ăn trước đây. Khi tặng bánh của Tại Thong, mình khá yên tâm để đem tặng cho khách hàng cũng như nhân viên, hộp quà tặng sang trọng thể hiện đẳng cấp của người tặng.',
+    avatarUrl: '/image/noimage.png',
+    rating: 5,
+    position: 1,
+    isActive: true,
+    createdAt: '',
+    updatedAt: ''
+  },
+  {
+    id: 3,
+    name: 'Anh Minh',
+    location: 'Quận 7',
+    type: 'Khách hàng cá nhân',
+    content: 'Bánh Lava bên HA Food rất ngon, Minh có dịp được dùng thử thì quyết định mua vài hộp làm quà biếu gia đình, khách hàng trong dịp lễ này luôn. Mẫu quà hộp bên ngoài cũng quá đẹp, đóng gói chỉnh chu. Rất tin tưởng vào chất lượng bên HA Food.',
+    avatarUrl: '/image/noimage.png',
+    rating: 5,
+    position: 2,
+    isActive: true,
+    createdAt: '',
+    updatedAt: ''
+  },
+  {
+    id: 4,
+    name: 'Chị Mỹ',
+    location: 'Quận 2',
+    type: 'Khách hàng doanh nghiệp',
+    content: 'Bên công đoàn ở Sài Gòn vừa nhận được bánh vào hôm nay. HA Food quá chuyên nghiệp, từ hương vị bánh đến khâu đóng gói không chê vào đâu được, công ty chị rất ưng ý nha. Năm nay công ty chị rất vui vì tìm được nhà cung cấp quà chất lượng như bên HA Food.',
+    avatarUrl: '/image/noimage.png',
+    rating: 5,
+    position: 3,
+    isActive: true,
+    createdAt: '',
+    updatedAt: ''
+  }
+]
 
 const TestimonialsSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [testimonials, setTestimonials] = useState<Testimonial[]>([])
   const [loading, setLoading] = useState(true)
 
-  // Default testimonials as fallback
-  const defaultTestimonials = [
-    {
-      id: 1,
-      name: 'Chị Hân',
-      location: 'Hà Nội',
-      type: '',
-      content: 'Hộp vip của bánh trung thu Tại Thong năm nay rất sang trọng. Bánh có hương vị rất ngon, và mềm, nhân đậy đặn và phần trà kèm theo tham lắm. Bên cạnh đó, mẫu hộp vip có màu xanh navy bắt mắt, thiết kế mở phong tùi xách cũng rất sang tạo. Đặt trong tủ trưng bày của tôi không hề kém cạnh so với các thương hiệu nổi tiếng khác.',
-      avatarUrl: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face',
-      rating: 5,
-      position: 0,
-      isActive: true,
-      createdAt: '',
-      updatedAt: ''
-    },
-    {
-      id: 2,
-      name: 'Giám Đốc Phòng Giao Dịch ngân hàng VCB',
-      location: 'Quận 2',
-      type: '',
-      content: 'Bánh rất ngon và giá cả phù hợp với ngân sách để ra, có thể tặng cho khách hàng để tri ân khách hàng. Mình cũng chọn thêm cho nhân viên vì vị bánh mới lạ và khác biệt so với các loại từng ăn trước đây. Khi tặng bánh của Tại Thong, mình khá yên tâm để đem tặng cho khách hàng cũng như nhân viên, hộp quà tặng sang trọng thể hiện đẳng cấp của người tặng.',
-      avatarUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face',
-      rating: 5,
-      position: 1,
-      isActive: true,
-      createdAt: '',
-      updatedAt: ''
-    },
-    {
-      id: 3,
-      name: 'Anh Minh',
-      location: 'Quận 7',
-      type: 'Khách hàng cá nhân',
-      content: 'Bánh Lava bên HA Food rất ngon, Minh có dịp được dùng thử thì quyết định mua vài hộp làm quà biếu gia đình, khách hàng trong dịp lễ này luôn. Mẫu quà hộp bên ngoài cũng quá đẹp, đóng gói chỉnh chu. Rất tin tưởng vào chất lượng bên HA Food.',
-      avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face',
-      rating: 5,
-      position: 2,
-      isActive: true,
-      createdAt: '',
-      updatedAt: ''
-    },
-    {
-      id: 4,
-      name: 'Chị Mỹ',
-      location: 'Quận 2',
-      type: 'Khách hàng doanh nghiệp',
-      content: 'Bên công đoàn ở Sài Gòn vừa nhận được bánh vào hôm nay. HA Food quá chuyên nghiệp, từ hương vị bánh đến khâu đóng gói không chê vào đâu được, công ty chị rất ưng ý nha. Năm nay công ty chị rất vui vì tìm được nhà cung cấp quà chất lượng như bên HA Food.',
-      avatarUrl: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=face',
-      rating: 5,
-      position: 3,
-      isActive: true,
-      createdAt: '',
-      updatedAt: ''
-    }
-  ]
-
-  useEffect(() => {
-    fetchTestimonials()
-  }, [])
-
-  const fetchTestimonials = async () => {
+  const fetchTestimonials = useCallback(async () => {
     try {
       const response = await homepageService.getHomepageContent()
       if (response.success) {
@@ -82,7 +78,11 @@ const TestimonialsSection = () => {
     } finally {
       setLoading(false)
     }
-  }
+  }, []) // No defaultTestimonials in deps
+
+  useEffect(() => {
+    fetchTestimonials()
+  }, [fetchTestimonials])
 
   // Calculate how many slides we can show (2 testimonials per slide)
   const testimonialsPerSlide = 2
@@ -181,12 +181,14 @@ const TestimonialsSection = () => {
                           <div className="flex items-start mb-6">
                             <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-200 mr-4 flex-shrink-0">
                               <Image
-                                src={testimonial.avatarUrl || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face'}
+                                src={testimonial.avatarUrl || '/image/noimage.png'}
                                 alt={testimonial.name}
+                                width={100}
+                                height={100}
                                 className="w-full h-full object-cover"
                                 onError={(e) => {
                                   const target = e.target as HTMLImageElement;
-                                  target.src = 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face';
+                                  target.src = '/image/noimage.png';
                                 }}
                               />
                             </div>
@@ -220,7 +222,9 @@ const TestimonialsSection = () => {
                           <div className="absolute bottom-6 right-6">
                             <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
                               <Image
-                                src="https://placehold.co/48x48/f8f9fa/8B4513?text=HA&font=roboto"
+                                width={48}
+                                height={48}
+                                src="/image/noimage.png"
                                 alt="HA Food Logo"
                                 className="w-8 h-8 object-contain"
                               />
