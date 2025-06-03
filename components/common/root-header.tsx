@@ -7,7 +7,7 @@ export default function RootHeader() {
     return (
         <>
             {/* Header Section */}
-            <header className="w-full border-b bg-primary">
+            <header className="w-full bg-primary">
                 <div className="flex items-center justify-between gap-4 px-24 py-4 text-secondary">
                     <Button className="py-4">
                         <Image
@@ -19,10 +19,10 @@ export default function RootHeader() {
                     </Button>
                     <div className="flex items-center gap-2">
                         <button>
-                        <Search size={26}/>
+                            <Search size={26} />
                         </button>
-                        <button>                       
-                        <ShoppingCart size={26} />
+                        <button>
+                            <ShoppingCart size={26} />
                         </button>
                     </div>
                 </div>
@@ -31,8 +31,8 @@ export default function RootHeader() {
                         <ul className="flex items-center gap-4 list-none">
                             <NavLink href="/">TRANG CHỦ</NavLink>
                             <NavLink href="/about">GIỚI THIỆU</NavLink>
-                            <NavLink 
-                                href="/products" 
+                            <NavLink
+                                href="/products"
                                 subItems={[
                                     { href: "/products/product-a", label: "Product A" },
                                     { href: "/products/product-b", label: "Product B" },
@@ -45,12 +45,12 @@ export default function RootHeader() {
                             <NavLink href="/news">TIN TỨC</NavLink>
                             <NavLink href="/contact">LIÊN HỆ</NavLink>
                             <NavLink href="/legal"
-                            subItems={
-                                [
-                                    { href: "/legal/privacy-policy", label: "Chính sách bảo mật" },
-                                    { href: "/legal/terms-of-service", label: "Điều khoản sử dụng" },
-                                ]
-                            }>CHÍNH SÁCH</NavLink>
+                                subItems={
+                                    [
+                                        { href: "/legal/privacy-policy", label: "Chính sách bảo mật" },
+                                        { href: "/legal/terms-of-service", label: "Điều khoản sử dụng" },
+                                    ]
+                                }>CHÍNH SÁCH</NavLink>
                         </ul>
                     </nav>
                 </div>
