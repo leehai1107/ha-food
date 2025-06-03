@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import AnimatedCounter from "../animations/AnimatedCounter"
 import Link from "next/link"
 import { Stat } from "@/types";
-import { Building2, Gift, MapPinned, UserRoundCheck } from "lucide-react";
+import { Building2, ChevronDown, Gift, MapPinned, UserRoundCheck } from "lucide-react";
 
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0)
@@ -31,7 +31,7 @@ export default function HeroSection() {
         id: 1,
         title: 'Tinh Hoa Ẩm Thực Việt Nam',
         subtitle: 'Khám phá hương vị truyền thống được chế biến từ những nguyên liệu tươi ngon nhất',
-        ctaText: 'Khám phá ngay',
+        ctaText: 'Xem Thêm',
         ctaLink: '/products',
         imageUrl: 'image/noimage.png',
         position: 0,
@@ -79,8 +79,9 @@ export default function HeroSection() {
     <section className="relative w-full h-screen overflow-hidden">
       {/* Slider */}
       <div className="relative w-full h-full">
-        {slides.map((slide, _) => (
+        {slides.map((slide, index) => (
           <div
+            key={index}
             className="absolute inset-0 flex items-center justify-center"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -88,8 +89,7 @@ export default function HeroSection() {
           >
             <div className="w-full px-4 sm:px-6 lg:px-8">
               <div
-                className={`text-center text-secondary max-w-4xl mx-auto transform transition-opacity duration-700 ${isHovered ? 'opacity-100 animate-float-in-bottom' : 'opacity-0'
-                  }`}
+                className={`text-center text-primary max-w-4xl mx-auto transform transition-opacity duration-700 ${isHovered ? 'opacity-100 animate-float-in-bottom' : 'opacity-0'}`}
               >
                 <h1 className="text-4xl md:text-6xl font-bold mb-6 text-shadow-lg font-heading">
                   {slide.title}
@@ -97,18 +97,28 @@ export default function HeroSection() {
                 <p className="text-lg md:text-xl mb-8 leading-relaxed text-shadow font-primary">
                   {slide.subtitle}
                 </p>
-                <div className="mt-4">
+                <div className="flex items-center justify-center mt-24">
                   {slide.ctaLink ? (
-                    <Link
-                      href={slide.ctaLink}
-                      className="inline-block bg-secondary text-white px-10 py-4 rounded-theme text-lg font-bold uppercase tracking-wide shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 font-primary"
-                    >
-                      {slide.ctaText}
-                    </Link>
+                    <div className="flex items-center justify-center flex-col">
+                      <Link
+                        href={slide.ctaLink}
+                        className="inline-block text-primary px-10 py-4 rounded-theme text-lg font-bold uppercase tracking-wide  hover:-translate-y-2 transition-all duration-300 font-primary"
+                      >
+                        {slide.ctaText}
+                      </Link>
+                      <ChevronDown
+                        className="inline-block text-primary animate-bounce"
+                        size={24} />
+                    </div>
                   ) : (
-                    <button className="bg-secondary text-white px-10 py-4 rounded-theme text-lg font-bold uppercase tracking-wide shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all duration-300 font-primary">
-                      {slide.ctaText}
-                    </button>
+                    <div className="flex items-center justify-center flex-col">
+                      <button className="text-primary px-10 py-4 rounded-theme text-lg font-bold uppercase tracking-wide shadow-lg  hover:-translate-y-2 transition-all duration-300 font-primary">
+                        {slide.ctaText}
+                      </button>
+                      <ChevronDown
+                        className="inline-block text-primary animate-bounce"
+                        size={24} />
+                    </div>
                   )}
                 </div>
               </div>
