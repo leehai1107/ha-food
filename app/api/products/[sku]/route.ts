@@ -5,10 +5,10 @@ const prisma = new PrismaClient();
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { sku: string } }
+  { params }: { params: Promise<{ sku: string }> }
 ) {
   try {
-    const { sku } = params;
+    const sku = (await params).sku;
     const product = await prisma.product.findUnique({
       where: { productSku: sku },
       include: {

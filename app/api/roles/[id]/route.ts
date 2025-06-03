@@ -5,10 +5,10 @@ const prisma = new PrismaClient();
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id);
+    const id = parseInt((await params).id);
     const role = await prisma.role.findUnique({
       where: { id },
       include: {
@@ -53,10 +53,10 @@ export async function GET(
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id);
+    const id = parseInt((await params).id);
     const { name } = await req.json();
 
     if (!name) {
@@ -86,7 +86,7 @@ export async function PUT(
         {
           success: false,
           error: 'Role not found',
-          message: `Role with ID ${params.id} does not exist`
+          message: `Role with ID ${(await params).id} does not exist`
         },
         { status: 404 }
       );
@@ -114,10 +114,10 @@ export async function PUT(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id);
+    const id = parseInt((await params).id);
 
     // Check if role has associated accounts
     const accountCount = await prisma.account.count({
@@ -150,7 +150,7 @@ export async function DELETE(
         {
           success: false,
           error: 'Role not found',
-          message: `Role with ID ${params.id} does not exist`
+          message: `Role with ID ${(await params).id} does not exist`
         },
         { status: 404 }
       );

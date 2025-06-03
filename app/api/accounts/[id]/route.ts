@@ -4,9 +4,9 @@ import * as bcrypt from 'bcrypt';
 
 const prisma = new PrismaClient();
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const id = parseInt(params.id);
+    const id = parseInt((await params).id);
     const account = await prisma.account.findUnique({
       where: { id },
       include: {
@@ -43,9 +43,9 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
   }
 }
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const id = parseInt(params.id);
+    const id = parseInt((await params).id);
     const body = await req.json();
     const { name, email, password, phone, address, roleId } = body;
 
@@ -92,7 +92,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
       return NextResponse.json({
         success: false,
         error: 'Account not found',
-        message: `Account with ID ${params.id} does not exist`
+        message: `Account with ID ${(await params).id} does not exist`
       }, { status: 404 });
     }
     if (error.code === 'P2002') {
@@ -117,9 +117,9 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const id = parseInt(params.id);
+    const id = parseInt((await params).id);
 
     const account = await prisma.account.delete({
       where: { id },
@@ -138,7 +138,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
       return NextResponse.json({
         success: false,
         error: 'Account not found',
-        message: `Account with ID ${params.id} does not exist`
+        message: `Account with ID ${(await params).id} does not exist`
       }, { status: 404 });
     }
     return NextResponse.json({

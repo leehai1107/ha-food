@@ -2,7 +2,7 @@
 import { useAuth } from '@/contexts/AuthContext';
 import React, { useState } from 'react';
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -15,11 +15,6 @@ const LoginPage: React.FC = () => {
 
     const router = useRouter();
 
-    const searchParams = useSearchParams();
-
-    // Get the intended destination or default to home
-    const from = searchParams.get("from") || "/";
-
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
@@ -27,7 +22,7 @@ const LoginPage: React.FC = () => {
 
         try {
             await login({ email, password });
-            router.replace(from);  // Redirect to the intended destination
+            router.replace("/");  // Redirect to the intended destination
         } catch (err: unknown) {
             if (err && typeof err === "object" && "message" in err) {
                 setError(String((err as { message?: string }).message) || 'Đăng nhập thất bại');

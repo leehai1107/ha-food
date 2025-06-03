@@ -5,10 +5,10 @@ const prisma = new PrismaClient();
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id);
+    const id = parseInt((await params).id);
     const orderItem = await prisma.orderItem.findUnique({
       where: { id },
       include: {
@@ -62,10 +62,10 @@ export async function GET(
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id);
+    const id = parseInt((await params).id);
     const { quantity, productPrice } = await req.json();
 
     if (!quantity || quantity <= 0) {
@@ -186,7 +186,7 @@ export async function PUT(
       return NextResponse.json({
         success: false,
         error: 'Order item not found',
-        message: `Order item with ID ${params.id} does not exist`
+        message: `Order item with ID ${(await params).id} does not exist`
       }, { status: 404 });
     }
     return NextResponse.json({
@@ -199,10 +199,10 @@ export async function PUT(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id);
+    const id = parseInt((await params).id);
 
     // Get current order item and order
     const currentItem = await prisma.orderItem.findUnique({
@@ -295,7 +295,7 @@ export async function DELETE(
       return NextResponse.json({
         success: false,
         error: 'Order item not found',
-        message: `Order item with ID ${params.id} does not exist`
+        message: `Order item with ID ${(await params).id} does not exist`
       }, { status: 404 });
     }
     return NextResponse.json({

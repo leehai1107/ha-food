@@ -5,10 +5,10 @@ const prisma = new PrismaClient();
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id);
+    const id = parseInt((await params).id);
     const order = await prisma.order.findUnique({
       where: { id },
       include: {
@@ -63,10 +63,10 @@ export async function GET(
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id);
+    const id = parseInt((await params).id);
     const { status } = await req.json();
 
     if (!status) {
@@ -153,7 +153,7 @@ export async function PUT(
       return NextResponse.json({
         success: false,
         error: 'Order not found',
-        message: `Order with ID ${params.id} does not exist`
+        message: `Order with ID ${(await params).id} does not exist`
       }, { status: 404 });
     }
     return NextResponse.json({
@@ -166,10 +166,10 @@ export async function PUT(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id);
+    const id = parseInt((await params).id);
 
     // Get current order
     const currentOrder = await prisma.order.findUnique({
@@ -236,7 +236,7 @@ export async function DELETE(
       return NextResponse.json({
         success: false,
         error: 'Order not found',
-        message: `Order with ID ${params.id} does not exist`
+        message: `Order with ID ${(await params).id} does not exist`
       }, { status: 404 });
     }
     return NextResponse.json({

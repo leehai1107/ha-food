@@ -3,14 +3,15 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const { searchParams } = new URL(req.url);
     const includeProducts = searchParams.get('includeProducts') === 'true';
-    const id = parseInt(params.id);
+    const idNum = parseInt(id);
 
     const category = await prisma.category.findUnique({
-      where: { id },
+      where: { id: idNum },
       include: {
         parent: true,
         children: {
@@ -36,7 +37,7 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
       return NextResponse.json({
         success: false,
         error: 'Category not found',
-        message: `Category with ID ${id} does not exist`
+        message: `Category with ID ${idNum} does not exist`
       }, { status: 404 });
     }
 
@@ -54,9 +55,10 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
   }
 }
 
-export async function PUT(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const id = parseInt(params.id);
+    const { id } = await params;
+    const idNum = parseInt(id);
     const { name, description, imageUrl, parentId } = await req.json();
 
     if (!name) {
@@ -67,7 +69,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
       }, { status: 400 });
     }
 
-    if (parentId && id === parentId) {
+    if (parentId && idNum === parentId) {
       return NextResponse.json({
         success: false,
         error: 'Validation error',
@@ -88,7 +90,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
       }
       // Check for circular reference (simplified)
       const descendants = await prisma.category.findMany({
-        where: { parentId: id }
+        where: { parentId: idNum }
       });
       if (descendants.some(desc => desc.id === parentId)) {
         return NextResponse.json({
@@ -100,7 +102,7 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     }
 
     const category = await prisma.category.update({
-      where: { id },
+      where: { id: idNum },
       data: {
         name,
         description: description || null,
@@ -121,10 +123,11 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
     });
   } catch (error: any) {
     if (error.code === 'P2025') {
+      const { id } = await params;
       return NextResponse.json({
         success: false,
         error: 'Category not found',
-        message: `Category with ID ${params.id} does not exist`
+        message: `Category with ID ${id} does not exist`
       }, { status: 404 });
     }
     return NextResponse.json({
@@ -135,13 +138,14 @@ export async function PUT(req: NextRequest, { params }: { params: { id: string }
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
-    const id = parseInt(params.id);
+    const { id } = await params;
+    const idNum = parseInt(id);
 
     // Check if category has children
     const childrenCount = await prisma.category.count({
-      where: { parentId: id }
+      where: { parentId: idNum }
     });
     if (childrenCount > 0) {
       return NextResponse.json({
@@ -153,7 +157,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
 
     // Check if category has products
     const productsCount = await prisma.product.count({
-      where: { categoryId: id }
+      where: { categoryId: idNum }
     });
     if (productsCount > 0) {
       return NextResponse.json({
@@ -164,7 +168,7 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
     }
 
     const category = await prisma.category.delete({
-      where: { id }
+      where: { id: idNum }
     });
 
     return NextResponse.json({
@@ -174,10 +178,11 @@ export async function DELETE(req: NextRequest, { params }: { params: { id: strin
     });
   } catch (error: any) {
     if (error.code === 'P2025') {
+      const { id } = await params;
       return NextResponse.json({
         success: false,
         error: 'Category not found',
-        message: `Category with ID ${params.id} does not exist`
+        message: `Category with ID ${id} does not exist`
       }, { status: 404 });
     }
     return NextResponse.json({

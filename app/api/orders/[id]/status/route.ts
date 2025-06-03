@@ -5,10 +5,10 @@ const prisma = new PrismaClient();
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const id = parseInt(params.id);
+    const id = parseInt((await params).id);
     const { status } = await req.json();
 
     if (!status) {
@@ -95,7 +95,7 @@ export async function PATCH(
       return NextResponse.json({
         success: false,
         error: 'Order not found',
-        message: `Order with ID ${params.id} does not exist`
+        message: `Order with ID ${(await params).id} does not exist`
       }, { status: 404 });
     }
     return NextResponse.json({

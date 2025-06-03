@@ -3,10 +3,12 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function GET({ params }: { params: { section: string } }
+export async function GET(
+  _req: NextRequest,
+  { params }: { params: Promise<{ section: string }> }
 ) {
   try {
-    const { section } = params;
+    const section = (await params).section;
 
     const content = await prisma.homepageContent.findUnique({
       where: { section }
@@ -36,10 +38,10 @@ export async function GET({ params }: { params: { section: string } }
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { section: string } }
+  { params }: { params: Promise<{ section: string }> }
 ) {
   try {
-    const { section } = params;
+    const section = (await params).section;
     const { title, subtitle, content, isActive } = await req.json();
 
     // TODO: Add authentication/authorization check for admin here

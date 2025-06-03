@@ -5,10 +5,10 @@ const prisma = new PrismaClient();
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const id = (await params).id;
     const { name, logoUrl, websiteUrl, description, position, isActive } = await req.json();
 
     // TODO: Add authentication/authorization check for admin here
@@ -35,7 +35,7 @@ export async function PUT(
       return NextResponse.json({
         success: false,
         error: 'Client not found',
-        message: `Client with ID ${params.id} does not exist`
+        message: `Client with ID ${(await params).id} does not exist`
       }, { status: 404 });
     }
     return NextResponse.json({
@@ -48,10 +48,10 @@ export async function PUT(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const id = (await params).id;
 
     // TODO: Add authentication/authorization check for admin here
 
@@ -69,7 +69,7 @@ export async function DELETE(
       return NextResponse.json({
         success: false,
         error: 'Client not found',
-        message: `Client with ID ${params.id} does not exist`
+        message: `Client with ID ${(await params).id} does not exist`
       }, { status: 404 });
     }
     return NextResponse.json({

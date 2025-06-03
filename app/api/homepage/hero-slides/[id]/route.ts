@@ -5,10 +5,10 @@ const prisma = new PrismaClient();
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const id = (await params).id;
     const { title, subtitle, ctaText, ctaLink, imageUrl, position, isActive } = await req.json();
 
     // TODO: Add authentication/authorization check for admin here
@@ -36,7 +36,7 @@ export async function PUT(
       return NextResponse.json({
         success: false,
         error: 'Hero slide not found',
-        message: `Hero slide with ID ${params.id} does not exist`
+        message: `Hero slide with ID ${(await params).id} does not exist`
       }, { status: 404 });
     }
     return NextResponse.json({
@@ -49,10 +49,10 @@ export async function PUT(
 
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const { id } = params;
+    const id = (await params).id;
 
     // TODO: Add authentication/authorization check for admin here
 
@@ -70,7 +70,7 @@ export async function DELETE(
       return NextResponse.json({
         success: false,
         error: 'Hero slide not found',
-        message: `Hero slide with ID ${params.id} does not exist`
+        message: `Hero slide with ID ${(await params).id} does not exist`
       }, { status: 404 });
     }
     return NextResponse.json({
