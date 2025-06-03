@@ -1,16 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
+import slugify from 'slugify';
+
 
 const prisma = new PrismaClient();
-
-function generateSlug(title: string): string {
-  return title
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')
-    .replace(/\s+/g, '-')
-    .replace(/-+/g, '-')
-    .trim();
-}
 
 export async function GET(
   req: NextRequest,
@@ -90,7 +83,7 @@ export async function PUT(
 
     // Update slug if title changed
     if (title && title !== existingNews.title) {
-      let baseSlug = generateSlug(title);
+      const baseSlug = slugify(title);
       let slug = baseSlug;
       let counter = 1;
       while (
