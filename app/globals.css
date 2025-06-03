@@ -6,6 +6,20 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* CSS Variables for Dynamic Theming */
+:root {
+  /* Colors */
+  --color-primary: #B0041A;
+  --color-secondary: #FFDB67;
+  --color-primary-white: #F8F8F8;
+  --color-primary-black:#181818;
+  --color-accent: #F4A460;
+  --color-background: #FFFFFF;
+  --color-text: #1F2937;
+  --color-link: #3B82F6;
+  --color-border: #E5E7EB;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

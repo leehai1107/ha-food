@@ -54,7 +54,7 @@ export async function GET() {
   } catch (error) {
     return NextResponse.json({
       success: false,
-      error: 'Internal server error',
+      error: 'Internal server error:'+error,
       message: 'Failed to fetch homepage content'
     }, { status: 500 });
   }

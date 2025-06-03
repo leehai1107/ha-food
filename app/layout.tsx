@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme/theme-provider"
-import RootHeader from "@/layouts/header/header";
-import RootFooter from "@/layouts/footer/footer";
 import { Toaster } from "sonner";
+import { AuthProvider, useAuth } from "@/contexts/AuthContext";
+import LayoutContent from "@/layouts/layout-content";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "My Portfolio",
-  description: "A showcase of my work and blog posts",
+  title: "Ha Food - Quà Tặng Doanh Nghiệp",
+  description: "Ha Food - Nơi cung cấp quà tặng doanh nghiệp uy tín và chất lượng",
 };
 
 export default function RootLayout({
@@ -38,10 +38,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <RootHeader />
-          <main>{children}</main>
+          <AuthProvider>
+            <LayoutContent>{children}</LayoutContent>
+          </AuthProvider>
         </ThemeProvider>
-        <RootFooter />
         <Toaster />
       </body>
     </html>
