@@ -18,7 +18,7 @@ export function NavLink({ href, children, subItems }: NavLinkProps) {
     const [isHovered, setIsHovered] = useState(false)
 
     return (
-        <li 
+        <li
             className="relative"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
@@ -34,8 +34,8 @@ export function NavLink({ href, children, subItems }: NavLinkProps) {
             >
                 {children}
                 {subItems && (
-                    <ChevronDown 
-                        size={16} 
+                    <ChevronDown
+                        size={16}
                         className={cn(
                             "transition-transform",
                             isHovered && "rotate-180"
@@ -44,7 +44,7 @@ export function NavLink({ href, children, subItems }: NavLinkProps) {
                 )}
             </Link>
             {subItems && isHovered && (
-                <ul className="absolute left-0 mt-1 w-48 bg-dark-red rounded-md shadow-lg py-1 z-50">
+                <ul className="absolute left-0 mt-[1px] w-48 bg-dark-red rounded-md shadow-lg py-1 z-50">
                     {subItems.map((item, index) => (
                         <li key={index}>
                             <Link
