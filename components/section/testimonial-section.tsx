@@ -210,7 +210,7 @@ const TestimonialsSection = () => {
 
                           {/* Testimonial Content */}
                           <div className="mb-6">
-                            <div className="text-4xl text-secondary opacity-30 font-serif leading-none mb-3">&quot</div>
+                            <div className="text-4xl text-secondary opacity-30 font-serif leading-none mb-3">&quot;</div>
                             <p className="text-gray-700 leading-relaxed font-primary text-sm">
                               {testimonial.content}
                             </p>
