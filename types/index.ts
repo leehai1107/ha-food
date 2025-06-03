@@ -1011,3 +1011,15 @@ export interface UpdateCartItemRequest {
 // =============================================================================
 
 export * from './systemConfig';
+
+
+export interface Stat {
+  value: string;
+  label: string;
+  icon?: React.ReactNode;
+}
+
+export type GalleryImage = {
+  url: string;
+  alt: string;
+};

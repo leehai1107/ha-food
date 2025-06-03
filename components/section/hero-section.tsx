@@ -1,16 +1,17 @@
 'use client'
 import homepageService, { HeroSlide, HomepageContent } from "@/services/homepageService"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react";
 import AnimatedCounter from "../animations/AnimatedCounter"
 import Link from "next/link"
+import { Stat } from "@/types";
 
 export default function HeroSection() {
-    const [currentSlide, setCurrentSlide] = useState(0)
+  const [currentSlide, setCurrentSlide] = useState(0)
   const [slides, setSlides] = useState<HeroSlide[]>([])
   const [statsContent, setStatsContent] = useState<HomepageContent | null>(null)
   const [loading, setLoading] = useState(true)
 
-//   / Default slides as fallback
+  //   / Default slides as fallback
   const defaultSlides = [
     {
       id: 1,
@@ -30,28 +31,32 @@ export default function HeroSection() {
     fetchHomepageData()
   }, [])
 
-  const fetchHomepageData = async () => {
+  const fetchHomepageData = useCallback(async () => {
     try {
-      const response = await homepageService.getHomepageContent()
+      const response = await homepageService.getHomepageContent();
       if (response.success) {
-        const activeSlides = response.data.heroSlides.filter(slide => slide.isActive)
-        setSlides(activeSlides)
-        const stats = response.data.content.find(content => content.section === 'stats')
-        setStatsContent(stats || null)
-      }else {
-        console.log("Response data:", response)
-        console.error('Failed to fetch homepage content:', response.message)
-        setSlides(defaultSlides)
+        const activeSlides = response.data.heroSlides.filter(slide => slide.isActive);
+        setSlides(activeSlides);
+        const stats = response.data.content.find(content => content.section === 'stats');
+        setStatsContent(stats || null);
+      } else {
+        console.log("Response data:", response);
+        console.error('Failed to fetch homepage content:', response.message);
+        setSlides(defaultSlides);
       }
     } catch (error) {
-      console.error('Failed to fetch homepage data:', error)
-      setSlides(defaultSlides)
+      console.error('Failed to fetch homepage data:', error);
+      setSlides(defaultSlides);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  }, [defaultSlides]);
 
-   useEffect(() => {
+  useEffect(() => {
+    fetchHomepageData();
+  }, [fetchHomepageData]);
+
+  useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length)
     }, 5000)
@@ -71,16 +76,15 @@ export default function HeroSection() {
     )
   }
 
-  return(
+  return (
     <section className="relative w-full h-screen overflow-hidden mt-20">
       {/* Slider */}
       <div className="relative w-full h-full">
         {slides.map((slide, index) => (
           <div
             key={slide.id}
-            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${
-              index === currentSlide ? 'opacity-100' : 'opacity-0'
-            }`}
+            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-1000 ${index === currentSlide ? 'opacity-100' : 'opacity-0'
+              }`}
             style={{ backgroundImage: `url(${slide.imageUrl})` }}
           >
             {/* Overlay */}
@@ -119,9 +123,8 @@ export default function HeroSection() {
         {slides.map((_, index) => (
           <button
             key={index}
-            className={`w-3 h-3 rounded-full border-2 border-white transition-all duration-300 hover:scale-125 ${
-              index === currentSlide ? 'bg-white' : 'bg-transparent'
-            }`}
+            className={`w-3 h-3 rounded-full border-2 border-white transition-all duration-300 hover:scale-125 ${index === currentSlide ? 'bg-white' : 'bg-transparent'
+              }`}
             onClick={() => goToSlide(index)}
           />
         ))}
@@ -132,7 +135,7 @@ export default function HeroSection() {
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center max-w-6xl mx-auto">
             {statsContent?.content?.stats ? (
-              statsContent.content.stats.map((stat: any, index: number) => {
+              (statsContent.content.stats as Stat[]).map((stat, index) => {
                 // Extract number from value string (e.g., "15+" -> 15, "10,000+" -> 10000)
                 const numericValue = parseInt(stat.value.replace(/[^\d]/g, '')) || 0;
                 const suffix = stat.value.replace(/[\d,]/g, '');

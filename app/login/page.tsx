@@ -28,8 +28,12 @@ const LoginPage: React.FC = () => {
         try {
             await login({ email, password });
             router.replace(from);  // Redirect to the intended destination
-        } catch (err: any) {
-            setError(err.message || 'Đăng nhập thất bại');
+        } catch (err: unknown) {
+            if (err && typeof err === "object" && "message" in err) {
+                setError(String((err as { message?: string }).message) || 'Đăng nhập thất bại');
+            } else {
+                setError('Đăng nhập thất bại');
+            }
         } finally {
             setIsLoading(false);
         }

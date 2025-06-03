@@ -71,8 +71,12 @@ const router = useRouter();
         address: formData.address.trim() || undefined
       });
       router.replace('/'); 
-    } catch (err: any) {
-      setError(err.message || 'Đăng ký thất bại');
+    } catch (err: unknown) {
+      if (err && typeof err === "object" && "message" in err) {
+        setError(String((err as { message?: string }).message) || 'Đăng ký thất bại');
+      } else {
+        setError('Đăng ký thất bại');
+      }
     } finally {
       setIsLoading(false);
     }

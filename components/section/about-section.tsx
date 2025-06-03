@@ -1,6 +1,8 @@
 'use client'
 import { useState } from 'react';
 import AnimatedCounter from '../animations/AnimatedCounter';
+import Image from 'next/image';
+import { GalleryImage } from '@/types';
 
 const AboutSection = () => {
   const [loading] = useState(false);
@@ -120,7 +122,7 @@ const AboutSection = () => {
               {/* Main Image */}
               <div className="relative group">
                 <div className="rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300">
-                  <img
+                  <Image
                     src={content.content?.images?.main || 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600&h=400&fit=crop'}
                     alt="HA Food - Tinh hoa ẩm thực"
                     className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-500"
@@ -136,30 +138,30 @@ const AboutSection = () => {
 
               {/* Gallery Grid */}
               <div className="grid grid-cols-2 gap-4">
-                {(content.content?.images?.gallery || [
-                  { url: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop', alt: 'Ẩm thực truyền thống' },
-                  { url: 'https://images.unsplash.com/photo-1555507036-ab794f4afe5a?w=400&h=300&fit=crop', alt: 'Quà tặng doanh nghiệp' },
-                  { url: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&h=300&fit=crop', alt: 'Không gian sản xuất' }
-                ]).slice(0, 3).map((image: any, index: number) => (
-                  <div key={index} className={`relative group ${index === 2 ? 'col-span-2' : ''}`}>
-                    <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
-                      <img
-                        src={image.url}
-                        alt={image.alt}
-                        className={`w-full object-cover group-hover:scale-105 transition-transform duration-300 ${
-                          index === 2 ? 'h-32' : 'h-40'
-                        }`}
-                      />
-                      <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <span className="text-white text-sm font-medium bg-black/50 px-3 py-1 rounded-full">
-                            {image.alt}
-                          </span>
+                {
+                  (content.content?.images?.gallery || [
+                    { url: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop', alt: 'Ẩm thực truyền thống' },
+                    { url: 'https://images.unsplash.com/photo-1555507036-ab794f4afe5a?w=400&h=300&fit=crop', alt: 'Quà tặng doanh nghiệp' },
+                    { url: 'https://images.unsplash.com/photo-1571091718767-18b5b1457add?w=400&h=300&fit=crop', alt: 'Không gian sản xuất' }
+                  ] as GalleryImage[]).slice(0, 3).map((image: GalleryImage, index: number) => (
+                    <div key={index} className={`relative group ${index === 2 ? 'col-span-2' : ''}`}>
+                      <div className="rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300">
+                        <Image
+                          src={image.url}
+                          alt={image.alt}
+                          className={`w-full object-cover group-hover:scale-105 transition-transform duration-300 ${index === 2 ? 'h-32' : 'h-40'
+                            }`}
+                        />
+                        <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <span className="text-white text-sm font-medium bg-black/50 px-3 py-1 rounded-full">
+                              {image.alt}
+                            </span>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
               </div>
             </div>
           </div>
@@ -187,7 +189,7 @@ const AboutSection = () => {
                     end={1000}
                     suffix="+"
                     duration={1}
-                    delay={0+ 0.2}
+                    delay={0 + 0.2}
                     startOnView={true}
                   />
                 </div>
@@ -211,7 +213,7 @@ const AboutSection = () => {
                     end={24}
                     suffix="/7"
                     duration={1}
-                    delay={0+ 0.6}
+                    delay={0 + 0.6}
                     startOnView={true}
                   />
                 </div>

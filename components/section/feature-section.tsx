@@ -1,5 +1,6 @@
 "use client";
 import homepageService, { Client } from '@/services/homepageService';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 
 const FeaturedClientsSection = () => {
@@ -158,7 +159,7 @@ const FeaturedClientsSection = () => {
                       className="flex-shrink-0 group"
                     >
                       <div className="w-24 h-16 flex items-center justify-center bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-3">
-                        <img
+                        <Image
                           src={client.logoUrl}
                           alt={client.name}
                           className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
@@ -180,7 +181,7 @@ const FeaturedClientsSection = () => {
                       className="flex-shrink-0 group"
                     >
                       <div className="w-24 h-16 flex items-center justify-center bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-3">
-                        <img
+                        <Image
                           src={client.logoUrl}
                           alt={client.name}
                           className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"

@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import productService from '@/services/productService';
 import categoryService from '@/services/categoryService';
 import { Category, Product } from '@/types';
+import Image from 'next/image';
 
 const ProductsSection = () => {
   const router = useRouter();
@@ -126,7 +127,7 @@ const ProductsSection = () => {
                 onClick={() => handleCategoryClick(category)}
               >
                 <div className="relative h-64 overflow-hidden group">
-                  <img
+                  <Image
                     src={getCategoryImage(category) || ""}
                     alt={category.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
@@ -174,7 +175,7 @@ const ProductsSection = () => {
                   onClick={() => handleViewProduct(product)}
                 >
                   <div className="relative h-48 overflow-hidden group">
-                    <img
+                    <Image
                       src={getProductImage(product)}
                       alt={product.productName}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"

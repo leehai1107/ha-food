@@ -1,5 +1,6 @@
 "use client";
 import homepageService, { Testimonial } from '@/services/homepageService'
+import Image from 'next/image';
 import { useState, useEffect } from 'react'
 
 
@@ -179,7 +180,7 @@ const TestimonialsSection = () => {
                           {/* Header with Avatar and Info */}
                           <div className="flex items-start mb-6">
                             <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-200 mr-4 flex-shrink-0">
-                              <img
+                              <Image
                                 src={testimonial.avatarUrl || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face'}
                                 alt={testimonial.name}
                                 className="w-full h-full object-cover"
@@ -209,7 +210,7 @@ const TestimonialsSection = () => {
 
                           {/* Testimonial Content */}
                           <div className="mb-6">
-                            <div className="text-4xl text-secondary opacity-30 font-serif leading-none mb-3">"</div>
+                            <div className="text-4xl text-secondary opacity-30 font-serif leading-none mb-3">&quot</div>
                             <p className="text-gray-700 leading-relaxed font-primary text-sm">
                               {testimonial.content}
                             </p>
@@ -218,7 +219,7 @@ const TestimonialsSection = () => {
                           {/* Company Logo */}
                           <div className="absolute bottom-6 right-6">
                             <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
-                              <img
+                              <Image
                                 src="https://placehold.co/48x48/f8f9fa/8B4513?text=HA&font=roboto"
                                 alt="HA Food Logo"
                                 className="w-8 h-8 object-contain"
@@ -239,9 +240,8 @@ const TestimonialsSection = () => {
               {Array.from({ length: totalSlides }, (_, index) => (
                 <button
                   key={index}
-                  className={`w-3 h-3 rounded-full border-2 border-secondary transition-all duration-300 hover:scale-125 ${
-                    index === currentIndex ? 'bg-secondary' : 'bg-transparent'
-                  }`}
+                  className={`w-3 h-3 rounded-full border-2 border-secondary transition-all duration-300 hover:scale-125 ${index === currentIndex ? 'bg-secondary' : 'bg-transparent'
+                    }`}
                   onClick={() => goToSlide(index)}
                 />
               ))}
