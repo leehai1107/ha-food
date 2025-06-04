@@ -10,9 +10,10 @@ interface NavLinkProps {
     href: string
     children: React.ReactNode
     subItems?: { href: string; label: string }[]
+    width?: string
 }
 
-export function NavLink({ href, children, subItems }: NavLinkProps) {
+export function NavLink({ href, children, subItems, width }: NavLinkProps) {
     const pathname = usePathname()
     const isActive = pathname === href
     const [isHovered, setIsHovered] = useState(false)
@@ -26,10 +27,10 @@ export function NavLink({ href, children, subItems }: NavLinkProps) {
             <Link
                 href={href}
                 className={cn(
-                    "flex items-center gap-1 transition-colors hover:text-secondary hover:bg-secondary/10 px-4 py-2 rounded-md",
+                    "flex items-center gap-1 transition-colors hover:text-dark-red hover:bg-secondary/10 px-4 py-2 rounded-md",
                     isActive
-                        ? "text-secondary font-semibold bg-secondary/10"
-                        : "text-primary-white font-semibold"
+                        ? "text-primary font-semibold bg-secondary/10" // Active link style
+                        : "text-primary font-semibold"
                 )}
             >
                 {children}
@@ -44,7 +45,7 @@ export function NavLink({ href, children, subItems }: NavLinkProps) {
                 )}
             </Link>
             {subItems && isHovered && (
-                <ul className="absolute left-0 w-48 bg-primary rounded-md shadow-lg py-1 z-50">
+                <ul className={`absolute left-0 w-${width} bg-primary rounded-md shadow-lg py-1 z-50 animate-float-in-top`}>
                     {subItems.map((item, index) => (
                         <li key={index}>
                             <Link

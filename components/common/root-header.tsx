@@ -26,7 +26,7 @@ export default function RootHeader() {
                         </button>
                     </div>
                 </div>
-                <div className="flex items-center justify-center gap-4 text-primary-white bg-dark-red py-1 font-semibold">
+                <div className="flex items-center justify-center gap-4 text-primary-white bg-primary-white py-1 font-semibold">
                     <nav>
                         <ul className="flex items-center gap-4 list-none flex-wrap">
                             <NavLink href="/">TRANG CHỦ</NavLink>
@@ -39,6 +39,7 @@ export default function RootHeader() {
                                     { href: "/products/product-c", label: "Product C" },
                                     { href: "/products/product-d", label: "Product D" },
                                 ]}
+                                width="48"
                             >
                                 SẢN PHẨM
                             </NavLink>
@@ -48,9 +49,14 @@ export default function RootHeader() {
                                 subItems={
                                     [
                                         { href: "/legal/privacy-policy", label: "Chính sách bảo mật" },
-                                        { href: "/legal/terms-of-service", label: "Điều khoản sử dụng" },
+                                        { href: "/legal/terms-of-service", label: "Chính sách thanh toán" },
+                                        { href: "/legal/terms-of-service", label: "Chính sách vận chuyển" },
+                                        { href: "/legal/terms-of-service", label: "Chính sách đổi trả" },
+                                        { href: "/legal/terms-of-service", label: "Chính sách chiết khấu" },
                                     ]
-                                }>CHÍNH SÁCH</NavLink>
+                                }
+                                width="52"
+                            >CHÍNH SÁCH</NavLink>
                         </ul>
                     </nav>
                 </div>
