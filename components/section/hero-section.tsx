@@ -89,7 +89,11 @@ export default function HeroSection() {
           >
             <div className="w-full px-4 sm:px-6 lg:px-8">
               <div
-                className={`text-center text-primary max-w-4xl mx-auto transform transition-opacity duration-700 ${isHovered ? 'opacity-100 animate-float-in-bottom' : 'opacity-0'}`}
+                className={`
+              text-center text-primary max-w-4xl mx-auto 
+              transition-all duration-700 ease-out transform
+              ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
+            `}
               >
                 <h1 className="text-4xl md:text-6xl font-bold mb-6 text-shadow-lg font-heading">
                   {slide.title}
@@ -102,28 +106,31 @@ export default function HeroSection() {
                     <div className="flex items-center justify-center flex-col">
                       <Link
                         href={slide.ctaLink}
-                        className="inline-block text-primary px-10 py-4 rounded-theme text-lg font-bold uppercase tracking-wide  hover:-translate-y-2 transition-all duration-300 font-primary"
+                        className="inline-block text-primary px-10 py-4 rounded-theme text-lg font-bold uppercase tracking-wide hover:-translate-y-2 transition-all duration-300 font-primary"
                       >
                         {slide.ctaText}
                       </Link>
                       <ChevronDown
                         className="inline-block text-primary animate-bounce"
-                        size={24} />
+                        size={24}
+                      />
                     </div>
                   ) : (
                     <div className="flex items-center justify-center flex-col">
-                      <button className="text-primary px-10 py-4 rounded-theme text-lg font-bold uppercase tracking-wide shadow-lg  hover:-translate-y-2 transition-all duration-300 font-primary">
+                      <button className="text-primary px-10 py-4 rounded-theme text-lg font-bold uppercase tracking-wide shadow-lg hover:-translate-y-2 transition-all duration-300 font-primary">
                         {slide.ctaText}
                       </button>
                       <ChevronDown
                         className="inline-block text-primary animate-bounce"
-                        size={24} />
+                        size={24}
+                      />
                     </div>
                   )}
                 </div>
               </div>
             </div>
           </div>
+
 
         ))}
       </div>

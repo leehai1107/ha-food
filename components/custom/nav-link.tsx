@@ -28,8 +28,8 @@ export function NavLink({ href, children, subItems }: NavLinkProps) {
                 className={cn(
                     "flex items-center gap-1 transition-colors hover:text-secondary hover:bg-secondary/10 px-4 py-2 rounded-md",
                     isActive
-                        ? "text-secondary font-medium bg-secondary/10"
-                        : "text-primary-white font-medium"
+                        ? "text-secondary font-semibold bg-secondary/10"
+                        : "text-primary-white font-semibold"
                 )}
             >
                 {children}
@@ -44,7 +44,7 @@ export function NavLink({ href, children, subItems }: NavLinkProps) {
                 )}
             </Link>
             {subItems && isHovered && (
-                <ul className="absolute left-0 mt-[1px] w-48 bg-dark-red rounded-md shadow-lg py-1 z-50">
+                <ul className="absolute left-0 w-48 bg-primary rounded-md shadow-lg py-1 z-50">
                     {subItems.map((item, index) => (
                         <li key={index}>
                             <Link

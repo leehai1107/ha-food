@@ -1,7 +1,7 @@
 export default function LegalSection() {
     return (
         <div className="flex flex-col gap-3">
-            <h4 className="text-secondary font-medium text-xl">BẢN QUYỀN & PHÁP LÝ</h4>
+            <h4 className="text-secondary font-semibold text-xl">BẢN QUYỀN & PHÁP LÝ</h4>
             <div className="flex flex-col gap-2">
                 <p className="text-sm">
                     © {new Date().getFullYear()} Hafood.vn. All rights reserved.

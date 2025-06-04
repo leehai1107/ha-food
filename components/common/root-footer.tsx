@@ -5,8 +5,8 @@ import LegalSection from "../section/legal-section";
 
 export default function RootFooter() {
     return (
-        <>{/* Footer */}
-            <footer className="w-full px-24 py-10 bg-primary flex flex-row justify-evenly text-primary-white md:flex-row">
+        <>
+            <footer className="w-full py-10 px-5 bg-primary flex flex-col sm:flex-row md:flex-row lg:flex-row justify-center gap-6 text-primary-white">
                 {/* Info section */}
                 <FooterInfo />
                 {/* About section */}

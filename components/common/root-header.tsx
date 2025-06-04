@@ -7,9 +7,9 @@ export default function RootHeader() {
     return (
         <>
             {/* Header Section */}
-            <header className="w-full bg-primary">
-                <div className="flex items-center justify-between gap-4 px-24 py-4 text-secondary">
-                    <Button className="py-4">
+            <header className="w-full bg-primary animate-float-in-top z-30 sticky top-0 left-0 right-0 shadow-lg">
+                <div className="max-w-[1200px] mx-auto py-6 w-[calc(100%-20px)] text-secondary flex justify-between flex-wrap items-center">
+                    <Button className="">
                         <Image
                             src="/logo/logo-primary.png"
                             alt="Logo"
@@ -26,9 +26,9 @@ export default function RootHeader() {
                         </button>
                     </div>
                 </div>
-                <div className="flex items-center justify-center gap-4 text-primary-white bg-dark-red">
+                <div className="flex items-center justify-center gap-4 text-primary-white bg-dark-red py-1 font-semibold">
                     <nav>
-                        <ul className="flex items-center gap-4 list-none">
+                        <ul className="flex items-center gap-4 list-none flex-wrap">
                             <NavLink href="/">TRANG CHỦ</NavLink>
                             <NavLink href="/about">GIỚI THIỆU</NavLink>
                             <NavLink
