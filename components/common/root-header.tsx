@@ -55,7 +55,7 @@ export default function RootHeader() {
                                         { href: "/legal/terms-of-service", label: "Chính sách chiết khấu" },
                                     ]
                                 }
-                                width="52"
+                                width="64"
                             >CHÍNH SÁCH</NavLink>
                         </ul>
                     </nav>
