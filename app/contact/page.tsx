@@ -1,93 +1,168 @@
+// import { Card, CardContent } from "@/components/ui/card"
+// import { Input } from "@/components/ui/input"
+// import { Textarea } from "@/components/ui/textarea"
+// import { Button } from "@/components/ui/button"
+// import { Icons } from "@/components/custom/icon"
+
+// export default function Contact() {
+//     return (
+//         <section className="w-full px-6 py-16">
+//             <div className="flex flex-col md:flex-row justify-center items-stretch gap-6 max-w-[1200px] mx-auto w-full h-full">
+//                 {/* Left section */}
+//                 <div className="w-full md:w-1/3 flex flex-col gap-8 shadow-lg bg-primary-white p-6 h-full">
+//                     <div className="flex flex-col items-right gap-4">
+//                         <div className="flex items-center gap-4">
+//                             <div className="w-12 rounded-full bg-primary/10 flex items-center justify-center">
+//                                 <Icons.mail className="h-6 w-6 text-primary" />
+//                             </div>
+//                             <div>
+//                                 <h3 className="font-semibold uppercase">Địa chỉ</h3>
+//                             </div>
+//                         </div>
+//                         <div>
+//                             <p className="text-primary-black">Giờ làm việc : 8h - 20h, T2-T7</p>
+//                             <p className="text-primary-black">816/30 Quốc lộ 1A, Phường Thạnh Xuân, Quận 12, TP.HCM</p>
+//                         </div>
+//                     </div>
+
+//                     <div className="flex flex-col items-right gap-4">
+//                         <div className="flex items-center gap-4">
+//                             <div className="w-12 rounded-full bg-primary/10 flex items-center justify-center">
+//                                 <Icons.mail className="h-6 w-6 text-primary" />
+//                             </div>
+//                             <div>
+//                                 <h3 className="font-semibold uppercase">Tổng đài hỗ trợ</h3>
+//                             </div>
+//                         </div>
+//                         <div>
+//                             <p className="text-primary-black">Giờ làm việc : 8h - 20h, T2-T7</p>
+//                             <p className="text-primary-black">SĐT: 0972819379</p>
+//                         </div>
+//                     </div>
+
+//                     <div className="flex flex-col items-right gap-4">
+//                         <div className="flex items-center gap-4">
+//                             <div className="w-12 rounded-full bg-primary/10 flex items-center justify-center">
+//                                 <Icons.mail className="h-6 w-6 text-primary" />
+//                             </div>
+//                             <div>
+//                                 <h3 className="font-semibold uppercase">Email</h3>
+//                             </div>
+//                         </div>
+//                         <div>
+//                             <p className="text-primary-black">Giờ làm việc : 8h - 20h, T2-T7</p>
+//                             <p className="text-primary-black">Emails: info@hafood.vn</p>
+//                         </div>
+//                     </div>
+//                 </div>
+//                 {/* Right section */}
+//                 <Card className="w-full md:w-2/3 shadow-lg bg-primary-white h-full flex flex-col">
+//                     <CardContent className="pt-20 flex-1 flex flex-col items-center justify-center">
+//                         <form className="space-y-4 w-full px-4">
+//                             <div className="flex flex-col md:flex-row gap-4">
+//                                 <div className="space-y-2">
+//                                     <Input id="name" placeholder="Họ và Tên *" required />
+//                                 </div>
+//                                 <div className="space-y-2">
+//                                     <Input id="email" type="email" placeholder="Địa chỉ Email *" required />
+//                                 </div>
+//                                 <div className="space-y-2">
+//                                     <Input id="phone" type="tel" placeholder="Số điện thoại *" required />
+//                                 </div>
+//                             </div>
+//                             <div className="space-y-2">
+//                                 <Textarea
+//                                     id="message"
+//                                     placeholder="Nội dung *"
+//                                     className="min-h-80"
+//                                     required
+//                                 />
+//                             </div>
+//                             <div className="flex items-center justify-center">
+//                                 <Button type="submit" className="text-primary-white bg-primary">Gửi thông tin</Button>
+//                             </div>
+//                         </form>
+//                     </CardContent>
+//                 </Card>
+//             </div>
+//         </section>
+//     )
+// } 
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/custom/icon"
+import { Phone } from "lucide-react"
 
 export default function Contact() {
     return (
         <section className="w-full px-6 py-16">
-            <div className="max-w-6xl mx-auto">
-                <div className="text-center mb-12">
-                    <h1 className="text-4xl font-bold mb-4">Get In Touch</h1>
-                    <p className="text-muted-foreground max-w-xl mx-auto">
-                        Have a project in mind or just want to chat? Feel free to reach out. I&apos;ll get back to you as soon as possible.
-                    </p>
-                </div>
+            <div className="flex flex-col md:flex-row justify-center items-stretch gap-6 max-w-[1200px] mx-auto w-full h-full">
 
-                <div className="grid md:grid-cols-2 gap-12 items-start">
-                    <div className="space-y-8">
-                        <div className="flex items-center gap-4">
-                            <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
-                                <Icons.mail className="h-6 w-6 text-primary" />
+                {/* Left section */}
+                <div className="w-full md:w-1/3 flex flex-col gap-6 bg-white p-6 border rounded-md">
+                    {/* Address */}
+                    <div className="pb-4 border-b border-gray-300">
+                        <div className="flex items-center gap-3 mb-2">
+                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                                <Icons.mapPin className="h-5 w-5 text-primary" />
                             </div>
-                            <div>
-                                <h3 className="font-semibold">Email</h3>
-                                <p className="text-muted-foreground">hello@leehai.dev</p>
-                            </div>
+                            <h3 className="font-semibold uppercase text-sm">Địa chỉ</h3>
                         </div>
-
-                        <div className="flex items-center gap-4">
-                            <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
-                                <Icons.mapPin className="h-6 w-6 text-primary" />
-                            </div>
-                            <div>
-                                <h3 className="font-semibold">Location</h3>
-                                <p className="text-muted-foreground">Ho Chi Minh City, Vietnam</p>
-                            </div>
-                        </div>
-
-                        <div className="flex gap-4 pt-4">
-                            <Button variant="outline" size="icon" asChild>
-                                <a href="https://github.com" target="_blank" rel="noopener noreferrer">
-                                    <Icons.gitHub className="h-4 w-4" />
-                                </a>
-                            </Button>
-                            <Button variant="outline" size="icon" asChild>
-                                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                                    <Icons.twitter className="h-4 w-4" />
-                                </a>
-                            </Button>
-                            <Button variant="outline" size="icon" asChild>
-                                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                                    <Icons.linkedin className="h-4 w-4" />
-                                </a>
-                            </Button>
-                        </div>
+                        <p className="text-sm">Giờ làm việc : 8h - 20h, T2-T7</p>
+                        <p className="text-sm">816/30 Quốc lộ 1A, Phường Thạnh Xuân, Quận 12, TP.HCM</p>
                     </div>
 
-                    <Card>
-                        <CardContent className="pt-6">
-                            <form className="space-y-4">
-                                <div className="grid md:grid-cols-2 gap-4">
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium" htmlFor="name">Name</label>
-                                        <Input id="name" placeholder="John Doe" required />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-sm font-medium" htmlFor="email">Email</label>
-                                        <Input id="email" type="email" placeholder="john@example.com" required />
-                                    </div>
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium" htmlFor="subject">Subject</label>
-                                    <Input id="subject" placeholder="Project Inquiry" required />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-sm font-medium" htmlFor="message">Message</label>
-                                    <Textarea
-                                        id="message"
-                                        placeholder="Tell me about your project..."
-                                        className="min-h-[150px]"
-                                        required
-                                    />
-                                </div>
-                                <Button type="submit" className="w-full">Send Message</Button>
-                            </form>
-                        </CardContent>
-                    </Card>
+                    {/* Hotline */}
+                    <div className="pb-4 border-b border-gray-300">
+                        <div className="flex items-center gap-3 mb-2">
+                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                                <Phone className="h-5 w-5 text-primary" />
+                            </div>
+                            <h3 className="font-semibold uppercase text-sm">Tổng đài hỗ trợ</h3>
+                        </div>
+                        <p className="text-sm">Giờ làm việc : 8h - 20h, T2-T7</p>
+                        <p className="text-sm">SĐT: 0972819379</p>
+                    </div>
+
+                    {/* Email */}
+                    <div className="pb-4 border-b border-gray-300">
+                        <div className="flex items-center gap-3 mb-2">
+                            <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                                <Icons.mail className="h-5 w-5 text-primary" />
+                            </div>
+                            <h3 className="font-semibold uppercase text-sm">Email</h3>
+                        </div>
+                        <p className="text-sm">Giờ làm việc : 8h - 20h, T2-T7</p>
+                        <p className="text-sm">Emails: info@hafood.vn</p>
+                    </div>
                 </div>
+
+                {/* Right section */}
+                <Card className="w-full md:w-2/3 bg-white border rounded-md">
+                    <CardContent className="py-8 px-6">
+                        <form className="space-y-4 w-full">
+                            <div className="flex flex-col md:flex-row gap-4">
+                                <Input id="name" placeholder="Họ và Tên *" className="bg-gray-100 text-sm" required />
+                                <Input id="email" type="email" placeholder="Địa chỉ Email *" className="bg-gray-100 text-sm" required />
+                                <Input id="phone" type="tel" placeholder="Số điện thoại *" className="bg-gray-100 text-sm" required />
+                            </div>
+                            <Textarea
+                                id="message"
+                                placeholder="Nội dung"
+                                className="bg-gray-100 text-sm min-h-[360px]"
+                                required
+                            />
+                            <div className="flex justify-center">
+                                <Button type="submit" className="bg-primary text-white px-6 py-2 text-sm rounded">
+                                    Gửi thông tin
+                                </Button>
+                            </div>
+                        </form>
+                    </CardContent>
+                </Card>
             </div>
         </section>
     )
-} 
+}

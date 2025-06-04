@@ -72,6 +72,7 @@ export default {
 		  animation: {
 			'float-in-bottom': 'float-in-bottom 0.6s ease-out forwards',
 			'float-in-top': 'float-in-top 0.6s ease-out forwards',
+			'slide-down': 'slideDown 0.3s ease-out',
 		  },
   	}
   },

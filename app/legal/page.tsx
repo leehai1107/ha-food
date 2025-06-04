@@ -15,17 +15,18 @@ export default function LegalPage() {
     const [selected, setSelected] = useState<string>(LEGAL_ITEMS[0]);
 
     return (
-        <div className="flex flex-row justify-center w-full h-full py-8 px-20 gap-4">
+        <div className="flex flex-col md:flex-row justify-center w-full h-full py-6 px-4 md:px-10 lg:px-20 gap-4">
             {/* List of legal */}
-            <div className="w-1/3 shadow-lg rounded-lg bg-primary-white p-4">
+            <div className="w-full md:w-1/3 shadow-lg rounded-lg bg-primary-white p-4">
                 <LegalList
                     items={LEGAL_ITEMS}
                     selected={selected}
                     onSelect={setSelected}
                 />
             </div>
+
             {/* Legal information with animation */}
-            <div className="w-2/3 shadow-lg rounded-lg bg-primary-white p-4">
+            <div className="w-full md:w-2/3 shadow-lg rounded-lg bg-primary-white p-4">
                 <div key={selected} className="animate-float-in-top mt-5">
                     <LegalInformation selected={selected} />
                 </div>
