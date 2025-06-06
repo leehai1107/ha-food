@@ -136,10 +136,10 @@ export default function HeroSection() {
       </div>
 
       {/* Stats */}
-      <div className="absolute bottom-0 left-0 right-0 bg-primary-white backdrop-blur-sm py-8 z-10">
+      <div className="absolute bottom-0 left-0 right-0 bg-primary backdrop-blur-sm py-8 z-10 text-primary-white">
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center mx-auto">
-            <div className="text-primary flex flex-col items-center">
+            <div className="flex flex-col items-center">
               <div className="text-secondary mb-2 font-heading">
                 <Gift size={64} />
               </div>
@@ -148,7 +148,7 @@ export default function HeroSection() {
               </p>
               <p className="uppercase font-bold text-3xl">Tinh Tế</p>
             </div>
-            <div className="text-primary flex flex-col items-center">
+            <div className="flex flex-col items-center">
               <div className="text-secondary mb-2 font-heading">
                 <Building2 size={64} />
               </div>
@@ -157,7 +157,7 @@ export default function HeroSection() {
               </p>
               <p className="uppercase font-bold text-3xl">Chuyên Nghiệp</p>
             </div>
-            <div className="text-primary flex flex-col items-center">
+            <div className="flex flex-col items-center">
               <div className="text-secondary mb-2 font-heading">
                 <MapPinned size={64} />
               </div>
@@ -166,7 +166,7 @@ export default function HeroSection() {
               </p>
               <p className="uppercase font-bold text-3xl">Toàn Quốc</p>
             </div>
-            <div className="text-primary flex flex-col items-center">
+            <div className="flex flex-col items-center">
               <div className="text-secondary mb-2 font-heading">
                 <UserRoundCheck size={64} />
               </div>
