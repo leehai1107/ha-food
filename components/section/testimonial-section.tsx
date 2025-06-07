@@ -1,7 +1,7 @@
 "use client";
-import homepageService, { Testimonial } from '@/services/homepageService'
+import { Testimonial } from '@/services/homepageService'
 import Image from 'next/image';
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 
 // Move defaultTestimonials outside the component
@@ -21,7 +21,7 @@ const defaultTestimonials: Testimonial[] = [
   },
   {
     id: 2,
-    name: 'Giám Đốc Phòng Giao Dịch ngân hàng VCB',
+    name: 'ABC',
     location: 'Quận 2',
     type: '',
     content: 'Bánh rất ngon và giá cả phù hợp với ngân sách để ra, có thể tặng cho khách hàng để tri ân khách hàng. Mình cũng chọn thêm cho nhân viên vì vị bánh mới lạ và khác biệt so với các loại từng ăn trước đây. Khi tặng bánh của Tại Thong, mình khá yên tâm để đem tặng cho khách hàng cũng như nhân viên, hộp quà tặng sang trọng thể hiện đẳng cấp của người tặng.',
@@ -57,66 +57,45 @@ const defaultTestimonials: Testimonial[] = [
     isActive: true,
     createdAt: '',
     updatedAt: ''
+  },
+  {
+    id: 5,
+    name: 'Chị Hằng',
+    location: 'Quận 1',
+    type: 'Khách hàng doanh nghiệp',
+    content: 'Bánh trung thu bên HA Food rất ngon, hộp quà sang trọng, thiết kế đẹp. Chị đã đặt hàng cho công ty chị để tặng khách hàng và nhân viên trong dịp lễ này. Chị rất hài lòng với chất lượng sản phẩm và dịch vụ của HA Food.',
+    avatarUrl: '/image/noimage.png',
+    rating: 5,
+    position: 4,
+    isActive: true,
+    createdAt: '',
+    updatedAt: ''
+  },
+  {
+    id: 6,
+    name: 'Chị Lan',
+    location: 'Quận 3',
+    type: 'Khách hàng cá nhân',
+    content: 'Bánh trung thu bên HA Food rất ngon, hộp quà sang trọng, thiết kế đẹp. Chị đã đặt hàng cho công ty chị để tặng khách hàng và nhân viên trong dịp lễ này. Chị rất hài lòng với chất lượng sản phẩm và dịch vụ của HA Food.',
+    avatarUrl: '/image/noimage.png',
+    rating: 5,
+    position: 5,
+    isActive: true,
+    createdAt: '',
+    updatedAt: ''
   }
 ]
 
 const TestimonialsSection = () => {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([])
-  const [loading, setLoading] = useState(true)
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  const fetchTestimonials = useCallback(async () => {
-    try {
-      const response = await homepageService.getHomepageContent()
-      if (response.success) {
-        const activeTestimonials = response.data.testimonials.filter(testimonial => testimonial.isActive)
-        setTestimonials(activeTestimonials.length > 0 ? activeTestimonials : defaultTestimonials)
-      }
-    } catch (error) {
-      console.error('Failed to fetch testimonials:', error)
-      setTestimonials(defaultTestimonials)
-    } finally {
-      setLoading(false)
+  const scroll = (direction: "left" | "right") => {
+    const container = scrollRef.current;
+    if (container) {
+      const scrollAmount = 650;
+      container.scrollBy({ left: direction === "left" ? -scrollAmount : scrollAmount, behavior: "smooth" });
     }
-  }, []) // No defaultTestimonials in deps
-
-  useEffect(() => {
-    fetchTestimonials()
-  }, [fetchTestimonials])
-
-  // Calculate how many slides we can show (2 testimonials per slide)
-  const testimonialsPerSlide = 2
-  const totalSlides = Math.ceil(testimonials.length / testimonialsPerSlide)
-
-  useEffect(() => {
-    if (totalSlides > 1) {
-      const timer = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % totalSlides)
-      }, 6000)
-
-      return () => clearInterval(timer)
-    }
-  }, [totalSlides])
-
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index)
-  }
-
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % totalSlides)
-  }
-
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + totalSlides) % totalSlides)
-  }
-
-  if (loading) {
-    return (
-      <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
-      </section>
-    )
-  }
+  };
 
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
@@ -131,130 +110,72 @@ const TestimonialsSection = () => {
           </p>
         </div>
 
-        {/* Testimonials Carousel */}
-        <div className="max-w-7xl mx-auto relative">
-          {/* Navigation Arrows */}
-          {totalSlides > 1 && (
-            <>
-              <button
-                onClick={prevSlide}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 text-primary hover:text-secondary"
-                aria-label="Previous testimonials"
+        {/* Scroll Arrows */}
+        <div className="relative">
+          <button
+            onClick={() => scroll("left")}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-md hover:shadow-lg transition-all text-primary"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            onClick={() => scroll("right")}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-md hover:shadow-lg transition-all text-primary"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          {/* Scrollable Testimonials */}
+          <div
+            ref={scrollRef}
+            className="flex space-x-6 overflow-x-auto scrollbar-hide px-2 py-4 scroll-smooth"
+          >
+            {defaultTestimonials.map((testimonial) => (
+              <div
+                key={testimonial.id}
+                className="flex-none w-1/3 bg-primary-white rounded-3xl p-6 shadow-md hover:shadow-xl transition duration-300"
+                style={{ minHeight: "320px" }}
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-              </button>
-              <button
-                onClick={nextSlide}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 z-10 bg-white rounded-full p-3 shadow-lg hover:shadow-xl transition-all duration-300 text-primary hover:text-secondary"
-                aria-label="Next testimonials"
-              >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-            </>
-          )}
-
-          {/* Testimonials Container */}
-          <div className="overflow-hidden">
-            <div
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-            >
-              {Array.from({ length: totalSlides }, (_, slideIndex) => (
-                <div key={slideIndex} className="w-full flex-shrink-0">
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 px-8">
-                    {testimonials
-                      .slice(slideIndex * testimonialsPerSlide, (slideIndex + 1) * testimonialsPerSlide)
-                      .map((testimonial) => (
-                        <div
-                          key={testimonial.id}
-                          className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 relative"
-                          style={{
-                            borderRadius: '40px',
-                            minHeight: '400px'
-                          }}
-                        >
-                          {/* Header with Avatar and Info */}
-                          <div className="flex items-start mb-6">
-                            <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-gray-200 mr-4 flex-shrink-0">
-                              <Image
-                                src={testimonial.avatarUrl || '/image/noimage.png'}
-                                alt={testimonial.name}
-                                width={100}
-                                height={100}
-                                className="w-full h-full object-cover"
-                                onError={(e) => {
-                                  const target = e.target as HTMLImageElement;
-                                  target.src = '/image/noimage.png';
-                                }}
-                              />
-                            </div>
-                            <div className="flex-1">
-                              <h4 className="text-lg font-bold text-gray-900 mb-1 font-heading">
-                                {testimonial.name}
-                              </h4>
-                              <p className="text-sm text-gray-600 mb-2 font-primary">
-                                {testimonial.location}
-                              </p>
-                              {/* Rating Stars */}
-                              <div className="flex items-center">
-                                {[...Array(5)].map((_, i) => (
-                                  <svg key={i} className={`w-4 h-4 ${i < testimonial.rating ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                                  </svg>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-
-                          {/* Testimonial Content */}
-                          <div className="mb-6">
-                            <div className="text-4xl text-secondary opacity-30 font-serif leading-none mb-3">&quot;</div>
-                            <p className="text-gray-700 leading-relaxed font-primary text-sm">
-                              {testimonial.content}
-                            </p>
-                          </div>
-
-                          {/* Company Logo */}
-                          <div className="absolute bottom-6 right-6">
-                            <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center">
-                              <Image
-                                width={48}
-                                height={48}
-                                src="/image/noimage.png"
-                                alt="HA Food Logo"
-                                className="w-8 h-8 object-contain"
-                              />
-                            </div>
-                          </div>
-                        </div>
+                {/* Header */}
+                <div className="flex items-start mb-4">
+                  <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-gray-200 mr-4">
+                    <Image
+                      src={testimonial.avatarUrl || "/image/noimage.png"}
+                      alt={testimonial.name}
+                      width={56}
+                      height={56}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div>
+                    <h4 className="text-md font-bold text-gray-900">{testimonial.name}</h4>
+                    <p className="text-xs text-gray-500">{testimonial.location}</p>
+                    <div className="flex mt-1">
+                      {[...Array(5)].map((_, i) => (
+                        <svg key={i} className={`w-4 h-4 ${i < testimonial.rating ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
+                          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                        </svg>
                       ))}
+                    </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
 
-          {/* Indicators */}
-          {totalSlides > 1 && (
-            <div className="flex justify-center space-x-3 mt-8">
-              {Array.from({ length: totalSlides }, (_, index) => (
-                <button
-                  key={index}
-                  className={`w-3 h-3 rounded-full border-2 border-secondary transition-all duration-300 hover:scale-125 ${index === currentIndex ? 'bg-secondary' : 'bg-transparent'
-                    }`}
-                  onClick={() => goToSlide(index)}
-                />
-              ))}
-            </div>
-          )}
+                {/* Quote */}
+                <div className="relative">
+                  <div className="text-4xl text-secondary opacity-20 absolute top-0 left-0 font-serif">“</div>
+                  <p className="text-sm text-primary-black mt-4 font-primary">{testimonial.content}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default TestimonialsSection
+export default TestimonialsSection;
