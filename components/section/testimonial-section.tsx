@@ -1,7 +1,7 @@
 "use client";
 import { Testimonial } from '@/services/homepageService'
 import Image from 'next/image';
-import { useState, useEffect, useRef } from 'react'
+import { useRef } from 'react'
 
 
 // Move defaultTestimonials outside the component
