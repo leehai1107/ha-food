@@ -19,6 +19,7 @@ body {
   --color-link: #3B82F6;
   --color-border: #E5E7EB;
   --color-dark-red:#641918;
+  --color-dark-yellow: #FFC300;
 }
 
 @layer base {

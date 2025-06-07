@@ -19,7 +19,7 @@ export default function CollectionSection() {
                     <h2 className="text-2xl md:text-3xl font-bold text-primary">
                         BỘ SƯU TẬP TRUNG THU 2024:
                     </h2>
-                    <h3 className="text-2xl md:text-4xl font-semibold text-secondary italic">
+                    <h3 className="text-2xl md:text-4xl font-semibold text-dark-yellow italic">
                         THIÊN HƯƠNG NGUYỆT DẠ
                     </h3>
                     <p className="">

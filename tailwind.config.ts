@@ -19,6 +19,7 @@ export default {
 			'primary-white': 'var(--color-primary-white)',
 			'primary-black': 'var(--color-primary-black)',
 			'dark-red':'var(--color-dark-red)',
+			'dark-yellow':'var(--color-dark-yellow)',
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			card: {
