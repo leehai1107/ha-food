@@ -202,7 +202,7 @@ const ProductsSection = () => {
                     )}
                   </div>
                   <div className="p-5">
-                    <div className="text-xs font-medium text-secondary uppercase tracking-wide mb-1 font-primary">
+                    <div className="text-xs font-medium text-primary uppercase tracking-wide mb-1 font-primary">
                       {product.productType}
                     </div>
                     <p className="text-xs text-gray-500 mb-2 font-primary">Mã: {product.productSku}</p>
