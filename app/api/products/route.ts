@@ -5,34 +5,7 @@ const prisma = new PrismaClient();
 
 export async function GET(req: NextRequest) {
   try {
-    const { searchParams, pathname } = new URL(req.url);
-
-    // /api/products/types/list
-    if (pathname.endsWith('/types/list')) {
-      const productTypes = await prisma.product.findMany({
-        select: { productType: true },
-        distinct: ['productType'],
-        orderBy: { productType: 'asc' }
-      });
-      const types = productTypes.map(p => p.productType);
-      return NextResponse.json({
-        success: true,
-        data: types,
-        message: 'Product types retrieved successfully'
-      });
-    }
-
-    // /api/products/tags/list
-    if (pathname.endsWith('/tags/list')) {
-      const products = await prisma.product.findMany({ select: { tags: true } });
-      const allTags = products.flatMap((p: { tags: string[] }) => p.tags);
-      const uniqueTags = [...new Set(allTags)].sort();
-      return NextResponse.json({
-        success: true,
-        data: uniqueTags,
-        message: 'Product tags retrieved successfully'
-      });
-    }
+    const { searchParams } = new URL(req.url);
 
     // /api/products (main list)
     const page = parseInt(searchParams.get('page') || '1');

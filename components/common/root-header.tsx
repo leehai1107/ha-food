@@ -5,9 +5,14 @@ import { Search, ShoppingCart, Menu, X } from "lucide-react";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useCart } from "@/hooks/CartContext";
 
 export default function RootHeader() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const router = useRouter();
+    const { getCartItemCount } = useCart()
+
 
     return (
         <>
@@ -31,8 +36,17 @@ export default function RootHeader() {
                         <button>
                             <Search size={26} />
                         </button>
-                        <button>
+                        <button
+                            className="relative p-2"
+                            onClick={
+                                () => router.push("/cart")
+                            }>
                             <ShoppingCart size={26} />
+                            {getCartItemCount() > 0 && (
+                                <span className="absolute -top-0 -right-0 bg-secondary text-primary-black text-xs font-semibold rounded-full h-5 w-5 flex items-center justify-center">
+                                    {getCartItemCount()}
+                                </span>
+                            )}
                         </button>
 
                         {/* Mobile Menu Toggle */}
