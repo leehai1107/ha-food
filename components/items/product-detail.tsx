@@ -105,9 +105,11 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
                     {images.length > 1 && (
                         <div className="flex space-x-2 overflow-x-auto">
                             {images.map((image, index) => (
-                                <img
+                                <Image
                                     key={index}
                                     src={image}
+                                    width={80}
+                                    height={80}
                                     alt={`${product.productName} ${index + 1}`}
                                     className={`w-20 h-20 object-cover rounded cursor-pointer border-2 flex-shrink-0 ${selectedImageIndex === index ? 'border-red-600' : 'border-gray-300'
                                         }`}
@@ -374,7 +376,7 @@ interface ImageModalProps {
 const ImageModal: React.FC<ImageModalProps> = ({ imageUrl, onClose }) => {
     return (
         <div
-            className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 bg-primary-black bg-opacity-75 flex items-center justify-center z-50 p-4"
             onClick={onClose}
         >
             <div className="relative" onClick={(e) => e.stopPropagation()}>
@@ -384,7 +386,7 @@ const ImageModal: React.FC<ImageModalProps> = ({ imageUrl, onClose }) => {
                 >
                     &times;
                 </button>
-                <img src={imageUrl} alt="Zoomed Product Image" className="max-w-full max-h-screen object-contain" />
+                <Image src={imageUrl} width={800} height={800} alt="Zoomed Product Image" className="max-w-full max-h-screen object-contain" />
             </div>
         </div>
     );
