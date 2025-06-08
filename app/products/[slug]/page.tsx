@@ -3,12 +3,9 @@ import { Metadata } from 'next'
 import productService from '@/services/productService'
 import ProductDetailClient from '@/components/items/product-detail-client'
 
-interface ProductDetailPageProps {
-    params: { slug: string }
-}
 
-export async function generateMetadata({ params }: ProductDetailPageProps): Promise<Metadata> {
-    const slug = await params.slug
+export async function generateMetadata({ params }: {params:Promise<{slug:string}>}): Promise<Metadata> {
+    const {slug} = await params;
     const product = await productService.getProductBySlug(slug)
 
     return {
@@ -20,8 +17,8 @@ export async function generateMetadata({ params }: ProductDetailPageProps): Prom
     }
 }
 
-export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
-    const slug = await params.slug
+export default async function ProductDetailPage({ params }: {params:Promise<{slug:string}>}) {
+    const {slug} = await params;
     const response = await productService.getProductBySlug(slug)
 
     if (!response?.success || !response.data) {
