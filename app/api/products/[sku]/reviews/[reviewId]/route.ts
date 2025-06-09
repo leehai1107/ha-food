@@ -1,0 +1,121 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+// PUT /api/products/[sku]/reviews/[reviewId]
+export async function PUT(
+  req: NextRequest,
+  { params }: { params: { sku: string; reviewId: string } }
+) {
+  try {
+    const reviewData = await req.json();
+    const reviewId = parseInt(params.reviewId);
+
+    // Validate review exists
+    const existingReview = await prisma.review.findUnique({
+      where: { id: reviewId }
+    });
+
+    if (!existingReview) {
+      return NextResponse.json({
+        success: false,
+        error: 'Not found',
+        message: 'Review not found'
+      }, { status: 404 });
+    }
+
+    // Update review
+    const review = await prisma.review.update({
+      where: { id: reviewId },
+      data: {
+        customerName: reviewData.customerName,
+        rating: reviewData.rating,
+        content: reviewData.content
+      }
+    });
+
+    // Update product rating
+    const productReviews = await prisma.review.findMany({
+      where: { productSku: params.sku }
+    });
+
+    const averageRating = productReviews.reduce((acc, review) => acc + review.rating, 0) / productReviews.length;
+
+    await prisma.product.update({
+      where: { productSku: params.sku },
+      data: {
+        rating: averageRating,
+        reviewCount: productReviews.length
+      }
+    });
+
+    return NextResponse.json({
+      success: true,
+      data: review,
+      message: 'Review updated successfully'
+    });
+  } catch (error) {
+    return NextResponse.json({
+      success: false,
+      error: 'Internal server error',
+      message: 'Failed to update review'
+    }, { status: 500 });
+  }
+}
+
+// DELETE /api/products/[sku]/reviews/[reviewId]
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: { sku: string; reviewId: string } }
+) {
+  try {
+    const reviewId = parseInt(params.reviewId);
+
+    // Validate review exists
+    const existingReview = await prisma.review.findUnique({
+      where: { id: reviewId }
+    });
+
+    if (!existingReview) {
+      return NextResponse.json({
+        success: false,
+        error: 'Not found',
+        message: 'Review not found'
+      }, { status: 404 });
+    }
+
+    // Delete review
+    await prisma.review.delete({
+      where: { id: reviewId }
+    });
+
+    // Update product rating
+    const productReviews = await prisma.review.findMany({
+      where: { productSku: params.sku }
+    });
+
+    const averageRating = productReviews.length > 0
+      ? productReviews.reduce((acc, review) => acc + review.rating, 0) / productReviews.length
+      : null;
+
+    await prisma.product.update({
+      where: { productSku: params.sku },
+      data: {
+        rating: averageRating,
+        reviewCount: productReviews.length
+      }
+    });
+
+    return NextResponse.json({
+      success: true,
+      message: 'Review deleted successfully'
+    });
+  } catch (error) {
+    return NextResponse.json({
+      success: false,
+      error: 'Internal server error',
+      message: 'Failed to delete review'
+    }, { status: 500 });
+  }
+} 

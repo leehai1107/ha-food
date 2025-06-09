@@ -79,6 +79,7 @@ model Product {
   category     Category?      @relation(fields: [categoryId], references: [id])
   images       ProductImage[]
   orderItems   OrderItem[]
+  reviews Review[]
 
   @@index([slug], map: "idx_products_slug")
   @@map("products")
@@ -276,4 +277,19 @@ model SystemConfig {
   @@index([category], map: "idx_system_config_category")
   @@index([key], map: "idx_system_config_key")
   @@map("system_config")
+}
+
+model Review {
+  id          Int      @id @default(autoincrement())
+  productSku  String   @map("product_sku")
+  customerName String
+  rating      Int      @default(5) // Có thể dùng Decimal nếu bạn muốn rating 4.5 chẳng hạn
+  content     String
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  // Relations
+  product Product @relation(fields: [productSku], references: [productSku], onDelete: Cascade)
+
+  @@index([productSku], map: "idx_reviews_product_sku")
+  @@map("reviews")
 }

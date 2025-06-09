@@ -70,6 +70,28 @@ export interface UpdateProductRequest {
   weight?: string;
 }
 
+export interface Review {
+  id: number;
+  productSku: string;
+  customerName: string;
+  rating: number;
+  content: string;
+  createdAt: string;
+}
+
+export interface CreateReviewRequest {
+  productSku: string;
+  customerName: string;
+  rating: number;
+  content: string;
+}
+
+export interface UpdateReviewRequest {
+  customerName?: string;
+  rating?: number;
+  content?: string;
+}
+
 class ProductService {
   // Get all products with filtering and pagination
   async getProducts(params?: ProductQueryParams): Promise<ApiResponse<ProductResponse>> {
@@ -225,6 +247,26 @@ class ProductService {
       };
     }
   }
+
+  async createReview(productSku: string, reviewData: CreateReviewRequest): Promise<ApiResponse<Review>> {
+    const response = await api.post(`/api/products/${productSku}/reviews`, reviewData);
+    return response.data;
+  }
+
+  async updateReview(productSku: string, reviewId: number, reviewData: UpdateReviewRequest): Promise<ApiResponse<Review>> {
+    const response = await api.put(`/api/products/${productSku}/reviews/${reviewId}`, reviewData);
+    return response.data;
+  }
+
+  async deleteReview(productSku: string, reviewId: number): Promise<ApiResponse<void>> {
+    const response = await api.delete(`/api/products/${productSku}/reviews/${reviewId}`);
+    return response.data;
+  }
+
+  async getProductReviews(productSku: string): Promise<ApiResponse<Review[]>> {
+    const response = await api.get(`/api/products/${productSku}/reviews`);
+    return response.data;
+  }
 }
 
 // Export singleton instance
@@ -250,4 +292,8 @@ export const {
   getFeaturedProducts,
   getNewestProducts,
   getProductsSortedByPrice,
+  createReview,
+  updateReview,
+  deleteReview,
+  getProductReviews,
 } = productService;

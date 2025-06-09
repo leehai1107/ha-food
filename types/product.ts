@@ -10,6 +10,28 @@ export type {
   BulkCreateProductImagesRequest
 } from './index';
 
+export interface Review {
+  id: number;
+  productSku: string;
+  customerName: string;
+  rating: number;
+  content: string;
+  createdAt: string;
+}
+
+export interface CreateReviewRequest {
+  productSku: string;
+  customerName: string;
+  rating: number;
+  content: string;
+}
+
+export interface UpdateReviewRequest {
+  customerName?: string;
+  rating?: number;
+  content?: string;
+}
+
 export interface Product {
   id: string;
   productSku: string;
@@ -35,6 +57,7 @@ export interface Product {
     id: string;
     name: string;
   };
+  reviews?: Review[];
   createdAt: string;
   updatedAt: string;
 } 

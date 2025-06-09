@@ -1,5 +1,6 @@
 import React from 'react';
 import { Category, CreateProductRequest, Product } from '@/types';
+import { Review, CreateReviewRequest } from '@/services/productService';
 import ProductForm from './ProductForm';
 
 interface ProductModalProps {
@@ -30,6 +31,12 @@ interface ProductModalProps {
     removeIngredient: (index: number) => void;
     editingProduct?: Product;
     isEditing?: boolean;
+    reviews?: Review[];
+    onAddReview?: (review: CreateReviewRequest) => void;
+    onUpdateReview?: (reviewId: number, review: Partial<CreateReviewRequest>) => void;
+    onDeleteReview?: (reviewId: number) => void;
+    reviewForm: CreateReviewRequest;
+    setReviewForm: (form: CreateReviewRequest) => void;
 }
 
 const ProductModal: React.FC<ProductModalProps> = ({
@@ -59,7 +66,13 @@ const ProductModal: React.FC<ProductModalProps> = ({
     addIngredient,
     removeIngredient,
     editingProduct,
-    isEditing = false
+    isEditing = false,
+    reviews,
+    onAddReview,
+    onUpdateReview,
+    onDeleteReview,
+    reviewForm,
+    setReviewForm
 }) => {
     if (!isOpen) return null;
 
@@ -107,6 +120,13 @@ const ProductModal: React.FC<ProductModalProps> = ({
                         addIngredient={addIngredient}
                         removeIngredient={removeIngredient}
                         editingProduct={editingProduct}
+                        isEditing={isEditing}
+                        reviews={reviews}
+                        onAddReview={onAddReview}
+                        onUpdateReview={onUpdateReview}
+                        onDeleteReview={onDeleteReview}
+                        reviewForm={reviewForm}
+                        setReviewForm={setReviewForm}
                     />
 
                     <div className="mt-6 flex items-center justify-end space-x-4 pt-6 border-t border-gray-200">

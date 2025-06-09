@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import { Category, CreateProductRequest, Product } from '@/types';
+import { CreateReviewRequest, Review } from '@/services/productService';
 
 interface ProductFormProps {
     formData: CreateProductRequest;
@@ -26,6 +27,13 @@ interface ProductFormProps {
     addIngredient: () => void;
     removeIngredient: (index: number) => void;
     editingProduct?: Product;
+    reviews?: Review[];
+    onAddReview?: (review: CreateReviewRequest) => void;
+    onUpdateReview?: (reviewId: number, review: Partial<CreateReviewRequest>) => void;
+    onDeleteReview?: (reviewId: number) => void;
+    isEditing?: boolean;
+    reviewForm: CreateReviewRequest;
+    setReviewForm: (form: CreateReviewRequest) => void;
 }
 
 const ProductForm: React.FC<ProductFormProps> = ({
@@ -51,8 +59,34 @@ const ProductForm: React.FC<ProductFormProps> = ({
     setIngredientInput,
     addIngredient,
     removeIngredient,
-    editingProduct
+    editingProduct,
+    reviews,
+    onAddReview,
+    onUpdateReview,
+    onDeleteReview,
+    isEditing,
+    reviewForm,
+    setReviewForm
 }) => {
+    const handleAddReview = () => {
+        if (!reviewForm.customerName || !reviewForm.content || reviewForm.rating === 0) {
+            alert('Vui lòng điền đầy đủ thông tin đánh giá');
+            return;
+        }
+        if (onAddReview) {
+            onAddReview({ ...reviewForm, productSku: formData.productSku });
+            setReviewForm({ customerName: '', rating: 0, content: '' });
+        }else{
+            console.log("onAddReview function is not provided");
+        }
+    };
+
+    const handleEditReview = (review: Review) => {
+        if (onUpdateReview) {
+            onUpdateReview(review.id, review);
+        }
+    };
+
     return (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Basic Information */}
@@ -406,6 +440,113 @@ const ProductForm: React.FC<ProductFormProps> = ({
                     </div>
                 )}
             </div>
+
+            {/* Reviews Section - Only show in edit mode */}
+            {isEditing && (
+                <div className="mt-6 pt-6 border-t border-gray-200 col-span-2">
+                    <h4 className="font-medium text-gray-900 mb-4">Đánh giá sản phẩm</h4>
+                    
+                    {/* Add Review Form */}
+                    <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+                        <h5 className="text-sm font-medium text-gray-700 mb-3">Thêm đánh giá mới</h5>
+                        <div className="space-y-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    Tên khách hàng <span className="text-red-500">*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    value={reviewForm.customerName}
+                                    onChange={(e) => setReviewForm(prev => ({ ...prev, customerName: e.target.value }))}
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                                    placeholder="Tên khách hàng"
+                                />
+                            </div>
+                            
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    Đánh giá <span className="text-red-500">*</span>
+                                </label>
+                                <select
+                                    value={reviewForm.rating}
+                                    onChange={(e) => setReviewForm(prev => ({ ...prev, rating: parseInt(e.target.value) }))}
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                                >
+                                    {[1, 2, 3, 4, 5].map(rating => (
+                                        <option key={rating} value={rating}>
+                                            {rating} sao
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    Nội dung đánh giá <span className="text-red-500">*</span>
+                                </label>
+                                <textarea
+                                    value={reviewForm.content}
+                                    onChange={(e) => setReviewForm(prev => ({ ...prev, content: e.target.value }))}
+                                    rows={3}
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                                    placeholder="Nội dung đánh giá"
+                                />
+                            </div>
+                            
+                            <button
+                                type="button"
+                                onClick={handleAddReview}
+                                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+                            >
+                                Thêm đánh giá
+                            </button>
+                        </div>
+                    </div>
+
+                    {/* Reviews List */}
+                    {reviews && reviews.length > 0 && (
+                        <div className="space-y-4">
+                            <h5 className="text-sm font-medium text-gray-700">Danh sách đánh giá</h5>
+                            {reviews.map((review) => (
+                                <div key={review.id} className="p-4 bg-white border rounded-lg">
+                                    <div className="flex justify-between items-start mb-2">
+                                        <div>
+                                            <h6 className="font-medium text-gray-900">{review.customerName}</h6>
+                                            <div className="flex items-center text-yellow-400">
+                                                {Array.from({ length: review.rating }).map((_, i) => (
+                                                    <svg key={i} className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                                    </svg>
+                                                ))}
+                                            </div>
+                                        </div>
+                                        <div className="flex space-x-2">
+                                            <button
+                                                type="button"
+                                                onClick={() => handleEditReview(review)}
+                                                className="text-blue-600 hover:text-blue-800"
+                                            >
+                                                Sửa
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() => onDeleteReview?.(review.id)}
+                                                className="text-red-600 hover:text-red-800"
+                                            >
+                                                Xóa
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <p className="text-gray-600 text-sm">{review.content}</p>
+                                    <p className="text-gray-400 text-xs mt-2">
+                                        {new Date(review.createdAt).toLocaleDateString('vi-VN')}
+                                    </p>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            )}
         </div>
     );
 };

@@ -4,6 +4,7 @@ import categoryService from '@/services/categoryService';
 import productService from '@/services/productService';
 import { productApi } from '@/services/uploadApi';
 import { Category, CreateProductRequest, Product, ProductQueryParams } from '@/types';
+import { Review, CreateReviewRequest } from '@/services/productService';
 import slugify from 'slugify';
 import ProductList from './components/ProductList';
 import ProductFilters from './components/ProductFilters';
@@ -19,6 +20,13 @@ const ProductManagement: React.FC = () => {
     const [showCreateModal, setShowCreateModal] = useState(false);
     const [showEditModal, setShowEditModal] = useState(false);
     const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+    const [reviews, setReviews] = useState<Review[]>([]);
+    const [reviewForm, setReviewForm] = useState<CreateReviewRequest>({
+        customerName: '',
+        rating: 5,
+        content: '',
+        productSku: ''
+    });
 
     // Pagination and filtering
     const [currentPage, setCurrentPage] = useState(1);
@@ -255,7 +263,7 @@ const ProductManagement: React.FC = () => {
         }
     };
 
-    const openEditModal = (product: Product) => {
+    const openEditModal = async (product: Product) => {
         setEditingProduct(product);
         setFormData({
             productSku: product.productSku,
@@ -276,6 +284,7 @@ const ProductManagement: React.FC = () => {
         });
         // Clear image upload state when opening edit modal
         resetImageState();
+        await fetchProductReviews(product.productSku);
         setShowEditModal(true);
     };
 
@@ -411,6 +420,65 @@ const ProductManagement: React.FC = () => {
         setDragOver(false);
     };
 
+    const handleAddReview = async () => {
+        if (!editingProduct) return;
+        
+        try {
+            const response = await productService.createReview(editingProduct.productSku, {
+                ...reviewForm,
+                productSku: editingProduct.productSku
+            });
+            if (response.success) {
+                await fetchProductReviews(editingProduct.productSku);
+                setReviewForm({
+                    customerName: '',
+                    rating: 5,
+                    content: '',
+                    productSku: ''
+                });
+            }
+        } catch (err: any) {
+            setError(err.message || 'Failed to add review');
+        }
+    };
+
+    const handleUpdateReview = async (reviewId: number, reviewData: Partial<CreateReviewRequest>) => {
+        if (!editingProduct) return;
+        
+        try {
+            const response = await productService.updateReview(editingProduct.productSku, reviewId, reviewData);
+            if (response.success) {
+                await fetchProductReviews(editingProduct.productSku);
+            }
+        } catch (err: any) {
+            setError(err.message || 'Failed to update review');
+        }
+    };
+
+    const handleDeleteReview = async (reviewId: number) => {
+        if (!editingProduct) return;
+        
+        try {
+            const response = await productService.deleteReview(editingProduct.productSku, reviewId);
+            if (response.success) {
+                await fetchProductReviews(editingProduct.productSku);
+            }
+        } catch (err: any) {
+            setError(err.message || 'Failed to delete review');
+        }
+    };
+
+    const fetchProductReviews = async (productSku: string) => {
+        try {
+            const response = await productService.getProductReviews(productSku);
+            if (response.success) {
+                setReviews(response.data);
+            }
+        } catch (err: any) {
+            console.error('Failed to fetch reviews:', err);
+        }
+    };
+
     if (loading && products.length === 0) {
         return (
             <div className="p-6">
@@ -515,6 +583,10 @@ const ProductManagement: React.FC = () => {
                 setIngredientInput={setIngredientInput}
                 addIngredient={addIngredient}
                 removeIngredient={removeIngredient}
+                isEditing={false}
+                reviewForm={reviewForm}
+                setReviewForm={setReviewForm}
+                reviews={[]}
             />
 
             {/* Edit Product Modal */}
@@ -550,6 +622,12 @@ const ProductManagement: React.FC = () => {
                 removeIngredient={removeIngredient}
                 editingProduct={editingProduct || undefined}
                 isEditing={true}
+                reviews={reviews}
+                onAddReview={handleAddReview}
+                onUpdateReview={handleUpdateReview}
+                onDeleteReview={handleDeleteReview}
+                reviewForm={reviewForm}
+                setReviewForm={setReviewForm}
             />
         </div>
     );
