@@ -7,12 +7,14 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCart } from "@/hooks/CartContext";
+import { useAuth } from "@/contexts/AuthContext";
+import authService from "@/services/authService";
 
 export default function RootHeader() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const router = useRouter();
     const { getCartItemCount } = useCart()
-
+    const { account, isAuthenticated } = useAuth()
 
     return (
         <>
@@ -93,6 +95,9 @@ export default function RootHeader() {
                             >
                                 CHÍNH SÁCH
                             </NavLink>
+                            {isAuthenticated && authService.isAdmin(account) && (
+                                <NavLink href="/admin">🛠️ Quản trị</NavLink>
+                            )}
                         </ul>
                     </nav>
                 </div>

@@ -1,5 +1,5 @@
 "use client";
-import { notFound, useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import productService from '@/services/productService'
 import { useCart } from '@/hooks/CartContext';
 import { useEffect, useState } from 'react';
@@ -197,7 +197,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
                                 <Link
                                     key={relatedProduct.productSku}
                                     href={`/products/${relatedProduct.slug}`}
-                                    className="flex-none w-[calc(25%-18px)] min-w-[200px] bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow snap-start"
+                                    className="flex-none w-[calc(25%-18px)] min-w-[200px] bg-primary-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow snap-start"
                                 >
                                     <div className="relative">
                                         <img
@@ -208,7 +208,7 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
                                     </div>
                                     <div className="p-4 text-center">
                                         <h3 className="text-sm font-semibold text-gray-800 mb-2 truncate">{relatedProduct.productName}</h3>
-                                        <p className="text-red-600 font-bold">{parseFloat(relatedProduct.currentPrice).toLocaleString('vi-VN')} VNĐ</p>
+                                        <p className="text-primary font-bold">{parseFloat(relatedProduct.currentPrice).toLocaleString('vi-VN')} VNĐ</p>
                                     </div>
                                 </Link>
                             ))}

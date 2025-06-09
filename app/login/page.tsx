@@ -3,6 +3,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import React, { useState } from 'react';
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import authService from '@/services/authService';
 
 const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -21,8 +22,13 @@ const LoginPage: React.FC = () => {
         setIsLoading(true);
 
         try {
-            await login({ email, password });
-            router.replace("/");  // Redirect to the intended destination
+            const response = await login({ email, password });
+            // Check if user is admin and redirect accordingly
+            if (authService.isAdmin(response.account)) {
+                router.replace("/admin");
+            } else {
+                router.replace("/");
+            }
         } catch (err: unknown) {
             if (err && typeof err === "object" && "message" in err) {
                 setError(String((err as { message?: string }).message) || 'Đăng nhập thất bại');

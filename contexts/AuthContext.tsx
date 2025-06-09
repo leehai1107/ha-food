@@ -9,7 +9,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   role?: string;
   isLoading: boolean;
-  login: (credentials: LoginRequest) => Promise<void>;
+  login: (credentials: LoginRequest) => Promise<AuthResponse>;
   register: (userData: RegisterRequest) => Promise<void>;
   logout: () => void;
   refreshToken: () => Promise<void>;
@@ -50,7 +50,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     initializeAuth();
   }, []);
 
-  const login = async (credentials: LoginRequest): Promise<void> => {
+  const login = async (credentials: LoginRequest): Promise<AuthResponse> => {
     try {
       setIsLoading(true);
       const response: AuthResponse = await authService.login(credentials);
@@ -61,6 +61,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
       // Set user data
       setAccount(response.account);
+      
+      return response;
     } catch (error) {
       console.error('Login failed:', error);
       throw error;

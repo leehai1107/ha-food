@@ -25,7 +25,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
     onGoToCart,
 }) => {
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
-    const [activeTab, setActiveTab] = useState<'description' | 'ingredients' | 'preserve'>('description');
     const [isFading, setIsFading] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [modalImageUrl, setModalImageUrl] = useState<string | null>(null);
@@ -188,7 +187,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
                             {product.tags.map((tag, index) => (
                                 <span
                                     key={index}
-                                    className="bg-gray-100 text-gray-700 px-3 py-1 rounded-full text-sm"
+                                    className="bg-gray-100 text-primary-black px-3 py-1 rounded-full text-sm"
                                 >
                                     {tag}
                                 </span>
@@ -287,74 +286,43 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
                 </div>
             </div>
 
-            {/* Product Details Tabs */}
-            <div className="mt-12">
-                <div className="border-b border-gray-200">
-                    <nav className="flex space-x-8">
-                        <button
-                            className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'description'
-                                ? 'border-red-600 text-red-600'
-                                : 'border-transparent text-gray-500 hover:text-gray-700'
-                                }`}
-                            onClick={() => setActiveTab('description')}
-                        >
-                            MÔ TẢ SẢN PHẨM
-                        </button>
-                        <button
-                            className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'ingredients'
-                                ? 'border-red-600 text-red-600'
-                                : 'border-transparent text-gray-500 hover:text-gray-700'
-                                }`}
-                            onClick={() => setActiveTab('ingredients')}
-                        >
-                            NGUYÊN LIỆU
-                        </button>
-                        <button
-                            className={`py-4 px-1 border-b-2 font-medium text-sm ${activeTab === 'preserve'
-                                ? 'border-red-600 text-red-600'
-                                : 'border-transparent text-gray-500 hover:text-gray-700'
-                                }`}
-                            onClick={() => setActiveTab('preserve')}
-                        >
-                            BẢO QUẢN
-                        </button>
-                    </nav>
-                </div>
+            {/* Product Details Table */}
+            <div className="mt-12 overflow-x-auto">
+                <table className="w-full text-left table-auto border-collapse border border-gray-200">
+                    <tbody className="text-gray-700 text-sm">
+                        {/* Description */}
+                        <tr className="border-b border-gray-200">
+                            <th className="bg-gray-50 px-4 py-3 font-semibold w-40">Mô tả sản phẩm</th>
+                            <td className="px-4 py-3">{product.productDescriptions}</td>
+                        </tr>
 
-                <div className="py-8">
-                    {activeTab === 'description' && (
-                        <div className="prose max-w-none">
-                            <p className="text-gray-700 leading-relaxed">{product.productDescriptions}</p>
-                            {product.productContent && (
-                                <div className="mt-6">
-                                    <h3 className="text-xl font-semibold mb-4">Nội dung chi tiết:</h3>
-                                    <p className="text-gray-700 leading-relaxed">{product.productContent}</p>
-                                </div>
-                            )}
-                        </div>
-                    )}
+                        {/* Content (optional) */}
+                        {product.productContent && (
+                            <tr className="border-b border-gray-200">
+                                <th className="bg-gray-50 px-4 py-3 font-semibold">Nội dung chi tiết</th>
+                                <td className="px-4 py-3">{product.productContent}</td>
+                            </tr>
+                        )}
 
-                    {activeTab === 'ingredients' && (
-                        <div>
-                            <h3 className="text-xl font-semibold mb-4">Thành phần nguyên liệu:</h3>
-                            <ul className="space-y-2">
-                                {product.productIngredients.map((ingredient, index) => (
-                                    <li key={index} className="flex items-center">
-                                        <span className="w-2 h-2 bg-red-600 rounded-full mr-3"></span>
-                                        <span className="text-gray-700">{ingredient}</span>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    )}
+                        {/* Ingredients */}
+                        <tr className="border-b border-gray-200 align-top">
+                            <th className="bg-gray-50 px-4 py-3 font-semibold">Nguyên liệu</th>
+                            <td className="px-4 py-3">
+                                <ul className="list-disc list-inside space-y-1">
+                                    {product.productIngredients.map((ingredient, index) => (
+                                        <li key={index}>{ingredient}</li>
+                                    ))}
+                                </ul>
+                            </td>
+                        </tr>
 
-                    {activeTab === 'preserve' && (
-                        <div>
-                            <h3 className="text-xl font-semibold mb-4">Hướng dẫn bảo quản:</h3>
-                            <p className="text-gray-700 leading-relaxed">{product.productPreserve}</p>
-                        </div>
-                    )}
-                </div>
+                        {/* Preserve */}
+                        <tr className="border-b border-gray-200">
+                            <th className="bg-gray-50 px-4 py-3 font-semibold">Bảo quản</th>
+                            <td className="px-4 py-3">{product.productPreserve}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             {/* Image Modal */}

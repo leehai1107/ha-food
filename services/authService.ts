@@ -63,8 +63,8 @@ class AuthService {
 
   // Helper method to check if user is admin
   isAdmin(account: Account | null): boolean {
-    if (!account || !account.role) return false;
-    return ['admin', 'Admin', 'ADMIN'].includes(account.role.name);
+    if (!account?.role?.name) return false;
+    return account.role.name.toLowerCase() === 'admin';
   }
 
   // Helper method to check if user has specific role

@@ -4,15 +4,26 @@ import React from "react";
 import RootHeader from "@/components/common/root-header";
 import RootFooter from "@/components/common/root-footer";
 import { useAuth } from "@/contexts/AuthContext";
+import AdminLayout from "@/layouts/admin-layout";
+import authService from "@/services/authService";
 
-export default function LayoutContent({ children }: { children: React.ReactNode }) {
-  const { isAuthenticated, role } = useAuth();
+interface LayoutContentProps {
+    children: React.ReactNode;
+}
 
-  return (
-    <>
-      {role === "admin" ? <div>Admin Panel Header</div> : <RootHeader />}
-      <main>{children}</main>
-      {role === "admin" ? <div>Admin Panel Footer</div> : <RootFooter />}
-    </>
-  );
+export default function LayoutContent({ children }: LayoutContentProps) {
+    const { isAuthenticated, account } = useAuth();
+    const isAdmin = isAuthenticated && account && authService.isAdmin(account);
+
+    if (isAdmin) {
+        return <AdminLayout>{children}</AdminLayout>;
+    }
+
+    return (
+        <div className="min-h-screen flex flex-col">
+            <RootHeader />
+            <main className="flex-1">{children}</main>
+            <RootFooter />
+        </div>
+    );
 }
