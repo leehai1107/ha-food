@@ -1,6 +1,7 @@
 "use client";
 import newsService from '@/services/newsService';
 import { News } from '@/types';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect, use } from 'react';
 import ReactMarkdown from 'react-markdown';
@@ -179,10 +180,12 @@ const NewsDetailPage = ({ params }: { params: Promise<{ slug: string }> }) => {
                             {/* Featured Image */}
                             {news.featuredImage && (
                                 <div className="aspect-video overflow-hidden rounded-lg mb-8" style={{ borderRadius: 'var(--border-radius)' }}>
-                                    <img
+                                    <Image
                                         src={news.featuredImage}
                                         alt={news.title}
                                         className="w-full h-full object-cover"
+                                        width={1280}
+                                        height={720}
                                     />
                                 </div>
                             )}
@@ -212,7 +215,7 @@ const NewsDetailPage = ({ params }: { params: Promise<{ slug: string }> }) => {
                                     code: ({ children }) => <code className="bg-gray-100 px-1 py-0.5 rounded text-sm font-mono">{children}</code>,
                                     pre: ({ children }) => <pre className="bg-gray-100 p-4 rounded-lg overflow-x-auto mb-4">{children}</pre>,
                                     a: ({ href, children }) => <a href={href} className="text-primary hover:text-secondary underline font-primary">{children}</a>,
-                                    img: ({ src, alt }) => <img src={src} alt={alt} className="max-w-full h-auto rounded-lg shadow-md mb-4" />
+                                    img: ({ src, alt }) => src ? <Image src={src} alt={alt || ''} className="max-w-full h-auto rounded-lg shadow-md mb-4" width={1280} height={720} /> : null,
                                 }}
                             >
                                 {news.content}
@@ -262,10 +265,12 @@ const NewsDetailPage = ({ params }: { params: Promise<{ slug: string }> }) => {
                                         <article className="bg-gray-50 rounded-lg overflow-hidden hover:shadow-md transition-shadow" style={{ borderRadius: 'var(--border-radius)' }}>
                                             {article.featuredImage && (
                                                 <div className="aspect-video overflow-hidden">
-                                                    <img
+                                                    <Image
                                                         src={article.featuredImage}
                                                         alt={article.title}
                                                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                                        width={1280}
+                                                        height={720}
                                                     />
                                                 </div>
                                             )}

@@ -1,11 +1,13 @@
 "use client";
 import newsService from '@/services/newsService';
 import { News } from '@/types';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 
-const NewsPage = () => {
+// Separate the main content into its own component
+const NewsContent = () => {
     const searchParams = useSearchParams();
     const [news, setNews] = useState<News[]>([]);
     const [loading, setLoading] = useState(true);
@@ -89,8 +91,6 @@ const NewsPage = () => {
 
     return (
         <>
-
-
             {/* Hero Section */}
             <div className="bg-primary text-white py-20">
                 <div className="container-limited">
@@ -205,6 +205,23 @@ const NewsPage = () => {
     );
 };
 
+// Main page component with Suspense boundary
+const NewsPage = () => {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-gray-50 py-20">
+                <div className="container-limited">
+                    <div className="flex justify-center items-center h-64">
+                        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+                    </div>
+                </div>
+            </div>
+        }>
+            <NewsContent />
+        </Suspense>
+    );
+};
+
 // News Card Component
 const NewsCard = ({ news }: { news: News }) => {
     const readingTime = newsService.getReadingTime(news.content);
@@ -215,10 +232,12 @@ const NewsCard = ({ news }: { news: News }) => {
             <article className="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow overflow-hidden" style={{ borderRadius: 'var(--border-radius)' }}>
                 {news.featuredImage && (
                     <div className="aspect-video overflow-hidden">
-                        <img
+                        <Image
                             src={news.featuredImage}
                             alt={news.title}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            width={1280}
+                            height={720}
                         />
                     </div>
                 )}

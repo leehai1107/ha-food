@@ -7,6 +7,7 @@ import { Product } from '@/types';
 import ProductDetail from '@/components/items/product-detail';
 import Link from 'next/link';
 import { use } from 'react';
+import Image from 'next/image';
 
 export default function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = use(params);
@@ -200,7 +201,9 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
                                     className="flex-none w-[calc(25%-18px)] min-w-[200px] bg-primary-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow snap-start"
                                 >
                                     <div className="relative">
-                                        <img
+                                        <Image
+                                            width={200}
+                                            height={200}
                                             src={relatedProduct.images?.[0]?.imageUrl || '/placeholder-image.png'}
                                             alt={relatedProduct.productName}
                                             className="w-full h-48 object-cover"
