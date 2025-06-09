@@ -33,7 +33,7 @@ interface ProductFormProps {
     onDeleteReview?: (reviewId: number) => void;
     isEditing?: boolean;
     reviewForm: CreateReviewRequest;
-    setReviewForm: (form: CreateReviewRequest) => void;
+    setReviewForm: (form: CreateReviewRequest | ((prev: CreateReviewRequest) => CreateReviewRequest)) => void;
 }
 
 const ProductForm: React.FC<ProductFormProps> = ({
@@ -75,7 +75,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
         }
         if (onAddReview) {
             onAddReview({ ...reviewForm, productSku: formData.productSku });
-            setReviewForm({ customerName: '', rating: 0, content: '' });
+            setReviewForm({ customerName: '', rating: 0, content: '', productSku: formData.productSku });
         }else{
             console.log("onAddReview function is not provided");
         }

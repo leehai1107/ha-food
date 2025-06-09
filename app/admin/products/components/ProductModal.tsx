@@ -36,7 +36,7 @@ interface ProductModalProps {
     onUpdateReview?: (reviewId: number, review: Partial<CreateReviewRequest>) => void;
     onDeleteReview?: (reviewId: number) => void;
     reviewForm: CreateReviewRequest;
-    setReviewForm: (form: CreateReviewRequest) => void;
+    setReviewForm: (form: CreateReviewRequest | ((prev: CreateReviewRequest) => CreateReviewRequest)) => void;
 }
 
 const ProductModal: React.FC<ProductModalProps> = ({

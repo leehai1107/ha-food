@@ -430,12 +430,13 @@ const ProductManagement: React.FC = () => {
             });
             if (response.success) {
                 await fetchProductReviews(editingProduct.productSku);
-                setReviewForm({
+                setReviewForm((prev) => ({
+                    ...prev,
                     customerName: '',
                     rating: 5,
                     content: '',
                     productSku: ''
-                });
+                }));
             }
         } catch (err: any) {
             setError(err.message || 'Failed to add review');

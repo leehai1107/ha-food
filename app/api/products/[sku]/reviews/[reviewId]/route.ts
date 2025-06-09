@@ -6,15 +6,16 @@ const prisma = new PrismaClient();
 // PUT /api/products/[sku]/reviews/[reviewId]
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { sku: string; reviewId: string } }
+  { params }: { params: Promise<{ sku: string; reviewId: string }> }
 ) {
   try {
+    const { sku, reviewId } = await params;
     const reviewData = await req.json();
-    const reviewId = parseInt(params.reviewId);
+    const reviewIdNum = parseInt(reviewId);
 
     // Validate review exists
     const existingReview = await prisma.review.findUnique({
-      where: { id: reviewId }
+      where: { id: reviewIdNum }
     });
 
     if (!existingReview) {
@@ -27,7 +28,7 @@ export async function PUT(
 
     // Update review
     const review = await prisma.review.update({
-      where: { id: reviewId },
+      where: { id: reviewIdNum },
       data: {
         customerName: reviewData.customerName,
         rating: reviewData.rating,
@@ -37,13 +38,13 @@ export async function PUT(
 
     // Update product rating
     const productReviews = await prisma.review.findMany({
-      where: { productSku: params.sku }
+      where: { productSku: sku }
     });
 
     const averageRating = productReviews.reduce((acc, review) => acc + review.rating, 0) / productReviews.length;
 
     await prisma.product.update({
-      where: { productSku: params.sku },
+      where: { productSku: sku },
       data: {
         rating: averageRating,
         reviewCount: productReviews.length
@@ -67,14 +68,15 @@ export async function PUT(
 // DELETE /api/products/[sku]/reviews/[reviewId]
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { sku: string; reviewId: string } }
+  { params }: { params: Promise<{ sku: string; reviewId: string }> }
 ) {
   try {
-    const reviewId = parseInt(params.reviewId);
+    const { sku, reviewId } = await params;
+    const reviewIdNum = parseInt(reviewId);
 
     // Validate review exists
     const existingReview = await prisma.review.findUnique({
-      where: { id: reviewId }
+      where: { id: reviewIdNum }
     });
 
     if (!existingReview) {
@@ -87,12 +89,12 @@ export async function DELETE(
 
     // Delete review
     await prisma.review.delete({
-      where: { id: reviewId }
+      where: { id: reviewIdNum }
     });
 
     // Update product rating
     const productReviews = await prisma.review.findMany({
-      where: { productSku: params.sku }
+      where: { productSku: sku }
     });
 
     const averageRating = productReviews.length > 0
@@ -100,7 +102,7 @@ export async function DELETE(
       : null;
 
     await prisma.product.update({
-      where: { productSku: params.sku },
+      where: { productSku: sku },
       data: {
         rating: averageRating,
         reviewCount: productReviews.length
