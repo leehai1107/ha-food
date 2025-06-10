@@ -85,11 +85,11 @@ export default function RootHeader() {
                             <NavLink
                                 href="/legal"
                                 subItems={[
-                                    { href: "/legal/privacy-policy", label: "Chính sách bảo mật" },
-                                    { href: "/legal/terms-of-service", label: "Chính sách thanh toán" },
-                                    { href: "/legal/terms-of-service", label: "Chính sách vận chuyển" },
-                                    { href: "/legal/terms-of-service", label: "Chính sách đổi trả" },
-                                    { href: "/legal/terms-of-service", label: "Chính sách chiết khấu" },
+                                    { href: "/legal", label: "Chính sách bảo mật" },
+                                    { href: "/legal", label: "Chính sách thanh toán" },
+                                    { href: "/legal", label: "Chính sách vận chuyển" },
+                                    { href: "/legal", label: "Chính sách đổi trả" },
+                                    { href: "/legal", label: "Chính sách chiết khấu" },
                                 ]}
                                 width="64"
                             >

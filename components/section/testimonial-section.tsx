@@ -137,8 +137,8 @@ const TestimonialsSection = () => {
             {defaultTestimonials.map((testimonial) => (
               <div
                 key={testimonial.id}
-                className="flex-none w-80 sm:w-1/2 md:w-1/3 bg-primary-white rounded-3xl p-6 shadow-md hover:shadow-xl transition duration-300"
-                style={{ minHeight: "320px" }}
+                className="flex-none w-72 sm:w-1/2 md:w-1/3 bg-primary-white rounded-3xl p-6 shadow-md hover:shadow-xl transition duration-300"
+                style={{ minHeight: "288px" }}
               >
                 {/* Header */}
                 <div className="flex items-start mb-4">

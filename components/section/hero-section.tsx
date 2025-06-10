@@ -1,13 +1,12 @@
 'use client'
-import homepageService, { HeroSlide, HomepageContent } from "@/services/homepageService"
+import homepageService, { HeroSlide } from "@/services/homepageService"
 import { useCallback, useEffect, useState } from "react";
 import AnimatedCounter from "../animations/AnimatedCounter"
 import Link from "next/link"
-import { Stat } from "@/types";
 import { Building2, ChevronDown, Gift, MapPinned, UserRoundCheck } from "lucide-react";
 
 export default function HeroSection() {
-  const [currentSlide, setCurrentSlide] = useState(0)
+  const [_currentSlide, setCurrentSlide] = useState(0)
   const [slides, setSlides] = useState<HeroSlide[]>([])
   const [loading, setLoading] = useState(true)
   const [isHovered, setIsHovered] = useState(false);

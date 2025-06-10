@@ -91,6 +91,7 @@ const NewsContent = () => {
 
     return (
         <>
+        <div className='px-2'>
             {/* Hero Section */}
             <div className="bg-primary text-white py-20">
                 <div className="container-limited">
@@ -201,6 +202,7 @@ const NewsContent = () => {
                     </div>
                 )}
             </div>
+        </div>
         </>
     );
 };

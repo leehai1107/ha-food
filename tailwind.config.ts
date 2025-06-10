@@ -69,6 +69,46 @@ export default {
 				'0%': { opacity: '0', transform: 'translateY(-30px)' },
 				'100%': { opacity: '1', transform: 'translateY(0)' },
 			},
+			'fill-background': {
+				'0%': { 
+					clipPath: 'circle(0% at 50% 50%)',
+					backgroundColor: 'var(--color-primary)'
+				},
+				'40%': {
+					clipPath: 'circle(100% at 50% 50%)',
+					backgroundColor: 'var(--color-primary)'
+				},
+				'60%': {
+					clipPath: 'circle(100% at 50% 50%)',
+					backgroundColor: 'var(--color-primary)'
+				},
+				'100%': {
+					clipPath: 'circle(100% at 50% 50%)',
+					backgroundColor: 'var(--color-primary-white)'
+				}
+			},
+			'splash-smooth': {
+				'0%': { 
+					transform: 'scale(0.9)',
+					opacity: '0'
+				},
+				'40%': {
+					transform: 'scale(0.9)',
+					opacity: '0'
+				},
+				'60%': {
+					transform: 'scale(1)',
+					opacity: '1'
+				},
+				'85%': {
+					transform: 'scale(1)',
+					opacity: '1'
+				},
+				'100%': { 
+					transform: 'scale(1.2)',
+					opacity: '0'
+				}
+			},
 			scrollLeft: {
 				'0%': { transform: 'translateX(0%)' },
 				'100%': { transform: 'translateX(-50%)' },
@@ -77,8 +117,11 @@ export default {
 		  animation: {
 			'float-in-bottom': 'float-in-bottom 0.6s ease-out forwards',
 			'float-in-top': 'float-in-top 0.6s ease-out forwards',
+			'fill-background': 'fill-background 2.5s cubic-bezier(0.65, 0, 0.35, 1) forwards',
+			'splash-smooth': 'splash-smooth 2.5s cubic-bezier(0.65, 0, 0.35, 1) forwards',
 			'slide-down': 'slideDown 0.3s ease-out',
 			'scroll-left': 'scrollLeft var(--duration, 30s) linear infinite',
+			'scroll-float-in-bottom': 'float-in-bottom 0.6s ease-out forwards',
 		},
   	}
   },

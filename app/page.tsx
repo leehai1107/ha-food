@@ -4,22 +4,35 @@ import FeaturedClientsSection from "@/components/section/feature-section"
 import ProductsSection from "@/components/section/product-section"
 import TestimonialsSection from "@/components/section/testimonial-section"
 import CollectionSection from "@/components/section/collection-section"
+import { ScrollAnimation } from "@/components/ui/scroll-animation"
 
 export default async function Home() {
   return (
     <>
       {/* Hero Section */}
-      <HeroSection/>
+      <ScrollAnimation>
+        <HeroSection/>
+      </ScrollAnimation>
       {/* Collection Section */}
-      <CollectionSection/>
+      <ScrollAnimation>
+        <CollectionSection/>
+      </ScrollAnimation>
       {/* About Section */}
-      <AboutSection/>
+      <ScrollAnimation>
+        <AboutSection/>
+      </ScrollAnimation>
       {/* Featured Section */}
-      <FeaturedClientsSection/>
+      <ScrollAnimation>
+        <FeaturedClientsSection/>
+      </ScrollAnimation>
       {/* Products Section */}
-      <ProductsSection/>
+      <ScrollAnimation>
+        <ProductsSection/>
+      </ScrollAnimation>
       {/* Testimonials Section */}
-      <TestimonialsSection/>
+      <ScrollAnimation>
+        <TestimonialsSection/>
+      </ScrollAnimation>
     </>
   )
 }
