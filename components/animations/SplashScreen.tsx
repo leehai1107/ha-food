@@ -15,7 +15,7 @@ export default function SplashScreen() {
     // Hide splash screen after animation
     const timer = setTimeout(() => {
       setIsVisible(false);
-    }, 2100);
+    }, 1900);
 
     return () => clearTimeout(timer);
   }, [pathname]);
@@ -26,7 +26,7 @@ export default function SplashScreen() {
     <div className="fixed inset-0 z-[9999] flex items-center justify-center">
       {/* Background overlay with filling animation */}
       <div className="absolute inset-0 animate-fill-background" />
-      
+
       {/* Logo container with new animation */}
       <div className="relative w-32 h-32 animate-splash-smooth">
         <Image
