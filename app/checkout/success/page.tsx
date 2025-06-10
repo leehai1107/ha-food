@@ -1,9 +1,9 @@
 "use client";
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense } from 'react';
 
-const CheckoutSuccessPage = () => {
+const CheckoutSuccessContent = () => {
     const router = useRouter();
     const searchParams = useSearchParams();
     const orderId = searchParams.get('orderId');
@@ -130,6 +130,21 @@ const CheckoutSuccessPage = () => {
                 </div>
             </div>
         </>
+    );
+};
+
+const CheckoutSuccessPage = () => {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen bg-gray-50 py-8 pt-28 flex items-center justify-center">
+                <div className="text-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mx-auto"></div>
+                    <p className="mt-4 text-gray-600">Đang tải...</p>
+                </div>
+            </div>
+        }>
+            <CheckoutSuccessContent />
+        </Suspense>
     );
 };
 
