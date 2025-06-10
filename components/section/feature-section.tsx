@@ -1,138 +1,32 @@
-"use client";
-import homepageService, { Client } from '@/services/homepageService';
+'use client';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { defaultClients } from '@/constants/clients';
+import { useEffect, useRef, useState } from 'react';
 
 const FeaturedClientsSection = () => {
-  const [clients, setClients] = useState<Client[]>([]);
-  const [loading, setLoading] = useState(true);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [duration, setDuration] = useState('30s');
+  const speed = 100; // px/s
+
+  const displayClients = defaultClients;
 
   useEffect(() => {
-    fetchClients();
-  }, []);
+    const container = containerRef.current;
+    if (!container) return;
 
-  const fetchClients = async () => {
-    try {
-      const response = await homepageService.getHomepageContent();
-      if (response.success) {
-        setClients(response.data.clients || []);
-      }
-    } catch (error) {
-      console.error('Failed to fetch clients:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
+    // Scroll width includes both sets (duplicated), divide by 2
+    const totalWidth = container.scrollWidth / 2;
+    const calculatedDuration = totalWidth / speed;
 
-  // Default clients as fallback
-  const defaultClients = [
-    {
-      id: 1,
-      name: 'Vingroup',
-      logoUrl: '/image/noimage.png',
-      websiteUrl: 'https://vingroup.net',
-      description: 'Tập đoàn đa ngành hàng đầu Việt Nam',
-      position: 0,
-      isActive: true,
-      createdAt: '',
-      updatedAt: ''
-    },
-    {
-      id: 2,
-      name: 'FPT Corporation',
-      logoUrl: '/image/noimage.png',
-      websiteUrl: 'https://fpt.com.vn',
-      description: 'Công ty công nghệ thông tin hàng đầu',
-      position: 1,
-      isActive: true,
-      createdAt: '',
-      updatedAt: ''
-    },
-    {
-      id: 3,
-      name: 'Techcombank',
-      logoUrl: '/image/noimage.png',
-      websiteUrl: 'https://techcombank.com.vn',
-      description: 'Ngân hàng Kỹ thương Việt Nam',
-      position: 2,
-      isActive: true,
-      createdAt: '',
-      updatedAt: ''
-    },
-    {
-      id: 4,
-      name: 'Saigon Co.op',
-      logoUrl: '/image/noimage.png',
-      websiteUrl: 'https://saigoncoop.com.vn',
-      description: 'Hệ thống siêu thị hàng đầu TP.HCM',
-      position: 3,
-      isActive: true,
-      createdAt: '',
-      updatedAt: ''
-    },
-    {
-      id: 5,
-      name: 'Lotte Mart',
-      logoUrl: '/image/noimage.png',
-      websiteUrl: 'https://lottemart.com.vn',
-      description: 'Hệ thống siêu thị Hàn Quốc tại Việt Nam',
-      position: 4,
-      isActive: true,
-      createdAt: '',
-      updatedAt: ''
-    },
-    {
-      id: 6,
-      name: 'Big C',
-      logoUrl: '/image/noimage.png',
-      websiteUrl: 'https://bigc.vn',
-      description: 'Hệ thống siêu thị lớn tại Việt Nam',
-      position: 5,
-      isActive: true,
-      createdAt: '',
-      updatedAt: ''
-    },
-    {
-      id: 7,
-      name: 'Viettel',
-      logoUrl: '/image/noimage.png',
-      websiteUrl: 'https://viettel.com.vn',
-      description: 'Tập đoàn viễn thông quân đội',
-      position: 6,
-      isActive: true,
-      createdAt: '',
-      updatedAt: ''
-    },
-    {
-      id: 8,
-      name: 'BIDV',
-      logoUrl: '/image/noimage.png',
-      websiteUrl: 'https://bidv.com.vn',
-      description: 'Ngân hàng Đầu tư và Phát triển Việt Nam',
-      position: 7,
-      isActive: true,
-      createdAt: '',
-      updatedAt: ''
-    }
-  ];
-
-  const displayClients = clients.length > 0 ? clients : defaultClients;
-
-  if (loading) {
-    return (
-      <section className="py-20 bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
-      </section>
-    );
-  }
+    setDuration(`${calculatedDuration}s`);
+  }, [displayClients]);
 
   return (
     <section className="py-16 bg-gray-50" id="clients">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          {/* Horizontal Layout: Title | Scrolling Items */}
           <div className="flex items-center">
-            {/* Left side - Title */}
+            {/* Title */}
             <div className="flex-shrink-0 mr-8 lg:mr-12">
               <h2 className="text-2xl md:text-3xl font-bold text-primary font-heading leading-tight text-right">
                 <div>Khách hàng</div>
@@ -140,62 +34,24 @@ const FeaturedClientsSection = () => {
               </h2>
             </div>
 
-            {/* Vertical divider */}
+            {/* Divider */}
             <div className="w-px h-12 bg-gray-300 mr-8 lg:mr-12 flex-shrink-0"></div>
 
-            {/* Right side - Infinite Scrolling Clients */}
+            {/* Client carousel */}
             <div className="flex-1 relative overflow-hidden">
-              {/* Gradient overlays for smooth fade effect */}
-              <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-gray-50 to-transparent z-10"></div>
-              <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-gray-50 to-transparent z-10"></div>
+              {/* Gradient overlay */}
+              <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-gray-50 to-transparent z-10" />
+              <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-gray-50 to-transparent z-10" />
 
-              {/* Scrolling container */}
-              <div className="flex animate-scroll-left">
-                {/* First set of clients */}
-                <div className="flex items-center space-x-8 px-4">
-                  {displayClients.map((client) => (
-                    <div
-                      key={`first-${client.id}`}
-                      className="flex-shrink-0 group"
-                    >
-                      <div className="w-24 h-16 flex items-center justify-center bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-3">
-                        <Image
-                          src={client.logoUrl}
-                          alt={client.name}
-                          width={100}
-                          height={100}
-                          className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.src = '/image/noimage.png';
-                          }}
-                        />
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Duplicate set for seamless loop */}
-                <div className="flex items-center space-x-8 px-4">
-                  {displayClients.map((client) => (
-                    <div
-                      key={`second-${client.id}`}
-                      className="flex-shrink-0 group"
-                    >
-                      <div className="w-24 h-16 flex items-center justify-center bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-3">
-                        <Image
-                          src={client.logoUrl}
-                          alt={client.name}
-                          width={100}
-                          height={100}
-                          className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
-                          onError={(e) => {
-                            const target = e.target as HTMLImageElement;
-                            target.src = 'noimage.png';
-                          }}
-                        />
-                      </div>
-                    </div>
+              {/* Animated scroll container */}
+              <div
+                ref={containerRef}
+                className="flex whitespace-nowrap group"
+                style={{ ['--duration' as any]: duration }}
+              >
+                <div className="flex items-center space-x-8 px-4 animate-scroll-left">
+                  {[...displayClients, ...displayClients].map((client, i) => (
+                    <ClientCard key={`${client.id}-${i}`} client={client} />
                   ))}
                 </div>
               </div>
@@ -206,5 +62,23 @@ const FeaturedClientsSection = () => {
     </section>
   );
 };
+
+const ClientCard = ({ client }: { client: { id: number; name: string; logoUrl: string } }) => (
+  <div className="flex-shrink-0 group">
+    <div className="w-24 h-16 flex items-center justify-center bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-3">
+      <Image
+        src={client.logoUrl}
+        alt={client.name}
+        width={100}
+        height={100}
+        className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
+        onError={(e) => {
+          const target = e.target as HTMLImageElement;
+          target.src = '/image/noimage.png';
+        }}
+      />
+    </div>
+  </div>
+);
 
 export default FeaturedClientsSection;

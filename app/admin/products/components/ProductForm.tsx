@@ -95,13 +95,13 @@ const ProductForm: React.FC<ProductFormProps> = ({
 
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                        SKU sản phẩm <span className="text-red-500">*</span>
+                        SKU sản phẩm <span className="text-primary">*</span>
                     </label>
                     <input
                         type="text"
                         value={formData.productSku}
                         onChange={(e) => setFormData({ ...formData, productSku: e.target.value })}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                         placeholder="VD: SP001"
                         required
                     />
@@ -109,13 +109,13 @@ const ProductForm: React.FC<ProductFormProps> = ({
 
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Tên sản phẩm <span className="text-red-500">*</span>
+                        Tên sản phẩm <span className="text-primary">*</span>
                     </label>
                     <input
                         type="text"
                         value={formData.productName}
                         onChange={(e) => setFormData({ ...formData, productName: e.target.value })}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                         placeholder="Tên sản phẩm"
                         required
                     />
@@ -123,13 +123,13 @@ const ProductForm: React.FC<ProductFormProps> = ({
 
                 <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Loại sản phẩm <span className="text-red-500">*</span>
+                        Loại sản phẩm <span className="text-primary">*</span>
                     </label>
                     <input
                         type="text"
                         value={formData.productType}
                         onChange={(e) => setFormData({ ...formData, productType: e.target.value })}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                         placeholder="VD: Hộp quà Tết"
                         required
                     />
@@ -140,7 +140,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                     <select
                         value={formData.categoryId || ''}
                         onChange={(e) => setFormData({ ...formData, categoryId: e.target.value ? parseInt(e.target.value) : undefined })}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                     >
                         <option value="">Chọn danh mục</option>
                         {categories.map((category) => (
@@ -154,14 +154,14 @@ const ProductForm: React.FC<ProductFormProps> = ({
                 <div className="grid grid-cols-2 gap-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Số lượng <span className="text-red-500">*</span>
+                            Số lượng <span className="text-primary">*</span>
                         </label>
                         <input
                             type="number"
                             min="0"
                             value={formData.quantity}
                             onChange={(e) => setFormData({ ...formData, quantity: parseInt(e.target.value) || 0 })}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                             required
                         />
                     </div>
@@ -172,7 +172,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                             type="text"
                             value={formData.weight || ''}
                             onChange={(e) => setFormData({ ...formData, weight: e.target.value })}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                             placeholder="VD: 500g"
                         />
                     </div>
@@ -181,28 +181,28 @@ const ProductForm: React.FC<ProductFormProps> = ({
                 <div className="grid grid-cols-2 gap-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Giá gốc (VND) <span className="text-red-500">*</span>
+                            Giá bán (VND) <span className="text-primary">*</span>
                         </label>
                         <input
                             type="number"
                             min="0"
                             value={formData.originalPrice}
                             onChange={(e) => setFormData({ ...formData, originalPrice: parseFloat(e.target.value) || 0 })}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                             required
                         />
                     </div>
 
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-2">
-                            Giá bán (VND) <span className="text-red-500">*</span>
+                            Giá khuyến mãi (VND) <span className="text-primary">*</span>
                         </label>
                         <input
                             type="number"
                             min="0"
                             value={formData.currentPrice}
                             onChange={(e) => setFormData({ ...formData, currentPrice: parseFloat(e.target.value) || 0 })}
-                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                             required
                         />
                     </div>
@@ -214,7 +214,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                         id="available"
                         checked={formData.available}
                         onChange={(e) => setFormData({ ...formData, available: e.target.checked })}
-                        className="h-4 w-4 text-red-600 focus:ring-red-500 border-gray-300 rounded"
+                        className="h-4 w-4 text-red-600 focus:ring-primary border-gray-300 rounded"
                     />
                     <label htmlFor="available" className="ml-2 block text-sm text-gray-900">
                         Sản phẩm có sẵn
@@ -232,7 +232,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                         value={formData.productDescriptions || ''}
                         onChange={(e) => setFormData({ ...formData, productDescriptions: e.target.value })}
                         rows={3}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                         placeholder="Mô tả ngắn về sản phẩm"
                     />
                 </div>
@@ -243,7 +243,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                         value={formData.productContent || ''}
                         onChange={(e) => setFormData({ ...formData, productContent: e.target.value })}
                         rows={4}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                         placeholder="Nội dung chi tiết về sản phẩm"
                     />
                 </div>
@@ -254,7 +254,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                         value={formData.productPreserve || ''}
                         onChange={(e) => setFormData({ ...formData, productPreserve: e.target.value })}
                         rows={3}
-                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                         placeholder="Hướng dẫn bảo quản sản phẩm"
                     />
                 </div>
@@ -268,7 +268,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                             value={tagInput}
                             onChange={(e) => setTagInput(e.target.value)}
                             onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addTag())}
-                            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                             placeholder="Nhập tag và nhấn Enter"
                         />
                         <button
@@ -304,7 +304,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                             value={ingredientInput}
                             onChange={(e) => setIngredientInput(e.target.value)}
                             onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addIngredient())}
-                            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                            className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                             placeholder="Nhập thành phần và nhấn Enter"
                         />
                         <button
@@ -369,7 +369,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                 <div
                     className={`
                         border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors
-                        ${dragOver ? 'border-red-500 bg-red-50' : 'border-gray-300 hover:border-gray-400'}
+                        ${dragOver ? 'border-primary bg-red-50' : 'border-gray-300 hover:border-gray-400'}
                     `}
                     onDragOver={handleDragOver}
                     onDragLeave={handleDragLeave}
@@ -425,7 +425,7 @@ const ProductForm: React.FC<ProductFormProps> = ({
                                     <button
                                         type="button"
                                         onClick={() => removeImage(index)}
-                                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600"
+                                        className="absolute -top-2 -right-2 bg-primary text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600"
                                     >
                                         ×
                                     </button>
@@ -452,25 +452,25 @@ const ProductForm: React.FC<ProductFormProps> = ({
                         <div className="space-y-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Tên khách hàng <span className="text-red-500">*</span>
+                                    Tên khách hàng <span className="text-primary">*</span>
                                 </label>
                                 <input
                                     type="text"
                                     value={reviewForm.customerName}
                                     onChange={(e) => setReviewForm(prev => ({ ...prev, customerName: e.target.value }))}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                                     placeholder="Tên khách hàng"
                                 />
                             </div>
                             
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Đánh giá <span className="text-red-500">*</span>
+                                    Đánh giá <span className="text-primary">*</span>
                                 </label>
                                 <select
                                     value={reviewForm.rating}
                                     onChange={(e) => setReviewForm(prev => ({ ...prev, rating: parseInt(e.target.value) }))}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                                 >
                                     {[1, 2, 3, 4, 5].map(rating => (
                                         <option key={rating} value={rating}>
@@ -482,13 +482,13 @@ const ProductForm: React.FC<ProductFormProps> = ({
                             
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    Nội dung đánh giá <span className="text-red-500">*</span>
+                                    Nội dung đánh giá <span className="text-primary">*</span>
                                 </label>
                                 <textarea
                                     value={reviewForm.content}
                                     onChange={(e) => setReviewForm(prev => ({ ...prev, content: e.target.value }))}
                                     rows={3}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary"
                                     placeholder="Nội dung đánh giá"
                                 />
                             </div>

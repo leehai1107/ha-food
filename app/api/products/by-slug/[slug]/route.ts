@@ -13,7 +13,8 @@ export async function GET(
       where: { slug },
       include: {
         category: { select: { id: true, name: true } },
-        images: true
+        images: true,
+        reviews: true
       }
     });
 

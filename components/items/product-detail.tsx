@@ -325,6 +325,22 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
                 </table>
             </div>
 
+            {/* Review List */}
+            <div className="mt-12">
+                <h3 className="text-lg font-semibold mb-4">Đánh giá sản phẩm</h3>
+                <ul className="space-y-2">
+                    {product.reviews?.map((review) => (
+                        <li key={review.id} className="border-b border-gray-200 pb-2">
+                            <p className="font-semibold">{review.customerName}</p>
+                            <div className="flex items-center space-x-1 mt-1">
+                                {renderStars(parseFloat(review.rating.toString()))} <span className="text-gray-600">({review.rating})</span>
+                            </div>
+                            <p className="text-gray-600">{review.content}</p>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+
             {/* Image Modal */}
             {modalOpen && (
                 <ImageModal imageUrl={modalImageUrl!} onClose={closeModal} />

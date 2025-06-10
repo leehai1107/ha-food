@@ -22,6 +22,13 @@ body {
   --color-dark-yellow: #FFC300;
 }
 
+@layer utilities {
+  .group:hover .animate-scroll-left {
+    animation-play-state: paused;
+  }
+}
+
+
 @layer base {
   :root {
     --background: 0 0% 100%;

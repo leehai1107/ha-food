@@ -2,6 +2,8 @@
 // SHARED TYPES - Based on Prisma Schema
 // =============================================================================
 
+import { Review } from './product';
+
 // Base types
 export type ID = number;
 export type SKU = string;
@@ -164,6 +166,7 @@ export interface Product {
   _count?: {
     orderItems: number;
   };
+  reviews ?: Review[];
 }
 
 export interface CreateProductRequest {
