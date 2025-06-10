@@ -3,7 +3,7 @@ import FeatureCard from "../items/feature-card";
 
 export default function AboutSection() {
   return (
-    <section className="py-12  bg-primary-white animate-float-in-bottom">
+    <section className="py-12 px-4 bg-primary-white animate-float-in-bottom">
       <div className="max-w-screen-xl mx-auto grid md:grid-cols-3 gap-10">
         <FeatureCard
           icon={<Gift size={48} />}

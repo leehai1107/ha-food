@@ -34,7 +34,10 @@ class OrderService {
     // Get all orders
     async getOrders(): Promise<ApiResponse<Order[]>> {
         const response = await api.get('/api/orders');
-        return response.data;
+        return {
+            ...response.data,
+            data: response.data.data.orders
+        };
     }
 
     // Get order by ID

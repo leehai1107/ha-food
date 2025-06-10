@@ -6,6 +6,7 @@ import RootFooter from "@/components/common/root-footer";
 import { useAuth } from "@/contexts/AuthContext";
 import AdminLayout from "@/layouts/admin-layout";
 import authService from "@/services/authService";
+import QuickActions from "@/components/common/quick-actions";
 
 interface LayoutContentProps {
     children: React.ReactNode;
@@ -24,6 +25,7 @@ export default function LayoutContent({ children }: LayoutContentProps) {
             <RootHeader />
             <main className="flex-1">{children}</main>
             <RootFooter />
+            <QuickActions />
         </div>
     );
 }

@@ -114,7 +114,7 @@ const TestimonialsSection = () => {
         <div className="relative">
           <button
             onClick={() => scroll("left")}
-            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-2 shadow-md hover:shadow-lg transition-all text-primary"
+            className="absolute left-2 sm:left-0 top-1/2 -translate-y-1/2 z-10 bg-white rounded-full p-2 sm:p-3 shadow-md hover:shadow-lg transition-all text-primary"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -132,12 +132,12 @@ const TestimonialsSection = () => {
           {/* Scrollable Testimonials */}
           <div
             ref={scrollRef}
-            className="flex space-x-6 overflow-x-auto scrollbar-hide px-2 py-4 scroll-smooth"
+            className="flex space-x-4 sm:space-x-6 overflow-x-auto scrollbar-hide px-2 py-4 scroll-smooth"
           >
             {defaultTestimonials.map((testimonial) => (
               <div
                 key={testimonial.id}
-                className="flex-none w-1/3 bg-primary-white rounded-3xl p-6 shadow-md hover:shadow-xl transition duration-300"
+                className="flex-none w-80 sm:w-1/2 md:w-1/3 bg-primary-white rounded-3xl p-6 shadow-md hover:shadow-xl transition duration-300"
                 style={{ minHeight: "320px" }}
               >
                 {/* Header */}

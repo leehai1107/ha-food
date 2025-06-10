@@ -33,7 +33,7 @@ export default function HeroSection() {
         subtitle: 'Khám phá hương vị truyền thống được chế biến từ những nguyên liệu tươi ngon nhất',
         ctaText: 'Xem Thêm',
         ctaLink: '/products',
-        imageUrl: 'image/noimage.png',
+        imageUrl: '/image/noimage.png',
         position: 0,
         isActive: true,
         createdAt: '',
@@ -69,7 +69,7 @@ export default function HeroSection() {
 
   if (loading) {
     return (
-      <section className="relative w-full h-screen overflow-hidden mt-20 bg-gray-100 flex items-center justify-center">
+      <section className="relative w-full h-screen overflow-hidden bg-gray-100 flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-red-600"></div>
       </section>
     )
@@ -82,12 +82,12 @@ export default function HeroSection() {
         {slides.map((slide, index) => (
           <div
             key={index}
-            className="absolute inset-0 flex items-center justify-center"
+            className="absolute inset-0 flex justify-center"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             style={{ background: overlayGradient }}
           >
-            <div className="w-full px-4 sm:px-6 lg:px-8">
+            <div className="w-full px-4 sm:px-6 lg:px-8 pt-12">
               <div
                 className={`
               text-center text-primary max-w-4xl mx-auto 

@@ -1,11 +1,51 @@
+"use client";
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
 import { Icons } from "@/components/custom/icon"
 import { Phone } from "lucide-react"
+import { useState } from "react"
+import { toast } from "sonner"
 
 export default function Contact() {
+    const [isSubmitting, setIsSubmitting] = useState(false)
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+        setIsSubmitting(true)
+
+        const form = e.currentTarget
+        const formData = new FormData(form)
+        const data = {
+            name: formData.get('name'),
+            email: formData.get('email'),
+            phone: formData.get('phone'),
+            message: formData.get('message')
+        }
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+
+            if (!response.ok) {
+                throw new Error('Failed to send message')
+            }
+
+            toast.success('Gửi thông tin thành công!')
+            form.reset()
+        } catch (error) {
+            toast.error('Có lỗi xảy ra. Vui lòng thử lại sau. Err: ' + error)
+        } finally {
+            setIsSubmitting(false)
+        }
+    }
+
     return (
         <section className="w-full px-6 py-16">
             <div className="flex flex-col md:flex-row justify-center items-stretch gap-6 max-w-[1200px] mx-auto w-full h-full">
@@ -52,21 +92,26 @@ export default function Contact() {
                 {/* Right section */}
                 <Card className="w-full md:w-2/3 bg-white border rounded-md">
                     <CardContent className="py-8 px-6">
-                        <form className="space-y-4 w-full">
+                        <form onSubmit={handleSubmit} className="space-y-4 w-full">
                             <div className="flex flex-col md:flex-row gap-4">
-                                <Input id="name" placeholder="Họ và Tên *" className="bg-gray-100 text-sm" required />
-                                <Input id="email" type="email" placeholder="Địa chỉ Email *" className="bg-gray-100 text-sm" required />
-                                <Input id="phone" type="tel" placeholder="Số điện thoại *" className="bg-gray-100 text-sm" required />
+                                <Input name="name" id="name" placeholder="Họ và Tên *" className="bg-gray-100 text-sm" required />
+                                <Input name="email" id="email" type="email" placeholder="Địa chỉ Email *" className="bg-gray-100 text-sm" required />
+                                <Input name="phone" id="phone" type="tel" placeholder="Số điện thoại *" className="bg-gray-100 text-sm" required />
                             </div>
                             <Textarea
+                                name="message"
                                 id="message"
                                 placeholder="Nội dung"
                                 className="bg-gray-100 text-sm min-h-[360px]"
                                 required
                             />
                             <div className="flex justify-center">
-                                <Button type="submit" className="bg-primary text-white px-6 py-2 text-sm rounded">
-                                    Gửi thông tin
+                                <Button 
+                                    type="submit" 
+                                    className="bg-primary text-white px-6 py-2 text-sm rounded"
+                                    disabled={isSubmitting}
+                                >
+                                    {isSubmitting ? 'Đang gửi...' : 'Gửi thông tin'}
                                 </Button>
                             </div>
                         </form>

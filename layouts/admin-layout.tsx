@@ -12,13 +12,12 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
     const tabs = [
         { id: 'dashboard', name: 'Tổng quan', icon: '📊', description: 'Thống kê tổng quan', path: '/admin' },
-        { id: 'products', name: 'Sản phẩm', icon: '🍕', description: 'Quản lý sản phẩm', path: '/admin/products' },
+        { id: 'products', name: 'Sản phẩm', icon: '🗃️', description: 'Quản lý sản phẩm', path: '/admin/products' },
         { id: 'accounts', name: 'Tài khoản', icon: '👥', description: 'Quản lý người dùng', path: '/admin/accounts' },
         { id: 'orders', name: 'Đơn hàng', icon: '📦', description: 'Quản lý đơn hàng', path: '/admin/orders' },
         { id: 'categories', name: 'Danh mục', icon: '📂', description: 'Quản lý danh mục', path: '/admin/categories' },
         { id: 'news', name: 'Tin tức', icon: '📰', description: 'Quản lý tin tức', path: '/admin/news' },
         { id: 'system-config', name: 'Cấu hình', icon: '⚙️', description: 'Cấu hình hệ thống', path: '/admin/system-config' },
-        { id: 'homepage', name: 'Trang chủ', icon: '🏠', description: 'Quản lý nội dung trang chủ', path: '/admin/homepage' }
     ];
 
     const handleLogout = () => {

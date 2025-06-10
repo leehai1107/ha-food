@@ -19,6 +19,13 @@ interface OrderEmailData {
   createdAt: Date;
 }
 
+interface ContactFormData {
+  name: string;
+  email: string;
+  phone: string;
+  message: string;
+}
+
 class EmailService {
   private transporter: nodemailer.Transporter | null = null;
   private configMap: Record<string, string> = {};
@@ -108,6 +115,45 @@ class EmailService {
     }
   }
 
+  async sendContactFormEmail(contactData: ContactFormData) {
+    if (!this.transporter) {
+      await this.initializeTransporter();
+    }
+
+    if (!this.transporter) {
+      console.warn('Email service not available. Skipping contact form email.');
+      return false;
+    }
+
+    try {
+      const adminEmailConfig = await prisma.systemConfig.findUnique({
+        where: { key: 'email_from_address', isActive: true }
+      });
+
+      if (!adminEmailConfig) {
+        console.warn('Admin email not configured. Skipping contact form email.');
+        return false;
+      }
+
+      const adminEmail = adminEmailConfig.value;
+      const emailHtml = this.generateContactFormEmailTemplate(contactData);
+
+      const mailOptions = {
+        from: `"${this.configMap.email_from_name}" <${this.configMap.email_from_address}>`,
+        to: adminEmail,
+        subject: `Liên hệ mới từ ${contactData.name} - HA Food`,
+        html: emailHtml,
+      };
+
+      const result = await this.transporter.sendMail(mailOptions);
+      console.log('Contact form email sent successfully:', result.messageId);
+      return true;
+    } catch (error) {
+      console.error('Failed to send contact form email:', error);
+      return false;
+    }
+  }
+
   private generateOrderEmailTemplate(orderData: OrderEmailData): string {
     const formatPrice = (price: number) => {
       return new Intl.NumberFormat('vi-VN', {
@@ -150,7 +196,7 @@ class EmailService {
       <body>
         <div class="container">
           <div class="header">
-            <h1>🍕 HA Food - Đơn hàng mới</h1>
+            <h1>Ha Food - Đơn hàng mới</h1>
           </div>
           
           <div class="content">
@@ -187,6 +233,54 @@ class EmailService {
           <div class="footer">
             <p>Đây là email tự động từ hệ thống HA Food.</p>
             <p>Vui lòng đăng nhập vào trang quản trị để xử lý đơn hàng.</p>
+          </div>
+        </div>
+      </body>
+      </html>
+    `;
+  }
+
+  private generateContactFormEmailTemplate(contactData: ContactFormData): string {
+    return `
+      <!DOCTYPE html>
+      <html lang="vi">
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Liên hệ mới - Ha Food</title>
+        <style>
+          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+          .header { background-color: #dc2626; color: white; padding: 20px; text-align: center; }
+          .content { padding: 20px; background-color: #f9f9f9; }
+          .contact-info { background-color: white; padding: 15px; margin: 10px 0; border-radius: 5px; }
+          .message { background-color: white; padding: 15px; margin: 10px 0; border-radius: 5px; }
+          .footer { text-align: center; padding: 20px; color: #666; }
+        </style>
+      </head>
+      <body>
+        <div class="container">
+          <div class="header">
+            <h1>Ha Food - Liên hệ mới</h1>
+          </div>
+          
+          <div class="content">
+            <div class="contact-info">
+              <h2>Thông tin người liên hệ</h2>
+              <p><strong>Tên:</strong> ${contactData.name}</p>
+              <p><strong>Email:</strong> ${contactData.email}</p>
+              <p><strong>Số điện thoại:</strong> ${contactData.phone}</p>
+            </div>
+
+            <div class="message">
+              <h2>Nội dung tin nhắn</h2>
+              <p>${contactData.message.replace(/\n/g, '<br>')}</p>
+            </div>
+          </div>
+
+          <div class="footer">
+            <p>Đây là email tự động từ hệ thống HA Food.</p>
+            <p>Vui lòng phản hồi email này để liên hệ với khách hàng.</p>
           </div>
         </div>
       </body>

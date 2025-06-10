@@ -117,10 +117,19 @@ const OrderManagement: React.FC = () => {
             setLoading(true);
             const result = await orderService.getOrders();
             if (result.success) {
-                setOrders(result.data);
+                if (Array.isArray(result.data)) {
+                    setOrders(result.data);
+                } else {
+                    console.error('Expected orders to be an array but got:', result.data);
+                    setOrders([]);
+                }
+            } else {
+                console.error('Failed to fetch orders:', result);
+                setOrders([]);
             }
         } catch (error) {
             console.error('Error fetching orders:', error);
+            setOrders([]);
         } finally {
             setLoading(false);
         }

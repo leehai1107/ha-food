@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function CollectionSection() {
     return (
-        <section className="py-16 bg-primary-white animate-float-in-bottom">
+        <section className="py-16 px-4 bg-primary-white animate-float-in-bottom">
             <div className="container mx-auto flex flex-col md:flex-row items-start gap-10">
                 {/* Left Image */}
                 <div className="md:w-1/2 w-full relative h-[500px]">

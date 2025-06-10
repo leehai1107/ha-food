@@ -80,7 +80,7 @@ const AdminHeader: React.FC<AdminHeaderProps> = ({
                     <button
                         key={tab.id}
                         onClick={() => router.push(tab.path)}
-                        className={`w-full flex items-center space-x-3 px-3 py-3 rounded-lg text-left transition-all duration-200 group ${currentTab.id === tab.id
+                        className={`w-full flex items-center space-x-3 py-3 rounded-lg text-left transition-all duration-200 group ${currentTab.id === tab.id
                             ? 'bg-red-50 text-red-700 border border-red-200 shadow-sm'
                             : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
                             }`}
