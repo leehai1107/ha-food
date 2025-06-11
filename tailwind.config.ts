@@ -113,6 +113,16 @@ export default {
 				'0%': { transform: 'translateX(0%)' },
 				'100%': { transform: 'translateX(-50%)' },
 			  },
+			  'fade-in-up': {
+				'0%': {
+				  opacity: '0',
+				  transform: 'translateY(20px)'
+				},
+				'100%': {
+				  opacity: '1',
+				  transform: 'translateY(0)'
+				},
+			  }
 		  },
 		  animation: {
 			'float-in-bottom': 'float-in-bottom 0.6s ease-out forwards',
@@ -122,6 +132,7 @@ export default {
 			'slide-down': 'slideDown 0.3s ease-out',
 			'scroll-left': 'scrollLeft var(--duration, 30s) linear infinite',
 			'scroll-float-in-bottom': 'float-in-bottom 0.6s ease-out forwards',
+			'fade-in-up': 'fade-in-up 0.5s ease-out forwards'
 		},
   	}
   },

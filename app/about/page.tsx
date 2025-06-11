@@ -7,33 +7,17 @@ export default function About() {
     <section className="w-full px-6 py-16">
       <div className="max-w-6xl mx-auto">
         <Card>
-          <CardHeader>
-            <CardTitle>About Me</CardTitle>
+          <CardHeader className="flex items-center justify-between">
+            <CardTitle className="text-primary">GIỚI THIỆU</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="text-primary-black font-medium ">
             <p className="text-muted-foreground mb-4">
-              Hello! I&apos;m Lee Hai, a passionate full-stack developer with a knack for crafting beautiful and functional web experiences. I specialize in React, Next.js, Go, and modern web technologies.
+              Thói quen biểu tặng quà là một văn hóa rất ý nghĩa và đáng trân trọng không chỉ ở Việt Nam mà còn phổ biến trên toàn thế giới. Đây là một cách tri ân cũng như một hình thức giúp gắn kết và phát triển các mối quan hệ mà các doanh nghiệp đang áp dụng rất hiệu quả. Hafood.vn là một trong những nhà tiên phong áp dụng hộp quà Tết thay thế cho giỏ quà Tết nhằm tăng tính tiện dụng và sang trọng hơn.
             </p>
             <p className="text-muted-foreground mb-4">
-              With a strong background in both front-end and back-end development, I have a comprehensive understanding of the entire web development process. I am committed to delivering high-quality solutions that meet the needs of my clients.
-            </p>
+              Trải qua nhiều năm hình thành và phát triển, Hafood.vn sở hữu đầy đủ cơ sở hạ tầng, các thiết bị tân tiến, đội ngũ vận hành chuyên nghiệp và hệ thống phân phối trải dài từ các quận trung tâm TP.HCM đến khắp toàn quốc.            </p>
             <p className="text-muted-foreground mb-4">
-              In my free time, I enjoy exploring new technologies, contributing to open-source projects, and writing technical articles to share my knowledge with the community.
-            </p>
-            <div className="flex gap-4 mt-6">
-              <Button size="lg" asChild>
-                <a href="/file/LeChiHai.pdf" download>
-                  Download CV
-                  <Icons.arrowRight className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-              <Button size="lg" variant="outline" asChild>
-                <a href="/contact">
-                  Contact Me
-                  <Icons.mail className="ml-2 h-4 w-4" />
-                </a>
-              </Button>
-            </div>
+              Với kinh nghiệm đã phục vụ hơn 10.000 khách hàng từ các doanh nghiệp lớn đến những cá nhân có yêu cầu khắt khe nhất, chúng tôi luôn tự tin và sẵn sàng đáp ứng được mọi nhu cầu của khách hàng.</p>
           </CardContent>
         </Card>
       </div>

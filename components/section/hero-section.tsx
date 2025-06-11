@@ -1,5 +1,5 @@
 'use client'
-import homepageService, { HeroSlide } from "@/services/homepageService"
+import { HeroSlide } from "@/services/homepageService"
 import { useCallback, useEffect, useState } from "react";
 import AnimatedCounter from "../animations/AnimatedCounter"
 import Link from "next/link"
@@ -19,12 +19,7 @@ export default function HeroSection() {
     setPrimary(rootStyles.getPropertyValue('--color-primary').trim());
   }, []);
 
-  const overlayGradient = isHovered
-    ? `linear-gradient(to bottom, ${primaryWhite}CC, ${primaryWhite}99, ${primary}CC)` // from bottom center
-    : `linear-gradient(to bottom, ${primaryWhite}CC, ${primaryWhite}99, ${primaryWhite}CC)`; // default
-
   const fetchHomepageData = useCallback(async () => {
-    // Move defaultSlides here to avoid changing dependencies
     const defaultSlides = [
       {
         id: 1,
@@ -39,19 +34,8 @@ export default function HeroSection() {
         updatedAt: ''
       }
     ];
-    try {
-      const response = await homepageService.getHomepageContent();
-      if (response.success) {
-        const activeSlides = response.data.heroSlides.filter(slide => slide.isActive);
-        setSlides(activeSlides);
-      }
-    } catch (error) {
-      console.error('Failed to fetch homepage data:', error);
-      setSlides(defaultSlides);
-    } finally {
-      setLoading(false);
-      setSlides(defaultSlides);
-    }
+    setSlides(defaultSlides);
+    setLoading(false);
   }, []);
 
   useEffect(() => {
@@ -84,22 +68,28 @@ export default function HeroSection() {
             className="absolute inset-0 flex justify-center"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            style={{ background: overlayGradient }}
+            style={{
+              backgroundImage: `linear-gradient(to bottom, ${primaryWhite}CC, ${primaryWhite}99, ${isHovered ? primary : primaryWhite}CC), url(${slide.imageUrl})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center'
+            }}
           >
             <div className="w-full px-4 sm:px-6 lg:px-8 pt-12">
               <div
                 className={`
-              text-center text-primary max-w-4xl mx-auto 
+              text-center text-primary max-w-4xl mx-auto pt-24
               transition-all duration-700 ease-out transform
               ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
             `}
               >
-                <h1 className="text-4xl md:text-6xl font-bold mb-6 text-shadow-lg font-heading">
-                  {slide.title}
-                </h1>
-                <p className="text-lg md:text-xl mb-8 leading-relaxed text-shadow font-primary">
-                  {slide.subtitle}
-                </p>
+                <div>
+                  <h1 className="text-4xl md:text-6xl font-bold mb-6 text-shadow-lg font-heading">
+                    {slide.title}
+                  </h1>
+                  <p className="text-lg md:text-xl mb-8 leading-relaxed text-shadow font-primary">
+                    {slide.subtitle}
+                  </p>
+                </div>
                 <div className="flex items-center justify-center mt-24">
                   {slide.ctaLink ? (
                     <div className="flex items-center justify-center flex-col">
@@ -129,8 +119,6 @@ export default function HeroSection() {
               </div>
             </div>
           </div>
-
-
         ))}
       </div>
 
@@ -138,7 +126,7 @@ export default function HeroSection() {
       <div className="absolute bottom-0 left-0 right-0 bg-primary backdrop-blur-sm py-8 z-10 text-primary-white">
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center mx-auto">
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center animate-fade-in-up" style={{ animationDelay: '0s' }}>
               <div className="text-secondary mb-2 font-heading">
                 <Gift size={64} />
               </div>
@@ -147,7 +135,7 @@ export default function HeroSection() {
               </p>
               <p className="uppercase font-bold text-3xl">Tinh Tế</p>
             </div>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
               <div className="text-secondary mb-2 font-heading">
                 <Building2 size={64} />
               </div>
@@ -156,7 +144,7 @@ export default function HeroSection() {
               </p>
               <p className="uppercase font-bold text-3xl">Chuyên Nghiệp</p>
             </div>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
               <div className="text-secondary mb-2 font-heading">
                 <MapPinned size={64} />
               </div>
@@ -165,7 +153,7 @@ export default function HeroSection() {
               </p>
               <p className="uppercase font-bold text-3xl">Toàn Quốc</p>
             </div>
-            <div className="flex flex-col items-center">
+            <div className="flex flex-col items-center animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
               <div className="text-secondary mb-2 font-heading">
                 <UserRoundCheck size={64} />
               </div>
