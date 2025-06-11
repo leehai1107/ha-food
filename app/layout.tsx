@@ -6,6 +6,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import LayoutContent from "@/layouts/layout-content";
 import { CartProvider } from "@/hooks/CartContext";
 import SplashScreen from '@/components/animations/SplashScreen';
+import { Analytics } from "@vercel/analytics/next"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,6 +38,7 @@ export default function RootLayout({
         <AuthProvider>
           <CartProvider>
             <LayoutContent>{children}</LayoutContent>
+            <Analytics />
           </CartProvider>
         </AuthProvider>
         <Toaster />
