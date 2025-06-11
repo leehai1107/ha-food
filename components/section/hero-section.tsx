@@ -9,15 +9,7 @@ export default function HeroSection() {
   const [_currentSlide, setCurrentSlide] = useState(0)
   const [slides, setSlides] = useState<HeroSlide[]>([])
   const [loading, setLoading] = useState(true)
-  const [isHovered, setIsHovered] = useState(false);
-  const [primaryWhite, setPrimaryWhite] = useState("--color-primary-white");
-  const [primary, setPrimary] = useState("--color-primary");
-
-  useEffect(() => {
-    const rootStyles = getComputedStyle(document.documentElement);
-    setPrimaryWhite(rootStyles.getPropertyValue('--color-primary-white').trim());
-    setPrimary(rootStyles.getPropertyValue('--color-primary').trim());
-  }, []);
+  const [isHovered, setIsHovered] = useState(false); 
 
   const fetchHomepageData = useCallback(async () => {
     const defaultSlides = [
@@ -27,7 +19,7 @@ export default function HeroSection() {
         subtitle: 'Khám phá hương vị truyền thống được chế biến từ những nguyên liệu tươi ngon nhất',
         ctaText: 'Xem Thêm',
         ctaLink: '/products',
-        imageUrl: '/image/noimage.png',
+        imageUrl: '/image/banners/1.jpg',
         position: 0,
         isActive: true,
         createdAt: '',
@@ -61,66 +53,64 @@ export default function HeroSection() {
   return (
     <section className="relative w-full h-screen overflow-hidden">
       {/* Slider */}
-      <div className="relative w-full h-full">
-        {slides.map((slide, index) => (
+      {slides.map((slide, index) => (
+        <div
+          key={index}
+          className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${index === _currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
+            }`}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          style={{
+            backgroundImage: `url(${slide.imageUrl})`,
+            backgroundSize: 'contain',
+            backgroundPosition: 'center',
+          }}
+        >
+          {/* Lớp phủ trắng khi hover */}
           <div
-            key={index}
-            className="absolute inset-0 flex justify-center"
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            style={{
-              backgroundImage: `linear-gradient(to bottom, ${primaryWhite}CC, ${primaryWhite}99, ${isHovered ? primary : primaryWhite}CC), url(${slide.imageUrl})`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }}
-          >
-            <div className="w-full px-4 sm:px-6 lg:px-8 pt-12">
-              <div
-                className={`
-              text-center text-primary max-w-4xl mx-auto pt-24
-              transition-all duration-700 ease-out transform
-              ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
-            `}
-              >
-                <div>
-                  <h1 className="text-4xl md:text-6xl font-bold mb-6 text-shadow-lg font-heading">
-                    {slide.title}
-                  </h1>
-                  <p className="text-lg md:text-xl mb-8 leading-relaxed text-shadow font-primary">
-                    {slide.subtitle}
-                  </p>
-                </div>
-                <div className="flex items-center justify-center mt-24">
-                  {slide.ctaLink ? (
-                    <div className="flex items-center justify-center flex-col">
-                      <Link
-                        href={slide.ctaLink}
-                        className="inline-block text-primary px-10 py-4 rounded-theme text-lg font-bold uppercase tracking-wide hover:-translate-y-2 transition-all duration-300 font-primary"
-                      >
-                        {slide.ctaText}
-                      </Link>
-                      <ChevronDown
-                        className="inline-block text-primary animate-bounce"
-                        size={24}
-                      />
-                    </div>
-                  ) : (
-                    <div className="flex items-center justify-center flex-col">
-                      <button className="text-primary px-10 py-4 rounded-theme text-lg font-bold uppercase tracking-wide shadow-lg hover:-translate-y-2 transition-all duration-300 font-primary">
-                        {slide.ctaText}
-                      </button>
-                      <ChevronDown
-                        className="inline-block text-primary animate-bounce"
-                        size={24}
-                      />
-                    </div>
-                  )}
-                </div>
+            className={`absolute inset-0 bg-white transition-opacity duration-500 ${isHovered ? 'opacity-40' : 'opacity-0'
+              }`}
+            style={{ pointerEvents: 'none' }}
+          />
+
+          {/* Nội dung text */}
+          <div className="absolute inset-0 flex flex-col items-center justify-start sm:justify-center px-4 text-center z-10 mt-52 sm:mt-0">
+            <div
+              className={`text-primary max-w-3xl transition-all duration-700 ease-out transform ${isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
+            >
+              <h1 className="text-3xl md:text-6xl font-bold mb-4 text-shadow-lg font-heading">
+                {slide.title}
+              </h1>
+              <p className="text-base md:text-xl mb-6 leading-relaxed text-shadow font-primary">
+                {slide.subtitle}
+              </p>
+
+              {/* CTA */}
+              <div className="flex flex-col items-center justify-center gap-2">
+                {slide.ctaLink ? (
+                  <>
+                    <Link
+                      href={slide.ctaLink}
+                      className="text-primary px-6 py-3 rounded-theme text-base md:text-lg font-bold uppercase tracking-wide hover:-translate-y-1 transition-all duration-300 font-primary"
+                    >
+                      {slide.ctaText}
+                    </Link>
+                    <ChevronDown className="text-primary animate-bounce" size={24} />
+                  </>
+                ) : (
+                  <>
+                    <button className="text-primary px-6 py-3 rounded-theme text-base md:text-lg font-bold uppercase tracking-wide shadow-lg hover:-translate-y-1 transition-all duration-300 font-primary">
+                      {slide.ctaText}
+                    </button>
+                    <ChevronDown className="text-primary animate-bounce" size={24} />
+                  </>
+                )}
               </div>
             </div>
           </div>
-        ))}
-      </div>
+
+        </div>
+      ))}
 
       {/* Stats */}
       <div className="absolute bottom-0 left-0 right-0 bg-primary backdrop-blur-sm py-8 z-10 text-primary-white">
