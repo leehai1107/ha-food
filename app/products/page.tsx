@@ -3,10 +3,11 @@ import ProductList from "@/components/items/product-list";
 import productService from "@/services/productService";
 import categoryService from "@/services/categoryService";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 
-const ProductsPage = () => {
+// Client component that handles search params
+const ProductsContent = () => {
     const searchParams = useSearchParams();
     const [selectedProductType, setSelectedProductType] = useState<string>('');
     const [selectedCategory, setSelectedCategory] = useState<string>('');
@@ -142,6 +143,22 @@ const ProductsPage = () => {
                 </div>
             </div>
         </>
+    );
+};
+
+// Loading fallback component
+const ProductsLoading = () => (
+    <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-red-600"></div>
+    </div>
+);
+
+// Main page component
+const ProductsPage = () => {
+    return (
+        <Suspense fallback={<ProductsLoading />}>
+            <ProductsContent />
+        </Suspense>
     );
 };
 

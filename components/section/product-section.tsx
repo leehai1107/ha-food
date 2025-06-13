@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import productService from '@/services/productService';
 import categoryService from '@/services/categoryService';
 import { Category, Product } from '@/types';
 import Image from 'next/image';
