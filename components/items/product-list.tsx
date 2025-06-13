@@ -8,10 +8,11 @@ import React, { useState, useEffect, useCallback } from 'react';
 
 interface ProductListProps {
     productType?: string;
+    category?: string;
     limit?: number;
 }
 
-const ProductList: React.FC<ProductListProps> = ({ productType, limit = 10 }) => {
+const ProductList: React.FC<ProductListProps> = ({ productType, category, limit = 20 }) => {
     const router = useRouter();
     const { addToCart } = useCart();
     const [products, setProducts] = useState<Product[]>([]);
@@ -31,11 +32,13 @@ const ProductList: React.FC<ProductListProps> = ({ productType, limit = 10 }) =>
 
             const response = await productService.getProducts({
                 productType,
+                category,
                 limit,
                 page: 1,
                 available: true,
                 sortBy: 'rating',
-                sortOrder: 'desc'
+                sortOrder: 'desc',
+                includeImages: true
             });
 
             if (response.success) {
@@ -46,7 +49,7 @@ const ProductList: React.FC<ProductListProps> = ({ productType, limit = 10 }) =>
                     total: response.data.total
                 });
             } else {
-                setError('Failed to fetch products');
+                setError(response.message || 'Failed to fetch products');
             }
         } catch (err) {
             setError('An error occurred while fetching products');
@@ -54,7 +57,7 @@ const ProductList: React.FC<ProductListProps> = ({ productType, limit = 10 }) =>
         } finally {
             setLoading(false);
         }
-    }, [productType, limit]);
+    }, [productType, category, limit]);
 
     useEffect(() => {
         fetchProducts();
@@ -108,6 +111,15 @@ const ProductList: React.FC<ProductListProps> = ({ productType, limit = 10 }) =>
         }
     }, [addToCart]);
 
+    const getProductImage = (product: Product) => {
+        if (product.images && product.images.length > 0) {
+            const primaryImage = product.images.find(img => img.isPrimary);
+            const imageUrl = primaryImage?.imageUrl || product.images[0].imageUrl;
+            return imageUrl || "/image/noimage.png";
+        }
+        return "/image/noimage.png";
+    };
+
     if (loading) {
         return (
             <div className="flex justify-center items-center py-8">
@@ -149,15 +161,8 @@ const ProductList: React.FC<ProductListProps> = ({ productType, limit = 10 }) =>
                     >
                         {/* Product Image */}
                         <div className="relative">
-                            {/* <Image
-                                src={(product.images && product.images.length > 0 ? product.images[0] : '/images/noimage.png') as string}
-                                alt={product.productName}
-                                width={300}
-                                height={300}
-                                className="w-full h-48 object-cover"
-                            /> */}
                             <Image
-                                src={'/image/noimage.png' as string}
+                                src={getProductImage(product)}
                                 alt={product.productName}
                                 width={300}
                                 height={300}

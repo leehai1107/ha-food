@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "@/components/custom/nav-link";
 import { Search, ShoppingCart, Menu, X } from "lucide-react";
 import Image from "next/image";
@@ -9,12 +9,37 @@ import { useRouter } from "next/navigation";
 import { useCart } from "@/hooks/CartContext";
 import { useAuth } from "@/contexts/AuthContext";
 import authService from "@/services/authService";
+import categoryService from "@/services/categoryService";
+import type { Category } from "@/types";
 
 export default function RootHeader() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [categories, setCategories] = useState<Category[]>([]);
     const router = useRouter();
     const { getCartItemCount } = useCart()
     const { account, isAuthenticated } = useAuth()
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const response = await categoryService.getHierarchicalCategories();
+                if (response.success) {
+                    setCategories(response.data);
+                }
+            } catch (error) {
+                console.error('Failed to fetch categories:', error);
+            }
+        };
+
+        fetchCategories();
+    }, []);
+
+    const transformCategoriesToSubItems = (categories: Category[]) => {
+        return categories.map(category => ({
+            href: `/products/${category.id}`,
+            label: category.name
+        }));
+    };
 
     return (
         <>
@@ -70,12 +95,7 @@ export default function RootHeader() {
                             <NavLink href="/about">GIỚI THIỆU</NavLink>
                             <NavLink
                                 href="/products"
-                                subItems={[
-                                    { href: "/products/product-a", label: "Product A" },
-                                    { href: "/products/product-b", label: "Product B" },
-                                    { href: "/products/product-c", label: "Product C" },
-                                    { href: "/products/product-d", label: "Product D" },
-                                ]}
+                                subItems={transformCategoriesToSubItems(categories)}
                                 width="48"
                             >
                                 SẢN PHẨM

@@ -16,11 +16,8 @@ export async function GET(req: NextRequest) {
           _count: { select: { children: true, products: true } },
           ...(includeProducts && {
             products: {
-              select: {
-                productSku: true,
-                productName: true,
-                currentPrice: true,
-                available: true
+              include: {
+                images: { orderBy: [{ isPrimary: 'desc' }, { position: 'asc' }] }
               }
             }
           })
@@ -44,11 +41,8 @@ export async function GET(req: NextRequest) {
             _count: { select: { children: true, products: true } },
             ...(includeProducts && {
               products: {
-                select: {
-                  productSku: true,
-                  productName: true,
-                  currentPrice: true,
-                  available: true
+                include: {
+                  images: { orderBy: [{ isPrimary: 'desc' }, { position: 'asc' }] }
                 }
               }
             })
@@ -57,11 +51,8 @@ export async function GET(req: NextRequest) {
         _count: { select: { children: true, products: true } },
         ...(includeProducts && {
           products: {
-            select: {
-              productSku: true,
-              productName: true,
-              currentPrice: true,
-              available: true
+            include: {
+              images: { orderBy: [{ isPrimary: 'desc' }, { position: 'asc' }] }
             }
           }
         })

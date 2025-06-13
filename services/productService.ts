@@ -13,12 +13,15 @@ export interface ProductQueryParams {
   limit?: number;
   search?: string;
   productType?: string;
+  category?: string;
   available?: boolean;
   minPrice?: number;
   maxPrice?: number;
   tags?: string[];
   sortBy?: 'name' | 'price' | 'createdAt' | 'rating';
   sortOrder?: 'asc' | 'desc';
+  includeImages?: boolean;
+  includeCategory?: boolean;
 }
 
 export interface ProductResponse {
