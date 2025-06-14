@@ -29,67 +29,73 @@ interface ContactFormData {
 class EmailService {
   private transporter: nodemailer.Transporter | null = null;
   private configMap: Record<string, string> = {};
-  private isInitializing: boolean = false;
-  private initializationPromise: Promise<boolean> | null = null;
 
-  async initializeTransporter(): Promise<boolean> {
-    if (this.transporter) {
-      return true;
-    }
-
-    if (this.isInitializing) {
-      return this.initializationPromise || Promise.resolve(false);
-    }
-
-    this.isInitializing = true;
-    this.initializationPromise = (async () => {
-      try {
-        const config = await this.getEmailConfig();
-        
-        if (!config.smtp_host || !config.smtp_username || !config.smtp_password) {
-          throw new Error('Email configuration incomplete');
-        }
-
-        this.transporter = nodemailer.createTransport({
-          host: config.smtp_host,
-          port: parseInt(config.smtp_port || '587'),
-          secure: false,
-          auth: {
-            user: config.smtp_username,
-            pass: config.smtp_password,
-          },
-        });
-
-        await this.transporter.verify();
-        this.configMap = config;
-        console.log('Email service initialized successfully');
-        return true;
-      } catch (error) {
-        console.error('Failed to initialize email service:', error);
-        this.transporter = null;
-        return false;
-      } finally {
-        this.isInitializing = false;
-        this.initializationPromise = null;
-      }
-    })();
-
-    return this.initializationPromise;
-  }
-
-  private async ensureTransporter(): Promise<nodemailer.Transporter> {
-    if (!this.transporter) {
-      const initialized = await this.initializeTransporter();
-      if (!initialized || !this.transporter) {
-        throw new Error('Failed to initialize email transporter');
-      }
-    }
-    return this.transporter;
-  }
-
-  async sendOrderNotificationToAdmin(orderData: OrderEmailData): Promise<boolean> {
+  async initializeTransporter() {
     try {
-      const transporter = await this.ensureTransporter();
+      // Get email configuration from system config
+      const emailConfigs = await prisma.systemConfig.findMany({
+        where: {
+          key: {
+            in: ['smtp_host', 'smtp_port', 'smtp_username', 'smtp_password', 'email_from_address', 'email_from_name']
+          },
+          isActive: true
+        }
+      });
+
+      this.configMap = emailConfigs.reduce((acc, config) => {
+        acc[config.key] = config.value;
+        return acc;
+      }, {} as Record<string, string>);
+
+      if (!this.configMap.smtp_host || !this.configMap.smtp_username || !this.configMap.smtp_password) {
+        console.warn('Email configuration incomplete. Email notifications will be disabled.');
+        return false;
+      }
+
+      this.transporter = nodemailer.createTransport({
+        host: this.configMap.smtp_host,
+        port: parseInt(this.configMap.smtp_port || '587'),
+        secure: false, // Using TLS by default
+        auth: {
+          user: this.configMap.smtp_username,
+          pass: this.configMap.smtp_password,
+        },
+      });
+
+      // Verify connection
+      if (this.transporter) {
+        await new Promise((resolve, reject) => {
+          this.transporter!.verify((error, success) => {
+            if (error) {
+              console.error('Email transporter verification failed:', error);
+              reject(error);
+            } else {
+              console.log('Email transporter is ready to send messages');
+              resolve(success);
+            }
+          });
+        },);
+      }
+      console.log('Email service initialized successfully');
+      return true;
+    } catch (error) {
+      console.error('Failed to initialize email service:', error);
+      this.transporter = null;
+      return false;
+    }
+  }
+
+  async sendOrderNotificationToAdmin(orderData: OrderEmailData) {
+    if (!this.transporter) {
+      await this.initializeTransporter();
+    }
+
+    if (!this.transporter) {
+      console.warn('Email service not available. Skipping order notification.');
+      return false;
+    }
+
+    try {
       // Get admin email from system config
       const adminEmailConfig = await prisma.systemConfig.findUnique({
         where: { key: 'email_from_address', isActive: true }
@@ -110,7 +116,7 @@ class EmailService {
         html: emailHtml,
       };
 
-      const result = await transporter.sendMail(mailOptions);
+      const result = await this.transporter.sendMail(mailOptions);
       console.log('Order notification email sent successfully:', result.messageId);
       return true;
     } catch (error) {
@@ -290,22 +296,6 @@ class EmailService {
       </body>
       </html>
     `;
-  }
-
-  private async getEmailConfig(): Promise<Record<string, string>> {
-    const emailConfigs = await prisma.systemConfig.findMany({
-      where: {
-        key: {
-          in: ['smtp_host', 'smtp_port', 'smtp_username', 'smtp_password', 'email_from_address', 'email_from_name']
-        },
-        isActive: true
-      }
-    });
-
-    return emailConfigs.reduce((acc, config) => {
-      acc[config.key] = config.value;
-      return acc;
-    }, {} as Record<string, string>);
   }
 }
 
