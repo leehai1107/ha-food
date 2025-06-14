@@ -979,6 +979,15 @@ export interface UpdateLayoutRequest {
 // CART TYPES
 // =============================================================================
 
+export interface Discount {
+  id: number;
+  minQuantity: number;
+  discountPercent: number;
+  isActive: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
 export interface CartItem {
   productSKU: string;
   productName: string;
@@ -997,6 +1006,7 @@ export interface Cart {
   totalItems: number;
   totalPrice: number;
   updatedAt: string;
+  discounts?: Discount[];
 }
 
 export interface AddToCartRequest {

@@ -1,7 +1,9 @@
 "use client";
 import { Product } from '@/types';
+import { Discount } from '@/types/product';
+import { getDiscounts } from '@/services/productService';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface ProductDetailProps {
     product: Product;
@@ -28,6 +30,22 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
     const [isFading, setIsFading] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [modalImageUrl, setModalImageUrl] = useState<string | null>(null);
+    const [discounts, setDiscounts] = useState<Discount[]>([]);
+
+    useEffect(() => {
+        const fetchDiscounts = async () => {
+            try {
+                const response = await getDiscounts();
+                if (response.success) {
+                    setDiscounts(response.data);
+                }
+            } catch (err) {
+                console.error('Failed to load discounts:', err);
+            }
+        };
+
+        fetchDiscounts();
+    }, []);
 
     const formatPrice = (price: number) => {
         return new Intl.NumberFormat('vi-VN', {
@@ -71,6 +89,34 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
     const closeModal = () => {
         setModalOpen(false);
         setModalImageUrl(null);
+    };
+
+    const calculateDiscountedPrice = (quantity: number) => {
+        if (!discounts || discounts.length === 0) {
+            return parseFloat(product.currentPrice);
+        }
+
+        const applicableDiscount = discounts
+            .filter(d => d.isActive && quantity >= d.minQuantity)
+            .sort((a, b) => b.minQuantity - a.minQuantity)[0];
+
+        if (!applicableDiscount) {
+            return parseFloat(product.currentPrice);
+        }
+
+        const originalPrice = parseFloat(product.currentPrice);
+        const discountAmount = originalPrice * (applicableDiscount.discountPercent / 100);
+        return originalPrice - discountAmount;
+    };
+
+    const getApplicableDiscount = (quantity: number) => {
+        if (!discounts || discounts.length === 0) {
+            return null;
+        }
+
+        return discounts
+            .filter(d => d.isActive && quantity >= d.minQuantity)
+            .sort((a, b) => b.minQuantity - a.minQuantity)[0];
     };
 
     return (
@@ -147,9 +193,6 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
                                 <span className="text-xl text-gray-500 line-through ml-4">
                                     {formatPrice(parseFloat(product.originalPrice))}
                                 </span>
-                                <div className="text-green-600 font-semibold">
-                                    Tiết kiệm: {formatPrice(parseFloat(product.originalPrice) - parseFloat(product.currentPrice))}
-                                </div>
                             </div>
                         ) : (
                             <span className="text-3xl font-bold text-gray-900">
@@ -324,6 +367,38 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
                     </tbody>
                 </table>
             </div>
+
+            {/* Bulk Discounts */}
+            {discounts.length > 0 && (
+                <div className="mt-12 bg-gray-50 p-6 rounded-lg">
+                    <h3 className="text-lg font-semibold mb-4">Chiết khấu doanh nghiệp</h3>
+                    <div className="space-y-2">
+                        {discounts
+                            .filter(d => d.isActive)
+                            .sort((a, b) => a.minQuantity - b.minQuantity)
+                            .map((discount, index) => (
+                                <div key={index} className="flex justify-between items-center">
+                                    <span className="text-gray-600">
+                                        Từ {discount.minQuantity} hộp
+                                    </span>
+                                    <span className="font-semibold text-green-600">
+                                        {discount.discountPercent}% chiết khấu
+                                    </span>
+                                </div>
+                            ))}
+                    </div>
+                    {getApplicableDiscount(quantity) && (
+                        <div className="mt-3 p-3 bg-green-50 border border-green-200 rounded-lg">
+                            <p className="text-green-800">
+                                Your current quantity qualifies for {getApplicableDiscount(quantity)?.discountPercent}% off!
+                            </p>
+                            <p className="text-green-800 font-semibold mt-1">
+                                Discounted price: {formatPrice(calculateDiscountedPrice(quantity))}
+                            </p>
+                        </div>
+                    )}
+                </div>
+            )}
 
             {/* Review List */}
             <div className="mt-12">

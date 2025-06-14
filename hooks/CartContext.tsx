@@ -1,6 +1,7 @@
 "use client";
-import React, { createContext, useContext, useReducer, useEffect, type ReactNode } from 'react';
-import type { Cart, CartItem, Product, UpdateCartItemRequest } from '../types';
+import React, { createContext, useContext, useReducer, useEffect, type ReactNode, useState } from 'react';
+import type { Cart, CartItem, Product, UpdateCartItemRequest, Discount } from '../types';
+import { getDiscounts } from '@/services/productService';
 
 // Cart Actions
 type CartAction =
@@ -8,19 +9,23 @@ type CartAction =
   | { type: 'REMOVE_ITEM'; payload: { productSKU: string } }
   | { type: 'UPDATE_QUANTITY'; payload: UpdateCartItemRequest }
   | { type: 'CLEAR_CART' }
-  | { type: 'LOAD_CART'; payload: Cart };
+  | { type: 'LOAD_CART'; payload: Cart }
+  | { type: 'SET_DISCOUNTS'; payload: Discount[] };
 
 // Cart Context Type
 interface CartContextType {
   cart: Cart;
+  discounts: Discount[];
   addToCart: (product: Product, quantity: number) => void;
   removeFromCart: (productSKU: string) => void;
   updateQuantity: (productSKU: string, quantity: number) => void;
   clearCart: () => void;
   getCartItemCount: () => number;
   getCartTotal: () => number;
+  getDiscountedTotal: () => number;
   isInCart: (productSKU: string) => boolean;
   getCartItem: (productSKU: string) => CartItem | undefined;
+  getItemDiscountedPrice: (item: CartItem) => number;
 }
 
 // Initial Cart State
@@ -127,6 +132,12 @@ const cartReducer = (state: Cart, action: CartAction): Cart => {
     case 'LOAD_CART':
       return action.payload;
 
+    case 'SET_DISCOUNTS':
+      return {
+        ...state,
+        discounts: action.payload,
+      };
+
     default:
       return state;
   }
@@ -146,6 +157,22 @@ const CART_STORAGE_KEY = 'ha-food-cart';
 // Cart Provider Component
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cart, dispatch] = useReducer(cartReducer, initialCart);
+  const [discounts, setDiscounts] = useState<Discount[]>([]);
+
+  // Load discounts on mount
+  useEffect(() => {
+    const loadDiscounts = async () => {
+      try {
+        const response = await getDiscounts();
+        if (response.success) {
+          setDiscounts(response.data);
+        }
+      } catch (error) {
+        console.error('Error loading discounts:', error);
+      }
+    };
+    loadDiscounts();
+  }, []);
 
   // Load cart from localStorage on mount
   useEffect(() => {
@@ -194,6 +221,29 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
   const getCartTotal = () => cart.totalPrice;
 
+  const getDiscountedTotal = () => {
+    return cart.items.reduce((total, item) => {
+      return total + (getItemDiscountedPrice(item) * item.quantity);
+    }, 0);
+  };
+
+  const getItemDiscountedPrice = (item: CartItem) => {
+    if (!discounts || discounts.length === 0) {
+      return item.currentPrice;
+    }
+
+    const applicableDiscount = discounts
+      .filter(d => d.isActive && item.quantity >= d.minQuantity)
+      .sort((a, b) => b.minQuantity - a.minQuantity)[0];
+
+    if (!applicableDiscount) {
+      return item.currentPrice;
+    }
+
+    const discountAmount = item.currentPrice * (applicableDiscount.discountPercent / 100);
+    return item.currentPrice - discountAmount;
+  };
+
   const isInCart = (productSKU: string) => {
     return cart.items.some(item => item.productSKU === productSKU);
   };
@@ -204,14 +254,17 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
   const contextValue: CartContextType = {
     cart,
+    discounts,
     addToCart,
     removeFromCart,
     updateQuantity,
     clearCart,
     getCartItemCount,
     getCartTotal,
+    getDiscountedTotal,
     isInCart,
     getCartItem,
+    getItemDiscountedPrice,
   };
 
   return (

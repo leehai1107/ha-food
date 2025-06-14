@@ -58,6 +58,28 @@ export interface Product {
     name: string;
   };
   reviews?: Review[];
+  discounts?: Discount[];
   createdAt: string;
   updatedAt: string;
+}
+
+export interface Discount {
+  id: number;
+  minQuantity: number;
+  discountPercent: number;
+  isActive: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface CreateDiscountRequest {
+  minQuantity: number;
+  discountPercent: number;
+  isActive?: boolean;
+}
+
+export interface UpdateDiscountRequest {
+  minQuantity?: number;
+  discountPercent?: number;
+  isActive?: boolean;
 } 

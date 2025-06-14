@@ -95,6 +95,26 @@ export interface UpdateReviewRequest {
   content?: string;
 }
 
+export interface CreateDiscountRequest {
+  minQuantity: number;
+  discountPercent: number;
+  isActive?: boolean;
+}
+
+export interface UpdateDiscountRequest {
+  discountPercent?: number;
+  minQuantity?: number;
+  isActive?: boolean;
+}
+
+export interface Discount {
+  id: number;
+  productSku: string;
+  discountPercent: number;
+  minQuantity: number;
+  isActive: boolean;
+}
+
 class ProductService {
   // Get all products with filtering and pagination
   async getProducts(params?: ProductQueryParams): Promise<ApiResponse<ProductResponse>> {
@@ -270,6 +290,45 @@ class ProductService {
     const response = await api.get(`/api/products/${productSku}/reviews`);
     return response.data;
   }
+
+  // Discount methods
+  async createDiscount(discountData: CreateDiscountRequest): Promise<ApiResponse<Discount>> {
+    const response = await api.post('/api/discounts', discountData);
+    return response.data;
+  }
+
+  async updateDiscount(discountId: number, discountData: UpdateDiscountRequest): Promise<ApiResponse<Discount>> {
+    const response = await api.put(`/api/discounts/${discountId}`, discountData);
+    return response.data;
+  }
+
+  async deleteDiscount(discountId: number): Promise<ApiResponse<void>> {
+    const response = await api.delete(`/api/discounts/${discountId}`);
+    return response.data;
+  }
+
+  async getDiscounts(): Promise<ApiResponse<Discount[]>> {
+    const response = await api.get('/api/discounts');
+    return response.data;
+  }
+
+  // Helper method to calculate discounted price
+  calculateDiscountedPrice(originalPrice: number, quantity: number, discounts: Discount[]): number {
+    if (!discounts || discounts.length === 0) {
+      return originalPrice;
+    }
+
+    const applicableDiscount = discounts
+      .filter(d => d.isActive && quantity >= d.minQuantity)
+      .sort((a, b) => b.minQuantity - a.minQuantity)[0];
+
+    if (!applicableDiscount) {
+      return originalPrice;
+    }
+
+    const discountAmount = originalPrice * (applicableDiscount.discountPercent / 100);
+    return originalPrice - discountAmount;
+  }
 }
 
 // Export singleton instance
@@ -299,4 +358,9 @@ export const {
   updateReview,
   deleteReview,
   getProductReviews,
+  createDiscount,
+  updateDiscount,
+  deleteDiscount,
+  getDiscounts,
+  calculateDiscountedPrice,
 } = productService;

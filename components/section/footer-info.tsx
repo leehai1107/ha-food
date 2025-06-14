@@ -8,7 +8,7 @@ export default function FooterInfo() {
             <div className="flex flex-col gap-2  py-5">
                 <h4 className="text-secondary font-semibold text-xl">CÔNG TY TNHH HA FOOD VN</h4>
                 <p className="text-sm">Quà Tặng Doanh Nghiệp Uy Tín <br />
-                    Mã số thuể: 0317042993
+                    Mã số thuế: 0317042993
                 </p>
                 <div className="flex items-center justify-center gap-1">
                     <MapPin className="text-secondary" />

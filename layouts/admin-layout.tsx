@@ -17,6 +17,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
         { id: 'orders', name: 'Đơn hàng', icon: '📦', description: 'Quản lý đơn hàng', path: '/admin/orders' },
         { id: 'categories', name: 'Danh mục', icon: '📂', description: 'Quản lý danh mục', path: '/admin/categories' },
         { id: 'news', name: 'Tin tức', icon: '📰', description: 'Quản lý tin tức', path: '/admin/news' },
+        {id: 'discounts', name: 'Chiết khấu', icon: '💲', description: 'Quản lý chiết khấu', path: '/admin/discounts' },
         { id: 'system-config', name: 'Cấu hình', icon: '⚙️', description: 'Cấu hình hệ thống', path: '/admin/system-config' },
     ];
 

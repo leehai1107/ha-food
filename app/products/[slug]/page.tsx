@@ -47,14 +47,19 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
 
     useEffect(() => {
         const fetchRelatedProducts = async () => {
-            if (product && product.productType) {
+            if (product) {
                 try {
-                    const response = await productService.getProductsByType(product.productType);
+                    // Calculate price range (±20% of current product price)
+                    const currentPrice = parseFloat(product.currentPrice);
+                    const minPrice = currentPrice * 0.8; // 20% lower
+                    const maxPrice = currentPrice * 1.2; // 20% higher
+
+                    const response = await productService.getProductsByPriceRange(minPrice, maxPrice);
                     if (response.success && response.data) {
-                        // Filter out the current product
-                        const filteredProducts = response.data.products.filter(
-                            (relatedProduct) => relatedProduct.productSku !== product.productSku
-                        );
+                        // Filter out the current product and limit to 8 related products
+                        const filteredProducts = response.data.products
+                            .filter((relatedProduct) => relatedProduct.productSku !== product.productSku)
+                            .slice(0, 8);
                         setRelatedProducts(filteredProducts);
                     }
                 } catch (err) {

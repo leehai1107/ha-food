@@ -1,14 +1,41 @@
+"use client";
+import React, { useEffect, useState } from 'react';
+import { Discount } from '@/types/product';
+import { getDiscounts } from '@/services/productService';
+
 export default function DiscountPolicy() {
-    const discountPolicies = [
-        { quantity: '≥ 3', discount: '5%' },
-        { quantity: '≥ 5', discount: '10%' },
-        { quantity: '≥ 10', discount: '12%' },
-        { quantity: '≥ 20', discount: '15%' },
-        { quantity: '≥ 30', discount: '18%' },
-        { quantity: '≥ 50', discount: '20%' },
-        { quantity: '≥ 100', discount: '22%' },
-        { quantity: '≥ 200', discount: '25%' },
-    ];
+    const [discounts, setDiscounts] = useState<Discount[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        const fetchDiscounts = async () => {
+            try {
+                const response = await getDiscounts();
+                if (response.success) {
+                    setDiscounts(response.data);
+                }
+            } catch (err) {
+                console.error('Failed to load discounts:', err);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchDiscounts();
+    }, []);
+
+    if (loading) {
+        return (
+            <div className="px-4">
+                <h2 className="font-semibold text-5xl capitalize text-primary mb-8">Chính Sách Chiết Khấu</h2>
+                <div className="animate-pulse">
+                    <div className="h-8 bg-gray-200 rounded mb-4"></div>
+                    <div className="h-8 bg-gray-200 rounded mb-4"></div>
+                    <div className="h-8 bg-gray-200 rounded mb-4"></div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="px-4">
@@ -21,12 +48,15 @@ export default function DiscountPolicy() {
                     </tr>
                 </thead>
                 <tbody className="text-primary text-lg font-medium">
-                    {discountPolicies.map((policy) => (
-                        <tr key={policy.quantity}>
-                            <td className="py-2 border-b border-primary">{policy.quantity}</td>
-                            <td className="py-2 border-b border-primary">{policy.discount}</td>
-                        </tr>
-                    ))}
+                    {discounts
+                        .filter(d => d.isActive)
+                        .sort((a, b) => a.minQuantity - b.minQuantity)
+                        .map((discount) => (
+                            <tr key={discount.id}>
+                                <td className="py-2 border-b border-primary">≥ {discount.minQuantity}</td>
+                                <td className="py-2 border-b border-primary">{discount.discountPercent}%</td>
+                            </tr>
+                        ))}
                 </tbody>
             </table>
             <h3 className="font-semibold text-xl uppercase text-primary pt-4">
@@ -64,7 +94,8 @@ export default function DiscountPolicy() {
                 </li>
             </ul>
             <h3 className="font-semibold text-xl text-center uppercase text-primary pt-4">
-                Vui lòng liên hệ bộ phận Dịch Vụ Khách Hàng để được hỗ trợ tốt nhất!            </h3>
+                Vui lòng liên hệ bộ phận Dịch Vụ Khách Hàng để được hỗ trợ tốt nhất!
+            </h3>
         </div>
     );
 }
