@@ -1,9 +1,9 @@
 'use client'
-import { HeroSlide } from "@/services/homepageService"
 import { useCallback, useEffect, useState } from "react";
 import AnimatedCounter from "../animations/AnimatedCounter"
 import Link from "next/link"
 import { Building2, ChevronDown, Gift, MapPinned, UserRoundCheck } from "lucide-react";
+import { HeroSlide } from "@/types";
 
 export default function HeroSection() {
   const [_currentSlide, setCurrentSlide] = useState(0)
@@ -15,8 +15,8 @@ export default function HeroSection() {
     const defaultSlides = [
       {
         id: 1,
-        title: 'Tinh Hoa Ẩm Thực Việt Nam',
-        subtitle: 'Khám phá hương vị truyền thống được chế biến từ những nguyên liệu tươi ngon nhất',
+        title: 'Thiên Cầu Vượng Khí',
+        subtitle: 'Thiên Cầu Vượng Khí là biểu tượng của sự may mắn và vượng khí, như một lời chúc phúc gửi đến người nhận, đem lại niềm vui, sự bình an và thịnh vượng trong cuộc sống.',
         ctaText: 'Xem Thêm',
         ctaLink: '/products',
         imageUrl: '/image/banners/1.jpg',

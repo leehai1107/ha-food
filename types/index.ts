@@ -1036,3 +1036,30 @@ export type GalleryImage = {
   url: string;
   alt: string;
 };
+
+export interface Testimonial {
+  id: number;
+  name: string;
+  location: string;
+  type: string;
+  content: string;
+  avatarUrl?: string;
+  rating: number;
+  position: number;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface HeroSlide {
+  id: number;
+  title: string;
+  subtitle: string;
+  ctaText: string;
+  ctaLink?: string;
+  imageUrl: string;
+  position: number;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
