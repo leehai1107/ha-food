@@ -7,6 +7,7 @@ import LayoutContent from "@/layouts/layout-content";
 import { CartProvider } from "@/hooks/CartContext";
 import SplashScreen from '@/components/animations/SplashScreen';
 import { Analytics } from "@vercel/analytics/next"
+import Script from 'next/script';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,6 +22,45 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Ha Food - Quà Tặng Doanh Nghiệp",
   description: "Ha Food - Nơi cung cấp quà tặng doanh nghiệp uy tín và chất lượng",
+  keywords: "quà tặng doanh nghiệp, quà tặng khách hàng, quà tặng đối tác, hộp quà cao cấp",
+  authors: [{ name: "Ha Food" }],
+  creator: "Ha Food",
+  publisher: "Ha Food",
+  robots: {
+    index: false,
+    follow: true,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: true,
+      noimageindex: true,
+    },
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'vi_VN',
+    url: 'https://hafood.vn',
+    siteName: 'Ha Food',
+    title: 'Ha Food - Quà Tặng Doanh Nghiệp',
+    description: 'Ha Food - Nơi cung cấp quà tặng doanh nghiệp uy tín và chất lượng',
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Ha Food',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Ha Food - Quà Tặng Doanh Nghiệp',
+    description: 'Ha Food - Nơi cung cấp quà tặng doanh nghiệp uy tín và chất lượng',
+    images: ['/og-image.jpg'],
+  },
+  verification: {
+    google: 'your-google-site-verification', // Replace with your Google Search Console verification code
+  },
 };
 
 export default function RootLayout({
@@ -29,8 +69,12 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head />
+    <html lang="vi" suppressHydrationWarning>
+      <head>
+        <link rel="canonical" href="https://hafood.vn" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#ffffff" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -42,6 +86,20 @@ export default function RootLayout({
           </CartProvider>
         </AuthProvider>
         <Toaster />
+        
+        {/* Google Analytics */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-XXXXXXXXXX');
+          `}
+        </Script>
       </body>
     </html>
   );
