@@ -9,7 +9,7 @@ export default function HeroSection() {
   const [_currentSlide, setCurrentSlide] = useState(0)
   const [slides, setSlides] = useState<HeroSlide[]>([])
   const [loading, setLoading] = useState(true)
-  const [isHovered, setIsHovered] = useState(false); 
+  const [isHovered, setIsHovered] = useState(false);
 
   const fetchHomepageData = useCallback(async () => {
     const defaultSlides = [
@@ -19,7 +19,7 @@ export default function HeroSection() {
         subtitle: 'Thiên Cầu Vượng Khí là biểu tượng của sự may mắn và vượng khí, như một lời chúc phúc gửi đến người nhận, đem lại niềm vui, sự bình an và thịnh vượng trong cuộc sống.',
         ctaText: 'Xem Thêm',
         ctaLink: '/products',
-        imageUrl: '/image/banners/1.jpg',
+        imageUrl: '/image/banners/banner_1.png',
         position: 0,
         isActive: true,
         createdAt: '',

@@ -7,7 +7,7 @@ export default function CollectionSection() {
                 {/* Left Image */}
                 <div className="md:w-1/2 w-full relative h-[500px]">
                     <Image
-                        src="/image/noimage.png"
+                        src="/image/banners/banner_tong_hop.png"
                         alt="Bộ sưu tập Thiên Hương Nguyệt Dạ"
                         fill
                         className="object-cover rounded-lg shadow-md"
