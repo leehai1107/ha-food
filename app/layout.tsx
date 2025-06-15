@@ -12,11 +12,15 @@ import Script from 'next/script';
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  preload: true,
+  adjustFontFallback: false,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  preload: true,
+  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {
@@ -74,6 +78,7 @@ export default function RootLayout({
         <link rel="canonical" href="https://ha-food-hazel.vercel.app" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#B0041A" />
+        <meta name="next-size-adjust" content="100%" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -86,7 +91,7 @@ export default function RootLayout({
           </CartProvider>
         </AuthProvider>
         <Toaster />
-        
+
         {/* Google Analytics */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX`}
