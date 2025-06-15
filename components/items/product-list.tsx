@@ -1,18 +1,17 @@
 import { useCart } from '@/hooks/CartContext';
 import productService from '@/services/productService';
-import { Product } from '@/types';
+import { Product, ProductQueryParams } from '@/types';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import React, { useState, useEffect, useCallback } from 'react';
 
 
 interface ProductListProps {
-    productType?: string;
     category?: string;
     limit?: number;
 }
 
-const ProductList: React.FC<ProductListProps> = ({ productType, category, limit = 20 }) => {
+const ProductList: React.FC<ProductListProps> = ({ category, limit = 20 }) => {
     const router = useRouter();
     const { addToCart } = useCart();
     const [products, setProducts] = useState<Product[]>([]);
@@ -31,8 +30,7 @@ const ProductList: React.FC<ProductListProps> = ({ productType, category, limit 
             setError(null);
 
             const response = await productService.getProducts({
-                productType,
-                category,
+                categoryId: category ? parseInt(category) : undefined,
                 limit,
                 page: 1,
                 available: true,
@@ -57,7 +55,7 @@ const ProductList: React.FC<ProductListProps> = ({ productType, category, limit 
         } finally {
             setLoading(false);
         }
-    }, [productType, category, limit]);
+    }, [category, limit]);
 
     useEffect(() => {
         fetchProducts();

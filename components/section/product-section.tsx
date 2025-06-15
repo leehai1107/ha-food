@@ -25,7 +25,25 @@ const ProductsSection = () => {
       // Fetch categories with their products
       const response = await categoryService.getHierarchicalCategories(true);
       if (response.success) {
-        setCategoriesWithProducts(response.data);
+        // Flatten the category structure and filter out categories with no products
+        const flattenedCategories = response.data.reduce((acc, category) => {
+          // Add parent category if it has products
+          if (category.products && category.products.length > 0) {
+            acc.push(category);
+          }
+          
+          // Add subcategories that have products
+          if (category.children) {
+            const subcategoriesWithProducts = category.children.filter(
+              child => child.products && child.products.length > 0
+            );
+            acc.push(...subcategoriesWithProducts);
+          }
+          
+          return acc;
+        }, [] as Category[]);
+
+        setCategoriesWithProducts(flattenedCategories);
       }
     } catch (error) {
       console.error('Error fetching data:', error);

@@ -92,6 +92,17 @@ const NewsContent = () => {
     return (
         <>
         <div className='px-2'>
+            {/* Breadcrumb */}
+            <div className="bg-gray-50 py-4">
+                <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                    <nav className="flex items-center space-x-2 text-sm">
+                        <Link href="/" className="text-red-600 hover:text-red-700">Trang chủ</Link>
+                        <span className="text-gray-500">/</span>
+                        <span className="text-gray-900 font-medium">Tin tức</span>
+                    </nav>
+                </div>
+            </div>
+
             {/* Hero Section */}
             <div className="bg-primary text-white py-20">
                 <div className="container-limited">

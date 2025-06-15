@@ -13,7 +13,7 @@ export interface ProductQueryParams {
   limit?: number;
   search?: string;
   productType?: string;
-  category?: string;
+  categoryId?: number;
   available?: boolean;
   minPrice?: number;
   maxPrice?: number;
@@ -123,7 +123,9 @@ class ProductService {
     if (params) {
       Object.entries(params).forEach(([key, value]) => {
         if (value !== undefined && value !== null) {
-          if (Array.isArray(value)) {
+          if (key === 'categoryId' && value) {
+            queryString.append('categoryId', value.toString());
+          } else if (Array.isArray(value)) {
             queryString.append(key, value.join(','));
           } else {
             queryString.append(key, value.toString());

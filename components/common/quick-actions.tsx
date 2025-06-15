@@ -36,19 +36,19 @@ export default function QuickActions() {
     // Placeholder functions for social media links.
     // REMEMBER TO REPLACE THESE WITH YOUR ACTUAL LINKS/IDS.
     const openZalo = () => {
-        window.open('https://zalo.me/your-zalo-id', '_blank');
+        window.open('https://zalo.me/0972819379', '_blank');
     };
 
     const openFacebook = () => {
-        window.open('https://www.facebook.com/your-facebook-page', '_blank');
+        window.open('https://www.facebook.com/hopquatet.hafood', '_blank');
     };
 
     const openLocation = () => {
-        window.open('https://www.google.com/maps/search/?api=1&query=your+location+coordinates', '_blank');
+        window.open('https://www.google.com/maps/place/HAFOOD+-+H%E1%BB%98P+QU%C3%80+T%E1%BA%B6NG+CAO+C%E1%BA%A4P+2025/@10.863216,106.672336,17z/data=!4m15!1m8!3m7!1s0x317529c501fd54a9:0xbc25368885a9579!2zSEFGT09EIC0gSOG7mFAgUVXDgCBU4bq2TkcgQ0FPIEPhuqRQIDIwMjU!8m2!3d10.863216!4d106.6749109!10e1!16s%2Fg%2F11y3t4cy8q!3m5!1s0x317529c501fd54a9:0xbc25368885a9579!8m2!3d10.863216!4d106.6749109!16s%2Fg%2F11y3t4cy8q?entry=ttu&g_ep=EgoyMDI1MDYxMS4wIKXMDSoASAFQAw%3D%3D', '_blank');
     };
 
     const openCall = () => {
-        window.open('tel:+84123456789', '_self'); // Replace with your phone number
+        window.open('tel:+84972819379', '_self'); // Replace with your phone number
     }
 
     return (

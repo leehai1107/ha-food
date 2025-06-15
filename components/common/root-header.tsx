@@ -12,6 +12,12 @@ import authService from "@/services/authService";
 import categoryService from "@/services/categoryService";
 import type { Category } from "@/types";
 
+interface SubItem {
+    href: string;
+    label: string;
+    subItems?: SubItem[];
+}
+
 export default function RootHeader() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [categories, setCategories] = useState<Category[]>([]);
@@ -34,10 +40,13 @@ export default function RootHeader() {
         fetchCategories();
     }, []);
 
-    const transformCategoriesToSubItems = (categories: Category[]) => {
+    const transformCategoriesToSubItems = (categories: Category[]): SubItem[] => {
         return categories.map(category => ({
             href: `/products/${category.id}`,
-            label: category.name
+            label: category.name,
+            subItems: category.children && category.children.length > 0 
+                ? transformCategoriesToSubItems(category.children)
+                : undefined
         }));
     };
 
@@ -96,7 +105,7 @@ export default function RootHeader() {
                             <NavLink
                                 href="/products"
                                 subItems={transformCategoriesToSubItems(categories)}
-                                width="48"
+                                width="56"
                             >
                                 SẢN PHẨM
                             </NavLink>

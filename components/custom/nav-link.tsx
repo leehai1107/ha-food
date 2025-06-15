@@ -4,12 +4,12 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { useState } from "react"
-import { ChevronDown } from "lucide-react"
+import { ChevronDown, ChevronRight } from "lucide-react"
 
 interface NavLinkProps {
     href: string
     children: React.ReactNode
-    subItems?: { href: string; label: string }[]
+    subItems?: { href: string; label: string; subItems?: { href: string; label: string }[] }[]
     width?: string
 }
 
@@ -17,6 +17,41 @@ export function NavLink({ href, children, subItems, width }: NavLinkProps) {
     const pathname = usePathname()
     const isActive = pathname === href
     const [isHovered, setIsHovered] = useState(false)
+
+    const renderSubItems = (items: NavLinkProps['subItems']) => {
+        if (!items) return null;
+        return (
+            <ul className={`absolute left-0 w-${width} bg-primary rounded-md shadow-lg py-1 z-50 animate-float-in-top`}>
+                {items.map((item, index) => (
+                    <li key={index} className="relative group">
+                        <Link
+                            href={item.href}
+                            className="flex items-center justify-between px-4 py-2 text-primary-white hover:bg-secondary/10 hover:text-secondary"
+                        >
+                            {item.label}
+                            {item.subItems && (
+                                <ChevronRight size={16} className="ml-2" />
+                            )}
+                        </Link>
+                        {item.subItems && (
+                            <ul className="hidden group-hover:block absolute left-full top-0 w-56 bg-primary rounded-md shadow-lg py-1 z-50">
+                                {item.subItems.map((subItem, subIndex) => (
+                                    <li key={subIndex}>
+                                        <Link
+                                            href={subItem.href}
+                                            className="block px-4 py-2 text-primary-white hover:bg-secondary/10 hover:text-secondary"
+                                        >
+                                            {subItem.label}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        )}
+                    </li>
+                ))}
+            </ul>
+        );
+    };
 
     return (
         <li
@@ -44,20 +79,7 @@ export function NavLink({ href, children, subItems, width }: NavLinkProps) {
                     />
                 )}
             </Link>
-            {subItems && isHovered && (
-                <ul className={`absolute left-0 w-${width} bg-primary rounded-md shadow-lg py-1 z-50 animate-float-in-top`}>
-                    {subItems.map((item, index) => (
-                        <li key={index}>
-                            <Link
-                                href={item.href}
-                                className="block px-4 py-2 text-primary-white hover:bg-secondary/10 hover:text-secondary"
-                            >
-                                {item.label}
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            )}
+            {subItems && isHovered && renderSubItems(subItems)}
         </li>
     )
 }

@@ -107,14 +107,14 @@ const NewsDetailPage = ({ params }: { params: Promise<{ slug: string }> }) => {
                 <div className="h-24"></div>
 
                 {/* Breadcrumb */}
-                <div className="bg-white border-b">
-                    <div className="container-limited py-4">
-                        <nav className="flex items-center space-x-2 text-sm text-gray-500 font-primary">
-                            <Link href="/" className="hover:text-primary">Trang chủ</Link>
-                            <span>/</span>
-                            <Link href="/tin-tuc" className="hover:text-primary">Tin tức</Link>
-                            <span>/</span>
-                            <span className="text-gray-900">{news.title}</span>
+                <div className="bg-gray-50 py-4">
+                    <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                        <nav className="flex items-center space-x-2 text-sm">
+                            <Link href="/" className="text-red-600 hover:text-red-700">Trang chủ</Link>
+                            <span className="text-gray-500">/</span>
+                            <Link href="/news" className="text-red-600 hover:text-red-700">Tin tức</Link>
+                            <span className="text-gray-500">/</span>
+                            <span className="text-gray-900 font-medium">{news.title}</span>
                         </nav>
                     </div>
                 </div>
