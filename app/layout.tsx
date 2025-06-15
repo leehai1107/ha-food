@@ -27,13 +27,13 @@ export const metadata: Metadata = {
   creator: "Ha Food",
   publisher: "Ha Food",
   robots: {
-    index: false,
+    index: true,
     follow: true,
-    nocache: true,
+    nocache: false,
     googleBot: {
-      index: false,
+      index: true,
       follow: true,
-      noimageindex: true,
+      noimageindex: false,
     },
   },
   openGraph: {
