@@ -91,6 +91,7 @@ const NewsContent = () => {
 
     return (
         <>
+            <h1 className="hidden">hafood - Quà tặng doanh nghiệp</h1>
         <div className='px-2'>
             {/* Breadcrumb */}
             <div className="bg-gray-50 py-4">

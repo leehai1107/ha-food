@@ -187,7 +187,6 @@ class EmailService {
       <html lang="vi">
       <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Đơn hàng mới - HA Food</title>
         <style>
           body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
@@ -256,7 +255,6 @@ class EmailService {
       <html lang="vi">
       <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Liên hệ mới - Ha Food</title>
         <style>
           body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }

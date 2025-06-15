@@ -73,7 +73,7 @@ export default function RootLayout({
       <head>
         <link rel="canonical" href="https://ha-food-hazel.vercel.app" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#B0041A" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

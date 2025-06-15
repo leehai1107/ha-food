@@ -50,6 +50,7 @@ const ProductsContent = () => {
 
     return (
         <>
+            <h1 className="hidden">hafood - Quà tặng doanh nghiệp</h1>
             {/* Breadcrumb */}
             <div className="bg-gray-50 py-4">
                 <div className="max-w-7xl mx-auto px-6 lg:px-8">

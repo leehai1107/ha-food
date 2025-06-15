@@ -42,6 +42,7 @@ const LoginPage: React.FC = () => {
 
     return (
         <>
+            <h1 className="hidden">hafood - Quà tặng doanh nghiệp</h1>
             <div className="min-h-screen bg-gray-50 flex flex-col justify-center sm:px-6 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-md">
                     <div className="text-center">
