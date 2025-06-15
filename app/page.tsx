@@ -9,6 +9,7 @@ import { ScrollAnimation } from "@/components/ui/scroll-animation"
 export default async function Home() {
   return (
     <>
+    <h1 className="hidden">hafood - Quà tặng doanh nghiệp</h1>
       {/* Hero Section */}
       <ScrollAnimation>
         <HeroSection/>

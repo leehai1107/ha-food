@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'vi_VN',
-    url: 'https://hafood.vn',
+    url: 'https://ha-food-hazel.vercel.app',
     siteName: 'Ha Food',
     title: 'Ha Food - Quà Tặng Doanh Nghiệp',
     description: 'Ha Food - Nơi cung cấp quà tặng doanh nghiệp uy tín và chất lượng',
@@ -71,7 +71,7 @@ export default function RootLayout({
   return (
     <html lang="vi" suppressHydrationWarning>
       <head>
-        <link rel="canonical" href="https://hafood.vn" />
+        <link rel="canonical" href="https://ha-food-hazel.vercel.app" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#ffffff" />
       </head>

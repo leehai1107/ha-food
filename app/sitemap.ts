@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next'
 import { prisma } from '@/lib/prisma'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://hafood.vn'
+  const baseUrl = 'https://ha-food-hazel.vercel.app'
   
   // Get all published news articles
   const news = await prisma.news.findMany({

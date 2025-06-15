@@ -1,0 +1,21 @@
+User-agent: *  
+Disallow: /admin
+Disallow: /search
+Disallow: /checkout
+Disallow: /account
+Disallow: /products/*+*
+Disallow: /products/*%2B*
+Disallow: /products/*%2b*
+Disallow: /news/*+*
+Disallow: /news/*%2B*
+Disallow: /news/*%2b*  
+Sitemap: https://ha-food-hazel.vercel.app/sitemap.xml  
+
+User-agent: Nutch  
+Disallow: /  
+
+User-agent: MJ12bot  
+Crawl-Delay: 10  
+
+User-agent: Ahrefs  
+Crawl-Delay: 10
