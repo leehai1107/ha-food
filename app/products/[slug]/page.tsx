@@ -54,13 +54,32 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
                     const minPrice = currentPrice * 0.8; // 20% lower
                     const maxPrice = currentPrice * 1.2; // 20% higher
 
+                    // First try to get products by price range
                     const response = await productService.getProductsByPriceRange(minPrice, maxPrice);
+                    
                     if (response.success && response.data) {
                         // Filter out the current product and limit to 8 related products
                         const filteredProducts = response.data.products
                             .filter((relatedProduct) => relatedProduct.productSku !== product.productSku)
                             .slice(0, 8);
-                        setRelatedProducts(filteredProducts);
+                            
+                        if (filteredProducts.length > 0) {
+                            setRelatedProducts(filteredProducts);
+                            return;
+                        }
+                    }
+
+                    // If no products found in price range, fallback to getting products by type
+                    const fallbackResponse = await productService.getProductsByType(product.productType, {
+                        limit: 8,
+                        available: true
+                    });
+
+                    if (fallbackResponse.success && fallbackResponse.data) {
+                        const fallbackProducts = fallbackResponse.data.products
+                            .filter((relatedProduct) => relatedProduct.productSku !== product.productSku)
+                            .slice(0, 8);
+                        setRelatedProducts(fallbackProducts);
                     }
                 } catch (err) {
                     console.error('Failed to load related products:', err);
@@ -147,6 +166,19 @@ export default function ProductDetailPage({ params }: { params: Promise<{ slug: 
 
     return (
         <>
+            {/* Breadcrumb */}
+            <div className="bg-gray-50 py-4">
+                <div className="max-w-7xl mx-auto px-6 lg:px-8">
+                    <nav className="flex items-center space-x-2 text-sm">
+                        <Link href="/" className="text-red-600 hover:text-red-700">Trang chủ</Link>
+                        <span className="text-gray-500">/</span>
+                        <Link href="/products" className="text-red-600 hover:text-red-700">Sản phẩm</Link>
+                        <span className="text-gray-500">/</span>
+                        <span className="text-gray-900 font-medium">{product?.productName}</span>
+                    </nav>
+                </div>
+            </div>
+
             <ProductDetail
                 product={product}
                 quantity={quantity}

@@ -125,13 +125,12 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
                 {/* Product Images */}
                 <div className="space-y-4">
                     {/* Main Image */}
-                    <div className="relative">
+                    <div className="relative w-full h-full">
                         <Image
                             src={images[selectedImageIndex]}
                             alt={product.productName}
-                            width={600}
-                            height={600}
-                            className={`w-full h-96 object-cover rounded-lg shadow-lg cursor-pointer transition-opacity duration-300 ${isFading ? 'opacity-0' : 'opacity-100'}`}
+                            fill
+                            className={`object-cover rounded-lg shadow-lg cursor-pointer transition-opacity duration-300 ${isFading ? 'opacity-0' : 'opacity-100'}`}
                             onClick={() => handleImageClick(images[selectedImageIndex])}
                         />
                         {!product.available && (
@@ -140,7 +139,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
                             </div>
                         )}
                         {parseFloat(product.originalPrice) > parseFloat(product.currentPrice) && (
-                            <div className="absolute top-4 left-4 bg-green-600 text-white px-4 py-2 rounded-lg text-lg font-semibold">
+                            <div className="absolute top-2 right-2 bg-green-600 text-white px-4 py-2 rounded-lg text-lg font-semibold">
                                 GIẢM GIÁ
                             </div>
                         )}

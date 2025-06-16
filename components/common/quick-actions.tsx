@@ -108,7 +108,7 @@ export default function QuickActions() {
                         onClick={openZalo}
                         className="flex flex-col items-center text-xs font-medium space-y-1 p-2"
                     >
-                        <Image src={Zalo} alt="Zalo" width={20} height={20} />
+                        <Image src={Zalo} alt="Zalo" width={20} height={20} unoptimized />
                         <span>Nhắn tin</span>
                     </button>
                     <button

@@ -42,7 +42,7 @@ export default function RootHeader() {
 
     const transformCategoriesToSubItems = (categories: Category[]): SubItem[] => {
         return categories.map(category => ({
-            href: `/products/${category.id}`,
+            href: `/products?category=${category.id}`,
             label: category.name,
             subItems: category.children && category.children.length > 0 
                 ? transformCategoriesToSubItems(category.children)
@@ -60,6 +60,7 @@ export default function RootHeader() {
                             <Image
                                 src="/logo/logo-primary.png"
                                 alt="Logo"
+                                priority
                                 width={168}
                                 height={47}
                             />

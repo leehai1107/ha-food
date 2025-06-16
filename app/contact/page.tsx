@@ -125,7 +125,7 @@ export default function Contact() {
                                         className="bg-primary text-white px-6 py-2 text-sm rounded"
                                         disabled={isSubmitting}
                                     >
-                                        {isSubmitting ? 'Đang gửi...' : 'Gửi thông tin'}
+                                        {isSubmitting ? 'Đang gửi...' : 'Liên hệ với chúng tôi'}
                                     </Button>
                                 </div>
                             </form>
