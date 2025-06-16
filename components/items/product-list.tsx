@@ -124,10 +124,16 @@ const ProductList: React.FC<ProductListProps> = ({ category, limit = 20 }) => {
         return "/image/noimage.png";
     };
 
-    const handleLoadMore = () => {
+    const handleLoadMore = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
         if (pagination.page < pagination.totalPages) {
             fetchProducts(pagination.page + 1, true);
         }
+    };
+
+    const handleRetry = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        fetchProducts(1, false);
     };
 
     if (loading) {
@@ -143,7 +149,7 @@ const ProductList: React.FC<ProductListProps> = ({ category, limit = 20 }) => {
             <div className="text-center py-8">
                 <p className="text-red-600 mb-4">{error}</p>
                 <button
-                    onClick={fetchProducts}
+                    onClick={handleRetry}
                     className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
                 >
                     Thử lại
@@ -308,7 +314,7 @@ const ProductList: React.FC<ProductListProps> = ({ category, limit = 20 }) => {
                     </p>
                     {pagination.page < pagination.totalPages && (
                         <button
-                            onClick={() => handleLoadMore()}
+                            onClick={handleLoadMore}
                             disabled={loadingMore}
                             className="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
                         >
