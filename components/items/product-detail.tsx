@@ -125,14 +125,29 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
                 {/* Product Images */}
                 <div className="space-y-4">
                     {/* Main Image */}
-                    <div className="relative w-full h-full">
-                        <Image
-                            src={images[selectedImageIndex]}
-                            alt={product.productName}
-                            fill
-                            className={`object-cover rounded-lg shadow-lg cursor-pointer transition-opacity duration-300 ${isFading ? 'opacity-0' : 'opacity-100'}`}
-                            onClick={() => handleImageClick(images[selectedImageIndex])}
-                        />
+                    <div className="lg:relative w-full h-full">
+                        {/* Mobile image */}
+  <div className="block sm:hidden w-full h-auto">
+    <Image
+      src={images[selectedImageIndex]}
+      alt={product.productName}
+      width={800} // use your preferred dimensions
+      height={600}
+      className="object-cover rounded-lg shadow-lg cursor-pointer transition-opacity duration-300"
+      onClick={() => handleImageClick(images[selectedImageIndex])}
+    />
+  </div>
+
+  {/* Desktop image (absolute + fill) */}
+  <div className="hidden sm:block relative w-full h-full">
+    <Image
+      src={images[selectedImageIndex]}
+      alt={product.productName}
+      fill
+      className={`absolute object-cover rounded-lg shadow-lg cursor-pointer transition-opacity duration-300 ${isFading ? 'opacity-0' : 'opacity-100'}`}
+      onClick={() => handleImageClick(images[selectedImageIndex])}
+    />
+  </div>
                         {!product.available && (
                             <div className="absolute top-4 right-4 bg-red-600 text-white px-4 py-2 rounded-lg text-lg font-semibold">
                                 HẾT HÀNG
