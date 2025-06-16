@@ -48,7 +48,7 @@ export default function QuickActions() {
     };
 
     const openCall = () => {
-        window.open('tel:+84972819379', '_self'); // Replace with your phone number
+        window.open('tel:0972819379', '_self'); // Replace with your phone number
     }
 
     return (

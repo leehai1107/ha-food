@@ -113,12 +113,12 @@ export default function HeroSection() {
       ))}
 
       {/* Stats */}
-      <div className="absolute bottom-0 left-0 right-0 bg-primary backdrop-blur-sm py-8 z-10 text-primary-white">
+      <div className="absolute bottom-0 left-0 right-0 bg-primary backdrop-blur-sm py-2 z-10 text-primary-white">
         <div className="w-full px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center mx-auto">
             <div className="flex flex-col items-center animate-fade-in-up" style={{ animationDelay: '0s' }}>
               <div className="text-secondary mb-2 font-heading">
-                <Gift size={64} />
+                <Gift size={48} />
               </div>
               <p className="text-base md:text-base font-semibold font-primary">
                 Giải Pháp Quà Tặng Doanh Nghiệp
@@ -127,7 +127,7 @@ export default function HeroSection() {
             </div>
             <div className="flex flex-col items-center animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
               <div className="text-secondary mb-2 font-heading">
-                <Building2 size={64} />
+                <Building2 size={48} />
               </div>
               <p className="text-base md:text-base font-semibold font-primary">
                 Hạ Tầng - Đội Ngũ
@@ -136,7 +136,7 @@ export default function HeroSection() {
             </div>
             <div className="flex flex-col items-center animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
               <div className="text-secondary mb-2 font-heading">
-                <MapPinned size={64} />
+                <MapPinned size={48} />
               </div>
               <p className="text-base md:text-base font-semibold font-primary">
                 Phạm Vi Phân Phối
@@ -145,7 +145,7 @@ export default function HeroSection() {
             </div>
             <div className="flex flex-col items-center animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
               <div className="text-secondary mb-2 font-heading">
-                <UserRoundCheck size={64} />
+                <UserRoundCheck size={48} />
               </div>
               <p className="text-base md:text-base font-semibold font-primary">
                 Khách Hàng Tin Dùng

@@ -20,6 +20,7 @@ interface SubItem {
 
 export default function RootHeader() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    const [expandedItems, setExpandedItems] = useState<string[]>([]);
     const [categories, setCategories] = useState<Category[]>([]);
     const router = useRouter();
     const { getCartItemCount } = useCart()
@@ -50,11 +51,56 @@ export default function RootHeader() {
         }));
     };
 
+    const toggleSubItems = (label: string) => {
+        setExpandedItems(prev => 
+            prev.includes(label) 
+                ? prev.filter(item => item !== label)
+                : [...prev, label]
+        );
+    };
+
+    const renderMobileSubItems = (subItems?: SubItem[], parentPath: string = '') => {
+        if (!subItems) return null;
+        
+        return (
+            <ul className="mt-2 space-y-2">
+                {subItems.map((item, index) => {
+                    const itemPath = `${parentPath}-${index}`;
+                    const hasSubItems = item.subItems && item.subItems.length > 0;
+                    
+                    return (
+                        <li key={index}>
+                            <div className="flex items-center justify-between">
+                                <Link 
+                                    href={item.href}
+                                    className="block py-1 hover:text-primary-dark"
+                                >
+                                    {item.label}
+                                </Link>
+                                {hasSubItems && (
+                                    <button 
+                                        onClick={() => toggleSubItems(itemPath)}
+                                        className="p-1"
+                                    >
+                                        {expandedItems.includes(itemPath) ? '-' : '+'}
+                                    </button>
+                                )}
+                            </div>
+                            {hasSubItems && expandedItems.includes(itemPath) && 
+                                renderMobileSubItems(item.subItems, itemPath)
+                            }
+                        </li>
+                    );
+                })}
+            </ul>
+        );
+    };
+
     return (
         <>
             {/* Header Section */}
             <header className="w-full bg-primary animate-float-in-top z-30 sticky top-0 left-0 right-0 shadow-lg">
-                <div className="max-w-[1200px] mx-auto py-6 w-[calc(100%-20px)] text-secondary flex justify-between items-center">
+                <div className="max-w-[1200px] mx-auto py-4 w-[calc(100%-20px)] text-secondary flex justify-between items-center">
                     <Button>
                         <Link href="/">
                             <Image
@@ -136,15 +182,38 @@ export default function RootHeader() {
                 <div className="relative md:hidden">
                     {/* Tooltip-like Menu */}
                     {isMobileMenuOpen && (
-                        <div className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-50 animate-float-in-top">
+                        <div className="absolute right-0 mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50 animate-float-in-top">
                             <nav>
                                 <ul className="flex flex-col gap-2 p-3 text-sm text-primary font-medium">
-                                    <NavLink href="/">TRANG CHỦ</NavLink>
-                                    <NavLink href="/about">GIỚI THIỆU</NavLink>
-                                    <NavLink href="/products">SẢN PHẨM</NavLink>
-                                    <NavLink href="/news">TIN TỨC</NavLink>
-                                    <NavLink href="/contact">LIÊN HỆ</NavLink>
-                                    <NavLink href="/legal">CHÍNH SÁCH</NavLink>
+                                    <NavLink href="/" isMobile>TRANG CHỦ</NavLink>
+                                    <NavLink href="/about" isMobile>GIỚI THIỆU</NavLink>
+                                    <NavLink
+                                        href="/products"
+                                        subItems={transformCategoriesToSubItems(categories)}
+                                        width="56"
+                                        isMobile
+                                    >
+                                        SẢN PHẨM
+                                    </NavLink>
+                                    <NavLink href="/news" isMobile>TIN TỨC</NavLink>
+                                    <NavLink href="/contact" isMobile>LIÊN HỆ</NavLink>
+                                    <NavLink
+                                        href="/legal"
+                                        subItems={[
+                                            { href: "/legal", label: "Chính sách bảo mật" },
+                                            { href: "/legal", label: "Chính sách thanh toán" },
+                                            { href: "/legal", label: "Chính sách vận chuyển" },
+                                            { href: "/legal", label: "Chính sách đổi trả" },
+                                            { href: "/legal", label: "Chính sách chiết khấu" },
+                                        ]}
+                                        width="64"
+                                        isMobile
+                                    >
+                                        CHÍNH SÁCH
+                                    </NavLink>
+                                    {isAuthenticated && authService.isAdmin(account) && (
+                                        <NavLink href="/admin" isMobile>🛠️ Quản trị</NavLink>
+                                    )}
                                 </ul>
                             </nav>
                         </div>

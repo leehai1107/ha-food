@@ -31,7 +31,7 @@ const ProductsSection = () => {
           if (category.products && category.products.length > 0) {
             acc.push(category);
           }
-          
+
           // Add subcategories that have products
           if (category.children) {
             const subcategoriesWithProducts = category.children.filter(
@@ -39,7 +39,7 @@ const ProductsSection = () => {
             );
             acc.push(...subcategoriesWithProducts);
           }
-          
+
           return acc;
         }, [] as Category[]);
 
@@ -90,16 +90,12 @@ const ProductsSection = () => {
     return "/image/noimage.png";
   };
 
-  const getCategoryImage = (category: Category) => {
-    return category.imageUrl || "/image/noimage.png";
-  };
-
   const handleCategoryClick = (category: Category) => {
     router.push(`/products?category=${encodeURIComponent(category.name)}`);
   };
 
   return (
-    <section className="py-20 bg-white" id="products">
+    <section className="bg-white" id="products">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16 max-w-4xl mx-auto">
@@ -122,15 +118,6 @@ const ProductsSection = () => {
                 {/* Category Header */}
                 <div className="flex items-center justify-between mb-8">
                   <div className="flex items-center gap-4">
-                    <div className="relative w-16 h-16 rounded-full overflow-hidden">
-                      <Image
-                        src={getCategoryImage(category)}
-                        alt={category.name}
-                        width={64}
-                        height={64}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
                     <div>
                       <h3 className="text-2xl font-bold text-primary font-heading">
                         {category.name}
@@ -144,7 +131,7 @@ const ProductsSection = () => {
                     onClick={() => handleCategoryClick(category)}
                     className="bg-primary text-white px-6 py-2 rounded-theme font-semibold hover:bg-secondary transition-colors font-primary"
                   >
-                    Xem tất cả
+                    Xem thêm
                   </button>
                 </div>
 
@@ -155,14 +142,8 @@ const ProductsSection = () => {
                     spaceBetween={24}
                     slidesPerView={1}
                     navigation
-                    pagination={{
-                      clickable: true,
-                      type: 'bullets',
-                      renderBullet: function (index, className) {
-                        const totalSlides = Math.ceil((category.products?.length || 0) / (window.innerWidth >= 1024 ? 4 : window.innerWidth >= 640 ? 2 : 1));
-                        return `<span class="${className}">${index + 1}/${totalSlides}</span>`;
-                      },
-                    }}
+                    pagination={{ clickable: true }}
+                    loop={true}
                     breakpoints={{
                       640: {
                         slidesPerView: 2,

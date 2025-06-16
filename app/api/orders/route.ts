@@ -287,7 +287,7 @@ export async function POST(req: NextRequest) {
         totalPrice: Number(totalPrice),
         createdAt: new Date()
       };
-      emailService.sendOrderNotificationToAdmin(emailData).catch(console.error);
+    await emailService.sendOrderNotificationToAdmin(emailData).catch(console.error);
     }
 
     return NextResponse.json({

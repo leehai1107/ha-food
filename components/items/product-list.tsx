@@ -239,35 +239,6 @@ const ProductList: React.FC<ProductListProps> = ({ category, limit = 20 }) => {
                                 )}
                             </div>
 
-                            {/* Tags */}
-                            <div className="flex flex-wrap gap-1 mb-3">
-                                {product.tags.slice(0, 2).map((tag, index) => (
-                                    <span
-                                        key={index}
-                                        className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs"
-                                    >
-                                        {tag}
-                                    </span>
-                                ))}
-                                {product.tags.length > 2 && (
-                                    <span className="text-gray-500 text-xs">
-                                        +{product.tags.length - 2} khác
-                                    </span>
-                                )}
-                            </div>
-
-                            {/* Weight */}
-                            {product.weight && (
-                                <p className="text-sm text-gray-600 mb-3">
-                                    Trọng lượng: {product.weight}
-                                </p>
-                            )}
-
-                            {/* Quantity */}
-                            <p className="text-sm text-gray-600 mb-3">
-                                Còn lại: {product.quantity} sản phẩm
-                            </p>
-
                             {/* Action Buttons */}
                             <div className="space-y-2">
                                 {product.available ? (
