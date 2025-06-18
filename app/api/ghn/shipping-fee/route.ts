@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     } catch (error) {
         console.error('Error in shipping fee API:', error);
         return NextResponse.json(
-            { error: 'Không thể tính phí vận chuyển' },
+            { error: 'Liên hệ' },
             { status: 500 }
         );
     }

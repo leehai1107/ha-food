@@ -209,3 +209,35 @@ model Discount {
 
   @@map("discounts")
 }
+
+model Gallery {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  tags        String[]
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  images GalleryImage[]
+
+  @@index([isActive], map: "idx_gallery_active")
+  @@map("galleries")
+}
+
+model GalleryImage {
+  id         Int      @id @default(autoincrement())
+  galleryId  Int      @map("gallery_id")
+  imageUrl   String   @map("image_url")
+  altText    String?  @map("alt_text")
+  position   Int      @default(0)
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  // Relations
+  gallery Gallery @relation(fields: [galleryId], references: [id], onDelete: Cascade)
+
+  @@index([galleryId], map: "idx_gallery_images_gallery_id")
+  @@index([position], map: "idx_gallery_images_position")
+  @@map("gallery_images")
+}

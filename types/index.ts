@@ -74,11 +74,6 @@ export interface LoginRequest {
   password: string;
 }
 
-export interface LoginRequest {
-  email: string;
-  password: string;
-}
-
 export interface RegisterRequest {
   name: string;
   email: string;
@@ -463,440 +458,95 @@ export interface ValidationResult {
   errors: ValidationError[];
 }
 
-
 // =============================================================================
-// ROLE TYPES
+// DISCOUNT TYPES
 // =============================================================================
 
-export interface Role {
+export interface Discount {
   id: ID;
-  name: string;
-}
-
-// =============================================================================
-// ACCOUNT TYPES
-// =============================================================================
-
-export interface Account {
-  id: ID;
-  name: string;
-  email: string;
-  phone: string | null;
-  address: string | null;
-  roleId: ID;
+  minQuantity: number;
+  discountPercent: Decimal;
+  isActive: boolean;
   createdAt: string;
-  // Relations
-  role?: Role;
-  orders?: Order[];
+  updatedAt: string;
 }
 
-export interface LoginRequest {
-  email: string;
-  password: string;
+export interface CreateDiscountRequest {
+  minQuantity: number;
+  discountPercent: Decimal;
+  isActive?: boolean;
 }
 
-export interface RegisterRequest {
-  name: string;
-  email: string;
-  password: string;
-  phone?: string;
-  address?: string;
-}
-
-export interface AuthResponse {
-  account: Account;
-  accessToken: string;
-  refreshToken: string;
-}
-
-export interface RefreshTokenRequest {
-  refreshToken: string;
-}
-
-export interface RefreshTokenResponse {
-  accessToken: string;
+export interface UpdateDiscountRequest {
+  minQuantity?: number;
+  discountPercent?: Decimal;
+  isActive?: boolean;
 }
 
 // =============================================================================
-// CATEGORY TYPES
+// GALLERY TYPES
 // =============================================================================
 
-export interface Category {
+export interface Gallery {
   id: ID;
   name: string;
-  description: string | null;
-  imageUrl: string | null;
-  parentId: ID | null;
+  description?: string;
+  tags: string[];
+  isActive: boolean;
   createdAt: string;
+  updatedAt: string;
   // Relations
-  parent?: Category | null;
-  children?: Category[];
-  products?: Product[];
+  images?: GalleryImage[];
   _count?: {
-    children: number;
-    products: number;
+    images: number;
   };
 }
 
-// =============================================================================
-// PRODUCT IMAGE TYPES
-// =============================================================================
-
-export interface ProductImage {
+export interface GalleryImage {
   id: ID;
-  productSku: SKU;
+  galleryId: ID;
   imageUrl: string;
-  isPrimary: boolean;
+  altText?: string;
   position: number;
   createdAt: string;
   // Relations
-  product?: Product;
+  gallery?: Gallery;
 }
 
-// =============================================================================
-// PRODUCT TYPES
-// =============================================================================
-
-export interface Product {
-  productSku: SKU;
-  productName: string;
-  slug: string;
-  quantity: number;
-  productType: string;
-  originalPrice: Decimal; // API returns as string (Decimal)
-  currentPrice: Decimal;   // API returns as string (Decimal)
-  tags: string[];
-  productDescriptions: string | null;
-  productIngredients: string[];
-  productContent: string | null;
-  productPreserve: string | null;
-  available: boolean;
-  rating: Decimal | null;  // API returns as string (Decimal)
-  reviewCount: number | null;
-  weight: string | null;
-  categoryId: ID | null;
-  createdAt: string;
-  updatedAt: string;
-  // Relations from API
-  category?: Category | null;
-  images?: ProductImage[];
-  orderItems?: OrderItem[];
-  _count?: {
-    orderItems: number;
-  };
-}
-
-// =============================================================================
-// CUSTOMER TYPES
-// =============================================================================
-
-export interface Customer {
-  id: ID;
-  name: string;
-  email: string | null;
-  phone: string | null;
-  address: string | null;
-  createdAt: string;
-}
-
-// =============================================================================
-// ORDER TYPES
-// =============================================================================
-
-export interface Order {
-  id: ID;
-  accountId: ID | null;
-  status: OrderStatus;
-  totalPrice: Decimal | null;
-  createdAt: string;
-  // Relations
-  account?: Account | null;
-  orderItems?: OrderItem[];
-  _count?: {
-    orderItems: number;
-  };
-}
-
-// =============================================================================
-// ORDER ITEM TYPES
-// =============================================================================
-
-export interface OrderItem {
-  id: ID;
-  orderId: ID;
-  productSku: SKU | null;
-  productName: string;
-  productType: string;
-  productPrice: Decimal;
-  quantity: number;
-  totalPrice: Decimal;
-  tags: string[];
-  productDescriptions: string | null;
-  productIngredients: string[];
-  productContent: string | null;
-  productPreserve: string | null;
-  weight: string | null;
-  // Relations
-  order?: Order;
-  product?: Product | null;
-}
-
-// =============================================================================
-// API RESPONSE TYPES
-// =============================================================================
-
-export interface ApiResponse<T> {
-  success: boolean;
-  data: T;
-  message?: string;
-}
-
-export interface ApiError {
-  success: false;
-  error: string;
-  message?: string;
-}
-
-export interface PaginatedResponse<T> {
-  data: T[];
-  total: number;
-  page: number;
-  limit: number;
-  totalPages: number;
-}
-
-// =============================================================================
-// QUERY PARAMETER TYPES
-// =============================================================================
-
-export interface PaginationParams {
-  page?: number;
-  limit?: number;
-}
-
-export interface SortParams {
-  sortBy?: string;
-  sortOrder?: SortOrder;
-}
-
-export interface BaseQueryParams extends PaginationParams, SortParams {
-  search?: string;
-}
-
-// Product Query Params
-export interface ProductQueryParams extends BaseQueryParams {
-  productType?: string;
-  available?: boolean;
-  minPrice?: number;
-  maxPrice?: number;
-  tags?: string[];
-  categoryId?: ID;
-  sortBy?: 'name' | 'price' | 'createdAt' | 'rating';
-  includeImages?: boolean;
-  includeCategory?: boolean;
-}
-
-// Category Query Params
-export interface CategoryQueryParams {
-  includeProducts?: boolean;
-  flat?: boolean;
-}
-
-// Order Query Params
-export interface OrderQueryParams extends BaseQueryParams {
-  accountId?: ID;
-  status?: OrderStatus;
-  startDate?: string;
-  endDate?: string;
-  sortBy?: 'createdAt' | 'totalPrice';
-  includeItems?: boolean;
-  includeAccount?: boolean;
-}
-
-// =============================================================================
-// REQUEST TYPES
-// =============================================================================
-
-// Product Requests
-export interface CreateProductRequest {
-  productSku: SKU;
-  productName: string;
-  slug: string;
-  quantity?: number;
-  productType: string;
-  originalPrice: number;
-  currentPrice: number;
-  tags?: string[];
-  productDescriptions?: string;
-  productIngredients?: string[];
-  productContent?: string;
-  productPreserve?: string;
-  available?: boolean;
-  rating?: number;
-  reviewCount?: number;
-  weight?: string;
-  categoryId?: ID;
-}
-
-export interface UpdateProductRequest {
-  productSku?: SKU;
-  productName?: string;
-  quantity?: number;
-  productType?: string;
-  originalPrice?: number;
-  currentPrice?: number;
-  tags?: string[];
-  productDescriptions?: string;
-  productIngredients?: string[];
-  productContent?: string;
-  productPreserve?: string;
-  available?: boolean;
-  rating?: number;
-  reviewCount?: number;
-  weight?: string;
-  categoryId?: ID;
-}
-
-// Category Requests
-export interface CreateCategoryRequest {
+export interface CreateGalleryRequest {
   name: string;
   description?: string;
-  imageUrl?: string;
-  parentId?: ID;
+  tags?: string[];
+  isActive?: boolean;
 }
 
-export interface UpdateCategoryRequest {
+export interface UpdateGalleryRequest {
   name?: string;
   description?: string;
-  imageUrl?: string;
-  parentId?: ID;
-}
-
-// Customer Requests
-export interface CreateCustomerRequest {
-  name: string;
-  email?: string;
-  phone?: string;
-  address?: string;
-}
-
-export interface UpdateCustomerRequest {
-  name?: string;
-  email?: string;
-  phone?: string;
-  address?: string;
-}
-
-// Order Requests
-export interface CreateOrderRequest {
-  accountId?: ID;
-  status?: OrderStatus;
-  totalPrice?: number;
-  orderItems?: CreateOrderItemRequest[];
-}
-
-export interface UpdateOrderRequest {
-  accountId?: ID;
-  status?: OrderStatus;
-  totalPrice?: number;
-}
-
-// Order Item Requests
-export interface CreateOrderItemRequest {
-  orderId?: ID;
-  productSku?: SKU;
-  productName: string;
-  productType: string;
-  productPrice: number;
-  quantity: number;
-  totalPrice: number;
   tags?: string[];
-  productDescriptions?: string;
-  productIngredients?: string[];
-  productContent?: string;
-  productPreserve?: string;
-  weight?: string;
+  isActive?: boolean;
 }
 
-export interface UpdateOrderItemRequest {
-  productSku?: SKU;
-  productName?: string;
-  productType?: string;
-  productPrice?: number;
-  quantity?: number;
-  totalPrice?: number;
-  tags?: string[];
-  productDescriptions?: string;
-  productIngredients?: string[];
-  productContent?: string;
-  productPreserve?: string;
-  weight?: string;
-}
-
-// Product Image Requests
-export interface CreateProductImageRequest {
-  productSku: SKU;
+export interface CreateGalleryImageRequest {
+  galleryId: ID;
   imageUrl: string;
-  isPrimary?: boolean;
+  altText?: string;
   position?: number;
 }
 
-export interface UpdateProductImageRequest {
+export interface UpdateGalleryImageRequest {
   imageUrl?: string;
-  isPrimary?: boolean;
+  altText?: string;
   position?: number;
 }
 
-// =============================================================================
-// RESPONSE TYPES
-// =============================================================================
-
-export interface ProductResponse {
-  products: Product[];
-  total: number;
-  page: number;
-  limit: number;
-  totalPages: number;
-}
-
-// =============================================================================
-// LEGACY TYPES (for backward compatibility)
-// =============================================================================
-
-export interface Food {
-  id: string;
-  name: string;
-  description?: string;
-  price: number;
-  category: string;
-  imageUrl?: string;
-  available: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
-
-// Legacy User type (replaced by Account)
-export interface User {
-  id: string;
-  email: string;
-  name?: string;
-  role: 'USER' | 'ADMIN';
-  createdAt: string;
-  updatedAt: string;
-}
-
-// =============================================================================
-// UTILITY TYPES
-// =============================================================================
-
-export interface ValidationError {
-  field: string;
-  message: string;
-}
-
-export interface ValidationResult {
-  isValid: boolean;
-  errors: ValidationError[];
+export interface BulkCreateGalleryImagesRequest {
+  galleryId: ID;
+  images: Array<{
+    imageUrl: string;
+    altText?: string;
+    position?: number;
+  }>;
 }
 
 // =============================================================================
@@ -982,15 +632,6 @@ export interface UpdateLayoutRequest {
 // CART TYPES
 // =============================================================================
 
-export interface Discount {
-  id: number;
-  minQuantity: number;
-  discountPercent: number;
-  isActive: boolean;
-  createdAt?: string;
-  updatedAt?: string;
-}
-
 export interface CartItem {
   productSKU: string;
   productName: string;
@@ -1027,7 +668,6 @@ export interface UpdateCartItemRequest {
 // =============================================================================
 
 export * from './systemConfig';
-
 
 export interface Stat {
   value: string;

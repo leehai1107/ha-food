@@ -122,7 +122,7 @@ export default {
 				  opacity: '1',
 				  transform: 'translateY(0)'
 				},
-			  }
+					}
 		  },
 		  animation: {
 			'float-in-bottom': 'float-in-bottom 0.6s ease-out forwards',

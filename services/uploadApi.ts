@@ -364,3 +364,101 @@ export const categoryApi = {
     }
   }
 };
+
+// General upload API functions
+export const uploadApi = {
+  // Upload single file
+  uploadFile: async (formData: FormData): Promise<ApiResponse> => {
+    try {
+      const token = localStorage.getItem('authToken');
+      const headers: HeadersInit = {};
+
+      if (token) {
+        headers.Authorization = `Bearer ${token}`;
+      }
+
+      const response = await fetch(`${API_BASE_URL}/api/upload/single`, {
+        method: 'POST',
+        headers,
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Failed to upload file');
+      }
+
+      return result;
+    } catch (error: any) {
+      console.error('Error uploading file:', error);
+      return {
+        success: false,
+        error: error.message || 'Failed to upload file'
+      };
+    }
+  },
+
+  // Upload multiple files
+  uploadFiles: async (formData: FormData): Promise<ApiResponse> => {
+    try {
+      const token = localStorage.getItem('authToken');
+      const headers: HeadersInit = {};
+
+      if (token) {
+        headers.Authorization = `Bearer ${token}`;
+      }
+
+      const response = await fetch(`${API_BASE_URL}/api/upload/multiple`, {
+        method: 'POST',
+        headers,
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Failed to upload files');
+      }
+
+      return result;
+    } catch (error: any) {
+      console.error('Error uploading files:', error);
+      return {
+        success: false,
+        error: error.message || 'Failed to upload files'
+      };
+    }
+  },
+
+  // Delete file
+  deleteFile: async (uploadType: string, filename: string): Promise<ApiResponse> => {
+    try {
+      const token = localStorage.getItem('authToken');
+      const headers: HeadersInit = {};
+
+      if (token) {
+        headers.Authorization = `Bearer ${token}`;
+      }
+
+      const response = await fetch(`${API_BASE_URL}/api/upload/${uploadType}/${filename}`, {
+        method: 'DELETE',
+        headers,
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Failed to delete file');
+      }
+
+      return result;
+    } catch (error: any) {
+      console.error('Error deleting file:', error);
+      return {
+        success: false,
+        error: error.message || 'Failed to delete file'
+      };
+    }
+  }
+};

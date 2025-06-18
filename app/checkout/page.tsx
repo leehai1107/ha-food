@@ -101,7 +101,7 @@ const CheckoutPage = () => {
       if (result.code === 200) {
         setShippingFee(result.data);
       } else {
-        setShippingError(result.error || "Không thể tính phí vận chuyển");
+        setShippingError(result.error || "Liên hệ");
         setShippingFee(null);
       }
     } catch (error) {
