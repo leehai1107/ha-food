@@ -1,16 +1,29 @@
 "use client";
-import React, { createContext, useContext, useReducer, useEffect, type ReactNode, useState } from 'react';
-import type { Cart, CartItem, Product, UpdateCartItemRequest, Discount } from '../types';
-import { getDiscounts } from '@/services/productService';
+import React, {
+  createContext,
+  useContext,
+  useReducer,
+  useEffect,
+  type ReactNode,
+  useState,
+} from "react";
+import type {
+  Cart,
+  CartItem,
+  Product,
+  UpdateCartItemRequest,
+  Discount,
+} from "../types";
+import { getDiscounts } from "@/services/productService";
 
 // Cart Actions
 type CartAction =
-  | { type: 'ADD_ITEM'; payload: { product: Product; quantity: number } }
-  | { type: 'REMOVE_ITEM'; payload: { productSKU: string } }
-  | { type: 'UPDATE_QUANTITY'; payload: UpdateCartItemRequest }
-  | { type: 'CLEAR_CART' }
-  | { type: 'LOAD_CART'; payload: Cart }
-  | { type: 'SET_DISCOUNTS'; payload: Discount[] };
+  | { type: "ADD_ITEM"; payload: { product: Product; quantity: number } }
+  | { type: "REMOVE_ITEM"; payload: { productSKU: string } }
+  | { type: "UPDATE_QUANTITY"; payload: UpdateCartItemRequest }
+  | { type: "CLEAR_CART" }
+  | { type: "LOAD_CART"; payload: Cart }
+  | { type: "SET_DISCOUNTS"; payload: Discount[] };
 
 // Cart Context Type
 interface CartContextType {
@@ -39,9 +52,11 @@ const initialCart: Cart = {
 // Cart Reducer
 const cartReducer = (state: Cart, action: CartAction): Cart => {
   switch (action.type) {
-    case 'ADD_ITEM': {
+    case "ADD_ITEM": {
       const { product, quantity } = action.payload;
-      const existingItemIndex = state.items.findIndex(item => item.productSKU === product.productSku);
+      const existingItemIndex = state.items.findIndex(
+        (item) => item.productSKU === product.productSku
+      );
 
       let newItems: CartItem[];
 
@@ -49,7 +64,10 @@ const cartReducer = (state: Cart, action: CartAction): Cart => {
         // Update existing item quantity
         newItems = state.items.map((item, index) => {
           if (index === existingItemIndex) {
-            const newQuantity = Math.min(item.quantity + quantity, item.maxQuantity);
+            const newQuantity = Math.min(
+              item.quantity + quantity,
+              item.maxQuantity
+            );
             return { ...item, quantity: newQuantity };
           }
           return item;
@@ -72,7 +90,10 @@ const cartReducer = (state: Cart, action: CartAction): Cart => {
       }
 
       const totalItems = newItems.reduce((sum, item) => sum + item.quantity, 0);
-      const totalPrice = newItems.reduce((sum, item) => sum + (item.currentPrice * item.quantity), 0);
+      const totalPrice = newItems.reduce(
+        (sum, item) => sum + item.currentPrice * item.quantity,
+        0
+      );
 
       return {
         items: newItems,
@@ -82,10 +103,15 @@ const cartReducer = (state: Cart, action: CartAction): Cart => {
       };
     }
 
-    case 'REMOVE_ITEM': {
-      const newItems = state.items.filter(item => item.productSKU !== action.payload.productSKU);
+    case "REMOVE_ITEM": {
+      const newItems = state.items.filter(
+        (item) => item.productSKU !== action.payload.productSKU
+      );
       const totalItems = newItems.reduce((sum, item) => sum + item.quantity, 0);
-      const totalPrice = newItems.reduce((sum, item) => sum + (item.currentPrice * item.quantity), 0);
+      const totalPrice = newItems.reduce(
+        (sum, item) => sum + item.currentPrice * item.quantity,
+        0
+      );
 
       return {
         items: newItems,
@@ -95,15 +121,18 @@ const cartReducer = (state: Cart, action: CartAction): Cart => {
       };
     }
 
-    case 'UPDATE_QUANTITY': {
+    case "UPDATE_QUANTITY": {
       const { productSKU, quantity } = action.payload;
 
       if (quantity <= 0) {
         // Remove item if quantity is 0 or negative
-        return cartReducer(state, { type: 'REMOVE_ITEM', payload: { productSKU } });
+        return cartReducer(state, {
+          type: "REMOVE_ITEM",
+          payload: { productSKU },
+        });
       }
 
-      const newItems = state.items.map(item => {
+      const newItems = state.items.map((item) => {
         if (item.productSKU === productSKU) {
           return { ...item, quantity: Math.min(quantity, item.maxQuantity) };
         }
@@ -111,7 +140,10 @@ const cartReducer = (state: Cart, action: CartAction): Cart => {
       });
 
       const totalItems = newItems.reduce((sum, item) => sum + item.quantity, 0);
-      const totalPrice = newItems.reduce((sum, item) => sum + (item.currentPrice * item.quantity), 0);
+      const totalPrice = newItems.reduce(
+        (sum, item) => sum + item.currentPrice * item.quantity,
+        0
+      );
 
       return {
         items: newItems,
@@ -121,7 +153,7 @@ const cartReducer = (state: Cart, action: CartAction): Cart => {
       };
     }
 
-    case 'CLEAR_CART':
+    case "CLEAR_CART":
       return {
         items: [],
         totalItems: 0,
@@ -129,10 +161,10 @@ const cartReducer = (state: Cart, action: CartAction): Cart => {
         updatedAt: new Date().toISOString(),
       };
 
-    case 'LOAD_CART':
+    case "LOAD_CART":
       return action.payload;
 
-    case 'SET_DISCOUNTS':
+    case "SET_DISCOUNTS":
       return {
         ...state,
         discounts: action.payload,
@@ -152,7 +184,7 @@ interface CartProviderProps {
 }
 
 // Local Storage Key
-const CART_STORAGE_KEY = 'ha-food-cart';
+const CART_STORAGE_KEY = "ha-food-cart";
 
 // Cart Provider Component
 export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
@@ -168,7 +200,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
           setDiscounts(response.data);
         }
       } catch (error) {
-        console.error('Error loading discounts:', error);
+        console.error("Error loading discounts:", error);
       }
     };
     loadDiscounts();
@@ -180,10 +212,10 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
       const savedCart = localStorage.getItem(CART_STORAGE_KEY);
       if (savedCart) {
         const parsedCart: Cart = JSON.parse(savedCart);
-        dispatch({ type: 'LOAD_CART', payload: parsedCart });
+        dispatch({ type: "LOAD_CART", payload: parsedCart });
       }
     } catch (error) {
-      console.error('Error loading cart from localStorage:', error);
+      console.error("Error loading cart from localStorage:", error);
     }
   }, []);
 
@@ -192,7 +224,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     try {
       localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
     } catch (error) {
-      console.error('Error saving cart to localStorage:', error);
+      console.error("Error saving cart to localStorage:", error);
     }
   }, [cart]);
 
@@ -201,19 +233,19 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     if (!product.available || quantity <= 0) {
       return;
     }
-    dispatch({ type: 'ADD_ITEM', payload: { product, quantity } });
+    dispatch({ type: "ADD_ITEM", payload: { product, quantity } });
   };
 
   const removeFromCart = (productSKU: string) => {
-    dispatch({ type: 'REMOVE_ITEM', payload: { productSKU } });
+    dispatch({ type: "REMOVE_ITEM", payload: { productSKU } });
   };
 
   const updateQuantity = (productSKU: string, quantity: number) => {
-    dispatch({ type: 'UPDATE_QUANTITY', payload: { productSKU, quantity } });
+    dispatch({ type: "UPDATE_QUANTITY", payload: { productSKU, quantity } });
   };
 
   const clearCart = () => {
-    dispatch({ type: 'CLEAR_CART' });
+    dispatch({ type: "CLEAR_CART" });
   };
 
   // Helper Functions
@@ -223,7 +255,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 
   const getDiscountedTotal = () => {
     return cart.items.reduce((total, item) => {
-      return total + (getItemDiscountedPrice(item) * item.quantity);
+      return total + getItemDiscountedPrice(item) * item.quantity;
     }, 0);
   };
 
@@ -233,23 +265,24 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     }
 
     const applicableDiscount = discounts
-      .filter(d => d.isActive && item.quantity >= d.minQuantity)
+      .filter((d) => d.isActive && item.quantity >= d.minQuantity)
       .sort((a, b) => b.minQuantity - a.minQuantity)[0];
 
     if (!applicableDiscount) {
       return item.currentPrice;
     }
 
-    const discountAmount = item.currentPrice * (applicableDiscount.discountPercent / 100);
+    const discountAmount =
+      item.currentPrice * (applicableDiscount.discountPercent / 100);
     return item.currentPrice - discountAmount;
   };
 
   const isInCart = (productSKU: string) => {
-    return cart.items.some(item => item.productSKU === productSKU);
+    return cart.items.some((item) => item.productSKU === productSKU);
   };
 
   const getCartItem = (productSKU: string) => {
-    return cart.items.find(item => item.productSKU === productSKU);
+    return cart.items.find((item) => item.productSKU === productSKU);
   };
 
   const contextValue: CartContextType = {
@@ -268,9 +301,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   };
 
   return (
-    <CartContext.Provider value={contextValue}>
-      {children}
-    </CartContext.Provider>
+    <CartContext.Provider value={contextValue}>{children}</CartContext.Provider>
   );
 };
 
@@ -278,7 +309,7 @@ export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
 export const useCart = (): CartContextType => {
   const context = useContext(CartContext);
   if (context === undefined) {
-    throw new Error('useCart must be used within a CartProvider');
+    throw new Error("useCart must be used within a CartProvider");
   }
   return context;
 };

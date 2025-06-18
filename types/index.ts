@@ -104,6 +104,7 @@ export interface Category {
   id: ID;
   name: string;
   description: string | null;
+  imageUrl: string | null;
   parentId: ID | null;
   createdAt: string;
   // Relations
@@ -119,12 +120,14 @@ export interface Category {
 export interface CreateCategoryRequest {
   name: string;
   description?: string;
+  imageUrl?: string;
   parentId?: ID;
 }
 
 export interface UpdateCategoryRequest {
   name?: string;
   description?: string;
+  imageUrl?: string;
   parentId?: ID;
 }
 
@@ -465,7 +468,7 @@ export interface ValidationResult {
 export interface Discount {
   id: ID;
   minQuantity: number;
-  discountPercent: Decimal;
+  discountPercent: number;
   isActive: boolean;
   createdAt: string;
   updatedAt: string;
@@ -675,7 +678,7 @@ export interface Stat {
   icon?: React.ReactNode;
 }
 
-export type GalleryImage = {
+export type GalleryImageItem = {
   url: string;
   alt: string;
 };

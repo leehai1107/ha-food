@@ -7,13 +7,14 @@ const prisma = new PrismaClient();
 // GET /api/galleries/[id]/images/[imageId] - Get a specific gallery image
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string; imageId: string } }
+  { params }: { params: Promise<{ id: string; imageId: string }> }
 ) {
   try {
-    const galleryId = parseInt(params.id);
-    const imageId = parseInt(params.imageId);
+    const { id, imageId } = await params;
+    const galleryId = parseInt(id);
+    const imageIdNum = parseInt(imageId);
 
-    if (isNaN(galleryId) || isNaN(imageId)) {
+    if (isNaN(galleryId) || isNaN(imageIdNum)) {
       return NextResponse.json({
         success: false,
         error: 'Invalid ID',
@@ -23,7 +24,7 @@ export async function GET(
 
     const image = await prisma.galleryImage.findFirst({
       where: {
-        id: imageId,
+        id: imageIdNum,
         galleryId: galleryId
       },
       include: {
@@ -62,32 +63,14 @@ export async function GET(
 // PUT /api/galleries/[id]/images/[imageId] - Update a gallery image
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string; imageId: string } }
+  { params }: { params: Promise<{ id: string; imageId: string }> }
 ) {
   try {
-    // Verify admin access
-    const token = req.headers.get('authorization')?.replace('Bearer ', '');
-    if (!token) {
-      return NextResponse.json({
-        success: false,
-        error: 'Unauthorized',
-        message: 'Authentication required'
-      }, { status: 401 });
-    }
+    const { id, imageId } = await params;
+    const galleryId       = parseInt(id);
+    const imageIdNum      = parseInt(imageId);
 
-    const decoded = await verifyToken(token);
-    if (!decoded || !decoded.account) {
-      return NextResponse.json({
-        success: false,
-        error: 'Invalid token',
-        message: 'Authentication failed'
-      }, { status: 401 });
-    }
-
-    const galleryId = parseInt(params.id);
-    const imageId = parseInt(params.imageId);
-
-    if (isNaN(galleryId) || isNaN(imageId)) {
+    if (isNaN(galleryId) || isNaN(imageIdNum)) {
       return NextResponse.json({
         success: false,
         error: 'Invalid ID',
@@ -101,7 +84,7 @@ export async function PUT(
     // Check if image exists
     const existingImage = await prisma.galleryImage.findFirst({
       where: {
-        id: imageId,
+        id: imageIdNum,
         galleryId: galleryId
       }
     });
@@ -128,7 +111,7 @@ export async function PUT(
 
     // Update image
     const image = await prisma.galleryImage.update({
-      where: { id: imageId },
+      where: { id: imageIdNum },
       data: updateData,
       include: {
         gallery: {
@@ -158,7 +141,7 @@ export async function PUT(
 // DELETE /api/galleries/[id]/images/[imageId] - Delete a gallery image
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string; imageId: string } }
+  { params }: { params: Promise<{ id: string; imageId: string }> }
 ) {
   try {
     // Verify admin access
@@ -172,7 +155,7 @@ export async function DELETE(
     }
 
     const decoded = await verifyToken(token);
-    if (!decoded || !decoded.account) {
+    if (!decoded || !decoded.accountId) {
       return NextResponse.json({
         success: false,
         error: 'Invalid token',
@@ -180,10 +163,11 @@ export async function DELETE(
       }, { status: 401 });
     }
 
-    const galleryId = parseInt(params.id);
-    const imageId = parseInt(params.imageId);
+    const { id, imageId } = await params;
+    const galleryId = parseInt(id);
+    const imageIdNum = parseInt(imageId);
 
-    if (isNaN(galleryId) || isNaN(imageId)) {
+    if (isNaN(galleryId) || isNaN(imageIdNum)) {
       return NextResponse.json({
         success: false,
         error: 'Invalid ID',
@@ -194,7 +178,7 @@ export async function DELETE(
     // Check if image exists
     const existingImage = await prisma.galleryImage.findFirst({
       where: {
-        id: imageId,
+        id: imageIdNum,
         galleryId: galleryId
       }
     });
@@ -209,7 +193,7 @@ export async function DELETE(
 
     // Delete image
     await prisma.galleryImage.delete({
-      where: { id: imageId }
+      where: { id: imageIdNum }
     });
 
     return NextResponse.json({

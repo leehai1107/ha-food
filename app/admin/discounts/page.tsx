@@ -1,9 +1,14 @@
 "use client";
 
-import { Discount } from '@/types/product';
-import { createDiscount, deleteDiscount, getDiscounts, updateDiscount } from '@/services/productService';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { Discount } from "@/types/product";
+import {
+  createDiscount,
+  deleteDiscount,
+  getDiscounts,
+  updateDiscount,
+} from "@/services/productService";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function DiscountsPage() {
   const router = useRouter();
@@ -14,7 +19,7 @@ export default function DiscountsPage() {
   const [newDiscount, setNewDiscount] = useState({
     minQuantity: 5,
     discountPercent: 8,
-    isActive: true
+    isActive: true,
   });
 
   useEffect(() => {
@@ -25,7 +30,7 @@ export default function DiscountsPage() {
           setDiscounts(response.data);
         }
       } catch (err) {
-        setError('Failed to load discounts');
+        setError("Failed to load discounts");
       } finally {
         setLoading(false);
       }
@@ -39,21 +44,30 @@ export default function DiscountsPage() {
       const response = await createDiscount(newDiscount);
       if (response.success) {
         setDiscounts([...discounts, response.data]);
-        setNewDiscount({ minQuantity: 5, discountPercent: 8, isActive: true });
+        setNewDiscount({
+          minQuantity: 5,
+          discountPercent: 8,
+          isActive: true,
+        });
       }
     } catch (err) {
-      setError('Failed to create discount');
+      setError("Failed to create discount");
     }
   };
 
-  const handleUpdateDiscount = async (discountId: number, updates: Partial<Discount>) => {
+  const handleUpdateDiscount = async (
+    discountId: number,
+    updates: Partial<Discount>
+  ) => {
     try {
       const response = await updateDiscount(discountId, updates);
       if (response.success) {
-        setDiscounts(discounts.map(d => d.id === discountId ? response.data : d));
+        setDiscounts(
+          discounts.map((d) => (d.id === discountId ? response.data : d))
+        );
       }
     } catch (err) {
-      setError('Failed to update discount');
+      setError("Failed to update discount");
     }
   };
 
@@ -61,10 +75,10 @@ export default function DiscountsPage() {
     try {
       const response = await deleteDiscount(discountId);
       if (response.success) {
-        setDiscounts(discounts.filter(d => d.id !== discountId));
+        setDiscounts(discounts.filter((d) => d.id !== discountId));
       }
     } catch (err) {
-      setError('Failed to delete discount');
+      setError("Failed to delete discount");
     }
   };
 
@@ -88,21 +102,35 @@ export default function DiscountsPage() {
         <h2 className="text-xl font-semibold mb-4">Add New Discount Tier</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Minimum Quantity</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Minimum Quantity
+            </label>
             <input
               type="number"
               value={newDiscount.minQuantity}
-              onChange={(e) => setNewDiscount({ ...newDiscount, minQuantity: parseInt(e.target.value) })}
+              onChange={(e) =>
+                setNewDiscount({
+                  ...newDiscount,
+                  minQuantity: parseInt(e.target.value),
+                })
+              }
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
               min="1"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Discount Percentage</label>
+            <label className="block text-sm font-medium text-gray-700">
+              Discount Percentage
+            </label>
             <input
               type="number"
               value={newDiscount.discountPercent}
-              onChange={(e) => setNewDiscount({ ...newDiscount, discountPercent: parseFloat(e.target.value) })}
+              onChange={(e) =>
+                setNewDiscount({
+                  ...newDiscount,
+                  discountPercent: parseFloat(e.target.value),
+                })
+              }
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
               min="0"
               max="100"
@@ -146,7 +174,11 @@ export default function DiscountsPage() {
                   <input
                     type="number"
                     value={discount.minQuantity}
-                    onChange={(e) => handleUpdateDiscount(discount.id, { minQuantity: parseInt(e.target.value) })}
+                    onChange={(e) =>
+                      handleUpdateDiscount(discount.id, {
+                        minQuantity: parseInt(e.target.value),
+                      })
+                    }
                     className="block w-24 rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
                     min="1"
                   />
@@ -155,7 +187,11 @@ export default function DiscountsPage() {
                   <input
                     type="number"
                     value={discount.discountPercent}
-                    onChange={(e) => handleUpdateDiscount(discount.id, { discountPercent: parseFloat(e.target.value) })}
+                    onChange={(e) =>
+                      handleUpdateDiscount(discount.id, {
+                        discountPercent: parseFloat(e.target.value),
+                      })
+                    }
                     className="block w-24 rounded-md border-gray-300 shadow-sm focus:border-red-500 focus:ring-red-500"
                     min="0"
                     max="100"
@@ -167,11 +203,15 @@ export default function DiscountsPage() {
                     <input
                       type="checkbox"
                       checked={discount.isActive}
-                      onChange={(e) => handleUpdateDiscount(discount.id, { isActive: e.target.checked })}
+                      onChange={(e) =>
+                        handleUpdateDiscount(discount.id, {
+                          isActive: e.target.checked,
+                        })
+                      }
                       className="rounded border-gray-300 text-red-600 shadow-sm focus:border-red-500 focus:ring-red-500"
                     />
                     <span className="ml-2 text-sm text-gray-600">
-                      {discount.isActive ? 'Active' : 'Inactive'}
+                      {discount.isActive ? "Active" : "Inactive"}
                     </span>
                   </label>
                 </td>
@@ -190,4 +230,4 @@ export default function DiscountsPage() {
       </div>
     </div>
   );
-} 
+}

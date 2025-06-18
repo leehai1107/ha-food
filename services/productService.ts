@@ -109,10 +109,11 @@ export interface UpdateDiscountRequest {
 
 export interface Discount {
   id: number;
-  productSku: string;
-  discountPercent: number;
   minQuantity: number;
+  discountPercent: number;
   isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 class ProductService {
