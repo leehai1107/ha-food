@@ -17,7 +17,7 @@ export default function FooterInfo() {
                 <div className="flex gap-4 text-secondary">
                     <div className="flex items-center justify-center gap-1">
                         <Phone />
-                        <a href="tel:0901234567" className="text-sm">0972819379</a>
+                        <a href="tel:0972819379" className="text-sm">0972819379</a>
                     </div>
                     <div className="flex items-center justify-center gap-1">
                         <Mail />

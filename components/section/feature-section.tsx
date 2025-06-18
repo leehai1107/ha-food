@@ -1,11 +1,11 @@
-'use client';
-import Image from 'next/image';
-import { defaultClients } from '@/constants/clients';
-import { useEffect, useRef, useState } from 'react';
+"use client";
+import Image from "next/image";
+import { defaultClients } from "@/constants/clients";
+import { useEffect, useRef, useState } from "react";
 
 const FeaturedClientsSection = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [duration, setDuration] = useState('30s');
+  const [duration, setDuration] = useState("30s");
   const speed = 100; // px/s
 
   const displayClients = defaultClients;
@@ -47,7 +47,7 @@ const FeaturedClientsSection = () => {
               <div
                 ref={containerRef}
                 className="flex whitespace-nowrap group"
-                style={{ ['--duration' as any]: duration }}
+                style={{ ["--duration" as any]: duration }}
               >
                 <div className="flex items-center space-x-8 px-4 animate-scroll-left">
                   {[...displayClients, ...displayClients].map((client, i) => (
@@ -63,18 +63,22 @@ const FeaturedClientsSection = () => {
   );
 };
 
-const ClientCard = ({ client }: { client: { id: number; name: string; logoUrl: string } }) => (
+const ClientCard = ({
+  client,
+}: {
+  client: { id: number; name: string; logoUrl: string };
+}) => (
   <div className="flex-shrink-0 group">
-    <div className="w-24 h-16 flex items-center justify-center bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-3">
+    <div className="w-32 h-28 flex items-center justify-center bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-3">
       <Image
         src={client.logoUrl}
         alt={client.name}
-        width={100}
-        height={100}
-        className="max-w-full max-h-full object-contain filter grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100"
+        width={400}
+        height={400}
+        className="max-w-full max-h-full object-contain filter transition-all duration-300 "
         onError={(e) => {
           const target = e.target as HTMLImageElement;
-          target.src = '/image/noimage.png';
+          target.src = "/image/noimage.png";
         }}
       />
     </div>

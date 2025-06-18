@@ -4,6 +4,9 @@
 
 import { Review } from './product';
 
+// Export GHN types
+export * from './ghn';
+
 // Base types
 export type ID = number;
 export type SKU = string;

@@ -98,7 +98,7 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-gray-100">
+    <section className="py-10 bg-gradient-to-br from-gray-50 to-gray-100">
       <div className="w-full px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16 max-w-4xl mx-auto">
@@ -152,8 +152,8 @@ const TestimonialsSection = () => {
                     />
                   </div>
                   <div>
-                    <h4 className="text-md font-bold text-gray-900">{testimonial.name}</h4>
-                    <p className="text-xs text-gray-500">{testimonial.location}</p>
+                    <h4 className="text-xl font-bold text-gray-900">{testimonial.name}</h4>
+                    <p className="text-md text-gray-500">{testimonial.location}</p>
                     <div className="flex mt-1">
                       {[...Array(5)].map((_, i) => (
                         <svg key={i} className={`w-4 h-4 ${i < testimonial.rating ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
@@ -167,7 +167,7 @@ const TestimonialsSection = () => {
                 {/* Quote */}
                 <div className="relative">
                   <div className="text-4xl text-secondary opacity-20 absolute top-0 left-0 font-serif">“</div>
-                  <p className="text-sm text-primary-black mt-4 font-primary">{testimonial.content}</p>
+                  <p className="text-lg text-primary-black mt-4 font-primary">{testimonial.content}</p>
                 </div>
               </div>
             ))}

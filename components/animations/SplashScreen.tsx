@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
-import Image from 'next/image';
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export default function SplashScreen() {
   const [isVisible, setIsVisible] = useState(false);
@@ -28,7 +28,7 @@ export default function SplashScreen() {
       <div className="absolute inset-0 animate-fill-background" />
 
       {/* Logo container with new animation */}
-      <div className="relative w-32 h-32 animate-splash-smooth">
+      <div className = "relative w-2/3 h-2/3 lg:w-1/3 lg:h-1/3 animate-splash-smooth">
         <Image
           src="/logo/logo.svg"
           alt="Logo"
@@ -39,4 +39,4 @@ export default function SplashScreen() {
       </div>
     </div>
   );
-} 
+}

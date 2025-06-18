@@ -31,7 +31,7 @@ export default function AboutSection() {
           description="Logo nhận diện thương hiệu: Tùy chỉnh hợp quà và in ấn theo màu nhận diện, nâng cao thương hiệu. Thiết kế độc quyền: Hộp bánh trung thu được thiết kế bởi những họa sĩ chuyên nghiệp tài năng."
         />
       </div>
-      <div className="bg-primary text-center py-6 mt-10 text-secondary font-semibold uppercase">
+      <div className="bg-primary text-center py-6 mt-10 text-secondary font-semibold uppercase text-2xl">
         <p>Hãy chọn HAFOOD VN để mang đến những hộp quà Trung thu <br />
           tuyệt vời và ý nghĩa, khẳng định đẳng cấp và uy tín của bạn</p>
 
