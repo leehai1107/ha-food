@@ -96,7 +96,7 @@ const ProductsSection = () => {
   };
 
   const handleCategoryClick = (category: Category) => {
-    router.push(`/products?category=${encodeURIComponent(category.name)}`);
+    router.push(`/products?category=${category.id}`);
   };
 
   return (

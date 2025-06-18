@@ -7,10 +7,15 @@ import React, { useState, useEffect, useCallback } from "react";
 
 interface ProductListProps {
   category?: string;
+  searchTerm?: string;
   limit?: number;
 }
 
-const ProductList: React.FC<ProductListProps> = ({ category, limit = 20 }) => {
+const ProductList: React.FC<ProductListProps> = ({
+  category,
+  searchTerm,
+  limit = 20,
+}) => {
   const router = useRouter();
   const { addToCart } = useCart();
   const [products, setProducts] = useState<Product[]>([]);
@@ -29,20 +34,27 @@ const ProductList: React.FC<ProductListProps> = ({ category, limit = 20 }) => {
       try {
         if (page === 1) {
           setLoading(true);
+          // Reset products when fetching first page (new category or initial load)
+          if (!append) {
+            setProducts([]);
+          }
         } else {
           setLoadingMore(true);
         }
         setError(null);
 
-        const response = await productService.getProducts({
+        const params = {
           categoryId: category ? parseInt(category) : undefined,
+          search: searchTerm || undefined,
           limit,
           page,
           available: true,
-          sortBy: "rating",
-          sortOrder: "desc",
+          sortBy: "rating" as const,
+          sortOrder: "desc" as const,
           includeImages: true,
-        });
+        };
+
+        const response = await productService.getProducts(params);
 
         if (response.success) {
           setProducts((prev) =>
@@ -66,12 +78,22 @@ const ProductList: React.FC<ProductListProps> = ({ category, limit = 20 }) => {
         setLoadingMore(false);
       }
     },
-    [category, limit]
+    [category, searchTerm, limit]
   );
 
   useEffect(() => {
     fetchProducts();
   }, [fetchProducts]);
+
+  // Reset products when category or search term changes
+  useEffect(() => {
+    setProducts([]);
+    setPagination({
+      page: 1,
+      totalPages: 1,
+      total: 0,
+    });
+  }, [category, searchTerm]);
 
   const formatPrice = (price: string | number) => {
     const numPrice = typeof price === "string" ? parseFloat(price) : price;
@@ -171,7 +193,16 @@ const ProductList: React.FC<ProductListProps> = ({ category, limit = 20 }) => {
   if (products.length === 0) {
     return (
       <div className="text-center py-8">
-        <p className="text-gray-600">Không có sản phẩm nào được tìm thấy.</p>
+        <p className="text-gray-600">
+          {searchTerm
+            ? `Không tìm thấy sản phẩm nào cho "${searchTerm}"`
+            : "Không có sản phẩm nào được tìm thấy."}
+        </p>
+        {searchTerm && (
+          <p className="text-sm text-gray-500 mt-2">
+            Thử tìm kiếm với từ khóa khác hoặc duyệt qua các danh mục sản phẩm.
+          </p>
+        )}
       </div>
     );
   }

@@ -20,6 +20,26 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Features
+
+### Product Search
+
+The application includes a comprehensive search functionality:
+
+- **Search Modal**: Click the search icon in the header or use keyboard shortcut `Ctrl+K` (Windows/Linux) or `Cmd+K` (Mac)
+- **Real-time Search**: Search products by name, description, or keywords
+- **URL Integration**: Search terms are reflected in the URL for easy sharing
+- **Category Filtering**: Combine search with category filtering
+- **Search Suggestions**: Quick search suggestions for popular terms
+
+#### How to Use Search:
+
+1. Click the search icon (🔍) in the header
+2. Or press `Ctrl+K` / `Cmd+K` to open search modal
+3. Enter your search terms
+4. Press Enter or click "Tìm kiếm" to search
+5. Results will be displayed on the products page with search term in URL
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
