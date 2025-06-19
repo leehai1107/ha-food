@@ -13,7 +13,7 @@ export async function GET(req: NextRequest) {
     const skip = (page - 1) * limit;
 
     // Build where clause based on status
-    let where: any = {};
+    const where: any = {};
     if (status === 'published') {
       where.isPublished = true;
     } else if (status === 'draft') {
