@@ -12,6 +12,7 @@ import galleryService from "@/services/galleryService";
 import type { Gallery } from "@/types";
 import AnimatedCounter from "@/components/animations/AnimatedCounter";
 import TestimonialsGallery from "@/components/section/testimonial-gallery";
+import Breadcrumbs from "@/components/custom/breadcums";
 
 export default function GalleryPage() {
   const [galleries, setGalleries] = useState<Gallery[]>([]);
@@ -116,6 +117,15 @@ export default function GalleryPage() {
     <>
       <div className="min-h-screen bg-gray-50 py-6">
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Breadcrumbs */}
+          <div className="mb-6">
+            <Breadcrumbs
+              items={[
+                { label: "Trang chủ", href: "/" },
+                { label: "Dự án tiêu biểu" },
+              ]}
+            />
+          </div>
           {/* Header */}
           <div className="text-center mb-12 bg-primary py-4 rounded-lg">
             <div className="flex flex-col items-center justify-center">
@@ -315,7 +325,7 @@ export default function GalleryPage() {
         </div>
       </div>
 
-      <TestimonialsGallery/>
+      <TestimonialsGallery />
 
       {/* Gallery Modal */}
       {showModal && selectedGallery && (

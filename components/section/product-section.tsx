@@ -100,7 +100,7 @@ const ProductsSection = () => {
   };
 
   return (
-    <section className="bg-white" id="products">
+    <section className="bg-white py-6" id="products">
       {/* Section Header */}
       <div className="text-center mb-16 max-w-4xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4 font-heading">
