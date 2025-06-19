@@ -68,7 +68,7 @@ Your `.env` file should contain:
 
 ```env
 # Database Configuration (REQUIRED)
-DATABASE_URL=postgresql://postgres:YHGtCWMJXBvXliNwpsrieKdxnDHwQnco@gondola.proxy.rlwy.net:37432/ha-food
+DATABASE_URL=???
 
 # Application Configuration (REQUIRED)
 NODE_ENV=production
