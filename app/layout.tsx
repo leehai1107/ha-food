@@ -5,9 +5,9 @@ import { Toaster } from "sonner";
 import { AuthProvider } from "@/contexts/AuthContext";
 import LayoutContent from "@/layouts/layout-content";
 import { CartProvider } from "@/hooks/CartContext";
-import SplashScreen from '@/components/animations/SplashScreen';
-import { Analytics } from "@vercel/analytics/next"
-import Script from 'next/script';
+import SplashScreen from "@/components/animations/SplashScreen";
+import { Analytics } from "@vercel/analytics/next";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,8 +25,11 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Ha Food - Quà Tặng Doanh Nghiệp",
-  description: "Ha Food - Nơi cung cấp quà tặng doanh nghiệp uy tín và chất lượng",
-  keywords: "quà tặng doanh nghiệp, quà tặng khách hàng, quà tặng đối tác, hộp quà cao cấp",
+  description:
+    "Ha Food - Nơi cung cấp quà tặng doanh nghiệp uy tín và chất lượng",
+  keywords:
+    "quà tặng doanh nghiệp, quà tặng khách hàng, quà tặng đối tác, hộp quà cao cấp",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_API_URL || "https://hafood.vn"),
   authors: [{ name: "Ha Food" }],
   creator: "Ha Food",
   publisher: "Ha Food",
@@ -41,41 +44,42 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    type: 'website',
-    locale: 'vi_VN',
-    url: 'https://ha-food-hazel.vercel.app',
-    siteName: 'Ha Food',
-    title: 'Ha Food - Quà Tặng Doanh Nghiệp',
-    description: 'Ha Food - Nơi cung cấp quà tặng doanh nghiệp uy tín và chất lượng',
+    type       : "website",
+    locale     : "vi_VN",
+    url        : process.env.NEXT_PUBLIC_API_URL || "https://hafood.vn",
+    siteName   : "Ha Food",
+    title      : "Ha Food - Quà Tặng Doanh Nghiệp",
+    description: 
+      "Ha Food - Nơi cung cấp quà tặng doanh nghiệp uy tín và chất lượng",
     images: [
       {
-        url: '/og-image.jpg',
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: 'Ha Food',
+        alt: "Ha Food",
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Ha Food - Quà Tặng Doanh Nghiệp',
-    description: 'Ha Food - Nơi cung cấp quà tặng doanh nghiệp uy tín và chất lượng',
-    images: ['/og-image.jpg'],
+    card: "summary_large_image",
+    title: "Ha Food - Quà Tặng Doanh Nghiệp",
+    description:
+      "Ha Food - Nơi cung cấp quà tặng doanh nghiệp uy tín và chất lượng",
+    images: ["/og-image.jpg"],
   },
   verification: {
-    google: 'your-google-site-verification', // Replace with your Google Search Console verification code
+    google: "your-google-site-verification", // Replace with your Google Search Console verification code
   },
 };
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="vi" suppressHydrationWarning>
       <head>
-        <link rel="canonical" href="https://ha-food-hazel.vercel.app" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#B0041A" />
         <meta name="next-size-adjust" content="100%" />

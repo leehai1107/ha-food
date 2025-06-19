@@ -231,7 +231,7 @@ export default function RootHeader() {
                     SẢN PHẨM
                   </NavLink>
                   <NavLink href="/gallery" isMobile>
-                    Dự án
+                    DỰ ÁN
                   </NavLink>
                   <NavLink href="/news" isMobile>
                     TIN TỨC
