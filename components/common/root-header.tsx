@@ -61,7 +61,7 @@ export default function RootHeader() {
 
   const transformCategoriesToSubItems = (categories: Category[]): SubItem[] => {
     return categories.map((category) => ({
-      href: `/products?category=${category.id}`,
+      href: `/products?categoryId=${category.id}`,
       label: category.name,
       subItems:
         category.children && category.children.length > 0

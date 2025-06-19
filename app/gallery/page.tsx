@@ -127,10 +127,6 @@ export default function GalleryPage() {
           {!tagsLoading && allTags.length > 0 && (
             <div className="mb-8">
               <div className="flex items-center gap-2 mb-4">
-                <Filter className="w-5 h-5 text-gray-600" />
-                <h3 className="text-lg font-semibold text-gray-900">
-                  Lọc theo thẻ:
-                </h3>
                 {selectedTags.length > 0 && (
                   <Button
                     variant="ghost"
@@ -149,7 +145,7 @@ export default function GalleryPage() {
                   <Badge
                     key={tag}
                     variant={selectedTags.includes(tag) ? "default" : "outline"}
-                    className={`cursor-pointer transition-colors ${
+                    className={`cursor-pointer transition-colors p-4 text-xl ${
                       selectedTags.includes(tag)
                         ? "bg-blue-600 text-white hover:bg-blue-700"
                         : "hover:bg-gray-100"
@@ -193,7 +189,7 @@ export default function GalleryPage() {
                   className="overflow-hidden hover:shadow-lg transition-shadow"
                 >
                   {/* Gallery Cover Image */}
-                  <div className="relative h-48 bg-gray-200">
+                  <div className="relative aspect-square w-full bg-gray-200">
                     {gallery.images && gallery.images.length > 0 ? (
                       <Image
                         src={gallery.images[0].imageUrl}
@@ -203,7 +199,7 @@ export default function GalleryPage() {
                       />
                     ) : (
                       <div className="flex items-center justify-center h-full">
-                        <ImageIcon className="h-12 w-12 text-gray-400" />
+                        <ImageIcon className="h-16 w-16 text-gray-400" />
                       </div>
                     )}
                     <div className="absolute top-3 right-3">
@@ -250,17 +246,15 @@ export default function GalleryPage() {
                       </div>
                     )}
 
-                    {/* Gallery Info */}
-                    <div className="flex items-center text-sm text-gray-500 mb-4">
-                      <Calendar className="w-4 h-4 mr-1" />
-                      <span>{formatDate(gallery.createdAt)}</span>
-                    </div>
-
                     {/* View Gallery Button */}
-                    <Button asChild className="w-full" variant="outline">
+                    <Button
+                      asChild
+                      className="w-full bg-primary text-primary-white hover:text-primary-black"
+                      variant="outline"
+                    >
                       <Link href={`/gallery/${gallery.id}`}>
                         <Eye className="w-4 h-4 mr-2" />
-                        Xem thư viện
+                        Xem dự án
                       </Link>
                     </Button>
                   </CardContent>

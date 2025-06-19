@@ -39,8 +39,7 @@ export async function GET(req: NextRequest) {
       if (maxPrice !== undefined) where.currentPrice.lte = maxPrice;
     }
     if (tags && tags.length > 0) where.tags = { hasEvery: tags };
-    if (categoryId) where.categoryId = categoryId;
-
+    if (categoryId !== undefined) where.categoryId = categoryId;
     // Build orderBy
     let orderBy: any = {};
     switch (sortBy) {

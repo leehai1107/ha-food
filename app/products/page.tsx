@@ -18,6 +18,7 @@ const ProductsContent = () => {
   const isInitialLoad = useRef(true);
   const isUserTyping = useRef(false);
   const lastUrlSearch = useRef<string>("");
+  const [ready, setReady] = useState(false);
 
   // Fetch product types and categories from API
   useEffect(() => {
@@ -53,7 +54,7 @@ const ProductsContent = () => {
 
   // Handle URL parameters
   useEffect(() => {
-    const categoryFromUrl = searchParams.get("category");
+    const categoryFromUrl = searchParams.get("categoryId");
     const searchFromUrl = searchParams.get("search");
 
     if (categoryFromUrl) {
@@ -76,6 +77,7 @@ const ProductsContent = () => {
     if (isInitialLoad.current) {
       isInitialLoad.current = false;
     }
+    setReady(true);
   }, [searchParams]);
 
   // Debounce search term with 500ms delay
@@ -112,9 +114,9 @@ const ProductsContent = () => {
       params.delete("search");
     }
 
-    // Clear category when searching
+    // Clear categoryId when searching
     if (debouncedSearchTerm) {
-      params.delete("category");
+      params.delete("categoryId");
       setSelectedCategory("");
     }
 
@@ -130,9 +132,9 @@ const ProductsContent = () => {
     // Update URL parameters
     const params = new URLSearchParams(searchParams.toString());
     if (categoryId) {
-      params.set("category", categoryId);
+      params.set("categoryId", categoryId);
     } else {
-      params.delete("category");
+      params.delete("categoryId");
     }
     // Clear search when changing category
     params.delete("search");
@@ -261,11 +263,13 @@ const ProductsContent = () => {
               ? getCategoryName(selectedCategory)
               : "Tất cả sản phẩm"}
           </h2>
-          <ProductList
-            category={selectedCategory || undefined}
-            searchTerm={debouncedSearchTerm || undefined}
-            limit={20}
-          />
+          {ready && (
+            <ProductList
+              category={selectedCategory || undefined}
+              searchTerm={debouncedSearchTerm || undefined}
+              limit={20}
+            />
+          )}
         </div>
       </div>
     </>
