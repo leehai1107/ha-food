@@ -2,8 +2,8 @@ import { MetadataRoute } from 'next'
 import { prisma } from '@/lib/prisma'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = 'https://ha-food-hazel.vercel.app'
-  
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL || 'https://ha-food-hazel.vercel.app'
+
   // Get all published news articles
   const news = await prisma.news.findMany({
     where: {
@@ -23,6 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     '/products',
     '/news',
     '/contact',
+    '/gallery'
   ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),

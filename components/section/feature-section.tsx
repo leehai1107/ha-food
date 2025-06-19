@@ -69,7 +69,7 @@ const ClientCard = ({
   client: { id: number; name: string; logoUrl: string };
 }) => (
   <div className="flex-shrink-0 group">
-    <div className="w-32 h-28 flex items-center justify-center bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-3">
+    <div className="w-44 h-36 flex items-center justify-center bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-5">
       <Image
         src={client.logoUrl}
         alt={client.name}
