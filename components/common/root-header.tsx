@@ -186,7 +186,7 @@ export default function RootHeader() {
               >
                 SẢN PHẨM
               </NavLink>
-              <NavLink href="/gallery">Dự án</NavLink>
+              <NavLink href="/gallery">DỰ ÁN</NavLink>
               <NavLink href="/news">TIN TỨC</NavLink>
               <NavLink href="/contact">LIÊN HỆ</NavLink>
               <NavLink

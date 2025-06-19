@@ -167,19 +167,6 @@ const ProductsContent = () => {
     return "Sản phẩm";
   };
 
-  // Get page description based on filters
-  const getPageDescription = () => {
-    if (debouncedSearchTerm) {
-      return `Kết quả tìm kiếm cho "${debouncedSearchTerm}" từ HA Food`;
-    }
-    if (selectedCategory) {
-      return `Khám phá bộ sưu tập ${getCategoryName(
-        selectedCategory
-      ).toLowerCase()} chất lượng cao từ HA Food`;
-    }
-    return "Khám phá bộ sưu tập sản phẩm chất lượng cao từ HA Food";
-  };
-
   return (
     <>
       <h1 className="hidden">hafood - Quà tặng doanh nghiệp</h1>
@@ -209,20 +196,6 @@ const ProductsContent = () => {
               </>
             )}
           </nav>
-        </div>
-      </div>
-
-      {/* Page Header */}
-      <div className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 py-8">
-          <div className="text-center">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              {getPageTitle()}
-            </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              {getPageDescription()}
-            </p>
-          </div>
         </div>
       </div>
 

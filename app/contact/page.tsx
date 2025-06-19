@@ -74,7 +74,7 @@ export default function Contact() {
                                 </div>
                                 <h3 className="font-semibold uppercase text-sm">Địa chỉ</h3>
                             </div>
-                            <p className="text-sm">Giờ làm việc : 8h - 20h, T2-T7</p>
+                            <p className="text-sm">Giờ làm việc : 8h - 20h, T2-CN</p>
                             <p className="text-sm">816/30 Quốc lộ 1A, Phường Thạnh Xuân, Quận 12, TP.HCM</p>
                         </div>
 
@@ -86,7 +86,7 @@ export default function Contact() {
                                 </div>
                                 <h3 className="font-semibold uppercase text-sm">Tổng đài hỗ trợ</h3>
                             </div>
-                            <p className="text-sm">Giờ làm việc : 8h - 20h, T2-T7</p>
+                            <p className="text-sm">Giờ làm việc : 8h - 20h, T2-CN</p>
                             <p className="text-sm">SĐT: 0972819379</p>
                         </div>
 
@@ -98,7 +98,7 @@ export default function Contact() {
                                 </div>
                                 <h3 className="font-semibold uppercase text-sm">Email</h3>
                             </div>
-                            <p className="text-sm">Giờ làm việc : 8h - 20h, T2-T7</p>
+                            <p className="text-sm">Giờ làm việc : 8h - 20h, T2-CN</p>
                             <p className="text-sm">Emails: info@hafood.vn</p>
                         </div>
                     </div>
