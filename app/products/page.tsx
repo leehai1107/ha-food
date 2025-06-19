@@ -163,7 +163,7 @@ const ProductsContent = () => {
     // If multiple, show parent name or a generic label
     // Try to find the parent (first ID)
     const parent = categories.find((c) => c.id.toString() === ids[0]);
-    return parent ? `${parent.name} (và các sản phẩm tương tự)` : "Nhiều danh mục";
+    return parent ? `${parent.name} (và các sản phẩm tương tự)`: "Nhiều danh mục";
   };
 
   // Get page title based on filters

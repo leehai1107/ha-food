@@ -1,4 +1,4 @@
-import type { Product } from '../types';
+import type { Product, ProductQueryParams } from '../types';
 import api from './api';
 
 // Local API Response type to avoid import issues
@@ -6,22 +6,6 @@ interface ApiResponse<T> {
   success: boolean;
   data: T;
   message?: string;
-}
-
-export interface ProductQueryParams {
-  page?: number;
-  limit?: number;
-  search?: string;
-  productType?: string;
-  categoryId?: number;
-  available?: boolean;
-  minPrice?: number;
-  maxPrice?: number;
-  tags?: string[];
-  sortBy?: 'name' | 'price' | 'createdAt' | 'rating';
-  sortOrder?: 'asc' | 'desc';
-  includeImages?: boolean;
-  includeCategory?: boolean;
 }
 
 export interface ProductResponse {

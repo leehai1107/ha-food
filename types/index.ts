@@ -215,11 +215,11 @@ export interface ProductQueryParams {
   limit?: number;
   search?: string;
   productType?: string;
+  categoryId?: ID | string;
   available?: boolean;
   minPrice?: number;
   maxPrice?: number;
   tags?: string[];
-  categoryId?: ID;
   sortBy?: 'name' | 'price' | 'createdAt' | 'rating';
   sortOrder?: 'asc' | 'desc';
   includeImages?: boolean;

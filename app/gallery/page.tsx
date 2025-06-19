@@ -10,6 +10,8 @@ import Image from "next/image";
 import Link from "next/link";
 import galleryService from "@/services/galleryService";
 import type { Gallery } from "@/types";
+import AnimatedCounter from "@/components/animations/AnimatedCounter";
+import TestimonialsGallery from "@/components/section/testimonial-gallery";
 
 export default function GalleryPage() {
   const [galleries, setGalleries] = useState<Gallery[]>([]);
@@ -112,158 +114,208 @@ export default function GalleryPage() {
 
   return (
     <>
-      <div className="min-h-screen bg-gray-50 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="min-h-screen bg-gray-50 py-6">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Dự án</h1>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Khám phá bộ sưu tập ảnh đẹp của chúng tôi, nơi lưu giữ những
-              khoảnh khắc đáng nhớ và hình ảnh chất lượng cao
-            </p>
-          </div>
-
-          {/* Tag Filter Section */}
-          {!tagsLoading && allTags.length > 0 && (
-            <div className="mb-8">
-              <div className="flex items-center gap-2 mb-4">
-                {selectedTags.length > 0 && (
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                    onClick={clearAllTags}
-                    className="text-gray-500 hover:text-gray-700"
-                  >
-                    <X className="w-4 h-4 mr-1" />
-                    Xóa tất cả
-                  </Button>
-                )}
-              </div>
-
-              <div className="flex flex-wrap gap-2">
-                {allTags.map((tag) => (
-                  <Badge
-                    key={tag}
-                    variant={selectedTags.includes(tag) ? "default" : "outline"}
-                    className={`cursor-pointer transition-colors p-4 text-xl ${
-                      selectedTags.includes(tag)
-                        ? "bg-blue-600 text-white hover:bg-blue-700"
-                        : "hover:bg-gray-100"
-                    }`}
-                    onClick={() => handleTagToggle(tag)}
-                  >
-                    <Tag className="w-3 h-3 mr-1" />
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-
-              {selectedTags.length > 0 && (
-                <div className="mt-3 text-sm text-gray-600">
-                  Đang lọc: {selectedTags.join(", ")}
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Galleries Grid */}
-          {galleries.length === 0 ? (
-            <div className="text-center py-12">
-              <ImageIcon className="mx-auto h-16 w-16 text-gray-400 mb-4" />
-              <h3 className="text-lg font-medium text-gray-900 mb-2">
-                {selectedTags.length > 0
-                  ? "Không tìm thấy Dự án nào với thẻ đã chọn"
-                  : "Chưa có Dự án nào"}
-              </h3>
-              <p className="text-gray-500">
-                {selectedTags.length > 0
-                  ? "Thử chọn thẻ khác hoặc xóa bộ lọc để xem tất cả thư viện."
-                  : "Dự án sẽ được cập nhật sớm nhất."}
+          <div className="text-center mb-12 bg-primary py-4 rounded-lg">
+            <div className="flex flex-col items-center justify-center">
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+                🏆 Dự Án Tiêu Biểu
+              </h1>
+              <p className="text-lg text-white/90 max-w-2xl mx-auto mb-8 font-medium">
+                Hành trình đồng hành cùng các doanh nghiệp hàng đầu Việt Nam
               </p>
             </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {galleries.map((gallery) => (
-                <Card
-                  key={gallery.id}
-                  className="overflow-hidden hover:shadow-lg transition-shadow"
-                >
-                  {/* Gallery Cover Image */}
-                  <div className="relative aspect-square w-full bg-gray-200">
-                    {gallery.images && gallery.images.length > 0 ? (
-                      <Image
-                        src={gallery.images[0].imageUrl}
-                        alt={gallery.images[0].altText || gallery.name}
-                        fill
-                        className="object-cover"
-                      />
-                    ) : (
-                      <div className="flex items-center justify-center h-full">
-                        <ImageIcon className="h-16 w-16 text-gray-400" />
-                      </div>
-                    )}
-                    <div className="absolute top-3 right-3">
-                      <Badge
-                        variant="secondary"
-                        className="bg-white/90 text-gray-900"
-                      >
-                        {gallery._count?.images || 0} ảnh
-                      </Badge>
-                    </div>
-                  </div>
-
-                  <CardContent className="p-6">
-                    {/* Gallery Title */}
-                    <CardTitle className="text-xl font-semibold text-gray-900 mb-2 line-clamp-2">
-                      {gallery.name}
-                    </CardTitle>
-
-                    {/* Gallery Description */}
-                    {gallery.description && (
-                      <p className="text-gray-600 mb-4 line-clamp-3">
-                        {gallery.description}
-                      </p>
-                    )}
-
-                    {/* Tags */}
-                    {gallery.tags && gallery.tags.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mb-4">
-                        {gallery.tags.slice(0, 3).map((tag, index) => (
-                          <Badge
-                            key={index}
-                            variant="outline"
-                            className="text-xs"
-                          >
-                            <Tag className="w-3 h-3 mr-1" />
-                            {tag}
-                          </Badge>
-                        ))}
-                        {gallery.tags.length > 3 && (
-                          <Badge variant="outline" className="text-xs">
-                            +{gallery.tags.length - 3}
-                          </Badge>
-                        )}
-                      </div>
-                    )}
-
-                    {/* View Gallery Button */}
-                    <Button
-                      asChild
-                      className="w-full bg-primary text-primary-white hover:text-primary-black"
-                      variant="outline"
-                    >
-                      <Link href={`/gallery/${gallery.id}`}>
-                        <Eye className="w-4 h-4 mr-2" />
-                        Xem dự án
-                      </Link>
-                    </Button>
-                  </CardContent>
-                </Card>
-              ))}
+            <div className="flex flex-col md:flex-row items-center justify-center gap-12 mt-8">
+              <div className="flex flex-col items-center">
+                <AnimatedCounter
+                  end={500}
+                  suffix={"+"}
+                  className="text-5xl font-bold text-white mb-2 uppercase"
+                  duration={3}
+                  delay={3 * 0.2}
+                  startOnView={true}
+                />
+                <span className="text-white/90 text-lg font-medium">
+                  Dự án hoàn thành
+                </span>
+              </div>
+              <div className="flex flex-col items-center">
+                <AnimatedCounter
+                  end={200}
+                  suffix={"+"}
+                  className="text-5xl font-bold text-white mb-2 uppercase"
+                  duration={3}
+                  delay={3 * 0.2}
+                  startOnView={true}
+                />
+                <span className="text-white/90 text-lg font-medium">
+                  Doanh nghiệp tin tưởng
+                </span>
+              </div>
+              <div className="flex flex-col items-center">
+                <AnimatedCounter
+                  end={98}
+                  suffix={"%"}
+                  className="text-5xl font-bold text-white mb-2 uppercase"
+                  duration={3}
+                  delay={3 * 0.2}
+                  startOnView={true}
+                />
+                <span className="text-white/90 text-lg font-medium">
+                  Khách hàng hài lòng
+                </span>
+              </div>
             </div>
-          )}
+          </div>
+
+          <div className="max-w-7xl container mx-auto">
+            {/* Tag Filter Section */}
+            {!tagsLoading && allTags.length > 0 && (
+              <div className="mb-8">
+                <div className="flex items-center gap-2 mb-4">
+                  {selectedTags.length > 0 && (
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={clearAllTags}
+                      className="text-gray-500 hover:text-gray-700"
+                    >
+                      <X className="w-4 h-4 mr-1" />
+                      Xóa tất cả
+                    </Button>
+                  )}
+                </div>
+
+                <div className="flex flex-wrap gap-2">
+                  {allTags.map((tag) => (
+                    <Badge
+                      key={tag}
+                      variant={
+                        selectedTags.includes(tag) ? "default" : "outline"
+                      }
+                      className={`cursor-pointer transition-colors p-4 text-xl ${
+                        selectedTags.includes(tag)
+                          ? "bg-blue-600 text-white hover:bg-blue-700"
+                          : "hover:bg-gray-100"
+                      }`}
+                      onClick={() => handleTagToggle(tag)}
+                    >
+                      <Tag className="w-3 h-3 mr-1" />
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+
+                {selectedTags.length > 0 && (
+                  <div className="mt-3 text-sm text-gray-600">
+                    Đang lọc: {selectedTags.join(", ")}
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Galleries Grid */}
+            {galleries.length === 0 ? (
+              <div className="text-center py-12">
+                <ImageIcon className="mx-auto h-16 w-16 text-gray-400 mb-4" />
+                <h3 className="text-lg font-medium text-gray-900 mb-2">
+                  {selectedTags.length > 0
+                    ? "Không tìm thấy Dự án nào với thẻ đã chọn"
+                    : "Chưa có Dự án nào"}
+                </h3>
+                <p className="text-gray-500">
+                  {selectedTags.length > 0
+                    ? "Thử chọn thẻ khác hoặc xóa bộ lọc để xem tất cả thư viện."
+                    : "Dự án sẽ được cập nhật sớm nhất."}
+                </p>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {galleries.map((gallery) => (
+                  <Card
+                    key={gallery.id}
+                    className="overflow-hidden hover:shadow-lg transition-shadow"
+                  >
+                    {/* Gallery Cover Image */}
+                    <div className="relative aspect-square w-full bg-gray-200">
+                      {gallery.images && gallery.images.length > 0 ? (
+                        <Image
+                          src={gallery.images[0].imageUrl}
+                          alt={gallery.images[0].altText || gallery.name}
+                          fill
+                          className="object-cover"
+                        />
+                      ) : (
+                        <div className="flex items-center justify-center h-full">
+                          <ImageIcon className="h-16 w-16 text-gray-400" />
+                        </div>
+                      )}
+                      <div className="absolute top-3 right-3">
+                        <Badge
+                          variant="secondary"
+                          className="bg-white/90 text-gray-900"
+                        >
+                          {gallery._count?.images || 0} ảnh
+                        </Badge>
+                      </div>
+                    </div>
+
+                    <CardContent className="p-6">
+                      {/* Gallery Title */}
+                      <CardTitle className="text-xl font-semibold text-gray-900 mb-2 line-clamp-2">
+                        {gallery.name}
+                      </CardTitle>
+
+                      {/* Gallery Description */}
+                      {gallery.description && (
+                        <p className="text-gray-600 mb-4 line-clamp-3">
+                          {gallery.description}
+                        </p>
+                      )}
+
+                      {/* Tags */}
+                      {gallery.tags && gallery.tags.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {gallery.tags.slice(0, 3).map((tag, index) => (
+                            <Badge
+                              key={index}
+                              variant="outline"
+                              className="text-xs"
+                            >
+                              <Tag className="w-3 h-3 mr-1" />
+                              {tag}
+                            </Badge>
+                          ))}
+                          {gallery.tags.length > 3 && (
+                            <Badge variant="outline" className="text-xs">
+                              +{gallery.tags.length - 3}
+                            </Badge>
+                          )}
+                        </div>
+                      )}
+
+                      {/* View Gallery Button */}
+                      <Button
+                        asChild
+                        className="w-full bg-primary text-primary-white hover:text-primary-black"
+                        variant="outline"
+                      >
+                        <Link href={`/gallery/${gallery.id}`}>
+                          <Eye className="w-4 h-4 mr-2" />
+                          Xem dự án
+                        </Link>
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
       </div>
+
+      <TestimonialsGallery/>
 
       {/* Gallery Modal */}
       {showModal && selectedGallery && (

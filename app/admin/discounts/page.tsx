@@ -88,7 +88,7 @@ export default function DiscountsPage() {
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold">Bulk Discounts Management</h1>
+        <h1 className="text-2xl font-bold">Quản lý chiết khấu</h1>
         <button
           onClick={() => router.back()}
           className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
@@ -99,11 +99,11 @@ export default function DiscountsPage() {
 
       {/* Add New Discount */}
       <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-        <h2 className="text-xl font-semibold mb-4">Add New Discount Tier</h2>
+        <h2 className="text-xl font-semibold mb-4">Thêm mức chiết khấu mới</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">
-              Minimum Quantity
+              Số lượng tối thiểu
             </label>
             <input
               type="number"
@@ -120,7 +120,7 @@ export default function DiscountsPage() {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">
-              Discount Percentage
+              Giá chiết khấu
             </label>
             <input
               type="number"
@@ -142,7 +142,7 @@ export default function DiscountsPage() {
               onClick={handleCreateDiscount}
               className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700"
             >
-              Add Discount Tier
+              Thêm mức chiết khấu
             </button>
           </div>
         </div>
@@ -154,16 +154,16 @@ export default function DiscountsPage() {
           <thead className="bg-gray-50">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Minimum Quantity
+                Số lượng tối thiểu
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Discount Percentage
+                Giá chiết khấu
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Status
+                Trạng thái
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Actions
+                Thao tác
               </th>
             </tr>
           </thead>
@@ -211,7 +211,7 @@ export default function DiscountsPage() {
                       className="rounded border-gray-300 text-red-600 shadow-sm focus:border-red-500 focus:ring-red-500"
                     />
                     <span className="ml-2 text-sm text-gray-600">
-                      {discount.isActive ? "Active" : "Inactive"}
+                      {discount.isActive ? "Hoạt động" : "Tạm ngưng"}
                     </span>
                   </label>
                 </td>
