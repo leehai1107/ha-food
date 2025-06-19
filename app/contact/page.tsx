@@ -98,8 +98,8 @@ export default function Contact() {
                                 </div>
                                 <h3 className="font-semibold uppercase text-sm">Email</h3>
                             </div>
-                            <p className="text-sm">Giờ làm việc : 8h - 20h, T2-CN</p>
-                            <p className="text-sm">Emails: info@hafood.vn</p>
+                            <p className = "text-sm">Giờ làm việc : 8h - 20h, T2-CN</p>
+                            <p className = "text-sm">Emails: info@hafood.vn</p>
                         </div>
                     </div>
 

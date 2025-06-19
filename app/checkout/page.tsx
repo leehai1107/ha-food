@@ -441,7 +441,7 @@ const CheckoutPage = () => {
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
                     >
                       <option value="">Chọn Tỉnh/Thành phố</option>
-                      {provinces.map((p) => (
+                      {[...provinces].reverse().map((p) => (
                         <option
                           key={p.ProvinceID}
                           value={p.ProvinceID.toString()}
@@ -457,7 +457,7 @@ const CheckoutPage = () => {
                       disabled={!selectedProvince}
                     >
                       <option value="">Chọn Quận/Huyện</option>
-                      {districts.map((d) => (
+                      {[...districts].reverse().map((d) => (
                         <option
                           key={d.DistrictID}
                           value={d.DistrictID.toString()}
@@ -475,7 +475,7 @@ const CheckoutPage = () => {
                       disabled={!selectedDistrict}
                     >
                       <option value="">Chọn Phường/Xã</option>
-                      {wards.map((w) => (
+                      {[...wards].reverse().map((w) => (
                         <option key={w.WardCode} value={w.WardCode}>
                           {w.WardName}
                         </option>
