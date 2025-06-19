@@ -429,8 +429,8 @@ const CheckoutPage = () => {
 
                 <div>
                   <label
-                    htmlFor="customerAddress"
-                    className="block text-sm font-medium text-gray-700 mb-2"
+                    htmlFor   = "customerAddress"
+                    className = "block text-sm font-medium text-gray-700 mb-2"
                   >
                     Địa chỉ giao hàng
                   </label>
