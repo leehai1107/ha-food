@@ -319,7 +319,7 @@ const CartPage = () => {
                     <span className="font-medium text-primary">
                       {getDiscountedTotal() >= 400000
                         ? "-30 000 đ"
-                        : "Chưa rõ"}
+                        : "Chưa tính"}
                     </span>
                   </div>
 
