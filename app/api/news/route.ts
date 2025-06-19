@@ -75,7 +75,6 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    // TODO: Add authentication/authorization for admin
     const { title, excerpt, content, featuredImage, tags, isPublished, publishedAt, authorId } = await req.json();
 
     if (!title || !content) {

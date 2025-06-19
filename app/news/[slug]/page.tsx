@@ -63,7 +63,7 @@ const NewsDetailPage = ({ params }: { params: Promise<{ slug: string }> }) => {
     if (loading) {
         return (
             <>
-                <div className="min-h-screen bg-gray-50 py-20">
+                <div className="min-h-screen bg-gray-50 py-6">
                     <div className="container-limited">
                         <div className="flex justify-center items-center h-64">
                             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
@@ -77,7 +77,7 @@ const NewsDetailPage = ({ params }: { params: Promise<{ slug: string }> }) => {
     if (error || !news) {
         return (
             <>
-                <div className="min-h-screen bg-gray-50 py-20">
+                <div className="min-h-screen bg-gray-50 py-6">
                     <div className="container-limited">
                         <div className="text-center">
                             <h1 className="text-2xl font-bold text-gray-900 mb-4 font-heading">
@@ -103,9 +103,6 @@ const NewsDetailPage = ({ params }: { params: Promise<{ slug: string }> }) => {
         <>
 
             <div className="min-h-screen bg-gray-50">
-                {/* Spacer for fixed header */}
-                <div className="h-24"></div>
-
                 {/* Breadcrumb */}
                 <div className="bg-gray-50 py-4">
                     <div className="max-w-7xl mx-auto px-6 lg:px-8">

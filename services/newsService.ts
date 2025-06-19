@@ -58,7 +58,7 @@ class NewsService {
   }
 
   async updateNews(id: number, data: UpdateNewsRequest): Promise<ApiResponse<News>> {
-    const response = await api.put(`/api/news/${id}`, data);
+    const response = await api.put(`/api/news/by-id/${id}`, data);
     return response.data;
   }
 
@@ -119,7 +119,7 @@ class NewsService {
       formData.append('image', imageFile);
     }
 
-    const response = await api.put(`/api/news/${id}/with-image`, formData, {
+    const response = await api.put(`/api/news/by-id/${id}/with-image`, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
       },

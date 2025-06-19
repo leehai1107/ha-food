@@ -2,7 +2,7 @@
 const nextConfig = {
   output: 'standalone',
   images: {
-    domains: [''],
+    domains: ['ha-food-hazel.vercel.app'],
   },
   experimental: {
     serverActions: {

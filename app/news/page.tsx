@@ -110,14 +110,15 @@ const NewsContent = () => {
                     <div className="text-center">
                         <h1 className="text-4xl md:text-5xl font-bold mb-4 font-heading">Tin Tức</h1>
                         <p className="text-xl text-gray-200 max-w-2xl mx-auto font-primary">
-                            Cập nhật những thông tin mới nhất về sản phẩm và hoạt động của HA Food
+                            Cập nhật những thông tin mới nhất về <br/> sản phẩm và hoạt động của HA Food
                         </p>
                     </div>
                 </div>
             </div>
 
-            {/* Filters Section */}
-            <div className="bg-white shadow-sm border-b">
+           <div className='max-w-7xl mx-auto'>
+             {/* Filters Section */}
+             <div className="bg-white shadow-sm border-b">
                 <div className="container-limited py-6">
                     <div className="flex flex-col lg:flex-row gap-4 items-center justify-between">
                         {/* Search */}
@@ -214,6 +215,7 @@ const NewsContent = () => {
                     </div>
                 )}
             </div>
+           </div>
         </div>
         </>
     );
