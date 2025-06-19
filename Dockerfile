@@ -23,7 +23,22 @@ WORKDIR /app
 RUN npm install -g pnpm
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-COPY .env .env
+
+# Add these lines for each environment variable
+ARG DATABASE_URL
+ENV DATABASE_URL=${DATABASE_URL}
+
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+
+ARG GHN_API
+ENV GHN_API=${GHN_API}
+
+ARG GHN_TOKEN
+ENV GHN_TOKEN=${GHN_TOKEN}
+
+ARG GHN_SHOP_ID
+ENV GHN_SHOP_ID=${GHN_SHOP_ID}
 
 # Generate Prisma client
 RUN npx prisma generate
