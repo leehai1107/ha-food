@@ -269,6 +269,26 @@ export const galleryService = {
         error: error.message || 'Failed to delete gallery image'
       };
     }
+  },
+
+  // Get all gallery tags
+  getTags: async (): Promise<ApiResponse> => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/galleries/tags`);
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Failed to fetch gallery tags');
+      }
+
+      return result;
+    } catch (error: any) {
+      console.error('Error fetching gallery tags:', error);
+      return {
+        success: false,
+        error: error.message || 'Failed to fetch gallery tags'
+      };
+    }
   }
 };
 

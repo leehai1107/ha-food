@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Button } from "@/components/ui/button";
-import { ImageIcon, Eye, Calendar, Tag } from "lucide-react";
+import { ImageIcon, Eye, Calendar, Tag, Filter, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import galleryService from "@/services/galleryService";
@@ -16,18 +16,28 @@ export default function GalleryPage() {
   const [loading, setLoading] = useState(true);
   const [selectedGallery, setSelectedGallery] = useState<Gallery | null>(null);
   const [showModal, setShowModal] = useState(false);
+  const [allTags, setAllTags] = useState<string[]>([]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [tagsLoading, setTagsLoading] = useState(true);
 
   useEffect(() => {
     fetchGalleries();
-  }, []);
+    fetchTags();
+  }, [selectedTags]);
 
   const fetchGalleries = async () => {
     setLoading(true);
     try {
-      const response = await galleryService.getAll({
+      const params: any = {
         includeImages: "true",
         isActive: "true",
-      });
+      };
+
+      if (selectedTags.length > 0) {
+        params.tags = selectedTags.join(",");
+      }
+
+      const response = await galleryService.getAll(params);
       if (response.success && response.data) {
         setGalleries(response.data.galleries || []);
       }
@@ -38,9 +48,33 @@ export default function GalleryPage() {
     }
   };
 
+  const fetchTags = async () => {
+    setTagsLoading(true);
+    try {
+      const response = await galleryService.getTags();
+      if (response.success && response.data) {
+        setAllTags(response.data.tags || []);
+      }
+    } catch (error) {
+      console.error("Error fetching tags:", error);
+    } finally {
+      setTagsLoading(false);
+    }
+  };
+
   const handleViewGallery = (gallery: Gallery) => {
     setSelectedGallery(gallery);
     setShowModal(true);
+  };
+
+  const handleTagToggle = (tag: string) => {
+    setSelectedTags((prev) =>
+      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag]
+    );
+  };
+
+  const clearAllTags = () => {
+    setSelectedTags([]);
   };
 
   const formatDate = (dateString: string) => {
@@ -82,24 +116,73 @@ export default function GalleryPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
-              Thư viện ảnh
-            </h1>
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">Dự án</h1>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
               Khám phá bộ sưu tập ảnh đẹp của chúng tôi, nơi lưu giữ những
               khoảnh khắc đáng nhớ và hình ảnh chất lượng cao
             </p>
           </div>
 
+          {/* Tag Filter Section */}
+          {!tagsLoading && allTags.length > 0 && (
+            <div className="mb-8">
+              <div className="flex items-center gap-2 mb-4">
+                <Filter className="w-5 h-5 text-gray-600" />
+                <h3 className="text-lg font-semibold text-gray-900">
+                  Lọc theo thẻ:
+                </h3>
+                {selectedTags.length > 0 && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={clearAllTags}
+                    className="text-gray-500 hover:text-gray-700"
+                  >
+                    <X className="w-4 h-4 mr-1" />
+                    Xóa tất cả
+                  </Button>
+                )}
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {allTags.map((tag) => (
+                  <Badge
+                    key={tag}
+                    variant={selectedTags.includes(tag) ? "default" : "outline"}
+                    className={`cursor-pointer transition-colors ${
+                      selectedTags.includes(tag)
+                        ? "bg-blue-600 text-white hover:bg-blue-700"
+                        : "hover:bg-gray-100"
+                    }`}
+                    onClick={() => handleTagToggle(tag)}
+                  >
+                    <Tag className="w-3 h-3 mr-1" />
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+
+              {selectedTags.length > 0 && (
+                <div className="mt-3 text-sm text-gray-600">
+                  Đang lọc: {selectedTags.join(", ")}
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Galleries Grid */}
           {galleries.length === 0 ? (
             <div className="text-center py-12">
               <ImageIcon className="mx-auto h-16 w-16 text-gray-400 mb-4" />
               <h3 className="text-lg font-medium text-gray-900 mb-2">
-                Chưa có thư viện ảnh nào
+                {selectedTags.length > 0
+                  ? "Không tìm thấy Dự án nào với thẻ đã chọn"
+                  : "Chưa có Dự án nào"}
               </h3>
               <p className="text-gray-500">
-                Thư viện ảnh sẽ được cập nhật sớm nhất.
+                {selectedTags.length > 0
+                  ? "Thử chọn thẻ khác hoặc xóa bộ lọc để xem tất cả thư viện."
+                  : "Dự án sẽ được cập nhật sớm nhất."}
               </p>
             </div>
           ) : (

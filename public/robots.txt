@@ -9,6 +9,7 @@ Disallow: /products/*%2b*
 Disallow: /news/*+*
 Disallow: /news/*%2B*
 Disallow: /news/*%2b*  
+Disallow: /gallery
 Sitemap: https://ha-food-hazel.vercel.app/sitemap.xml  
 
 User-agent: Nutch  

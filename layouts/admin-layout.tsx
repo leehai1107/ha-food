@@ -66,9 +66,9 @@ export default function AdminLayout({
     },
     {
       id: "galleries",
-      name: "Thư viện ảnh",
+      name: "Dự án",
       icon: "🖼️",
-      description: "Quản lý thư viện ảnh",
+      description: "Quản lý Dự án",
       path: "/admin/galleries",
     },
     {

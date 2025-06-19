@@ -14,8 +14,8 @@ import SearchModal from "../ui/search-modal";
 import type { Category } from "@/types";
 
 interface SubItem {
-  href     : string;
-  label    : string;
+  href: string;
+  label: string;
   subItems?: SubItem[];
 }
 
@@ -186,7 +186,7 @@ export default function RootHeader() {
               >
                 SẢN PHẨM
               </NavLink>
-              <NavLink href="/gallery">THƯ VIỆN ẢNH</NavLink>
+              <NavLink href="/gallery">Dự án</NavLink>
               <NavLink href="/news">TIN TỨC</NavLink>
               <NavLink href="/contact">LIÊN HỆ</NavLink>
               <NavLink
@@ -231,7 +231,7 @@ export default function RootHeader() {
                     SẢN PHẨM
                   </NavLink>
                   <NavLink href="/gallery" isMobile>
-                    THƯ VIỆN ẢNH
+                    Dự án
                   </NavLink>
                   <NavLink href="/news" isMobile>
                     TIN TỨC

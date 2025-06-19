@@ -66,8 +66,8 @@ export default function GalleryDetailPage() {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: gallery?.name || "Thư viện ảnh",
-          text: gallery?.description || "Khám phá thư viện ảnh đẹp",
+          title: gallery?.name || "Dự án",
+          text: gallery?.description || "Khám phá Dự án đẹp",
           url: window.location.href,
         });
       } catch (error) {

@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Thư viện ảnh | HA Food",
-  description: "Khám phá thư viện ảnh đẹp của chúng tôi",
+  title: "Dự án | HA Food",
+  description: "Khám phá Dự án đẹp của chúng tôi",
 };
 
 export default function GalleryDetailLayout({
@@ -11,4 +11,4 @@ export default function GalleryDetailLayout({
   children: React.ReactNode;
 }) {
   return children;
-} 
+}

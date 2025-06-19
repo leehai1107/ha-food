@@ -118,9 +118,7 @@ export default function GalleryForm({
               {isEditing ? "Chỉnh sửa thư viện" : "Tạo thư viện mới"}
             </h1>
             <p className="text-gray-600 mt-2">
-              {isEditing
-                ? "Cập nhật thông tin thư viện"
-                : "Tạo một thư viện ảnh mới"}
+              {isEditing ? "Cập nhật thông tin thư viện" : "Tạo một Dự án mới"}
             </p>
           </div>
         </div>
@@ -252,9 +250,9 @@ export default function GalleryForm({
                 Hủy
               </Button>
               <Button
-                className = "text-primary-white"
-                type      = "submit"
-                disabled  = {loading}
+                className="text-primary-white"
+                type="submit"
+                disabled={loading}
               >
                 {loading
                   ? "Đang lưu..."

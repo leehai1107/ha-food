@@ -138,10 +138,8 @@ export default function GalleriesPage() {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">
-            Quản lý Thư viện ảnh
-          </h1>
-          <p className="text-gray-600 mt-2">Tạo và quản lý các thư viện ảnh</p>
+          <h1 className="text-3xl font-bold text-gray-900">Quản lý Dự án</h1>
+          <p className="text-gray-600 mt-2">Tạo và quản lý các Dự án</p>
         </div>
         <Button
           onClick={handleCreateGallery}
@@ -200,7 +198,7 @@ export default function GalleriesPage() {
                 Không có thư viện nào
               </h3>
               <p className="mt-1 text-sm text-gray-500">
-                Bắt đầu tạo thư viện ảnh đầu tiên của bạn.
+                Bắt đầu tạo Dự án đầu tiên của bạn.
               </p>
               <div className="mt-6">
                 <Button onClick={handleCreateGallery}>

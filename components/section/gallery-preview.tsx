@@ -41,7 +41,7 @@ export default function GalleryPreview() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Thư viện ảnh nổi bật
+              Dự án nổi bật
             </h2>
             <p className="text-lg text-gray-600">
               Khám phá những khoảnh khắc đẹp nhất của chúng tôi
@@ -74,7 +74,7 @@ export default function GalleryPreview() {
         {/* Section Header */}
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Thư viện ảnh nổi bật
+            Dự án nổi bật
           </h2>
           <p className="text-lg text-gray-600">
             Khám phá những khoảnh khắc đẹp nhất của chúng tôi
@@ -141,7 +141,7 @@ export default function GalleryPreview() {
         <div className="text-center">
           <Button asChild size="lg">
             <Link href="/gallery">
-              Xem tất cả thư viện ảnh
+              Xem tất cả Dự án
               <ArrowRight className="w-4 h-4 ml-2" />
             </Link>
           </Button>
