@@ -154,8 +154,16 @@ const ProductsContent = () => {
   // Get category name for display
   const getCategoryName = (categoryId: string) => {
     if (!categoryId) return "Tất cả";
-    const category = categories.find((c) => c.id.toString() === categoryId);
-    return category ? category.name : "Tất cả";
+    // Support comma-separated IDs
+    const ids = categoryId.split(",").map((id) => id.trim());
+    if (ids.length === 1) {
+      const category = categories.find((c) => c.id.toString() === ids[0]);
+      return category ? category.name : "Tất cả";
+    }
+    // If multiple, show parent name or a generic label
+    // Try to find the parent (first ID)
+    const parent = categories.find((c) => c.id.toString() === ids[0]);
+    return parent ? `${parent.name} (và các sản phẩm tương tự)` : "Nhiều danh mục";
   };
 
   // Get page title based on filters

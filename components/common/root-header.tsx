@@ -59,15 +59,29 @@ export default function RootHeader() {
     };
   }, []);
 
+  // Helper to collect all descendant IDs (including self)
+  const collectCategoryIds = (category: Category): number[] => {
+    let ids = [category.id];
+    if (category.children && category.children.length > 0) {
+      for (const child of category.children) {
+        ids = ids.concat(collectCategoryIds(child));
+      }
+    }
+    return ids;
+  };
+
   const transformCategoriesToSubItems = (categories: Category[]): SubItem[] => {
-    return categories.map((category) => ({
-      href: `/products?categoryId=${category.id}`,
-      label: category.name,
-      subItems:
-        category.children && category.children.length > 0
-          ? transformCategoriesToSubItems(category.children)
-          : undefined,
-    }));
+    return categories.map((category) => {
+      const allIds = collectCategoryIds(category);
+      return {
+        href: `/products?categoryId=${allIds.join(",")}`,
+        label: category.name,
+        subItems:
+          category.children && category.children.length > 0
+            ? transformCategoriesToSubItems(category.children)
+            : undefined,
+      };
+    });
   };
 
   const toggleSubItems = (label: string) => {

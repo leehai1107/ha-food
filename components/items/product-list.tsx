@@ -44,7 +44,7 @@ const ProductList: React.FC<ProductListProps> = ({
         setError(null);
 
         const params = {
-          categoryId: category ? parseInt(category) : undefined,
+          categoryId: category || undefined,
           search: searchTerm || undefined,
           limit,
           page,

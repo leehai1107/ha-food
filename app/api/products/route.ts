@@ -18,7 +18,11 @@ export async function GET(req: NextRequest) {
     const tags = searchParams.get('tags') ? searchParams.get('tags')!.split(',') : undefined;
     const sortBy = (searchParams.get('sortBy') as 'name' | 'price' | 'createdAt' | 'rating') || 'createdAt';
     const sortOrder = (searchParams.get('sortOrder') as 'asc' | 'desc') || 'desc';
-    const categoryId = searchParams.has('categoryId') ? parseInt(searchParams.get('categoryId')!) : undefined;
+    const categoryIdParam = searchParams.get('categoryId');
+    let categoryIds: number[] | undefined = undefined;
+    if (categoryIdParam) {
+      categoryIds = categoryIdParam.split(',').map((id) => parseInt(id)).filter(Boolean);
+    }
 
     const skip = (page - 1) * limit;
 
@@ -39,7 +43,13 @@ export async function GET(req: NextRequest) {
       if (maxPrice !== undefined) where.currentPrice.lte = maxPrice;
     }
     if (tags && tags.length > 0) where.tags = { hasEvery: tags };
-    if (categoryId !== undefined) where.categoryId = categoryId;
+    if (categoryIds && categoryIds.length > 0) {
+      if (categoryIds.length === 1) {
+        where.categoryId = categoryIds[0];
+      } else {
+        where.categoryId = { in: categoryIds };
+      }
+    }
     // Build orderBy
     let orderBy: any = {};
     switch (sortBy) {
