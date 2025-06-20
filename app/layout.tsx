@@ -5,7 +5,6 @@ import { Toaster } from "sonner";
 import { AuthProvider } from "@/contexts/AuthContext";
 import LayoutContent from "@/layouts/layout-content";
 import { CartProvider } from "@/hooks/CartContext";
-import SplashScreen from "@/components/animations/SplashScreen";
 import { Analytics } from "@vercel/analytics/next";
 import Script from "next/script";
 
@@ -87,7 +86,6 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SplashScreen />
         <AuthProvider>
           <CartProvider>
             <LayoutContent>{children}</LayoutContent>
