@@ -86,8 +86,71 @@ export default function GalleryPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div className = "min-h-screen bg-gray-50 py-12">
+      <h1  className = "hidden">hafood - Quà tặng doanh nghiệp</h1>
+        <div className="mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Breadcrumbs */}
+          <div className="mb-6">
+            <Breadcrumbs
+              items={[
+                { label: "Trang chủ", href: "/" },
+                { label: "Dự án tiêu biểu" },
+              ]}
+            />
+          </div>
+          {/* Header */}
+          <div className="text-center mb-12 bg-primary py-4 rounded-lg">
+            <div className="flex flex-col items-center justify-center">
+              <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-lg">
+                🏆 Dự Án Tiêu Biểu
+              </h1>
+              <p className="text-lg text-white/90 max-w-2xl mx-auto mb-8 font-medium">
+                Hành trình đồng hành cùng các doanh nghiệp hàng đầu Việt Nam
+              </p>
+            </div>
+            <div className="flex flex-col md:flex-row items-center justify-center gap-12 mt-8">
+              <div className="flex flex-col items-center">
+                <AnimatedCounter
+                  end={500}
+                  suffix={"+"}
+                  className="text-5xl font-bold text-white mb-2 uppercase"
+                  duration={3}
+                  delay={3 * 0.2}
+                  startOnView={true}
+                />
+                <span className="text-white/90 text-lg font-medium">
+                  Dự án hoàn thành
+                </span>
+              </div>
+              <div className="flex flex-col items-center">
+                <AnimatedCounter
+                  end={200}
+                  suffix={"+"}
+                  className="text-5xl font-bold text-white mb-2 uppercase"
+                  duration={3}
+                  delay={3 * 0.2}
+                  startOnView={true}
+                />
+                <span className="text-white/90 text-lg font-medium">
+                  Doanh nghiệp tin tưởng
+                </span>
+              </div>
+              <div className="flex flex-col items-center">
+                <AnimatedCounter
+                  end={98}
+                  suffix={"%"}
+                  className="text-5xl font-bold text-white mb-2 uppercase"
+                  duration={3}
+                  delay={3 * 0.2}
+                  startOnView={true}
+                />
+                <span className="text-white/90 text-lg font-medium">
+                  Khách hàng hài lòng
+                </span>
+              </div>
+            </div>
+          </div>
           <div className="text-center mb-12">
             <Skeleton className="h-8 w-64 mx-auto mb-4" />
             <Skeleton className="h-4 w-96 mx-auto" />

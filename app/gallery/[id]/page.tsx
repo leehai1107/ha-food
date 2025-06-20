@@ -8,11 +8,9 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   ImageIcon,
-  Calendar,
   Tag,
   ArrowLeft,
   Share2,
-  Download,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

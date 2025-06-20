@@ -100,7 +100,7 @@ const ProductsSection = () => {
   };
 
   return (
-    <section className="bg-white py-6" id="products">
+    <section className="bg-primary-white py-6" id="products">
       {/* Section Header */}
       <div className="text-center mb-16 max-w-4xl mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4 font-heading">
@@ -215,7 +215,7 @@ const ProductsSection = () => {
                     {category.products?.map((product) => (
                       <SwiperSlide key={product.productSku}>
                         <div
-                          className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer h-full"
+                          className="bg-primary-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 hover:-translate-y-1 cursor-pointer h-full"
                           style={{ borderRadius: "var(--border-radius)" }}
                           onClick={() => handleViewProduct(product)}
                         >

@@ -2,10 +2,10 @@ import Image from "next/image";
 
 export default function CollectionSection() {
     return (
-        <section className="px-4 bg-primary-white animate-float-in-bottom">
+        <section className="px-4 pt-5 bg-primary-white animate-float-in-bottom">
             <div className="container mx-auto flex flex-col md:flex-row items-start gap-10">
                 {/* Left Image */}
-                <div className="md:w-1/2 w-full relative h-[600px]">
+                <div className="md:w-1/2 w-full relative h-[700px]">
                     <Image
                         src="/image/banners/banner_tong_hop.png"
                         alt="Bộ sưu tập Thiên Hương Nguyệt Dạ"
@@ -23,7 +23,7 @@ export default function CollectionSection() {
                     <h3 className="text-2xl md:text-4xl font-semibold text-dark-yellow italic">
                         THIÊN HƯƠNG NGUYỆT DẠ
                     </h3>
-                    <p className="">
+                    <p className="text-xl">
                         Kính chào Quý doanh nghiệp và quý khách hàng,
                         <br />
                         Mùa trung thu 2025 đang đến gần,
@@ -31,9 +31,9 @@ export default function CollectionSection() {
                         Đây là thời điểm tuyệt vời để chúng ta cùng nhau tôn vinh những giá trị truyền thống,
                         đồng thời khẳng định sự phát triển và thành công của đất nước.
                         Với tinh thần đó, chúng tôi hân hạnh giới thiệu bộ sưu tập
-                        “ THIÊN HƯƠNG NGUYỆT DẠ “ gồm có:
+                        <br/><strong className="text-primary">“ THIÊN HƯƠNG NGUYỆT DẠ “</strong> gồm có:
                     </p>
-                    <ul className="list-disc pl-5 text-primary">
+                    <ul className="list-disc pl-5 text-primary font-semibold">
                         <li>Khổng Tước Hương Nguyệt</li>
                         <li>Thiên Cầu Vượng Khí</li>
                         <li>Ngọc Quý Tam Phương</li>
@@ -41,11 +41,8 @@ export default function CollectionSection() {
                         <li>Tam Ngư Cát Hạnh</li>
                         <li>Hoàng Kim Phồn Thịnh</li>
                     </ul>
-                    <p className="">
-                        Mỗi bộ sưu tập đều mang thông điệp của sự đoàn kết, sáng tạo và khát vọng vươn xa.
-                    </p>
-                    <p className="">
-                        Chúng tôi tin rằng, với bộ sưu tập bánh trung thu THIÊN HƯƠNG NGUYỆT DẠ,
+                    <p className="text-xl">
+                        Chúng tôi tin rằng, với bộ sưu tập bánh trung thu <strong className="text-primary">THIÊN HƯƠNG NGUYỆT DẠ</strong>,
                         quý khách hàng sẽ có những giây phút thưởng thức trọn vẹn và ý nghĩa bên gia đình và người thân yêu.
                     </p>
                 </div>
