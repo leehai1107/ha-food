@@ -7,7 +7,7 @@ import Image from "next/image";
 export default function RootFooter() {
     return (
         <>
-            <footer className="relative w-full lg:pt-10 pb-20 pt-5 lg:pb-10 px-5 text-primary-white">
+            <footer className = "relative w-full lg:pt-10 pb-20 pt-5 lg:pb-10 px-5 text-primary-white">
                 {/* Background Image with Overlay */}
                 <div className="absolute inset-0 z-0">
                     <div className="absolute inset-0 bg-primary/90" /> {/* Dark overlay */}
@@ -16,7 +16,7 @@ export default function RootFooter() {
                         alt="Footer Background"
                         fill
                         priority
-                        className="w-full h-full object-cover"
+                        className = "w-full h-full object-cover"
                     />
                 </div>
 
