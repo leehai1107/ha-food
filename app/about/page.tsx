@@ -44,7 +44,9 @@ export default function About() {
                 vừa gần gũi, vừa mới mẻ.
               </p>
               <p className="mb-4">
-                <strong>🎨 Tạo Ra Một "Ngôn Ngữ Mới" Cho Bánh Trung Thu</strong>
+                <strong>
+                  🎨 Tạo Ra Một &quot;Ngôn Ngữ Mới&quot; Cho Bánh Trung Thu
+                </strong>
                 <br />
                 Chúng tôi tin rằng chiếc bánh Trung thu không nên chỉ đứng yên
                 trong ký ức. Nó cần được sống trong hiện tại - nơi người trẻ cần
