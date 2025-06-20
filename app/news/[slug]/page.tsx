@@ -102,7 +102,7 @@ const NewsDetailPage = ({ params }: { params: Promise<{ slug: string }> }) => {
     return (
         <>
 
-            <div className="min-h-screen bg-gray-50">
+            <div className="min-h-screen bg-gray-50 px-4">
                 {/* Breadcrumb */}
                 <div className="bg-gray-50 py-4">
                     <div className="max-w-7xl mx-auto px-6 lg:px-8">
