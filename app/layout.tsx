@@ -5,7 +5,6 @@ import { Toaster } from "sonner";
 import { AuthProvider } from "@/contexts/AuthContext";
 import LayoutContent from "@/layouts/layout-content";
 import { CartProvider } from "@/hooks/CartContext";
-import { Analytics } from "@vercel/analytics/next";
 import Script from "next/script";
 
 const geistSans = Geist({
@@ -94,7 +93,6 @@ export default function RootLayout({
         <AuthProvider>
           <CartProvider>
             <LayoutContent>{children}</LayoutContent>
-            <Analytics />
           </CartProvider>
         </AuthProvider>
         <Toaster />

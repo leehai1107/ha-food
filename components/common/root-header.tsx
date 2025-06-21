@@ -97,6 +97,10 @@ export default function RootHeader() {
     router.replace(`/products?search=${encodeURIComponent(searchTerm)}`);
   };
 
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+  };
+
   const renderMobileSubItems = (
     subItems?: SubItem[],
     parentPath: string = ""
@@ -230,10 +234,10 @@ export default function RootHeader() {
             <div className="absolute right-0 mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50 animate-float-in-top">
               <nav>
                 <ul className="flex flex-col gap-2 p-3 text-sm text-primary font-medium">
-                  <NavLink href="/" isMobile>
+                  <NavLink href="/" isMobile onClick={closeMobileMenu}>
                     TRANG CHỦ
                   </NavLink>
-                  <NavLink href="/about" isMobile>
+                  <NavLink href="/about" isMobile onClick={closeMobileMenu}>
                     GIỚI THIỆU
                   </NavLink>
                   <NavLink
@@ -241,16 +245,17 @@ export default function RootHeader() {
                     subItems={transformCategoriesToSubItems(categories)}
                     width="56"
                     isMobile
+                    onClick={closeMobileMenu}
                   >
                     SẢN PHẨM
                   </NavLink>
-                  <NavLink href="/gallery" isMobile>
+                  <NavLink href="/gallery" isMobile onClick={closeMobileMenu}>
                     DỰ ÁN
                   </NavLink>
-                  <NavLink href="/news" isMobile>
+                  <NavLink href="/news" isMobile onClick={closeMobileMenu}>
                     TIN TỨC
                   </NavLink>
-                  <NavLink href="/contact" isMobile>
+                  <NavLink href="/contact" isMobile onClick={closeMobileMenu}>
                     LIÊN HỆ
                   </NavLink>
                   <NavLink
@@ -264,11 +269,12 @@ export default function RootHeader() {
                     ]}
                     width="64"
                     isMobile
+                    onClick={closeMobileMenu}
                   >
                     CHÍNH SÁCH
                   </NavLink>
                   {isAuthenticated && authService.isAdmin(account) && (
-                    <NavLink href="/admin" isMobile>
+                    <NavLink href="/admin" isMobile onClick={closeMobileMenu}>
                       🛠️ Quản trị
                     </NavLink>
                   )}
