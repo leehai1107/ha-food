@@ -2,7 +2,7 @@
 import ProductList from "@/components/items/product-list";
 import categoryService from "@/services/categoryService";
 import Link from "next/link";
-import { useEffect, useState, Suspense, useCallback, useRef } from "react";
+import { useEffect, useState, Suspense, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
 // Client component that handles search params
@@ -168,16 +168,6 @@ const ProductsContent = () => {
       : "Nhiều danh mục";
   };
 
-  // Get page title based on filters
-  const getPageTitle = () => {
-    if (debouncedSearchTerm) {
-      return `Kết quả tìm kiếm: "${debouncedSearchTerm}"`;
-    }
-    if (selectedCategory) {
-      return getCategoryName(selectedCategory);
-    }
-    return "Sản phẩm";
-  };
 
   return (
     <>

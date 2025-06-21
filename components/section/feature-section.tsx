@@ -1,15 +1,11 @@
 "use client";
 import Image from "next/image";
 import { defaultClients } from "@/constants/clients";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
 const FeaturedClientsSection = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [duration, setDuration] = useState("30s");
-  const speed = 100; // px/s
-
   const displayClients = defaultClients;
 
   // Check if window is mobile (ssr safe)
@@ -20,17 +16,6 @@ const FeaturedClientsSection = () => {
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    // Scroll width includes both sets (duplicated), divide by 2
-    const totalWidth = container.scrollWidth / 2;
-    const calculatedDuration = totalWidth / speed;
-
-    setDuration(`${calculatedDuration}s`);
-  }, [displayClients]);
 
   return (
     <section className="py-16 bg-gray-50" id="clients">
