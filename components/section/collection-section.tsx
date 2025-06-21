@@ -33,7 +33,7 @@ export default function CollectionSection() {
             tôi hân hạnh giới thiệu bộ sưu tập
             <br />
             <strong className="text-primary">
-              " THIÊN HƯƠNG NGUYỆT DẠ "
+              &ldquo; THIÊN HƯƠNG NGUYỆT DẠ &rdquo;
             </strong>{" "}
             gồm có:
           </p>
