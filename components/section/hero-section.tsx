@@ -27,7 +27,7 @@ export default function HeroSection() {
           "Thiên Cầu Vượng Khí là biểu tượng của sự may mắn và vượng khí, như một lời chúc phúc gửi đến người nhận, đem lại niềm vui, sự bình an và thịnh vượng trong cuộc sống.",
         ctaText: "Xem Thêm",
         ctaLink: "/products",
-        imageUrl: "/image/banners/banner_1.png",
+        imageUrl: "/image/banners/banner_1.webp",
         position: 0,
         isActive: true,
         createdAt: "",

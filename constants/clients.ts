@@ -2,7 +2,7 @@ export const defaultClients = [
   {
     id: 1,
     name: 'Bách Mỹ Group',
-    logoUrl: '/image/featureclients/BackMyLogo.png',
+    logoUrl: '/image/featureclients/BackMyLogo.webp',
     websiteUrl: 'https://bachmygroup.vn',
     description: 'Tập đoàn đa ngành hàng đầu Việt Nam',
     position: 0,
@@ -13,7 +13,7 @@ export const defaultClients = [
   {
     id: 2,
     name: 'DAVICOM',
-    logoUrl: '/image/featureclients/davicom.jpg',
+    logoUrl: '/image/featureclients/davicom.webp',
     websiteUrl: 'https://davicom.com.vn',
     description: 'CÔNG TY CP TRUYỀN THÔNG VÀ CÔNG NGHỆ ĐẠI VIỆT',
     position: 1,
@@ -24,7 +24,7 @@ export const defaultClients = [
   {
     id: 3,
     name: 'Kim Đông Dương',
-    logoUrl: '/image/featureclients/kimdongduong.jpg',
+    logoUrl: '/image/featureclients/kimdongduong.webp',
     websiteUrl: 'https://kimdongduong.com.vn',
     description: 'Công ty TNHH Công nghệ và Truyền thông Kim Đông Dương',
     position: 2,
@@ -35,7 +35,7 @@ export const defaultClients = [
   {
     id: 4,
     name: 'Bidiphar',
-    logoUrl: '/image/featureclients/BIDIPHAR.png',
+    logoUrl: '/image/featureclients/BIDIPHAR.webp',
     websiteUrl: 'https://bidiphar.com',
     description: 'CÔNG TY CỔ PHẦN DƯỢC TRANG BỊ THIẾT BỊ Y TẾ BÌNH ĐỊNH BIDIPHAR',
     position: 3,
@@ -46,7 +46,7 @@ export const defaultClients = [
   {
     id: 5,
     name: 'RedWok (Chảo đỏ)',
-    logoUrl: '/image/featureclients/ChaoDo.png',
+    logoUrl: '/image/featureclients/ChaoDo.webp',
     websiteUrl: 'https://redwok.com.vn',
     description: 'CÔNG TY CỔ PHẦN ẨM THỰC CHẢO ĐỎ',
     position: 4,
@@ -57,7 +57,7 @@ export const defaultClients = [
   {
     id: 6,
     name: 'VietInfo',
-    logoUrl: '/image/featureclients/VIETINFO.png',
+    logoUrl: '/image/featureclients/VIETINFO.webp',
     websiteUrl: 'https://news.vietinfo.tech',
     description: 'CÔNG TY CỔ PHẦN CÔNG NGHỆ VIETINFO',
     position: 5,
@@ -68,7 +68,7 @@ export const defaultClients = [
   {
     id: 7,
     name: 'Digibird',
-    logoUrl: '/image/featureclients/Digibird.jpg',
+    logoUrl: '/image/featureclients/Digibird.webp',
     websiteUrl: 'https://digibird.co',
     description: 'CÔNG TY CỔ PHẦN DIGIBIRD',
     position: 6,
@@ -79,7 +79,7 @@ export const defaultClients = [
   {
     id: 8,
     name: 'SAPP',
-    logoUrl: '/image/featureclients/SAPP.jpg',
+    logoUrl: '/image/featureclients/SAPP.webp',
     websiteUrl: 'https://sapp.edu.vn/',
     description: 'CÔNG TY CỔ PHẦN GIÁO DỤC SAPP',
     position: 7,
@@ -90,7 +90,7 @@ export const defaultClients = [
   {
     id: 9,
     name: 'VIETJET',
-    logoUrl: '/image/featureclients/VIETJET.jpg',
+    logoUrl: '/image/featureclients/VIETJET.webp',
     websiteUrl: 'https://www.vietjetair.com',
     description: 'CÔNG TY CỔ PHẦN HÀNG KHÔNG VIETJET',
     position: 8,
@@ -101,7 +101,7 @@ export const defaultClients = [
   {
     id: 10,
     name: 'PARISPHARM',
-    logoUrl: '/image/featureclients/PARISPHARM.jpg',
+    logoUrl: '/image/featureclients/PARISPHARM.webp',
     websiteUrl: 'http://www.parispharm.net',
     description: 'CÔNG TY CỔ PHẦN PARIS PHARM',
     position: 9,
@@ -112,7 +112,7 @@ export const defaultClients = [
   {
     id: 11,
     name: 'KEYCOM',
-    logoUrl: '/image/featureclients/KEYCOM.jpg',
+    logoUrl: '/image/featureclients/KEYCOM.webp',
     websiteUrl: 'https://keycom.vn',
     description: 'CÔNG TY CỔ PHẦN THƯƠNG MẠI VÀ TRUYỀN THÔNG KEY',
     position: 10,
@@ -123,7 +123,7 @@ export const defaultClients = [
   {
     id: 12,
     name: 'FLAMINGO',
-    logoUrl: '/image/featureclients/FLAMINGO.jpg',
+    logoUrl: '/image/featureclients/FLAMINGO.webp',
     websiteUrl: 'https://flamingocorp.vn',
     description: 'CÔNG TY CỔ PHẦN TRUYỀN THÔNG SỐ FLAMINGO',
     position: 11,
@@ -134,7 +134,7 @@ export const defaultClients = [
   {
     id: 13,
     name: 'Ụt Ụt',
-    logoUrl: '/image/featureclients/utut.jpg',
+    logoUrl: '/image/featureclients/utut.webp',
     websiteUrl: 'https://www.quanutut.com',
     description: 'CÔNG TY CỔ PHẦN ỤT ỤT',
     position: 12,
@@ -145,7 +145,7 @@ export const defaultClients = [
   {
     id: 14,
     name: 'VIET GROW',
-    logoUrl: '/image/featureclients/VIETGROW.png',
+    logoUrl: '/image/featureclients/VIETGROW.webp',
     websiteUrl: 'http://megauni.vn',
     description: 'CÔNG TY CỔ PHẦN VIỆN PHÁT TRIỂN LÃNH ĐẠO',
     position: 13,
@@ -156,7 +156,7 @@ export const defaultClients = [
   {
     id: 15,
     name: 'WE FOOD',
-    logoUrl: '/image/featureclients/WEFOOD.jpg',
+    logoUrl: '/image/featureclients/WEFOOD.webp',
     websiteUrl: 'https://wefoodjsc.com',
     description: 'CÔNG TY CỔ PHẦN WE FOOD',
     position: 14,
@@ -167,7 +167,7 @@ export const defaultClients = [
   {
     id: 16,
     name: 'CATHAY',
-    logoUrl: '/image/featureclients/CATHAY.jpg',
+    logoUrl: '/image/featureclients/CATHAY.webp',
     websiteUrl: 'https://www.cathay-ins.com.vn',
     description: 'CÔNG TY TNHH BẢO HIỂM PHI NHÂN THỌ CATHAY VIỆT NAM',
     position: 15,
@@ -178,7 +178,7 @@ export const defaultClients = [
   {
     id: 17,
     name: 'COEN BIO',
-    logoUrl: '/image/featureclients/COEN.png',
+    logoUrl: '/image/featureclients/COEN.webp',
     websiteUrl: 'https://coen-bio.com',
     description: 'CÔNG TY TNHH COEN-BIO',
     position: 16,
@@ -189,7 +189,7 @@ export const defaultClients = [
   {
     id: 18,
     name: 'GIGA NET',
-    logoUrl: '/image/featureclients/GIGA-NET.png',
+    logoUrl: '/image/featureclients/GIGA-NET.webp',
     websiteUrl: 'https://congnghegiganet.com',
     description: 'CÔNG TY TNHH CÔNG NGHỆ GIGA-NET',
     position: 17,
@@ -200,7 +200,7 @@ export const defaultClients = [
   {
     id: 19,
     name: 'XINGLILAI - VIỆT NAM',
-    logoUrl: '/image/featureclients/XINGLILAI.jpg',
+    logoUrl: '/image/featureclients/XINGLILAI.webp',
     websiteUrl: '',
     description: 'CÔNG TY TNHH CÔNG NGHIỆP XINGLILAI - VIỆT NAM',
     position: 18,
@@ -211,7 +211,7 @@ export const defaultClients = [
   {
     id: 20,
     name: 'FUDICO',
-    logoUrl: '/image/featureclients/FUDICO.png',
+    logoUrl: '/image/featureclients/FUDICO.webp',
     websiteUrl: 'https://fudico.com.vn',
     description: 'CÔNG TY TNHH FUDICO',
     position: 19,
@@ -222,7 +222,7 @@ export const defaultClients = [
   {
     id: 21,
     name: 'FUJI VIỆT NAM',
-    logoUrl: '/image/featureclients/FUJI.jpg',
+    logoUrl: '/image/featureclients/FUJI.webp',
     websiteUrl: 'https://fujivietnam.com',
     description: 'CÔNG TY TNHH FUJI VIỆT NAM',
     position: 20,
@@ -233,7 +233,7 @@ export const defaultClients = [
   {
     id: 22,
     name: 'FUNCO',
-    logoUrl: '/image/featureclients/FUNCO.jpg',
+    logoUrl: '/image/featureclients/FUNCO.webp',
     websiteUrl: 'https://nikio.com.vn',
     description: 'CÔNG TY TNHH FUNCO',
     position: 21,
@@ -244,7 +244,7 @@ export const defaultClients = [
   {
     id: 23,
     name: 'GARMIN VIỆT NAM',
-    logoUrl: '/image/featureclients/GARMIN.jpg',
+    logoUrl: '/image/featureclients/GARMIN.webp',
     websiteUrl: 'https://www.garmin.com',
     description: 'CÔNG TY TNHH GARMIN VIỆT NAM',
     position: 22,
@@ -255,7 +255,7 @@ export const defaultClients = [
   {
     id: 24,
     name: 'GOC HEALTHY',
-    logoUrl: '/image/featureclients/GOC-HEALTHY.png',
+    logoUrl: '/image/featureclients/GOC-HEALTHY.webp',
     websiteUrl: '',
     description: 'CÔNG TY TNHH GOC HEALTHY',
     position: 23,
@@ -266,7 +266,7 @@ export const defaultClients = [
   {
     id: 25,
     name: 'WONDER LAND',
-    logoUrl: '/image/featureclients/WONDERLAND.png',
+    logoUrl: '/image/featureclients/WONDERLAND.webp',
     websiteUrl: 'http://www.wonderlands.com.vn',
     description: 'CÔNG TY TNHH KINH DOANH TƯ VẤN ĐẦU TƯ WONDER LAND',
     position: 24,
@@ -277,7 +277,7 @@ export const defaultClients = [
   {
     id: 26,
     name: 'LANBENA',
-    logoUrl: '/image/featureclients/LANBENA.png',
+    logoUrl: '/image/featureclients/LANBENA.webp',
     websiteUrl: 'https://lanbena.com',
     description: 'CÔNG TY TNHH LANBENA',
     position: 25,
@@ -288,7 +288,7 @@ export const defaultClients = [
   {
     id: 27,
     name: 'LEMAR VIỆT NAM',
-    logoUrl: '/image/featureclients/LEMAR.png',
+    logoUrl: '/image/featureclients/LEMAR.webp',
     websiteUrl: 'https://lemar.com.vn',
     description: 'CÔNG TY TNHH LEMAR VIỆT NAM',
     position: 26,
@@ -299,7 +299,7 @@ export const defaultClients = [
   {
     id: 28,
     name: 'NOVO JAPAN',
-    logoUrl: '/image/featureclients/NOVO-JAPAN.png',
+    logoUrl: '/image/featureclients/NOVO-JAPAN.webp',
     websiteUrl: 'https://novojapan.com.vn',
     description: 'CÔNG TY TNHH LIÊN DOANH DẦU NHỜN NOVO JAPAN',
     position: 27,
@@ -310,7 +310,7 @@ export const defaultClients = [
   {
     id: 29,
     name: 'HOLDING',
-    logoUrl: '/image/featureclients/HOLDING.jpg',
+    logoUrl: '/image/featureclients/HOLDING.webp',
     websiteUrl: '',
     description: 'CÔNG TY TNHH MOHODO HOLDING',
     position: 28,
@@ -321,7 +321,7 @@ export const defaultClients = [
   {
     id: 30,
     name: 'Thế Giới In Ấn',
-    logoUrl: '/image/featureclients/TheGioiInAn.png',
+    logoUrl: '/image/featureclients/TheGioiInAn.webp',
     websiteUrl: '',
     description: 'CÔNG TY TNHH MỘT THÀNH VIÊN THẾ GIỚI IN ẤN',
     position: 29,
@@ -332,7 +332,7 @@ export const defaultClients = [
   {
     id: 31,
     name: 'BIO TECH',
-    logoUrl: '/image/featureclients/BIO-TECH.png',
+    logoUrl: '/image/featureclients/BIO-TECH.webp',
     websiteUrl: '',
     description: 'CÔNG TY TNHH MỸ PHẨM BIO TECH',
     position: 30,
@@ -343,7 +343,7 @@ export const defaultClients = [
   {
     id: 32,
     name: 'ON - GIFT VIỆT NAM',
-    logoUrl: '/image/featureclients/ON-GIFT.jpg',
+    logoUrl: '/image/featureclients/ON-GIFT.webp',
     websiteUrl: '',
     description: 'CÔNG TY TNHH ON - GIFT VIỆT NAM',
     position: 31,
@@ -354,7 +354,7 @@ export const defaultClients = [
   {
     id: 33,
     name: 'LTV',
-    logoUrl: '/image/featureclients/LTV.png',
+    logoUrl: '/image/featureclients/LTV.webp',
     websiteUrl: '',
     description: 'CÔNG TY TNHH PHẦN MỀM LTV',
     position: 32,
@@ -365,7 +365,7 @@ export const defaultClients = [
   {
     id: 34,
     name: 'VTEDCO',
-    logoUrl: '/image/featureclients/VTEDCO.jpg',
+    logoUrl: '/image/featureclients/VTEDCO.webp',
     websiteUrl: '',
     description: 'CÔNG TY TNHH PHÁT TRIỂN ĐÀO TẠO GIÁO DỤC THÀNH CÔNG',
     position: 33,
@@ -376,7 +376,7 @@ export const defaultClients = [
   {
     id: 35,
     name: 'Huơng Việt',
-    logoUrl: '/image/featureclients/HUONG-VIET.jpg',
+    logoUrl: '/image/featureclients/HUONG-VIET.webp',
     websiteUrl: '',
     description: 'CÔNG TY TNHH PHÁT TRIỂN HƯƠNG VIỆT',
     position: 34,
@@ -387,7 +387,7 @@ export const defaultClients = [
   {
     id: 36,
     name: 'INTERPRO TRANS',
-    logoUrl: '/image/featureclients/INTERPRO-TRANS.png',
+    logoUrl: '/image/featureclients/INTERPRO-TRANS.webp',
     websiteUrl: '',
     description: 'CÔNG TY TNHH PHIÊN DỊCH CHUYÊN NGHIỆP QUỐC TẾ',
     position: 35,
@@ -398,7 +398,7 @@ export const defaultClients = [
   {
     id: 37,
     name: 'THÀNH LỘC',
-    logoUrl: '/image/featureclients/THANH-LOC.jpg',
+    logoUrl: '/image/featureclients/THANH-LOC.webp',
     websiteUrl: '',
     description: 'CÔNG TY TNHH PHỤ GIA NHỰA THÀNH LỘC',
     position: 36,
@@ -409,7 +409,7 @@ export const defaultClients = [
   {
     id: 38,
     name: 'PHÚ HẢI TOÀN',
-    logoUrl: '/image/featureclients/PHU-HAI-TOAN.png',
+    logoUrl: '/image/featureclients/PHU-HAI-TOAN.webp',
     websiteUrl: '',
     description: 'CÔNG TY TNHH PHÚ HẢI TOÀN',
     position: 37,
@@ -420,7 +420,7 @@ export const defaultClients = [
   {
     id: 39,
     name: 'IMMIGRATION LEGAL GROUP',
-    logoUrl: '/image/featureclients/IMMIGRATION-LEGAL-GROUP.png',
+    logoUrl: '/image/featureclients/IMMIGRATION-LEGAL-GROUP.webp',
     websiteUrl: '',
     description: 'CÔNG TY TNHH SOUTHWESTGATE IMMIGRATION LEGAL GROUP',
     position: 38,
@@ -431,7 +431,7 @@ export const defaultClients = [
   {
     id: 40,
     name: 'HTC SÀI GÒN',
-    logoUrl: '/image/featureclients/HTC-SAI-GON.png',
+    logoUrl: '/image/featureclients/HTC-SAI-GON.webp',
     websiteUrl: '',
     description: 'CÔNG TY TNHH THƯƠNG MẠI HTC SÀI GÒN',
     position: 39,
@@ -442,7 +442,7 @@ export const defaultClients = [
   {
     id: 41,
     name: 'MILANO',
-    logoUrl: '/image/featureclients/MILANO.png',
+    logoUrl: '/image/featureclients/MILANO.webp',
     websiteUrl: '',
     description: 'CÔNG TY TNHH THƯƠNG MẠI MILANO',
     position: 40,
@@ -453,7 +453,7 @@ export const defaultClients = [
   {
     id: 42,
     name: 'NỘI THẤT Ô TÔ QUANG MINH',
-    logoUrl: '/image/featureclients/NHAT-OTOC.png',
+    logoUrl: '/image/featureclients/NHAT-OTOC.webp',
     websiteUrl: '',
     description: 'CÔNG TY TNHH THƯƠNG MẠI XUẤT NHẬP KHẨU NỘI THẤT Ô TÔ QUANG MINH',
     position: 41,
@@ -464,7 +464,7 @@ export const defaultClients = [
   {
     id: 43,
     name: 'TI NO',
-    logoUrl: '/image/featureclients/TI-NO.png',
+    logoUrl: '/image/featureclients/TI-NO.webp',
     websiteUrl: '',
     description: 'CÔNG TY TNHH TI NO - CHI NHÁNH TI NO HÀ NỘI',
     position: 42,
@@ -475,7 +475,7 @@ export const defaultClients = [
   {
     id: 44,
     name: 'Nguyên Bảo Foods',
-    logoUrl: '/image/featureclients/NGUYEN-BAO-FOODS.png',
+    logoUrl: '/image/featureclients/NGUYEN-BAO-FOODS.webp',
     websiteUrl: '',
     description: 'Công ty TNHH Nguyên Bảo Foods',
     position: 43,
@@ -486,7 +486,7 @@ export const defaultClients = [
   {
     id: 45,
     name: 'Becamex Hotel Thu Dau Mot',
-    logoUrl: '/image/featureclients/BECAMEX-HOTEL-THU-DAU-MOT.png',
+    logoUrl: '/image/featureclients/BECAMEX-HOTEL-THU-DAU-MOT.webp',
     websiteUrl: '',
     description: 'Becamex Hotel Thu Dau Mot',
     position: 44,
@@ -497,7 +497,7 @@ export const defaultClients = [
   {
     id: 46,
     name: 'BIODERMA',
-    logoUrl: '/image/featureclients/BIODERMA.png',
+    logoUrl: '/image/featureclients/BIODERMA.webp',
     websiteUrl: '',
     description: 'BIODERMA',
     position: 45,
@@ -508,7 +508,7 @@ export const defaultClients = [
   {
     id: 47,
     name: 'minthacare',
-    logoUrl: '/image/featureclients/minthacare.png',
+    logoUrl: '/image/featureclients/minthacare.webp',
     websiteUrl: '',
     description: 'minthacare',
     position: 46,
@@ -519,7 +519,7 @@ export const defaultClients = [
   {
     id: 48,
     name: 'nuxe',
-    logoUrl: '/image/featureclients/nuxe.png',
+    logoUrl: '/image/featureclients/nuxe.webp',
     websiteUrl: '',
     description: 'nuxe',
     position: 47,
@@ -530,7 +530,7 @@ export const defaultClients = [
   {
     id: 49,
     name: 'QUAN DOAN Q12',
-    logoUrl: '/image/featureclients/QUAN-DOAN-Q12.jpg',
+    logoUrl: '/image/featureclients/QUAN-DOAN-Q12.webp',
     websiteUrl: '',
     description: 'QUAN DOAN Q12',
     position: 48,
@@ -541,7 +541,7 @@ export const defaultClients = [
   {
     id: 50,
     name: 'mien-nam',
-    logoUrl: '/image/featureclients/mien-nam.jpg',
+    logoUrl: '/image/featureclients/mien-nam.webp',
     websiteUrl: '',
     description: 'mien-nam',
     position: 49,
@@ -552,7 +552,7 @@ export const defaultClients = [
   {
     id: 51,
     name: 'final',
-    logoUrl: '/image/featureclients/final.jpg',
+    logoUrl: '/image/featureclients/final.webp',
     websiteUrl: '',
     description: 'final',
     position: 50,

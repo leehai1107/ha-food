@@ -7,7 +7,7 @@ export default function CollectionSection() {
         {/* Left Image */}
         <div className="md:w-1/2 w-full relative aspect-video">
           <Image
-            src="/image/banners/banner_tong_hop.png"
+            src="/image/banners/banner_tong_hop.webp"
             alt="Bộ sưu tập Thiên Hương Nguyệt Dạ"
             fill
             priority
