@@ -149,8 +149,8 @@ export default function RootHeader() {
           <Button>
             <Link href="/">
               <Image
-                src="/logo/logo-primary.png"
-                alt="Logo"
+                src = "/logo/logo-primary.webp"
+                alt = "Logo"
                 priority
                 width={168}
                 height={47}
