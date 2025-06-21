@@ -163,7 +163,9 @@ const ProductsContent = () => {
     // If multiple, show parent name or a generic label
     // Try to find the parent (first ID)
     const parent = categories.find((c) => c.id.toString() === ids[0]);
-    return parent ? `${parent.name} (và các sản phẩm tương tự)`: "Nhiều danh mục";
+    return parent
+      ? `${parent.name} (và các sản phẩm tương tự)`
+      : "Nhiều danh mục";
   };
 
   // Get page title based on filters
@@ -182,7 +184,7 @@ const ProductsContent = () => {
       <h1 className="hidden">hafood - Quà tặng doanh nghiệp</h1>
       {/* Breadcrumb */}
       <div className="bg-gray-50 py-4">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto ">
           <nav className="flex items-center space-x-2 text-sm">
             <Link href="/" className="text-red-600 hover:text-red-700">
               Trang chủ
@@ -210,7 +212,7 @@ const ProductsContent = () => {
       </div>
 
       {/* Content */}
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto py-8">
         {/* Filters */}
         <div className="bg-white rounded-lg shadow-sm p-6 mb-8">
           <h2 className="text-xl font-semibold mb-4">Bộ lọc sản phẩm</h2>
