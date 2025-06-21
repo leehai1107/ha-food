@@ -32,6 +32,11 @@ export const metadata: Metadata = {
   authors: [{ name: "Ha Food" }],
   creator: "Ha Food",
   publisher: "Ha Food",
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
   robots: {
     index: true,
     follow: true,
@@ -43,12 +48,12 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    type       : "website",
-    locale     : "vi_VN",
-    url        : process.env.NEXT_PUBLIC_API_URL || "https://hafood.vn",
-    siteName   : "Ha Food",
-    title      : "Ha Food - Quà Tặng Doanh Nghiệp",
-    description: 
+    type: "website",
+    locale: "vi_VN",
+    url: process.env.NEXT_PUBLIC_API_URL || "https://hafood.vn",
+    siteName: "Ha Food",
+    title: "Ha Food - Quà Tặng Doanh Nghiệp",
+    description:
       "Ha Food - Nơi cung cấp quà tặng doanh nghiệp uy tín và chất lượng",
     images: [
       {

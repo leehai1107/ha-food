@@ -111,7 +111,7 @@ const ProductList: React.FC<ProductListProps> = ({
       stars.push(
         <span
           key={i}
-          className={`text-lg ${
+          className={`text-sm ${
             i <= numRating ? "text-yellow-400" : "text-gray-300"
           }`}
         >
@@ -155,6 +155,8 @@ const ProductList: React.FC<ProductListProps> = ({
     }
     return "/image/noimage.png";
   };
+
+  const isMobile = typeof window !== "undefined" && window.innerWidth < 768;
 
   const handleLoadMore = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
@@ -208,12 +210,12 @@ const ProductList: React.FC<ProductListProps> = ({
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-6 lg:px-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 lg:gap-8">
+    <div className="max-w-7xl mx-auto  lg:px-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {products.map((product) => (
           <div
             key={product.productSku}
-            className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer"
+            className="group bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 cursor-pointer flex flex-col"
             onClick={() => handleViewProduct(product)}
           >
             {/* Product Image */}
@@ -223,102 +225,106 @@ const ProductList: React.FC<ProductListProps> = ({
                 alt={product.productName}
                 width={300}
                 height={300}
-                className="w-full h-48 object-cover"
+                className="w-full aspect-square object-cover"
               />
+              <div
+                className={`absolute top-2 right-2 transition-opacity ${
+                  isMobile ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+                }`}
+              >
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleViewProduct(product);
+                  }}
+                  className="bg-white/80 backdrop-blur-sm px-3 py-1 rounded-full shadow-md hover:bg-white text-sm font-semibold"
+                >
+                  Xem
+                </button>
+              </div>
+
               {!product.available && (
-                <div className="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded text-sm font-semibold">
+                <div className="absolute top-2 left-2 bg-gray-700 text-white px-2 py-1 rounded text-xs font-semibold">
                   Hết hàng
                 </div>
               )}
-              {parseFloat(product.originalPrice) >
-                parseFloat(product.currentPrice) && (
-                <div className="absolute top-2 right-2 bg-primary text-white px-2 py-1 rounded-md text-xs font-bold border-2 border-white shadow-lg transform rotate-3">
-                  <div className="flex items-center">
-                    <span className="text-xs mr-1">Giảm</span>
-                    <span className="text-sm">
-                      {Math.round(
-                        ((parseFloat(product.originalPrice) -
-                          parseFloat(product.currentPrice)) /
-                          parseFloat(product.originalPrice)) *
-                          100
-                      )}
-                      %
-                    </span>
+              {product.available &&
+                parseFloat(product.originalPrice) >
+                  parseFloat(product.currentPrice) && (
+                  <div className="absolute top-2 left-2 bg-red-600 text-white px-2 py-1 rounded-md text-xs font-bold">
+                    -
+                    {Math.round(
+                      ((parseFloat(product.originalPrice) -
+                        parseFloat(product.currentPrice)) /
+                        parseFloat(product.originalPrice)) *
+                        100
+                    )}
+                    %
                   </div>
+                )}
+
+              {/* Action Buttons inside image */}
+              {product.available && (
+                <div
+                  className={`absolute bottom-0 left-0 right-0 p-2 transition-opacity ${
+                    isMobile
+                      ? "opacity-100"
+                      : "opacity-0 group-hover:opacity-100"
+                  }`}
+                >
+                  <button
+                    onClick={(e) => handleAddToCart(product, e)}
+                    className={`w-full py-2 px-2 rounded-md font-semibold transition-all duration-300 text-sm flex items-center justify-center shadow-md ${
+                      addingToCart === product.productSku
+                        ? "bg-green-500 text-white"
+                        : "bg-white text-gray-900 hover:bg-gray-100"
+                    }`}
+                    disabled={addingToCart === product.productSku}
+                  >
+                    {addingToCart === product.productSku
+                      ? "✓ Đã thêm!"
+                      : "Thêm vào giỏ"}
+                  </button>
                 </div>
               )}
             </div>
 
             {/* Product Info */}
-            <div className="p-4">
+            <div className="p-2 flex flex-col flex-grow">
               {/* Product Name */}
-              <h3 className="font-semibold text-lg mb-2 line-clamp-2">
+              <h3 className="font-semibold text-sm mb-1 min-h-[2.5rem] line-clamp-2">
                 {product.productName}
               </h3>
 
-              {/* Rating */}
-              {product.rating && (
-                <div className="flex items-center mb-2">
-                  <div className="flex">{renderStars(product.rating)}</div>
-                  <span className="ml-2 text-sm text-gray-600">
-                    ({product.reviewCount || 0})
-                  </span>
-                </div>
-              )}
-
-              {/* Price */}
-              <div className="mb-3">
-                {parseFloat(product.originalPrice) >
-                parseFloat(product.currentPrice) ? (
-                  <div>
-                    <span className="text-lg font-bold text-red-600">
+              {/* Price & Rating */}
+              <div className="flex flex-col md:flex-row md:justify-between md:items-end mt-auto">
+                {/* Price */}
+                <div className="order-2 md:order-1">
+                  {parseFloat(product.originalPrice) >
+                  parseFloat(product.currentPrice) ? (
+                    <div className="flex flex-col">
+                      <span className="text-base font-bold text-red-600">
+                        {formatPrice(product.currentPrice)}
+                      </span>
+                      <span className="text-xs text-gray-500 line-through">
+                        {formatPrice(product.originalPrice)}
+                      </span>
+                    </div>
+                  ) : (
+                    <span className="text-base font-bold text-gray-900">
                       {formatPrice(product.currentPrice)}
                     </span>
-                    <span className="text-sm text-gray-500 line-through ml-2">
-                      {formatPrice(product.originalPrice)}
+                  )}
+                </div>
+
+                {/* Rating */}
+                {product.rating && (
+                  <div className="order-1 md:order-2 flex items-center mb-1 md:mb-0">
+                    {renderStars(product.rating)}
+                    <span className="ml-1 text-xs text-gray-500">
+                      ({product.reviewCount || 0})
                     </span>
                   </div>
-                ) : (
-                  <span className="text-lg font-bold text-gray-900">
-                    {formatPrice(product.currentPrice)}
-                  </span>
-                )}
-              </div>
-
-              {/* Action Buttons */}
-              <div className="space-y-2">
-                {product.available ? (
-                  <>
-                    <button
-                      onClick={(e) => handleAddToCart(product, e)}
-                      className={`w-full py-2 px-4 rounded font-semibold transition-colors ${
-                        addingToCart === product.productSku
-                          ? "bg-green-600 text-white"
-                          : "bg-red-600 text-white hover:bg-red-700"
-                      }`}
-                      disabled={addingToCart === product.productSku}
-                    >
-                      {addingToCart === product.productSku
-                        ? "✓ Đã thêm!"
-                        : "Thêm vào giỏ"}
-                    </button>
-                    <button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleViewProduct(product);
-                      }}
-                      className="w-full py-2 px-4 rounded font-semibold border-2 border-red-600 text-red-600 hover:bg-red-50 transition-colors"
-                    >
-                      Xem chi tiết
-                    </button>
-                  </>
-                ) : (
-                  <button
-                    className="w-full py-2 px-4 rounded font-semibold bg-gray-300 text-gray-500 cursor-not-allowed"
-                    disabled
-                  >
-                    Hết hàng
-                  </button>
                 )}
               </div>
             </div>

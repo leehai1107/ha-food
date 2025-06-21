@@ -89,11 +89,7 @@ const CartPage = () => {
                   {item.productName}
                 </Link>
               </h3>
-              <p className="text-xs sm:text-sm text-gray-600 mb-2">
-                Loại: {item.productType}
-                {item.weight && ` • Trọng lượng: ${item.weight}`}
-              </p>
-
+              
               {/* Price */}
               <div className="flex flex-wrap items-center gap-2 mb-3">
                 <span className="text-base sm:text-lg font-bold text-primary">
