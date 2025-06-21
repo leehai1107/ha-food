@@ -3,6 +3,19 @@ import type { NextRequest } from 'next/server';
 import { verifyToken } from '@/utils/jwt';
 
 export async function middleware(request: NextRequest) {
+  // Handle CORS preflight requests
+  if (request.method === 'OPTIONS') {
+    return new NextResponse(null, {
+      status: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Requested-With',
+        'Access-Control-Allow-Credentials': 'true',
+      },
+    });
+  }
+
   // Only run on /api/auth/me
   if (request.nextUrl.pathname === '/api/auth/me') {
     const authHeader = request.headers.get('authorization');
@@ -45,5 +58,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: '/api/auth/me',
+  matcher: ['/api/:path*'],
 }; 
