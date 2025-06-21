@@ -1,6 +1,7 @@
 import { useCart } from "@/hooks/CartContext";
 import productService from "@/services/productService";
 import { Product, ProductQueryParams } from "@/types";
+import { Check, ShoppingCart } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect, useCallback } from "react";
@@ -262,31 +263,6 @@ const ProductList: React.FC<ProductListProps> = ({
                     %
                   </div>
                 )}
-
-              {/* Action Buttons inside image */}
-              {product.available && (
-                <div
-                  className={`absolute bottom-0 left-0 right-0 p-2 transition-opacity ${
-                    isMobile
-                      ? "opacity-100"
-                      : "opacity-0 group-hover:opacity-100"
-                  }`}
-                >
-                  <button
-                    onClick={(e) => handleAddToCart(product, e)}
-                    className={`w-full py-2 px-2 rounded-md font-semibold transition-all duration-300 text-sm flex items-center justify-center shadow-md ${
-                      addingToCart === product.productSku
-                        ? "bg-green-500 text-white"
-                        : "bg-white text-gray-900 hover:bg-gray-100"
-                    }`}
-                    disabled={addingToCart === product.productSku}
-                  >
-                    {addingToCart === product.productSku
-                      ? "✓ Đã thêm!"
-                      : "Thêm vào giỏ"}
-                  </button>
-                </div>
-              )}
             </div>
 
             {/* Product Info */}
@@ -296,10 +272,20 @@ const ProductList: React.FC<ProductListProps> = ({
                 {product.productName}
               </h3>
 
-              {/* Price & Rating */}
-              <div className="flex flex-col md:flex-row md:justify-between md:items-end mt-auto">
+              {/* Rating */}
+              {product.rating && (
+                <div className="flex items-center mt-auto">
+                  {renderStars(product.rating)}
+                  <span className="ml-1 text-xs text-gray-500">
+                    ({product.reviewCount || 0})
+                  </span>
+                </div>
+              )}
+
+              {/* Price & Add to Cart */}
+              <div className="flex justify-between items-end pt-1">
                 {/* Price */}
-                <div className="order-2 md:order-1">
+                <div>
                   {parseFloat(product.originalPrice) >
                   parseFloat(product.currentPrice) ? (
                     <div className="flex flex-col">
@@ -317,14 +303,23 @@ const ProductList: React.FC<ProductListProps> = ({
                   )}
                 </div>
 
-                {/* Rating */}
-                {product.rating && (
-                  <div className="order-1 md:order-2 flex items-center mb-1 md:mb-0">
-                    {renderStars(product.rating)}
-                    <span className="ml-1 text-xs text-gray-500">
-                      ({product.reviewCount || 0})
-                    </span>
-                  </div>
+                {/* Add to Cart Button */}
+                {product.available && (
+                  <button
+                    onClick={(e) => handleAddToCart(product, e)}
+                    className={`rounded-md p-1.5 font-semibold text-sm shadow-sm transition-all duration-300 flex items-center justify-center ${
+                      addingToCart === product.productSku
+                        ? "bg-green-500 text-white"
+                        : "bg-primary text-primary-white hover:bg-secondary hover:text-primary-black border border-gray-200"
+                    }`}
+                    disabled={addingToCart === product.productSku}
+                  >
+                    {addingToCart === product.productSku ? (
+                      <Check className="h-4 w-4" />
+                    ) : (
+                      <ShoppingCart className="h-4 w-4" />
+                    )}
+                  </button>
                 )}
               </div>
             </div>
