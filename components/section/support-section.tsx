@@ -1,6 +1,6 @@
 import { Facebook, Mail } from "lucide-react";
 import Image from "next/image";
-import Zalo from "../../public/logo/zalo.svg";
+import Zalo from "../../public/uploads/shared/logos/zalo.svg";
 
 
 export default function SupportSection() {

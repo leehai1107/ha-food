@@ -1,10 +1,14 @@
 "use client";
+import rehypeColor from "@/lib/plugins/rehypeColor";
+import remarkColor from "@/lib/plugins/remarkColor";
 import newsService from "@/services/newsService";
 import { News } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
 import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
 
 const NewsDetailPage = ({ params }: { params: Promise<{ slug: string }> }) => {
   const [news, setNews] = useState<News | null>(null);
@@ -263,7 +267,9 @@ const NewsDetailPage = ({ params }: { params: Promise<{ slug: string }> }) => {
             {/* Article Body */}
             <div className="prose prose-lg max-w-none prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-primary prose-strong:text-gray-900">
               <ReactMarkdown
-                components={{
+                rehypePlugins = {[rehypeRaw, rehypeColor]}
+                remarkPlugins = {[remarkGfm, remarkColor]}
+                components    = {{
                   h1: ({ children }) => (
                     <h1 className="text-3xl font-bold text-gray-900 mb-4 font-heading">
                       {children}

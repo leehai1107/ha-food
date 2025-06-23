@@ -13,7 +13,7 @@ export default function RootFooter() {
           <div className="absolute inset-0 bg-primary/90" />{" "}
           {/* Dark overlay */}
           <Image
-            src="/image/banners/footer-bg.webp"
+            src="/uploads/shared/images/banners/footer-bg.webp"
             alt="Footer Background"
             fill
             priority

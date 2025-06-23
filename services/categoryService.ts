@@ -1,6 +1,5 @@
-import type { Category, ApiResponse } from '../types';
-import api from './api';
-
+import type { Category, ApiResponse } from "../types";
+import api from "./api";
 
 export interface CategoryQueryParams {
   includeProducts?: boolean;
@@ -12,6 +11,8 @@ export interface CreateCategoryRequest {
   description?: string;
   imageUrl?: string;
   parentId?: number;
+  priority?: number;
+  visible?: boolean;
 }
 
 export interface UpdateCategoryRequest {
@@ -19,11 +20,15 @@ export interface UpdateCategoryRequest {
   description?: string;
   imageUrl?: string;
   parentId?: number;
+  priority?: number;
+  visible?: boolean;
 }
 
 class CategoryService {
   // Get all categories (hierarchical by default, flat if specified)
-  async getCategories(params?: CategoryQueryParams): Promise<ApiResponse<Category[]>> {
+  async getCategories(
+    params?: CategoryQueryParams
+  ): Promise<ApiResponse<Category[]>> {
     const queryString = new URLSearchParams();
 
     if (params) {
@@ -39,20 +44,28 @@ class CategoryService {
   }
 
   // Get category by ID
-  async getCategoryById(id: number, includeProducts?: boolean): Promise<ApiResponse<Category>> {
-    const queryString = includeProducts ? '?includeProducts=true' : '';
+  async getCategoryById(
+    id: number,
+    includeProducts?: boolean
+  ): Promise<ApiResponse<Category>> {
+    const queryString = includeProducts ? "?includeProducts=true" : "";
     const response = await api.get(`/api/categories/${id}${queryString}`);
     return response.data;
   }
 
   // Create new category
-  async createCategory(categoryData: CreateCategoryRequest): Promise<ApiResponse<Category>> {
-    const response = await api.post('/api/categories', categoryData);
+  async createCategory(
+    categoryData: CreateCategoryRequest
+  ): Promise<ApiResponse<Category>> {
+    const response = await api.post("/api/categories", categoryData);
     return response.data;
   }
 
   // Update category
-  async updateCategory(id: number, categoryData: UpdateCategoryRequest): Promise<ApiResponse<Category>> {
+  async updateCategory(
+    id: number,
+    categoryData: UpdateCategoryRequest
+  ): Promise<ApiResponse<Category>> {
     const response = await api.put(`/api/categories/${id}`, categoryData);
     return response.data;
   }
@@ -64,17 +77,21 @@ class CategoryService {
   }
 
   // Get flat list of categories (convenience method)
-  async getFlatCategories(includeProducts?: boolean): Promise<ApiResponse<Category[]>> {
-    const queryString = includeProducts ? '&includeProducts=true' : '';
+  async getFlatCategories(
+    includeProducts?: boolean
+  ): Promise<ApiResponse<Category[]>> {
+    const queryString = includeProducts ? "&includeProducts=true" : "";
     const response = await api.get(`/api/categories?flat=true${queryString}`);
     return response.data;
   }
 
   // Get root categories with children (convenience method)
-  async getHierarchicalCategories(includeProducts?: boolean): Promise<ApiResponse<Category[]>> {
+  async getHierarchicalCategories(
+    includeProducts?: boolean
+  ): Promise<ApiResponse<Category[]>> {
     return this.getCategories({
       flat: false,
-      includeProducts
+      includeProducts,
     });
   }
 }
@@ -91,5 +108,5 @@ export const {
   updateCategory,
   deleteCategory,
   getFlatCategories,
-  getHierarchicalCategories
+  getHierarchicalCategories,
 } = categoryService;

@@ -45,6 +45,8 @@ model Category {
   imageUrl    String?  @map("image_url")
   parentId    Int?     @map("parent_id")
   createdAt   DateTime @default(now()) @map("created_at")
+  priority Int      @default(0)     // For menu arrangement
+  visible  Boolean  @default(true)  // For menu visibility
 
   // Relations
   parent   Category?  @relation("CategoryHierarchy", fields: [parentId], references: [id])

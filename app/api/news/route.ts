@@ -25,11 +25,11 @@ export async function GET(req: NextRequest) {
     }
 
     // /api/news (public)
-    const page = parseInt(searchParams.get('page') || '1');
-    const limit = parseInt(searchParams.get('limit') || '10');
+    const page   = parseInt(searchParams.get('page') || '1');
+    const limit  = parseInt(searchParams.get('limit') || '10');
     const search = searchParams.get('search') || '';
-    const tag = searchParams.get('tag') || '';
-    const skip = (page - 1) * limit;
+    const tag    = searchParams.get('tag') || '';
+    const skip   = (page - 1) * limit;
 
     const where: any = {
       isPublished: true,

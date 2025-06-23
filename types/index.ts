@@ -2,10 +2,10 @@
 // SHARED TYPES - Based on Prisma Schema
 // =============================================================================
 
-import { Review } from './product';
+import { Review } from "./product";
 
 // Export GHN types
-export * from './ghn';
+export * from "./ghn";
 
 // Base types
 export type ID = number;
@@ -47,7 +47,7 @@ export interface Account {
   orders?: Order[];
 }
 
-export interface SafeAccount extends Omit<Account, 'passwordHash'> {
+export interface SafeAccount extends Omit<Account, "passwordHash"> {
   // Account without sensitive data
 }
 
@@ -107,6 +107,8 @@ export interface Category {
   imageUrl: string | null;
   parentId: ID | null;
   createdAt: string;
+  priority: number; // For menu arrangement
+  visible: boolean; // For menu visibility
   // Relations
   parent?: Category | null;
   children?: Category[];
@@ -122,6 +124,8 @@ export interface CreateCategoryRequest {
   description?: string;
   imageUrl?: string;
   parentId?: ID;
+  priority?: number;
+  visible?: boolean;
 }
 
 export interface UpdateCategoryRequest {
@@ -129,6 +133,8 @@ export interface UpdateCategoryRequest {
   description?: string;
   imageUrl?: string;
   parentId?: ID;
+  priority?: number;
+  visible?: boolean;
 }
 
 export interface CategoryQueryParams {
@@ -167,7 +173,7 @@ export interface Product {
   _count?: {
     orderItems: number;
   };
-  reviews ?: Review[];
+  reviews?: Review[];
 }
 
 export interface CreateProductRequest {
@@ -220,8 +226,8 @@ export interface ProductQueryParams {
   minPrice?: number;
   maxPrice?: number;
   tags?: string[];
-  sortBy?: 'name' | 'price' | 'createdAt' | 'rating';
-  sortOrder?: 'asc' | 'desc';
+  sortBy?: "name" | "price" | "createdAt" | "rating";
+  sortOrder?: "asc" | "desc";
   includeImages?: boolean;
   includeCategory?: boolean;
 }
@@ -306,7 +312,13 @@ export interface BulkCreateCustomersRequest {
 // ORDER TYPES
 // =============================================================================
 
-export type OrderStatus = 'pending' | 'confirmed' | 'preparing' | 'ready' | 'delivered' | 'cancelled';
+export type OrderStatus =
+  | "pending"
+  | "confirmed"
+  | "preparing"
+  | "ready"
+  | "delivered"
+  | "cancelled";
 
 export interface Order {
   id: ID;
@@ -342,8 +354,8 @@ export interface OrderQueryParams {
   status?: OrderStatus;
   startDate?: string;
   endDate?: string;
-  sortBy?: 'createdAt' | 'totalPrice';
-  sortOrder?: 'asc' | 'desc';
+  sortBy?: "createdAt" | "totalPrice";
+  sortOrder?: "asc" | "desc";
   includeItems?: boolean;
   includeAccount?: boolean;
 }
@@ -431,7 +443,7 @@ export interface PaginatedResponse<T> {
 // UTILITY TYPES
 // =============================================================================
 
-export type SortOrder = 'asc' | 'desc';
+export type SortOrder = "asc" | "desc";
 
 export interface PaginationParams {
   page?: number;
@@ -601,7 +613,7 @@ export interface NewsQueryParams {
   limit?: number;
   search?: string;
   tag?: string;
-  status?: 'published' | 'draft' | 'all';
+  status?: "published" | "draft" | "all";
 }
 
 export interface NewsListResponse {
@@ -670,7 +682,7 @@ export interface UpdateCartItemRequest {
 // SYSTEM CONFIG TYPES
 // =============================================================================
 
-export * from './systemConfig';
+export * from "./systemConfig";
 
 export interface Stat {
   value: string;
@@ -697,15 +709,24 @@ export interface Testimonial {
   updatedAt: string;
 }
 
-export interface HeroSlide {
+export type MediaType = "image" | "video";
+
+export type HeroSlide = {
   id: number;
   title: string;
   subtitle: string;
   ctaText: string;
-  ctaLink?: string;
-  imageUrl: string;
+  ctaLink: string;
+  imageUrl?: string; // optional nếu là video
+  videoUrl?: string; // optional nếu là ảnh
+  type: MediaType;
   position: number;
-  isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
+};
+
+export type CollectionContent = {
+  id: number;
+  title?: string; // Optional title if needed for SEO/heading
+  mediaType: MediaType;
+  mediaUrl: string;
+  content: string; // Markdown string
+};

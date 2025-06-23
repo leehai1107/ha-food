@@ -12,7 +12,7 @@ const defaultTestimonials: Testimonial[] = [
     type: "",
     content:
       "Hộp quà được đóng gói cẩn thận, đảm bảo an toàn trong quá trình vận chuyển. Chúng tôi đã tặng hộp quà này cho đối tác và nhân viên trong công ty dịp trung thu năm ngoái. Năm nay lại tiếp tục đặt bên Hafood vì siêu chất lượng nhé!",
-    avatarUrl: "/image/customers/1.webp",
+    avatarUrl: "/uploads/shared/images/customers/1.webp",
     rating: 5,
     position: 0,
     isActive: true,
@@ -26,7 +26,7 @@ const defaultTestimonials: Testimonial[] = [
     type: "",
     content:
       "Thiết kế hộp quà rất đẹp mắt và tinh tế, phù hợp với nhiều đối tượng khách hàng. Vị bánh phong phú và cũng có nhiều vị rất mới lạ, nhưng ngon lắm nha. Cảm ơn Hafood đã cùng tạo nên một mùa Trung Thu tuyệt vời.",
-    avatarUrl: "/image/customers/2.webp",
+    avatarUrl: "/uploads/shared/images/customers/2.webp",
     rating: 5,
     position: 1,
     isActive: true,
@@ -40,7 +40,7 @@ const defaultTestimonials: Testimonial[] = [
     type: "",
     content:
       "Chúng tôi rất thích sự chăm chút tỉ mỉ trong từng chi tiết của hộp quà. Nhận bánh về mọi người trong công ty đều khen bánh sang  quá, đáng tiền cực kì. Luôn ủng hộ Hafood.",
-    avatarUrl: "/image/customers/3.webp",
+    avatarUrl: "/uploads/shared/images/customers/3.webp",
     rating: 5,
     position: 2,
     isActive: true,
@@ -54,7 +54,7 @@ const defaultTestimonials: Testimonial[] = [
     type: "",
     content:
       "Hộp quà Trung thu của Hafood thật sự sang trọng và tinh tế, phù hợp làm quà tặng doanh nghiệp trong các dịp lễ, tết. Đợt trước có đặt quà tết cho công ty tại đây rồi, giờ thấy quảng cáo mẫu mới cho Trung thu phải tham khảo liền. Rất ưng ý.",
-    avatarUrl: "/image/customers/4.webp",
+    avatarUrl: "/uploads/shared/images/customers/4.webp",
     rating: 5,
     position: 3,
     isActive: true,
@@ -68,7 +68,7 @@ const defaultTestimonials: Testimonial[] = [
     type: "",
     content:
       "Khách hàng của chúng tôi đều rất ấn tượng với hộp quà này. Tôi đã mua một số lượng để vừa trao quà dịp lễ cho nhân viên, vừa cho đối tác và khách hàng thân thiết. Vừa được ưu đãi tốt vừa chất lượng.",
-    avatarUrl: "/image/customers/5.webp",
+    avatarUrl: "/uploads/shared/images/customers/5.webp",
     rating: 5,
     position: 4,
     isActive: true,
@@ -82,7 +82,7 @@ const defaultTestimonials: Testimonial[] = [
     type: "",
     content:
       "Rất hài lòng với chất lượng hộp quà, nguyên liệu tươi ngon và an toàn. Trước khi đặt số lượng lớn cho công ty thì tôi đã đặt thử bánh lẻ, ăn vị khá ngon, không bị ngọt gắt như các dòng truyền thống. Mẫu mã đa dạng, phù hợp nhiều đối tượng. Rất recommend.",
-    avatarUrl: "/image/customers/6.webp",
+    avatarUrl: "/uploads/shared/images/customers/6.webp",
     rating: 5,
     position: 5,
     isActive: true,

@@ -1,6 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
-import slugify from 'slugify';
+import { NextRequest, NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
+import slugify from "slugify";
+import fs from "fs/promises";
+import path from "path";
 
 const prisma = new PrismaClient();
 
@@ -12,15 +14,15 @@ export async function GET(
     const id = parseInt((await params).id);
     const news = await prisma.news.findUnique({
       where: { id },
-      include: { author: { select: { id: true, name: true } } }
+      include: { author: { select: { id: true, name: true } } },
     });
 
     if (!news) {
       return NextResponse.json(
         {
           success: false,
-          error: 'News not found',
-          message: `News with ID ${id} not found`
+          error: "News not found",
+          message: `News with ID ${id} not found`,
         },
         { status: 404 }
       );
@@ -29,14 +31,14 @@ export async function GET(
     return NextResponse.json({
       success: true,
       data: news,
-      message: 'News retrieved successfully'
+      message: "News retrieved successfully",
     });
   } catch (error) {
     return NextResponse.json(
       {
         success: false,
-        error: 'Internal server error',
-        message: 'Failed to fetch news'
+        error: "Internal server error",
+        message: "Failed to fetch news",
       },
       { status: 500 }
     );
@@ -56,7 +58,7 @@ export async function PUT(
       featuredImage,
       tags,
       isPublished,
-      publishedAt
+      publishedAt,
     } = await req.json();
 
     const existingNews = await prisma.news.findUnique({ where: { id } });
@@ -64,8 +66,8 @@ export async function PUT(
       return NextResponse.json(
         {
           success: false,
-          error: 'News not found',
-          message: `News with ID ${id} not found`
+          error: "News not found",
+          message: `News with ID ${id} not found`,
         },
         { status: 404 }
       );
@@ -77,7 +79,7 @@ export async function PUT(
       content,
       featuredImage,
       tags: tags || [],
-      isPublished: isPublished || false
+      isPublished: isPublished || false,
     };
 
     // Update slug if title changed
@@ -87,7 +89,7 @@ export async function PUT(
       let counter = 1;
       while (
         await prisma.news.findFirst({
-          where: { slug, id: { not: id } }
+          where: { slug, id: { not: id } },
         })
       ) {
         slug = `${baseSlug}-${counter}`;
@@ -108,25 +110,27 @@ export async function PUT(
     const news = await prisma.news.update({
       where: { id },
       data: updateData,
-      include: { author: { select: { id: true, name: true } } }
+      include: { author: { select: { id: true, name: true } } },
     });
 
     return NextResponse.json({
       success: true,
       data: news,
-      message: 'News updated successfully'
+      message: "News updated successfully",
     });
   } catch (error) {
     return NextResponse.json(
       {
         success: false,
-        error: 'Internal server error',
-        message: 'Failed to update news'
+        error: "Internal server error",
+        message: "Failed to update news",
       },
       { status: 500 }
     );
   }
 }
+
+const UPLOAD_DIR = path.join(process.cwd(), "public", "uploads", "news");
 
 export async function DELETE(
   req: NextRequest,
@@ -137,28 +141,35 @@ export async function DELETE(
     const existingNews = await prisma.news.findUnique({ where: { id } });
     if (!existingNews) {
       return NextResponse.json(
-        {
-          success: false,
-          error: 'News not found',
-          message: `News with ID ${id} not found`
-        },
+        { success: false, error: "News not found" },
         { status: 404 }
       );
+    }
+
+    // Remove image file if it exists
+    if (existingNews.featuredImage) {
+      const imagePath = path.join(
+        UPLOAD_DIR,
+        path.basename(existingNews.featuredImage)
+      );
+      try {
+        await fs.unlink(imagePath);
+      } catch (err: any) {
+        // Ignore error if file does not exist
+        if (err.code !== "ENOENT") throw err;
+      }
     }
 
     await prisma.news.delete({ where: { id } });
 
     return NextResponse.json({
       success: true,
-      message: 'News deleted successfully'
+      message: "News and image deleted successfully",
     });
   } catch (error) {
+    console.error(error);
     return NextResponse.json(
-      {
-        success: false,
-        error: 'Internal server error',
-        message: 'Failed to delete news'
-      },
+      { success: false, error: "Internal server error" },
       { status: 500 }
     );
   }

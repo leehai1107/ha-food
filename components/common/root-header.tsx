@@ -71,17 +71,21 @@ export default function RootHeader() {
   };
 
   const transformCategoriesToSubItems = (categories: Category[]): SubItem[] => {
-    return categories.map((category) => {
-      const allIds = collectCategoryIds(category);
-      return {
-        href: `/products?categoryId=${allIds.join(",")}`,
-        label: category.name,
-        subItems:
-          category.children && category.children.length > 0
-            ? transformCategoriesToSubItems(category.children)
-            : undefined,
-      };
-    });
+                    // Filter by visible and sort by priority
+    return categories
+      .filter((category) => category.visible)
+      .sort((a, b) => (a.priority ?? 0) - (b.priority ?? 0))
+      .map((category) => {
+        const allIds = collectCategoryIds(category);
+        return {
+          href    : `/products?categoryId=${allIds.join(",")}`,
+          label   : category.name,
+          subItems: 
+            category.children && category.children.length > 0
+              ? transformCategoriesToSubItems(category.children)
+              :         undefined,
+        };
+      });
   };
 
   const toggleSubItems = (label: string) => {
@@ -149,8 +153,8 @@ export default function RootHeader() {
           <Button>
             <Link href="/">
               <Image
-                src = "/logo/logo-primary.webp"
-                alt = "Logo"
+                src="/uploads/shared/logos/logo-primary.webp"
+                alt="Logo"
                 priority
                 width={168}
                 height={47}

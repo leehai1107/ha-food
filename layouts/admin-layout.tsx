@@ -72,6 +72,13 @@ export default function AdminLayout({
       path: "/admin/galleries",
     },
     {
+      id: "files",
+      name: "Tệp tin",
+      icon: "📁",
+      description: "Quản lý tệp tin",
+      path: "/admin/files",
+    },
+    {
       id: "system-config",
       name: "Cấu hình",
       icon: "⚙️",

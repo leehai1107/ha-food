@@ -5,7 +5,7 @@ export default function FooterInfo() {
   return (
     <div className="flex flex-col gap-2">
       <Image
-        src="/logo/logo-primary.webp"
+        src="/uploads/shared/logos/logo-primary.webp"
         alt="Logo Ha Food"
         width={245}
         height={69}

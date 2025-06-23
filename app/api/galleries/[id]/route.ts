@@ -1,5 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
+import { NextRequest, NextResponse } from "next/server";
+import { PrismaClient } from "@prisma/client";
+import fs from "fs";
+import path from "path";
 
 const prisma = new PrismaClient();
 
@@ -12,48 +14,70 @@ export async function GET(
     const { id } = await params;
     const galleryId = parseInt(id);
     if (isNaN(galleryId)) {
-      return NextResponse.json({
-        success: false,
-        error: 'Invalid ID',
-        message: 'Gallery ID must be a number'
-      }, { status: 400 });
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Invalid ID",
+          message: "Gallery ID must be a number",
+        },
+        { status: 400 }
+      );
     }
 
     const { searchParams } = new URL(req.url);
-    const includeImages = searchParams.get('includeImages') === 'true';
+    const includeImages = searchParams.get("includeImages") === "true";
 
     const gallery = await prisma.gallery.findUnique({
       where: { id: galleryId },
       include: {
-        images: includeImages ? {
-          orderBy: { position: 'asc' }
-        } : false,
+        images: includeImages
+          ? {
+              orderBy: { position: "asc" },
+            }
+          : false,
         _count: {
-          select: { images: true }
-        }
-      }
+          select: { images: true },
+        },
+      },
     });
 
     if (!gallery) {
-      return NextResponse.json({
-        success: false,
-        error: 'Not found',
-        message: 'Gallery not found'
-      }, { status: 404 });
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Not found",
+          message: "Gallery not found",
+        },
+        { status: 404 }
+      );
     }
 
     return NextResponse.json({
       success: true,
       data: gallery,
-      message: 'Gallery retrieved successfully'
+      message: "Gallery retrieved successfully",
     });
   } catch (error) {
-    console.error('Error fetching gallery:', error);
-    return NextResponse.json({
-      success: false,
-      error: 'Internal server error',
-      message: 'Failed to fetch gallery'
-    }, { status: 500 });
+    console.error("Error fetching gallery:", error);
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Internal server error",
+        message: "Failed to fetch gallery",
+      },
+      { status: 500 }
+    );
+  }
+}
+
+// Helper to delete an image file
+async function deleteImageFile(imageUrl: string) {
+  if (!imageUrl) return;
+  const imagePath = path.join(process.cwd(), "public", imageUrl);
+  try {
+    await fs.promises.unlink(imagePath);
+  } catch (err) {
+    // Ignore error if file doesn't exist
   }
 }
 
@@ -66,11 +90,14 @@ export async function PUT(
     const { id } = await params;
     const galleryId = parseInt(id);
     if (isNaN(galleryId)) {
-      return NextResponse.json({
-        success: false,
-        error: 'Invalid ID',
-        message: 'Gallery ID must be a number'
-      }, { status: 400 });
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Invalid ID",
+          message: "Gallery ID must be a number",
+        },
+        { status: 400 }
+      );
     }
 
     const body = await req.json();
@@ -78,26 +105,36 @@ export async function PUT(
 
     // Check if gallery exists
     const existingGallery = await prisma.gallery.findUnique({
-      where: { id: galleryId }
+      where: { id: galleryId },
+      include: { images: true },
     });
 
     if (!existingGallery) {
-      return NextResponse.json({
-        success: false,
-        error: 'Not found',
-        message: 'Gallery not found'
-      }, { status: 404 });
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Not found",
+          message: "Gallery not found",
+        },
+        { status: 404 }
+      );
     }
+
+    // If images are being updated (not in this handler, but if you add image update here, handle file deletion)
+    // For now, skip as images are managed in a separate endpoint
 
     // Prepare update data
     const updateData: any = {};
     if (name !== undefined) {
       if (!name || name.trim().length === 0) {
-        return NextResponse.json({
-          success: false,
-          error: 'Validation error',
-          message: 'Gallery name cannot be empty'
-        }, { status: 400 });
+        return NextResponse.json(
+          {
+            success: false,
+            error: "Validation error",
+            message: "Gallery name cannot be empty",
+          },
+          { status: 400 }
+        );
       }
       updateData.name = name.trim();
     }
@@ -117,23 +154,26 @@ export async function PUT(
       data: updateData,
       include: {
         _count: {
-          select: { images: true }
-        }
-      }
+          select: { images: true },
+        },
+      },
     });
 
     return NextResponse.json({
       success: true,
       data: gallery,
-      message: 'Gallery updated successfully'
+      message: "Gallery updated successfully",
     });
   } catch (error) {
-    console.error('Error updating gallery:', error);
-    return NextResponse.json({
-      success: false,
-      error: 'Internal server error',
-      message: 'Failed to update gallery'
-    }, { status: 500 });
+    console.error("Error updating gallery:", error);
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Internal server error",
+        message: "Failed to update gallery",
+      },
+      { status: 500 }
+    );
   }
 }
 
@@ -146,41 +186,60 @@ export async function DELETE(
     const { id } = await params;
     const galleryId = parseInt(id);
     if (isNaN(galleryId)) {
-      return NextResponse.json({
-        success: false,
-        error: 'Invalid ID',
-        message: 'Gallery ID must be a number'
-      }, { status: 400 });
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Invalid ID",
+          message: "Gallery ID must be a number",
+        },
+        { status: 400 }
+      );
     }
 
     // Check if gallery exists
     const existingGallery = await prisma.gallery.findUnique({
-      where: { id: galleryId }
+      where: { id: galleryId },
+      include: { images: true },
     });
 
     if (!existingGallery) {
-      return NextResponse.json({
-        success: false,
-        error: 'Not found',
-        message: 'Gallery not found'
-      }, { status: 404 });
+      return NextResponse.json(
+        {
+          success: false,
+          error: "Not found",
+          message: "Gallery not found",
+        },
+        { status: 404 }
+      );
     }
 
-    // Delete gallery (images will be deleted automatically due to cascade)
+    // Delete all image files associated with this gallery
+    if (existingGallery.images && existingGallery.images.length > 0) {
+      for (const img of existingGallery.images) {
+        if (img.imageUrl) {
+          await deleteImageFile(img.imageUrl);
+        }
+      }
+    }
+
+    // Delete gallery (images will be deleted from DB due to cascade)
     await prisma.gallery.delete({
-      where: { id: galleryId }
+      where: { id: galleryId },
     });
 
     return NextResponse.json({
       success: true,
-      message: 'Gallery deleted successfully'
+      message: "Gallery deleted successfully",
     });
   } catch (error) {
-    console.error('Error deleting gallery:', error);
-    return NextResponse.json({
-      success: false,
-      error: 'Internal server error',
-      message: 'Failed to delete gallery'
-    }, { status: 500 });
+    console.error("Error deleting gallery:", error);
+    return NextResponse.json(
+      {
+        success: false,
+        error: "Internal server error",
+        message: "Failed to delete gallery",
+      },
+      { status: 500 }
+    );
   }
-} 
+}

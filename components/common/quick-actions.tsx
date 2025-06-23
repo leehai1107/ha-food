@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { ArrowUp, Phone, MessageCircle, MapPin } from 'lucide-react';
-import Zalo from "../../public/logo/zalo-white.svg";
+import Zalo from "../../public/uploads/shared/logos/zalo-white.svg";
 import Image from 'next/image';
 
 

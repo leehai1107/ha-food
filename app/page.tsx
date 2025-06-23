@@ -6,6 +6,7 @@ import ProductsSection from "@/components/section/product-section";
 import TestimonialsSection from "@/components/section/testimonial-section";
 import CollectionSection from "@/components/section/collection-section";
 import { ScrollAnimation } from "@/components/ui/scroll-animation";
+import { collectionData } from "@/constants";
 
 export const metadata: Metadata = {
   title: "hafood - Quà tặng doanh nghiệp | Thiên Cầu Vượng Khí",
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
     description: "Thiên Cầu Vượng Khí - Biểu tượng may mắn và vượng khí",
     images: [
       {
-        url: "/image/banners/banner_1.webp",
+        url: "/uploads/shared/images/banners/banner_1.webp",
         width: 1200,
         height: 630,
         alt: "hafood - Quà tặng doanh nghiệp",
@@ -29,7 +30,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "hafood - Quà tặng doanh nghiệp",
     description: "Thiên Cầu Vượng Khí - Biểu tượng may mắn và vượng khí",
-    images: ["/image/banners/banner_1.webp"],
+    images: ["/uploads/shared/images/banners/banner_1.webp"],
   },
 };
 
@@ -43,7 +44,7 @@ export default async function Home() {
 
       {/* Collection Section */}
       <ScrollAnimation>
-        <CollectionSection />
+        <CollectionSection data={collectionData} />
       </ScrollAnimation>
 
       {/* Products Section */}

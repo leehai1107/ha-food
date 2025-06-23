@@ -12,41 +12,41 @@ import newsService from "@/services/newsService";
 import Image from "next/image";
 
 const NewsManagement = () => {
-  const [news, setNews] = useState<News[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [showModal, setShowModal] = useState(false);
-  const [editingNews, setEditingNews] = useState<News | null>(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [news, setNews]                 = useState<News[]>([]);
+  const [loading, setLoading]           = useState(true);
+  const [error, setError]               = useState<string | null>(null);
+  const [showModal, setShowModal]       = useState(false);
+  const [editingNews, setEditingNews]   = useState<News | null>(null);
+  const [currentPage, setCurrentPage]   = useState(1);
+  const [totalPages, setTotalPages]     = useState(1);
+  const [searchTerm, setSearchTerm]     = useState("");
   const [statusFilter, setStatusFilter] = useState<
     "all" | "published" | "draft"
   >("all");
 
-  // Form state
+      // Form state
   const [formData, setFormData] = useState<CreateNewsRequest>({
-    title: "",
-    excerpt: "",
-    content: "",
+    title        : "",
+    excerpt      : "",
+    content      : "",
     featuredImage: "",
-    tags: [],
-    isPublished: false,
-    publishedAt: "",
+    tags         : [],
+    isPublished  : false,
+    publishedAt  : "",
   });
   const [tagInput, setTagInput] = useState("");
 
-  // Image upload state
+      // Image upload state
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
-  const [dragActive, setDragActive] = useState(false);
+  const [imagePreview, setImagePreview]   = useState<string | null>(null);
+  const [dragActive, setDragActive]       = useState(false);
 
   const fetchNews = useCallback(async () => {
     try {
       setLoading(true);
       const params: NewsQueryParams = {
-        page: currentPage,
-        limit: 10,
+        page  : currentPage,
+        limit : 10,
         status: statusFilter,
         search: searchTerm || undefined,
       };
@@ -68,7 +68,7 @@ const NewsManagement = () => {
     fetchNews();
   }, [fetchNews]);
 
-  // Cleanup preview URL on unmount
+      // Cleanup preview URL on unmount
   useEffect(() => {
     return () => {
       if (imagePreview && imagePreview.startsWith("blob:")) {
@@ -84,17 +84,17 @@ const NewsManagement = () => {
       setLoading(true);
 
       if (editingNews) {
-        // Update news
+            // Update news
         let response;
         if (selectedImage) {
-          // Update with new image
+              // Update with new image
           response = await newsService.updateNewsWithImage(
             editingNews.id,
             formData as UpdateNewsRequest,
             selectedImage
           );
         } else {
-          // Update without changing image
+              // Update without changing image
           response = await newsService.updateNews(
             editingNews.id,
             formData as UpdateNewsRequest
@@ -107,16 +107,16 @@ const NewsManagement = () => {
           setShowModal(false);
         }
       } else {
-        // Create news
+            // Create news
         let response;
         if (selectedImage) {
-          // Create with image
+              // Create with image
           response = await newsService.createNewsWithImage(
             formData,
             selectedImage
           );
         } else {
-          // Create without image
+              // Create without image
           response = await newsService.createNews(formData);
         }
 
@@ -136,15 +136,15 @@ const NewsManagement = () => {
   const handleEdit = (newsItem: News) => {
     setEditingNews(newsItem);
     setFormData({
-      title: newsItem.title,
-      excerpt: newsItem.excerpt || "",
-      content: newsItem.content,
+      title        : newsItem.title,
+      excerpt      : newsItem.excerpt || "",
+      content      : newsItem.content,
       featuredImage: newsItem.featuredImage || "",
-      tags: newsItem.tags,
-      isPublished: newsItem.isPublished,
-      publishedAt: newsItem.publishedAt
+      tags         : newsItem.tags,
+      isPublished  : newsItem.isPublished,
+      publishedAt  : newsItem.publishedAt
         ? new Date(newsItem.publishedAt).toISOString().slice(0, 16)
-        : "",
+        :   "",
     });
     setShowModal(true);
   };
@@ -165,18 +165,18 @@ const NewsManagement = () => {
 
   const resetForm = () => {
     setFormData({
-      title: "",
-      excerpt: "",
-      content: "",
+      title        : "",
+      excerpt      : "",
+      content      : "",
       featuredImage: "",
-      tags: [],
-      isPublished: false,
-      publishedAt: "",
+      tags         : [],
+      isPublished  : false,
+      publishedAt  : "",
     });
     setTagInput("");
     setEditingNews(null);
 
-    // Clear image upload state
+        // Clear image upload state
     setSelectedImage(null);
     setImagePreview(null);
     setDragActive(false);
@@ -199,15 +199,15 @@ const NewsManagement = () => {
     }));
   };
 
-  // Image handling functions
+      // Image handling functions
   const handleImageSelect = (file: File) => {
-    // Validate file type
+        // Validate file type
     if (!file.type.startsWith("image/")) {
       setError("Vui lòng chọn file ảnh (PNG, JPG, GIF, WebP)");
       return;
     }
 
-    // Validate file size (5MB limit)
+        // Validate file size (5MB limit)
     if (file.size > 5 * 1024 * 1024) {
       setError("Kích thước file không được vượt quá 5MB");
       return;
@@ -215,14 +215,14 @@ const NewsManagement = () => {
 
     setSelectedImage(file);
 
-    // Create preview URL
-    const reader = new FileReader();
-    reader.onload = (e) => {
+        // Create preview URL
+    const reader        = new FileReader();
+          reader.onload = (e) => {
       setImagePreview(e.target?.result as string);
     };
     reader.readAsDataURL(file);
 
-    // Clear any previous errors
+        // Clear any previous errors
     setError(null);
   };
 
@@ -247,7 +247,7 @@ const NewsManagement = () => {
   };
 
   const removeSelectedImage = () => {
-    // Clean up the preview URL to prevent memory leaks
+        // Clean up the preview URL to prevent memory leaks
     if (imagePreview && imagePreview.startsWith("blob:")) {
       URL.revokeObjectURL(imagePreview);
     }
@@ -654,7 +654,7 @@ const NewsManagement = () => {
                             PNG, JPG, GIF, WebP tối đa 5MB
                           </p>
                           <p className="text-xs text-gray-400 mt-1">
-                            Kích thước khuyến nghị: 800x600px hoặc tỷ lệ 4:3
+                            Kích thước khuyến nghị: 800x600px hoặc tỷ lệ 4: 3
                           </p>
                         </div>
                       </div>
@@ -738,7 +738,8 @@ const NewsManagement = () => {
                   </div>
                   <p className="text-xs text-gray-500 mt-1">
                     Sử dụng Markdown để định dạng nội dung. Hỗ trợ **bold**,
-                    *italic*, # headers, links, images, v.v.
+                    *italic*, # headers, links, images,
+                    [color=red]text[/color], [color=#FFFFF]text[/color] v.v.
                   </p>
                 </div>
 

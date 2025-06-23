@@ -127,7 +127,8 @@ const CheckoutSuccessContent = () => {
           <div
             className="rounded-lg shadow-sm p-8 text-center"
             style={{
-              backgroundImage: 'url("/image/banners/footer-bg.webp")',
+              backgroundImage: 
+                'url("/uploads/shared/images/banners/footer-bg.webp")',
               backgroundSize: "cover",
               backgroundPosition: "center",
               backgroundRepeat: "no-repeat",

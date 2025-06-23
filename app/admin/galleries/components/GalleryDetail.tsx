@@ -123,18 +123,16 @@ export default function GalleryDetail({
       {/* Gallery Info */}
       <Card>
         <CardHeader>
-          <CardTitle>Thông tin thư viện</CardTitle>
+          <CardTitle>Thông tin dự án</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <h3 className="font-medium text-gray-900 mb-2">
-                Thông tin cơ bản
-              </h3>
+             
               <dl className="space-y-2">
                 <div>
                   <dt className="text-sm font-medium text-gray-500">
-                    Tên thư viện
+                    Tên dự án
                   </dt>
                   <dd className="text-sm text-gray-900">{gallery.name}</dd>
                 </div>
@@ -157,7 +155,6 @@ export default function GalleryDetail({
               </dl>
             </div>
             <div>
-              <h3 className="font-medium text-gray-900 mb-2">Thống kê</h3>
               <dl className="space-y-2">
                 <div>
                   <dt className="text-sm font-medium text-gray-500">
@@ -204,7 +201,7 @@ export default function GalleryDetail({
       {/* Images */}
       <Card>
         <CardHeader>
-          <CardTitle>Ảnh trong thư viện ({images.length})</CardTitle>
+          <CardTitle>Ảnh trong dự án ({images.length})</CardTitle>
         </CardHeader>
         <CardContent>
           {loading ? (
@@ -223,7 +220,7 @@ export default function GalleryDetail({
                 Chưa có ảnh nào
               </h3>
               <p className="mt-1 text-sm text-gray-500">
-                Bắt đầu thêm ảnh vào thư viện này.
+                Bắt đầu thêm ảnh vào dự án này.
               </p>
               <div className="mt-6 text-primary-white">
                 <Button onClick={handleUploadImages}>
