@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -31,16 +31,12 @@ export default function GalleryDetail({
   onRefresh,
 }: GalleryDetailProps) {
   const [images, setImages] = useState<GalleryImage[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [showUploadModal, setShowUploadModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedImage, setSelectedImage] = useState<GalleryImage | null>(null);
 
-  useEffect(() => {
-    fetchImages();
-  }, [gallery.id]);
-
-  const fetchImages = async () => {
+  const fetchImages = useCallback(async () => {
     setLoading(true);
     try {
       const response = await galleryService.getImages(gallery.id);
@@ -52,7 +48,11 @@ export default function GalleryDetail({
     } finally {
       setLoading(false);
     }
-  };
+  }, [gallery.id]);
+
+  useEffect(() => {
+    fetchImages();
+  }, [fetchImages]);
 
   const handleUploadImages = () => {
     setShowUploadModal(true);
@@ -233,7 +233,7 @@ export default function GalleryDetail({
               </div>
             </div>
           ) : (
-            <div className = "grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
               {images.map((image) => (
                 <div key={image.id} className="group relative">
                   <div className="aspect-square overflow-hidden rounded-lg bg-gray-100">

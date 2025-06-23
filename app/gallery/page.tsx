@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -16,19 +16,14 @@ import Breadcrumbs from "@/components/custom/breadcums";
 
 export default function GalleryPage() {
   const [galleries, setGalleries] = useState<Gallery[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [selectedGallery, setSelectedGallery] = useState<Gallery | null>(null);
-  const [showModal, setShowModal] = useState(false);
   const [allTags, setAllTags] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [tagsLoading, setTagsLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [tagsLoading, setTagsLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedGallery, setSelectedGallery] = useState<Gallery | null>(null);
 
-  useEffect(() => {
-    fetchGalleries();
-    fetchTags();
-  }, [selectedTags]);
-
-  const fetchGalleries = async () => {
+  const fetchGalleries = useCallback(async () => {
     setLoading(true);
     try {
       const params: any = {
@@ -49,9 +44,9 @@ export default function GalleryPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [selectedTags]);
 
-  const fetchTags = async () => {
+  const fetchTags = useCallback(async () => {
     setTagsLoading(true);
     try {
       const response = await galleryService.getTags();
@@ -63,7 +58,12 @@ export default function GalleryPage() {
     } finally {
       setTagsLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchGalleries();
+    fetchTags();
+  }, [fetchGalleries, fetchTags]);
 
   const handleViewGallery = (gallery: Gallery) => {
     setSelectedGallery(gallery);
@@ -80,15 +80,11 @@ export default function GalleryPage() {
     setSelectedTags([]);
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("vi-VN");
-  };
 
   if (loading) {
     return (
-      
-      <div className = "min-h-screen bg-gray-50 py-12">
-      <h1  className = "hidden">hafood - Quà tặng doanh nghiệp</h1>
+      <div className="min-h-screen bg-gray-50 py-12">
+        <h1 className="hidden">hafood - Quà tặng doanh nghiệp</h1>
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
           {/* Breadcrumbs */}
           <div className="mb-6">

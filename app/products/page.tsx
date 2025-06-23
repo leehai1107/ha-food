@@ -2,7 +2,7 @@
 import ProductList from "@/components/items/product-list";
 import categoryService from "@/services/categoryService";
 import Link from "next/link";
-import { useEffect, useState, Suspense, useRef } from "react";
+import { useEffect, useState, Suspense, useRef, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
 // Client component that handles search params
@@ -20,37 +20,33 @@ const ProductsContent = () => {
   const lastUrlSearch = useRef<string>("");
   const [ready, setReady] = useState(false);
 
-  // Fetch product types and categories from API
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        // Fetch categories
-        const categoriesResponse = await categoryService.getFlatCategories();
-        if (categoriesResponse.success) {
-          setCategories(categoriesResponse.data);
-        } else {
-          console.error(
-            "Failed to fetch categories:",
-            categoriesResponse.message
-          );
-          // Set some fallback categories for testing
-          setCategories([
-            { id: 1, name: "Bánh Trung Thu", _count: { products: 21 } },
-            { id: 3, name: "Thiên Hương Nguyệt Dạ", _count: { products: 14 } },
-          ]);
-        }
-      } catch (error) {
-        console.error("Error fetching data:", error);
-        // Fallback to default categories for testing
+  const fetchData = useCallback(async () => {
+    try {
+      const response = await categoryService.getFlatCategories();
+      if (response.success) {
+        setCategories(response.data);
+      } else {
+        console.error("Failed to fetch categories:", response.message);
+        // Set some fallback categories for testing
         setCategories([
           { id: 1, name: "Bánh Trung Thu", _count: { products: 21 } },
           { id: 3, name: "Thiên Hương Nguyệt Dạ", _count: { products: 14 } },
         ]);
       }
-    };
-
-    fetchData();
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      // Fallback to default categories for testing
+      setCategories([
+        { id: 1, name: "Bánh Trung Thu", _count: { products: 21 } },
+        { id: 3, name: "Thiên Hương Nguyệt Dạ", _count: { products: 14 } },
+      ]);
+    }
   }, []);
+
+  // Fetch product types and categories from API
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   // Handle URL parameters
   useEffect(() => {
@@ -124,7 +120,7 @@ const ProductsContent = () => {
     const newUrl = `/products?${params.toString()}`;
     router.replace(newUrl);
     lastUrlSearch.current = debouncedSearchTerm;
-  }, [debouncedSearchTerm, router]);
+  }, [debouncedSearchTerm, router, searchParams]);
 
   const handleCategoryChange = (categoryId: string) => {
     setSelectedCategory(categoryId);
@@ -167,7 +163,6 @@ const ProductsContent = () => {
       ? `${parent.name} (và các sản phẩm tương tự)`
       : "Nhiều danh mục";
   };
-
 
   return (
     <>

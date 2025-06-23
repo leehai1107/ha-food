@@ -8,7 +8,7 @@ import {
 } from "@/types/ghn";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 
 const CheckoutPage = () => {
   const router = useRouter();
@@ -38,87 +38,64 @@ const CheckoutPage = () => {
   const [shippingError, setShippingError] = useState<string | null>(null);
 
   // Calculate total weight and dimensions from cart items
-  const calculatePackageInfo = () => {
-    let totalWeight = 0;
-    let maxHeight = 0;
-    let maxLength = 0;
-    let maxWidth = 0;
-
-    cart.items.forEach((item) => {
-      // Convert weight from string to number (assuming weight is in grams)
-      const itemWeight = item.weight ? parseInt(item.weight) || 500 : 500; // Default 500g if no weight
-      totalWeight += itemWeight * item.quantity;
-
-      // Estimate dimensions based on quantity (simple estimation)
-      maxHeight = Math.max(maxHeight, 10); // 10cm height per item
-      maxLength = Math.max(maxLength, 20); // 20cm length per item
-      maxWidth = Math.max(maxWidth, 15); // 15cm width per item
-    });
-
+  const calculatePackageInfo = useCallback(() => {
+    // Only use weight from CartItem, default to 500g if missing/invalid
+    const totalWeight = cart.items.reduce((sum, item) => {
+      const itemWeight = item.weight ? parseInt(item.weight) || 500 : 500;
+      return sum + itemWeight * item.quantity;
+    }, 0);
+    // Use fixed values for length, width, height
     return {
       weight: Math.max(totalWeight, 100), // Minimum 100g
-      height: maxHeight,
-      length: maxLength,
-      width: maxWidth,
+      length: 20, // cm
+      width: 15, // cm
+      height: 10, // cm
     };
-  };
+  }, [cart.items]);
 
-  // Calculate shipping fee
-  const calculateShippingFee = async () => {
+  const calculateShippingFee = useCallback(async () => {
     if (!selectedDistrict || !selectedWard) {
       setShippingFee(null);
-      setShippingError(null);
       return;
     }
 
-    setIsCalculatingShipping(true);
-    setShippingError(null);
-
     try {
       const packageInfo = calculatePackageInfo();
-
-      const requestBody = {
-        service_id: 53320, // Standard delivery service
-        to_district_id: parseInt(selectedDistrict),
-        to_ward_code: selectedWard,
-        height: packageInfo.height,
-        length: packageInfo.length,
-        weight: packageInfo.weight,
-        width: packageInfo.width,
-        insurance_value: cart.totalPrice,
-      };
-
-      const response = await fetch("/api/ghn?type=shipping-fee", {
+      const response = await fetch("/api/ghn/shipping-fee", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(requestBody),
+        body: JSON.stringify({
+          service_type_id: 2, // Standard delivery
+          to_district_id: parseInt(selectedDistrict),
+          to_ward_code: selectedWard,
+          height: packageInfo.height,
+          length: packageInfo.length,
+          weight: packageInfo.weight,
+          width: packageInfo.width,
+        }),
       });
 
-      const result = await response.json();
-
-      if (result.code === 200) {
-        setShippingFee(result.data);
+      const data = await response.json();
+      if (data.success) {
+        setShippingFee(data.data);
       } else {
-        setShippingError(result.error || "Liên hệ");
+        console.error("Error calculating shipping fee:", data.message);
         setShippingFee(null);
       }
     } catch (error) {
       console.error("Error calculating shipping fee:", error);
-      setShippingError("Lỗi khi tính phí vận chuyển");
       setShippingFee(null);
-    } finally {
-      setIsCalculatingShipping(false);
     }
-  };
+  }, [selectedDistrict, selectedWard, calculatePackageInfo]);
 
   // Calculate shipping fee when address changes
   useEffect(() => {
     if (selectedDistrict && selectedWard) {
       calculateShippingFee();
     }
-  }, [selectedDistrict, selectedWard, cart.items]);
+  }, [selectedDistrict, selectedWard, calculateShippingFee]);
 
   // Fetch provinces on mount
   useEffect(() => {
@@ -429,8 +406,8 @@ const CheckoutPage = () => {
 
                 <div>
                   <label
-                    htmlFor   = "customerAddress"
-                    className = "block text-sm font-medium text-gray-700 mb-2"
+                    htmlFor="customerAddress"
+                    className="block text-sm font-medium text-gray-700 mb-2"
                   >
                     Địa chỉ giao hàng
                   </label>

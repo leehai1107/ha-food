@@ -1,39 +1,40 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import {
-  ImageIcon,
-  Tag,
-  ArrowLeft,
-  Share2,
-} from "lucide-react";
+import { ImageIcon, Tag, ArrowLeft, Share2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import galleryService from "@/services/galleryService";
 import type { Gallery } from "@/types";
 
-export default function GalleryDetailPage() {
-  const params = useParams();
-  const router = useRouter();
+export default function GalleryDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
   const [gallery, setGallery] = useState<Gallery | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const [showImageModal, setShowImageModal] = useState(false);
-
-  const galleryId = params.id as string;
+  const [selectedImage, setSelectedImage] = useState<string>("");
+  const [galleryId, setGalleryId] = useState<string>("");
+  const router = useRouter();
 
   useEffect(() => {
-    if (galleryId) {
-      fetchGallery();
-    }
-  }, [galleryId]);
+    const getParams = async () => {
+      const { id } = await params;
+      if (typeof id === "string") {
+        setGalleryId(id);
+      }
+    };
+    getParams();
+  }, [params]);
 
-  const fetchGallery = async () => {
+  const fetchGallery = useCallback(async () => {
     setLoading(true);
     try {
       const response = await galleryService.getById(parseInt(galleryId), true);
@@ -49,17 +50,20 @@ export default function GalleryDetailPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [galleryId, router]);
+
+  useEffect(() => {
+    if (galleryId) {
+      fetchGallery();
+    }
+  }, [galleryId, fetchGallery]);
 
   const handleImageClick = (imageUrl: string) => {
     setSelectedImage(imageUrl);
     setShowImageModal(true);
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("vi-VN");
-  };
-
+ 
   const handleShare = async () => {
     if (navigator.share) {
       try {

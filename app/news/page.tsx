@@ -4,7 +4,7 @@ import { News } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, useCallback, Suspense } from "react";
 
 // Separate the main content into its own component
 const NewsContent = () => {
@@ -20,12 +20,7 @@ const NewsContent = () => {
   const currentTag = searchParams.get("tag") || "";
   const currentSearch = searchParams.get("search") || "";
 
-  useEffect(() => {
-    fetchNews();
-    fetchTags();
-  }, [currentPage, currentTag, currentSearch]);
-
-  const fetchNews = async () => {
+  const fetchNews = useCallback(async () => {
     try {
       setLoading(true);
       const response = await newsService.getPublishedNews({
@@ -45,9 +40,9 @@ const NewsContent = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentPage, currentTag, currentSearch]);
 
-  const fetchTags = async () => {
+  const fetchTags = useCallback(async () => {
     try {
       const response = await newsService.getAllTags();
       if (response.success) {
@@ -56,7 +51,12 @@ const NewsContent = () => {
     } catch (err) {
       console.error("Failed to fetch tags:", err);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchNews();
+    fetchTags();
+  }, [fetchNews, fetchTags]);
 
   const updateSearchParams = (key: string, value?: string) => {
     const params = new URLSearchParams(searchParams.toString());

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -29,22 +29,18 @@ import {
 
 export default function GalleriesPage() {
   const [galleries, setGalleries] = useState<Gallery[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
   const [showForm, setShowForm] = useState(false);
   const [showDetail, setShowDetail] = useState(false);
-  const [selectedGallery, setSelectedGallery] = useState<Gallery | null>(null);
   const [editingGallery, setEditingGallery] = useState<Gallery | null>(null);
+  const [selectedGallery, setSelectedGallery] = useState<Gallery | null>(null);
 
   const limit = 10;
 
-  useEffect(() => {
-    fetchGalleries();
-  }, [currentPage, searchTerm]);
-
-  const fetchGalleries = async () => {
+  const fetchGalleries = useCallback(async () => {
     setLoading(true);
     try {
       const params = {
@@ -64,7 +60,11 @@ export default function GalleriesPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentPage, searchTerm]);
+
+  useEffect(() => {
+    fetchGalleries();
+  }, [fetchGalleries]);
 
   const handleCreateGallery = () => {
     setEditingGallery(null);
