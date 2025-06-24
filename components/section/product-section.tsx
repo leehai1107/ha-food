@@ -90,9 +90,9 @@ const ProductsSection = () => {
     if (product.images && product.images.length > 0) {
       const primaryImage = product.images.find((img) => img.isPrimary);
       const imageUrl = primaryImage?.imageUrl || product.images[0].imageUrl;
-      return imageUrl || "/image/noimage.png";
+      return imageUrl || "/image/noimage.webp";
     }
-    return "/image/noimage.png";
+    return "/image/noimage.webp";
   };
 
   const handleCategoryClick = (category: Category) => {
@@ -101,15 +101,6 @@ const ProductsSection = () => {
 
   return (
     <section className="bg-primary-white py-6" id="products">
-      {/* Section Header */}
-      <div className="text-center mb-16 max-w-4xl mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4 font-heading">
-          Chúng tôi chỉ phục vụ những gì tốt nhất cho bạn
-        </h2>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed font-primary">
-          Khám phá bộ sưu tập sản phẩm đa dạng và chất lượng cao
-        </p>
-      </div>
       <div className="w-full px-4 sm:px-6 lg:px-8">
         {/* Trending Categories Section */}
         <div className="max-w-7xl mx-auto pb-12">
@@ -150,7 +141,7 @@ const ProductsSection = () => {
                     >
                       <div className="w-40 h-40 rounded-full overflow-hidden shadow-lg border-4 border-white mb-4 relative transition-transform group-hover:scale-105">
                         <Image
-                          src={cat.imageUrl || "/image/noimage.png"}
+                          src={cat.imageUrl || "/image/noimage.webp"}
                           alt={cat.name}
                           width={200}
                           height={200}

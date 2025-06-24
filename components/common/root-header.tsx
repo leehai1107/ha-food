@@ -71,19 +71,19 @@ export default function RootHeader() {
   };
 
   const transformCategoriesToSubItems = (categories: Category[]): SubItem[] => {
-                    // Filter by visible and sort by priority
+    // Filter by visible and sort by priority
     return categories
       .filter((category) => category.visible)
       .sort((a, b) => (a.priority ?? 0) - (b.priority ?? 0))
       .map((category) => {
         const allIds = collectCategoryIds(category);
         return {
-          href    : `/products?categoryId=${allIds.join(",")}`,
-          label   : category.name,
-          subItems: 
+          href: `/products?categoryId=${allIds.join(",")}`,
+          label: category.name,
+          subItems:
             category.children && category.children.length > 0
               ? transformCategoriesToSubItems(category.children)
-              :         undefined,
+              : undefined,
         };
       });
   };
@@ -208,6 +208,7 @@ export default function RootHeader() {
               >
                 SẢN PHẨM
               </NavLink>
+              <NavLink href="/catalogues">CATALOGUE</NavLink>
               <NavLink href="/gallery">DỰ ÁN</NavLink>
               <NavLink href="/news">TIN TỨC</NavLink>
               <NavLink href="/contact">LIÊN HỆ</NavLink>
@@ -252,6 +253,13 @@ export default function RootHeader() {
                     onClick={closeMobileMenu}
                   >
                     SẢN PHẨM
+                  </NavLink>
+                  <NavLink
+                    href="/catalogues"
+                    isMobile
+                    onClick={closeMobileMenu}
+                  >
+                    CATALOGUE
                   </NavLink>
                   <NavLink href="/gallery" isMobile onClick={closeMobileMenu}>
                     DỰ ÁN

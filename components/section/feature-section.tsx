@@ -68,7 +68,7 @@ const ClientCard = ({
         className="max-w-full max-h-full object-contain filter transition-all duration-300 "
         onError={(e) => {
           const target = e.target as HTMLImageElement;
-          target.src = "/image/noimage.png";
+          target.src = "/image/noimage.webp";
         }}
       />
     </div>

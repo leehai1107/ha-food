@@ -202,7 +202,9 @@ export default function AdminFilesPage() {
               <Image
                 src={node.url}
                 alt={node.name}
-                className="w-8 h-8 object-cover"
+                width={32}
+                height={32}
+                className="object-cover rounded"
               />
             ) : (
               <span>📄</span>

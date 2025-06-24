@@ -74,7 +74,7 @@ const ProductDetail: React.FC<ProductDetailProps> = ({
   const images =
     product.images && product.images.length > 0
       ? product.images.map((img) => img.imageUrl)
-      : ["/image/noimage.png"];
+      : ["/image/noimage.webp"];
 
   const handleImageClick = (imageUrl: string) => {
     setModalImageUrl(imageUrl);

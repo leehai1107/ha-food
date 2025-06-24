@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Source_Sans_3, EB_Garamond } from "next/font/google";
+
 import "./globals.css";
 import { Toaster } from "sonner";
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -7,18 +8,18 @@ import LayoutContent from "@/layouts/layout-content";
 import { CartProvider } from "@/hooks/CartContext";
 import Script from "next/script";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const sourceSansPro = Source_Sans_3({
+  variable: "--font-source-sans",
   subsets: ["latin"],
+  weight: ["400"], // Regular
   preload: true,
-  adjustFontFallback: false,
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const ebGaramond = EB_Garamond({
+  variable: "--font-eb-garamond",
   subsets: ["latin"],
+  weight: ["700"], // Bold
   preload: true,
-  adjustFontFallback: false,
 });
 
 export const metadata: Metadata = {
@@ -88,7 +89,7 @@ export default function RootLayout({
         <meta name="next-size-adjust" content="100%" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${sourceSansPro.variable} ${ebGaramond.variable} antialiased bg-primary-white`}
       >
         <AuthProvider>
           <CartProvider>

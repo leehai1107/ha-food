@@ -152,9 +152,9 @@ const ProductList: React.FC<ProductListProps> = ({
     if (product.images && product.images.length > 0) {
       const primaryImage = product.images.find((img) => img.isPrimary);
       const imageUrl = primaryImage?.imageUrl || product.images[0].imageUrl;
-      return imageUrl || "/image/noimage.png";
+      return imageUrl || "/image/noimage.webp";
     }
-    return "/image/noimage.png";
+    return "/image/noimage.webp";
   };
 
   const isMobile = typeof window !== "undefined" && window.innerWidth < 768;

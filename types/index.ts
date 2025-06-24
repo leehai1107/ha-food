@@ -730,3 +730,18 @@ export type CollectionContent = {
   mediaUrl: string;
   content: string; // Markdown string
 };
+
+export interface Catalogue {
+  id: number;
+  name: string;
+  coverImage: string;
+  pdfLink: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export * from "./product";
+export * from "./ghn";
+export * from "./systemConfig";
+export * from "./news";
+export * from "./address";

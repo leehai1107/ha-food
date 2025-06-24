@@ -169,7 +169,7 @@ const TestimonialsGallery = () => {
                 <div className="flex items-start mb-4">
                   <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-gray-200 mr-4">
                     <Image
-                      src={testimonial.avatarUrl || "/image/noimage.png"}
+                      src={testimonial.avatarUrl || "/image/noimage.webp"}
                       alt={testimonial.name}
                       width={56}
                       height={56}

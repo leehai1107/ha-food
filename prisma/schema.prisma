@@ -243,3 +243,14 @@ model GalleryImage {
   @@index([position], map: "idx_gallery_images_position")
   @@map("gallery_images")
 }
+
+model Catalogue {
+  id          Int      @id @default(autoincrement())
+  name        String
+  coverImage  String   // URL to the cover image
+  pdfLink     String   // URL to the PDF file
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("catalogues")
+}

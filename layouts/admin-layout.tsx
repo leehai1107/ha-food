@@ -72,6 +72,13 @@ export default function AdminLayout({
       path: "/admin/galleries",
     },
     {
+      id: "catalogues",
+      name: "Catalogue",
+      icon: "📇",
+      description: "Quản lý Catalogue",
+      path: "/admin/catalogues",
+    },
+    {
       id: "files",
       name: "Tệp tin",
       icon: "📁",

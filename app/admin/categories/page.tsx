@@ -559,7 +559,7 @@ const CategoryManagement: React.FC = () => {
                           src={
                             imagePreviewUrl ||
                             editingCategory?.imageUrl ||
-                            "/image/noimage.png"
+                            "/image/noimage.webp"
                           }
                           alt="Category preview"
                           width={96}

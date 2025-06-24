@@ -69,7 +69,7 @@ const CartPage = () => {
         {/* Product Image */}
         <div className="flex-shrink-0 w-20 h-20 sm:w-24 sm:h-24 mb-4 sm:mb-0 sm:mr-6">
           <Image
-            src={item.imageUrl || "/image/noimage.png"}
+            src={item.imageUrl || "/image/noimage.webp"}
             width={96}
             height={96}
             alt={item.productName}
@@ -89,7 +89,7 @@ const CartPage = () => {
                   {item.productName}
                 </Link>
               </h3>
-              
+
               {/* Price */}
               <div className="flex flex-wrap items-center gap-2 mb-3">
                 <span className="text-base sm:text-lg font-bold text-primary">
