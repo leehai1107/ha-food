@@ -252,15 +252,19 @@ const ProductList: React.FC<ProductListProps> = ({
               {product.available &&
                 parseFloat(product.originalPrice) >
                   parseFloat(product.currentPrice) && (
-                  <div className="absolute top-2 left-2 bg-red-600 text-white px-2 py-1 rounded-md text-xs font-bold">
-                    -
-                    {Math.round(
-                      ((parseFloat(product.originalPrice) -
-                        parseFloat(product.currentPrice)) /
-                        parseFloat(product.originalPrice)) *
-                        100
-                    )}
-                    %
+                  <div className="absolute top-2 left-2 bg-primary text-white px-2 py-1 rounded-md text-xs font-bold border-2 border-white shadow-lg transform rotate-3">
+                    <div className="flex items-center">
+                      <span className="text-xs mr-1">Giảm</span>
+                      <span className="text-sm">
+                        {Math.round(
+                          ((parseFloat(product.originalPrice) -
+                            parseFloat(product.currentPrice)) /
+                            parseFloat(product.originalPrice)) *
+                            100
+                        )}
+                        %
+                      </span>
+                    </div>
                   </div>
                 )}
             </div>

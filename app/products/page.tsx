@@ -168,7 +168,7 @@ const ProductsContent = () => {
     <>
       <h1 className="hidden">hafood - Quà tặng doanh nghiệp</h1>
       {/* Breadcrumb */}
-      <div className="bg-gray-50 py-4">
+      <div className="bg-gray-50 py-4 px-4">
         <div className="max-w-7xl mx-auto ">
           <nav className="flex items-center space-x-2 text-sm">
             <Link href="/" className="text-red-600 hover:text-red-700">
