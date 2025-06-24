@@ -29,7 +29,7 @@ export interface HomepageData {
 export async function getHomepageData(): Promise<HomepageData> {
   try {
     // For server-side rendering, we need to use the full URL
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";
+    const baseUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000";
     const response = await fetch(`${baseUrl}/api/admin/homepage`, {
       cache: "no-store", // Disable caching for dynamic content
     });
