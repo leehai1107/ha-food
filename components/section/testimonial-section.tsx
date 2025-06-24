@@ -3,96 +3,15 @@ import { Testimonial } from "@/types";
 import Image from "next/image";
 import { useRef } from "react";
 
-// Move defaultTestimonials outside the component
-const defaultTestimonials: Testimonial[] = [
-  {
-    id: 1,
-    name: "Chị Nhung",
-    location: "Trưởng phòng thu mua công ty Fuji VietNam",
-    type: "",
-    content:
-      "Hộp quà được đóng gói cẩn thận, đảm bảo an toàn trong quá trình vận chuyển. Chúng tôi đã tặng hộp quà này cho đối tác và nhân viên trong công ty dịp trung thu năm ngoái. Năm nay lại tiếp tục đặt bên Hafood vì siêu chất lượng nhé!",
-    avatarUrl: "/uploads/shared/images/customers/1.webp",
-    rating: 5,
-    position: 0,
-    isActive: true,
-    createdAt: "",
-    updatedAt: "",
-  },
-  {
-    id: 2,
-    name: "Chị Hà",
-    location: "Giám Đốc Chuỗi Spa Thảo Ngọc",
-    type: "",
-    content:
-      "Thiết kế hộp quà rất đẹp mắt và tinh tế, phù hợp với nhiều đối tượng khách hàng. Vị bánh phong phú và cũng có nhiều vị rất mới lạ, nhưng ngon lắm nha. Cảm ơn Hafood đã cùng tạo nên một mùa Trung Thu tuyệt vời.",
-    avatarUrl: "/uploads/shared/images/customers/2.webp",
-    rating: 5,
-    position: 1,
-    isActive: true,
-    createdAt: "",
-    updatedAt: "",
-  },
-  {
-    id: 3,
-    name: "Chị Vân",
-    location: "Giám đốc doanh nghiệp",
-    type: "",
-    content:
-      "Chúng tôi rất thích sự chăm chút tỉ mỉ trong từng chi tiết của hộp quà. Nhận bánh về mọi người trong công ty đều khen bánh sang  quá, đáng tiền cực kì. Luôn ủng hộ Hafood.",
-    avatarUrl: "/uploads/shared/images/customers/3.webp",
-    rating: 5,
-    position: 2,
-    isActive: true,
-    createdAt: "",
-    updatedAt: "",
-  },
-  {
-    id: 4,
-    name: "Chị Minh Anh",
-    location: "HR công ty thực phẩm",
-    type: "",
-    content:
-      "Hộp quà Trung thu của Hafood thật sự sang trọng và tinh tế, phù hợp làm quà tặng doanh nghiệp trong các dịp lễ, tết. Đợt trước có đặt quà tết cho công ty tại đây rồi, giờ thấy quảng cáo mẫu mới cho Trung thu phải tham khảo liền. Rất ưng ý.",
-    avatarUrl: "/uploads/shared/images/customers/4.webp",
-    rating: 5,
-    position: 3,
-    isActive: true,
-    createdAt: "",
-    updatedAt: "",
-  },
-  {
-    id: 5,
-    name: "Chị Thu Hà",
-    location: "Giám đốc doanh nghiệp",
-    type: "",
-    content:
-      "Khách hàng của chúng tôi đều rất ấn tượng với hộp quà này. Tôi đã mua một số lượng để vừa trao quà dịp lễ cho nhân viên, vừa cho đối tác và khách hàng thân thiết. Vừa được ưu đãi tốt vừa chất lượng.",
-    avatarUrl: "/uploads/shared/images/customers/5.webp",
-    rating: 5,
-    position: 4,
-    isActive: true,
-    createdAt: "",
-    updatedAt: "",
-  },
-  {
-    id: 6,
-    name: "Chị Lan Chi",
-    location: "HR Công ty công nghệ",
-    type: "",
-    content:
-      "Rất hài lòng với chất lượng hộp quà, nguyên liệu tươi ngon và an toàn. Trước khi đặt số lượng lớn cho công ty thì tôi đã đặt thử bánh lẻ, ăn vị khá ngon, không bị ngọt gắt như các dòng truyền thống. Mẫu mã đa dạng, phù hợp nhiều đối tượng. Rất recommend.",
-    avatarUrl: "/uploads/shared/images/customers/6.webp",
-    rating: 5,
-    position: 5,
-    isActive: true,
-    createdAt: "",
-    updatedAt: "",
-  },
-];
+interface TestimonialSectionProps {
+  testimonials: Testimonial[];
+}
 
-const TestimonialsSection = () => {
+const TestimonialsSection = ({ testimonials }: TestimonialSectionProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const displayTestimonials = testimonials.filter(
+    (testimonial) => testimonial.isActive
+  );
 
   const scroll = (direction: "left" | "right") => {
     const container = scrollRef.current;
@@ -163,7 +82,7 @@ const TestimonialsSection = () => {
             ref={scrollRef}
             className="flex space-x-4 sm:space-x-6 overflow-x-auto scrollbar-hide px-2 py-4 scroll-smooth"
           >
-            {defaultTestimonials.map((testimonial) => (
+            {displayTestimonials.map((testimonial) => (
               <div
                 key={testimonial.id}
                 className="flex-none w-72 sm:w-1/2 md:w-1/3 bg-primary-white rounded-3xl p-6 shadow-md hover:shadow-xl transition duration-300"
@@ -209,7 +128,7 @@ const TestimonialsSection = () => {
                 {/* Quote */}
                 <div className="relative">
                   <div className="text-4xl text-secondary opacity-20 absolute top-0 left-0 font-serif">
-                    “
+                    "
                   </div>
                   <p className="text-lg text-primary-black mt-4 font-primary">
                     {testimonial.content}

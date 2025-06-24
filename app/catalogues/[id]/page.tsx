@@ -14,10 +14,10 @@ export default function CatalogueDetailPage({
 }: {
   params: Promise<{ id: string }>;
 }) {
-  const { id }                    = use(params);
+  const { id } = use(params);
   const [catalogue, setCatalogue] = useState<Catalogue | null>(null);
-  const [numPages, setNumPages]   = useState<number>(0);
-  const [pdfError, setPdfError]   = useState<string | null>(null);
+  const [numPages, setNumPages] = useState<number>(0);
+  const [pdfError, setPdfError] = useState<string | null>(null);
 
   useEffect(() => {
     fetch(`/api/catalogues/${id}`)
@@ -35,44 +35,67 @@ export default function CatalogueDetailPage({
     setPdfError("Failed to load PDF. Please try again or download the file.");
   }
 
-  if (!catalogue) return <div className = "p-4">Loading...</div>;
+  if (!catalogue)
+    return (
+      <div className="bg-gray-50 py-4">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <nav className="flex items-center space-x-2 text-sm">
+            <Link href="/" className="text-red-600 hover:text-red-700">
+              Trang chủ
+            </Link>
+            <span className="text-gray-500">/</span>
+            <Link
+              href="/catalogues"
+              className="text-red-600 hover:text-red-700"
+            >
+              Catalogue
+            </Link>
+          </nav>
+        </div>
+      </div>
+    );
 
   return (
     <>
       {/* Breadcrumb */}
-      <div  className = "bg-gray-50 py-4">
-      <div  className = "max-w-7xl mx-auto px-6 lg:px-8">
-      <nav  className = "flex items-center space-x-2 text-sm">
-      <Link href      = "/" className = "text-red-600 hover:text-red-700">
+      <div className="bg-gray-50 py-4">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <nav className="flex items-center space-x-2 text-sm">
+            <Link href="/" className="text-red-600 hover:text-red-700">
               Trang chủ
             </Link>
-            <span className = "text-gray-500">/</span>
-            <Link href      = "/catalogues" className = "text-red-600 hover:text-red-700">
+            <span className="text-gray-500">/</span>
+            <Link
+              href="/catalogues"
+              className="text-red-600 hover:text-red-700"
+            >
               Catalogue
             </Link>
-            <span className = "text-gray-500">/</span>
-            <span className = "text-gray-900 font-medium">{catalogue.name}</span>
+            <span className="text-gray-500">/</span>
+            <span className="text-gray-900 font-medium">{catalogue.name}</span>
           </nav>
         </div>
       </div>
 
       {/* Header */}
-      <div className = "bg-primary text-white py-16">
-      <div className = "container-limited text-center">
-      <h1  className = "text-3xl md:text-4xl font-bold font-heading">{catalogue.name}</h1>
+      <div className="bg-primary text-white py-16">
+        <div className="container-limited text-center">
+          <h1 className="text-3xl md:text-4xl font-bold font-heading">
+            {catalogue.name}
+          </h1>
         </div>
       </div>
 
       {/* PDF Viewer */}
-      <div className = "max-w-4xl mx-auto p-4">
+      <div className="max-w-4xl mx-auto p-4">
         {pdfError ? (
-          <div className = "mb-4 p-4 bg-red-50 border border-red-200 rounded">
-          <p   className = "text-red-600">{pdfError}</p>
+          <div className="mb-4 p-4 bg-red-50 border border-red-200 rounded">
+            <p className="text-red-600">{pdfError}</p>
             <a
-              href      = {catalogue.pdfLink}
-              target    = "_blank"
-              rel       = "noopener noreferrer"
-              className = "text-blue-600 underline mt-2 inline-block"
+              href={catalogue.pdfLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 underline mt-2 inline-block"
             >
               Download PDF instead
             </a>

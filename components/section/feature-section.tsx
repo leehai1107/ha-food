@@ -1,12 +1,25 @@
 "use client";
 import Image from "next/image";
-import { defaultClients } from "@/constants/clients";
 import { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 
-const FeaturedClientsSection = () => {
-  const displayClients = defaultClients;
+interface Client {
+  id: number;
+  name: string;
+  logoUrl: string;
+  websiteUrl: string;
+  description: string;
+  position: number;
+  isActive: boolean;
+}
+
+interface FeaturedClientsSectionProps {
+  clients: Client[];
+}
+
+const FeaturedClientsSection = ({ clients }: FeaturedClientsSectionProps) => {
+  const displayClients = clients.filter((client) => client.isActive);
 
   // Check if window is mobile (ssr safe)
   const [isMobile, setIsMobile] = useState(false);
@@ -53,11 +66,7 @@ const FeaturedClientsSection = () => {
   );
 };
 
-const ClientCard = ({
-  client,
-}: {
-  client: { id: number; name: string; logoUrl: string };
-}) => (
+const ClientCard = ({ client }: { client: Client }) => (
   <div className="flex-shrink-0 group">
     <div className="w-44 h-36 flex items-center justify-center bg-white rounded-lg shadow-sm hover:shadow-md transition-all duration-300 p-5">
       <Image

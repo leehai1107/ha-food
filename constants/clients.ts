@@ -1,4 +1,5 @@
-export const defaultClients = [
+export const defaultClients = 
+[
   {
     id: 1,
     name: 'Bách Mỹ Group',
@@ -6,9 +7,7 @@ export const defaultClients = [
     websiteUrl: 'https://bachmygroup.vn',
     description: 'Tập đoàn đa ngành hàng đầu Việt Nam',
     position: 0,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 2,
@@ -17,9 +16,7 @@ export const defaultClients = [
     websiteUrl: 'https://davicom.com.vn',
     description: 'CÔNG TY CP TRUYỀN THÔNG VÀ CÔNG NGHỆ ĐẠI VIỆT',
     position: 1,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 3,
@@ -28,9 +25,7 @@ export const defaultClients = [
     websiteUrl: 'https://kimdongduong.com.vn',
     description: 'Công ty TNHH Công nghệ và Truyền thông Kim Đông Dương',
     position: 2,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 4,
@@ -39,9 +34,7 @@ export const defaultClients = [
     websiteUrl: 'https://bidiphar.com',
     description: 'CÔNG TY CỔ PHẦN DƯỢC TRANG BỊ THIẾT BỊ Y TẾ BÌNH ĐỊNH BIDIPHAR',
     position: 3,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 5,
@@ -50,9 +43,7 @@ export const defaultClients = [
     websiteUrl: 'https://redwok.com.vn',
     description: 'CÔNG TY CỔ PHẦN ẨM THỰC CHẢO ĐỎ',
     position: 4,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 6,
@@ -61,9 +52,7 @@ export const defaultClients = [
     websiteUrl: 'https://news.vietinfo.tech',
     description: 'CÔNG TY CỔ PHẦN CÔNG NGHỆ VIETINFO',
     position: 5,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 7,
@@ -72,9 +61,7 @@ export const defaultClients = [
     websiteUrl: 'https://digibird.co',
     description: 'CÔNG TY CỔ PHẦN DIGIBIRD',
     position: 6,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 8,
@@ -83,9 +70,7 @@ export const defaultClients = [
     websiteUrl: 'https://sapp.edu.vn/',
     description: 'CÔNG TY CỔ PHẦN GIÁO DỤC SAPP',
     position: 7,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 9,
@@ -94,9 +79,7 @@ export const defaultClients = [
     websiteUrl: 'https://www.vietjetair.com',
     description: 'CÔNG TY CỔ PHẦN HÀNG KHÔNG VIETJET',
     position: 8,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 10,
@@ -105,9 +88,7 @@ export const defaultClients = [
     websiteUrl: 'http://www.parispharm.net',
     description: 'CÔNG TY CỔ PHẦN PARIS PHARM',
     position: 9,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 11,
@@ -116,9 +97,7 @@ export const defaultClients = [
     websiteUrl: 'https://keycom.vn',
     description: 'CÔNG TY CỔ PHẦN THƯƠNG MẠI VÀ TRUYỀN THÔNG KEY',
     position: 10,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 12,
@@ -127,9 +106,7 @@ export const defaultClients = [
     websiteUrl: 'https://flamingocorp.vn',
     description: 'CÔNG TY CỔ PHẦN TRUYỀN THÔNG SỐ FLAMINGO',
     position: 11,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 13,
@@ -138,9 +115,7 @@ export const defaultClients = [
     websiteUrl: 'https://www.quanutut.com',
     description: 'CÔNG TY CỔ PHẦN ỤT ỤT',
     position: 12,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 14,
@@ -149,9 +124,7 @@ export const defaultClients = [
     websiteUrl: 'http://megauni.vn',
     description: 'CÔNG TY CỔ PHẦN VIỆN PHÁT TRIỂN LÃNH ĐẠO',
     position: 13,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 15,
@@ -160,9 +133,7 @@ export const defaultClients = [
     websiteUrl: 'https://wefoodjsc.com',
     description: 'CÔNG TY CỔ PHẦN WE FOOD',
     position: 14,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 16,
@@ -171,9 +142,7 @@ export const defaultClients = [
     websiteUrl: 'https://www.cathay-ins.com.vn',
     description: 'CÔNG TY TNHH BẢO HIỂM PHI NHÂN THỌ CATHAY VIỆT NAM',
     position: 15,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 17,
@@ -182,9 +151,7 @@ export const defaultClients = [
     websiteUrl: 'https://coen-bio.com',
     description: 'CÔNG TY TNHH COEN-BIO',
     position: 16,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 18,
@@ -193,9 +160,7 @@ export const defaultClients = [
     websiteUrl: 'https://congnghegiganet.com',
     description: 'CÔNG TY TNHH CÔNG NGHỆ GIGA-NET',
     position: 17,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 19,
@@ -204,9 +169,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'CÔNG TY TNHH CÔNG NGHIỆP XINGLILAI - VIỆT NAM',
     position: 18,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 20,
@@ -215,9 +178,7 @@ export const defaultClients = [
     websiteUrl: 'https://fudico.com.vn',
     description: 'CÔNG TY TNHH FUDICO',
     position: 19,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 21,
@@ -226,9 +187,7 @@ export const defaultClients = [
     websiteUrl: 'https://fujivietnam.com',
     description: 'CÔNG TY TNHH FUJI VIỆT NAM',
     position: 20,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 22,
@@ -237,9 +196,7 @@ export const defaultClients = [
     websiteUrl: 'https://nikio.com.vn',
     description: 'CÔNG TY TNHH FUNCO',
     position: 21,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 23,
@@ -248,9 +205,7 @@ export const defaultClients = [
     websiteUrl: 'https://www.garmin.com',
     description: 'CÔNG TY TNHH GARMIN VIỆT NAM',
     position: 22,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 24,
@@ -259,9 +214,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'CÔNG TY TNHH GOC HEALTHY',
     position: 23,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 25,
@@ -270,9 +223,7 @@ export const defaultClients = [
     websiteUrl: 'http://www.wonderlands.com.vn',
     description: 'CÔNG TY TNHH KINH DOANH TƯ VẤN ĐẦU TƯ WONDER LAND',
     position: 24,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 26,
@@ -281,9 +232,7 @@ export const defaultClients = [
     websiteUrl: 'https://lanbena.com',
     description: 'CÔNG TY TNHH LANBENA',
     position: 25,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 27,
@@ -292,9 +241,7 @@ export const defaultClients = [
     websiteUrl: 'https://lemar.com.vn',
     description: 'CÔNG TY TNHH LEMAR VIỆT NAM',
     position: 26,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 28,
@@ -303,9 +250,7 @@ export const defaultClients = [
     websiteUrl: 'https://novojapan.com.vn',
     description: 'CÔNG TY TNHH LIÊN DOANH DẦU NHỜN NOVO JAPAN',
     position: 27,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 29,
@@ -314,9 +259,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'CÔNG TY TNHH MOHODO HOLDING',
     position: 28,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 30,
@@ -325,9 +268,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'CÔNG TY TNHH MỘT THÀNH VIÊN THẾ GIỚI IN ẤN',
     position: 29,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 31,
@@ -336,9 +277,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'CÔNG TY TNHH MỸ PHẨM BIO TECH',
     position: 30,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 32,
@@ -347,9 +286,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'CÔNG TY TNHH ON - GIFT VIỆT NAM',
     position: 31,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 33,
@@ -358,9 +295,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'CÔNG TY TNHH PHẦN MỀM LTV',
     position: 32,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 34,
@@ -369,9 +304,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'CÔNG TY TNHH PHÁT TRIỂN ĐÀO TẠO GIÁO DỤC THÀNH CÔNG',
     position: 33,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 35,
@@ -380,9 +313,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'CÔNG TY TNHH PHÁT TRIỂN HƯƠNG VIỆT',
     position: 34,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 36,
@@ -391,9 +322,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'CÔNG TY TNHH PHIÊN DỊCH CHUYÊN NGHIỆP QUỐC TẾ',
     position: 35,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 37,
@@ -402,9 +331,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'CÔNG TY TNHH PHỤ GIA NHỰA THÀNH LỘC',
     position: 36,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 38,
@@ -413,9 +340,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'CÔNG TY TNHH PHÚ HẢI TOÀN',
     position: 37,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 39,
@@ -424,9 +349,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'CÔNG TY TNHH SOUTHWESTGATE IMMIGRATION LEGAL GROUP',
     position: 38,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 40,
@@ -435,9 +358,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'CÔNG TY TNHH THƯƠNG MẠI HTC SÀI GÒN',
     position: 39,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 41,
@@ -446,9 +367,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'CÔNG TY TNHH THƯƠNG MẠI MILANO',
     position: 40,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 42,
@@ -457,9 +376,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'CÔNG TY TNHH THƯƠNG MẠI XUẤT NHẬP KHẨU NỘI THẤT Ô TÔ QUANG MINH',
     position: 41,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 43,
@@ -468,9 +385,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'CÔNG TY TNHH TI NO - CHI NHÁNH TI NO HÀ NỘI',
     position: 42,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 44,
@@ -479,9 +394,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'Công ty TNHH Nguyên Bảo Foods',
     position: 43,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 45,
@@ -490,9 +403,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'Becamex Hotel Thu Dau Mot',
     position: 44,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 46,
@@ -501,9 +412,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'BIODERMA',
     position: 45,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 47,
@@ -512,9 +421,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'minthacare',
     position: 46,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 48,
@@ -523,9 +430,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'nuxe',
     position: 47,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 49,
@@ -534,9 +439,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'QUAN DOAN Q12',
     position: 48,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 50,
@@ -545,9 +448,7 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'mien-nam',
     position: 49,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   },
   {
     id: 51,
@@ -556,8 +457,6 @@ export const defaultClients = [
     websiteUrl: '',
     description: 'final',
     position: 50,
-    isActive: true,
-    createdAt: '',
-    updatedAt: ''
+    isActive: true
   }
 ];

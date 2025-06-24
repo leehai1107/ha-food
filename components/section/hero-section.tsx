@@ -13,31 +13,11 @@ import {
 } from "lucide-react";
 import { HeroSlide } from "@/types";
 
-const slides: HeroSlide[] = [
-  {
-    id: 1,
-    title: "Thiên Cầu Vượng Khí",
-    subtitle:
-      "Thiên Cầu Vượng Khí là biểu tượng của sự may mắn và vượng khí...",
-    ctaText: "Xem Thêm",
-    ctaLink: "/products",
-    imageUrl: "/uploads/shared/images/banners/banner_1.webp",
-    type: "image",
-    position: 0,
-  },
-  {
-    id: 2,
-    title: "Video Giới Thiệu",
-    subtitle: "Đây là video giới thiệu sản phẩm nổi bật...",
-    ctaText: "Xem Video",
-    ctaLink: "/products",
-    videoUrl: "/uploads/shared/videos/banner_video.mp4",
-    type: "video",
-    position: 1,
-  },
-];
+interface HeroSectionProps {
+  slides: HeroSlide[];
+}
 
-export default function HeroSection() {
+export default function HeroSection({ slides }: HeroSectionProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   // Auto slide change every 5 seconds
@@ -46,7 +26,7 @@ export default function HeroSection() {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [slides.length]);
 
   return (
     <section className="relative w-full overflow-hidden">

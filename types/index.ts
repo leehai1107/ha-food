@@ -705,8 +705,6 @@ export interface Testimonial {
   rating: number;
   position: number;
   isActive: boolean;
-  createdAt: string;
-  updatedAt: string;
 }
 
 export type MediaType = "image" | "video";

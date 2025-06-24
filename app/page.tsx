@@ -6,7 +6,7 @@ import ProductsSection from "@/components/section/product-section";
 import TestimonialsSection from "@/components/section/testimonial-section";
 import CollectionSection from "@/components/section/collection-section";
 import { ScrollAnimation } from "@/components/ui/scroll-animation";
-import { collectionData } from "@/constants";
+import { getHomepageData } from "@/services/homepageService";
 
 export const metadata: Metadata = {
   title: "hafood - Quà tặng doanh nghiệp | Thiên Cầu Vượng Khí",
@@ -35,16 +35,18 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
+  const homepageData = await getHomepageData();
+
   return (
     <>
       <h1 className="hidden">hafood - Quà tặng doanh nghiệp</h1>
 
       {/* Hero Section - No suspense needed for LCP optimization */}
-      <HeroSection />
+      <HeroSection slides={homepageData.hero.slides} />
 
       {/* Collection Section */}
       <ScrollAnimation>
-        <CollectionSection data={collectionData} />
+        <CollectionSection data={homepageData.collection} />
       </ScrollAnimation>
 
       {/* Products Section */}
@@ -54,17 +56,17 @@ export default async function Home() {
 
       {/* About Section */}
       <ScrollAnimation>
-        <AboutSection />
+        <AboutSection data={homepageData.about} />
       </ScrollAnimation>
 
       {/* Featured Section */}
       <ScrollAnimation>
-        <FeaturedClientsSection />
+        <FeaturedClientsSection clients={homepageData.features.clients} />
       </ScrollAnimation>
 
       {/* Testimonials Section */}
       <ScrollAnimation>
-        <TestimonialsSection />
+        <TestimonialsSection testimonials={homepageData.testimonials.items} />
       </ScrollAnimation>
     </>
   );

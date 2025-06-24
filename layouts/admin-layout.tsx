@@ -23,6 +23,13 @@ export default function AdminLayout({
       path: "/admin",
     },
     {
+      id: "homepage",
+      name: "Trang chủ",
+      icon: "🏠",
+      description: "Quản lý trang chủ",
+      path: "/admin/homepage",
+    },
+    {
       id: "products",
       name: "Sản phẩm",
       icon: "🗃️",

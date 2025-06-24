@@ -1,0 +1,572 @@
+{
+  "hero": {
+    "slides": [
+      {
+        "id": 1,
+        "title": "Thiên Cầu Vượng Khí",
+        "subtitle": "Thiên Cầu Vượng Khí là biểu tượng của sự may mắn và vượng khí, như một lời chúc phúc gửi đến người nhận, đem lại niềm vui, sự bình an và thịnh vượng trong cuộc sống.",
+        "ctaText": "Xem Thêm",
+        "ctaLink": "/products",
+        "imageUrl": "/uploads/shared/images/banners/banner_1.webp",
+        "type": "image",
+        "position": 0
+      }
+    ]
+  },
+  "collection": {
+    "id": 1,
+    "mediaType": "image",
+    "mediaUrl": "/uploads/shared/images/banners/banner_tong_hop.webp",
+    "content": "## [color=#B0041A]BỘ SƯU TẬP TRUNG THU 2025[/color]:\n### _[color=#FFC300]THIÊN HƯƠNG NGUYỆT DẠ[/color]_\n\nKính chào Quý doanh nghiệp và quý khách hàng,\n\nMùa trung thu 2025 đang đến gần, mang theo ánh trăng rằm sáng ngời và không khí đoàn viên ấm áp. Đây là thời điểm tuyệt vời để chúng ta cùng nhau tôn vinh những giá trị truyền thống, đồng thời khẳng định sự phát triển và thành công của đất nước.\n\nVới tinh thần đó, chúng tôi hân hạnh giới thiệu bộ sưu tập\n### [color=#B0041A]\"THIÊN HƯƠNG NGUYỆT DẠ\":[/color]\n\n- [Khổng Tước Hướng Nguyệt](https://hafood.vn/)\n- [Thiên Cầu Vượng Khí](https://hafood.vn/)\n- [Ngọc Quý Tam Phương](https://hafood.vn/)\n- [Nguyệt Quang Tam Miền](https://hafood.vn/)\n- [Tam Ngư Cát Hạnh](https://hafood.vn/)\n- [Hoàng Kim Phồn Thịnh](https://hafood.vn/)\n\nChúng tôi tin rằng, với bộ sưu tập bánh trung thu **[color=#B0041A]THIÊN HƯƠNG NGUYỆT DẠ[/color]**, quý khách hàng sẽ có những giây phút thưởng thức trọn vẹn và ý nghĩa bên gia đình và người thân yêu."
+  },
+  "about": {
+    "imageUrl": "/uploads/shared/images/about/sm.webp",
+    "imageUrlMd": "/uploads/shared/images/about/md.webp",
+    "imageUrlLg": "/uploads/shared/images/about/lg.webp"
+  },
+  "features": {
+    "clients": [
+      {
+        "id": 1,
+        "name": "Bách Mỹ Group",
+        "logoUrl": "/uploads/shared/images/featureclients/BackMyLogo.webp",
+        "websiteUrl": "https://bachmygroup.vn",
+        "description": "Tập đoàn đa ngành hàng đầu Việt Nam",
+        "position": 0,
+        "isActive": true
+      },
+      {
+        "id": 2,
+        "name": "DAVICOM",
+        "logoUrl": "/uploads/shared/images/featureclients/davicom.webp",
+        "websiteUrl": "https://davicom.com.vn",
+        "description": "CÔNG TY CP TRUYỀN THÔNG VÀ CÔNG NGHỆ ĐẠI VIỆT",
+        "position": 1,
+        "isActive": true
+      },
+      {
+        "id": 3,
+        "name": "Kim Đông Dương",
+        "logoUrl": "/uploads/shared/images/featureclients/kimdongduong.webp",
+        "websiteUrl": "https://kimdongduong.com.vn",
+        "description": "Công ty TNHH Công nghệ và Truyền thông Kim Đông Dương",
+        "position": 2,
+        "isActive": true
+      },
+      {
+        "id": 4,
+        "name": "Bidiphar",
+        "logoUrl": "/uploads/shared/images/featureclients/BIDIPHAR.webp",
+        "websiteUrl": "https://bidiphar.com",
+        "description": "CÔNG TY CỔ PHẦN DƯỢC TRANG BỊ THIẾT BỊ Y TẾ BÌNH ĐỊNH BIDIPHAR",
+        "position": 3,
+        "isActive": true
+      },
+      {
+        "id": 5,
+        "name": "RedWok (Chảo đỏ)",
+        "logoUrl": "/uploads/shared/images/featureclients/ChaoDo.webp",
+        "websiteUrl": "https://redwok.com.vn",
+        "description": "CÔNG TY CỔ PHẦN ẨM THỰC CHẢO ĐỎ",
+        "position": 4,
+        "isActive": true
+      },
+      {
+        "id": 6,
+        "name": "VietInfo",
+        "logoUrl": "/uploads/shared/images/featureclients/VIETINFO.webp",
+        "websiteUrl": "https://news.vietinfo.tech",
+        "description": "CÔNG TY CỔ PHẦN CÔNG NGHỆ VIETINFO",
+        "position": 5,
+        "isActive": true
+      },
+      {
+        "id": 7,
+        "name": "Digibird",
+        "logoUrl": "/uploads/shared/images/featureclients/Digibird.webp",
+        "websiteUrl": "https://digibird.co",
+        "description": "CÔNG TY CỔ PHẦN DIGIBIRD",
+        "position": 6,
+        "isActive": true
+      },
+      {
+        "id": 8,
+        "name": "SAPP",
+        "logoUrl": "/uploads/shared/images/featureclients/SAPP.webp",
+        "websiteUrl": "https://sapp.edu.vn/",
+        "description": "CÔNG TY CỔ PHẦN GIÁO DỤC SAPP",
+        "position": 7,
+        "isActive": true
+      },
+      {
+        "id": 9,
+        "name": "VIETJET",
+        "logoUrl": "/uploads/shared/images/featureclients/VIETJET.webp",
+        "websiteUrl": "https://www.vietjetair.com",
+        "description": "CÔNG TY CỔ PHẦN HÀNG KHÔNG VIETJET",
+        "position": 8,
+        "isActive": true
+      },
+      {
+        "id": 10,
+        "name": "PARISPHARM",
+        "logoUrl": "/uploads/shared/images/featureclients/PARISPHARM.webp",
+        "websiteUrl": "http://www.parispharm.net",
+        "description": "CÔNG TY CỔ PHẦN PARIS PHARM",
+        "position": 9,
+        "isActive": true
+      },
+      {
+        "id": 11,
+        "name": "KEYCOM",
+        "logoUrl": "/uploads/shared/images/featureclients/KEYCOM.webp",
+        "websiteUrl": "https://keycom.vn",
+        "description": "CÔNG TY CỔ PHẦN THƯƠNG MẠI VÀ TRUYỀN THÔNG KEY",
+        "position": 10,
+        "isActive": true
+      },
+      {
+        "id": 12,
+        "name": "FLAMINGO",
+        "logoUrl": "/uploads/shared/images/featureclients/FLAMINGO.webp",
+        "websiteUrl": "https://flamingocorp.vn",
+        "description": "CÔNG TY CỔ PHẦN TRUYỀN THÔNG SỐ FLAMINGO",
+        "position": 11,
+        "isActive": true
+      },
+      {
+        "id": 13,
+        "name": "Ụt Ụt",
+        "logoUrl": "/uploads/shared/images/featureclients/utut.webp",
+        "websiteUrl": "https://www.quanutut.com",
+        "description": "CÔNG TY CỔ PHẦN ỤT ỤT",
+        "position": 12,
+        "isActive": true
+      },
+      {
+        "id": 14,
+        "name": "VIET GROW",
+        "logoUrl": "/uploads/shared/images/featureclients/VIETGROW.webp",
+        "websiteUrl": "http://megauni.vn",
+        "description": "CÔNG TY CỔ PHẦN VIỆN PHÁT TRIỂN LÃNH ĐẠO",
+        "position": 13,
+        "isActive": true
+      },
+      {
+        "id": 15,
+        "name": "WE FOOD",
+        "logoUrl": "/uploads/shared/images/featureclients/WEFOOD.webp",
+        "websiteUrl": "https://wefoodjsc.com",
+        "description": "CÔNG TY CỔ PHẦN WE FOOD",
+        "position": 14,
+        "isActive": true
+      },
+      {
+        "id": 16,
+        "name": "CATHAY",
+        "logoUrl": "/uploads/shared/images/featureclients/CATHAY.webp",
+        "websiteUrl": "https://www.cathay-ins.com.vn",
+        "description": "CÔNG TY TNHH BẢO HIỂM PHI NHÂN THỌ CATHAY VIỆT NAM",
+        "position": 15,
+        "isActive": true
+      },
+      {
+        "id": 17,
+        "name": "COEN BIO",
+        "logoUrl": "/uploads/shared/images/featureclients/COEN.webp",
+        "websiteUrl": "https://coen-bio.com",
+        "description": "CÔNG TY TNHH COEN-BIO",
+        "position": 16,
+        "isActive": true
+      },
+      {
+        "id": 18,
+        "name": "GIGA NET",
+        "logoUrl": "/uploads/shared/images/featureclients/GIGA-NET.webp",
+        "websiteUrl": "https://congnghegiganet.com",
+        "description": "CÔNG TY TNHH CÔNG NGHỆ GIGA-NET",
+        "position": 17,
+        "isActive": true
+      },
+      {
+        "id": 19,
+        "name": "XINGLILAI - VIỆT NAM",
+        "logoUrl": "/uploads/shared/images/featureclients/XINGLILAI.webp",
+        "websiteUrl": "",
+        "description": "CÔNG TY TNHH CÔNG NGHIỆP XINGLILAI - VIỆT NAM",
+        "position": 18,
+        "isActive": true
+      },
+      {
+        "id": 20,
+        "name": "FUDICO",
+        "logoUrl": "/uploads/shared/images/featureclients/FUDICO.webp",
+        "websiteUrl": "https://fudico.com.vn",
+        "description": "CÔNG TY TNHH FUDICO",
+        "position": 19,
+        "isActive": true
+      },
+      {
+        "id": 21,
+        "name": "FUJI VIỆT NAM",
+        "logoUrl": "/uploads/shared/images/featureclients/FUJI.webp",
+        "websiteUrl": "https://fujivietnam.com",
+        "description": "CÔNG TY TNHH FUJI VIỆT NAM",
+        "position": 20,
+        "isActive": true
+      },
+      {
+        "id": 22,
+        "name": "FUNCO",
+        "logoUrl": "/uploads/shared/images/featureclients/FUNCO.webp",
+        "websiteUrl": "https://nikio.com.vn",
+        "description": "CÔNG TY TNHH FUNCO",
+        "position": 21,
+        "isActive": true
+      },
+      {
+        "id": 23,
+        "name": "GARMIN VIỆT NAM",
+        "logoUrl": "/uploads/shared/images/featureclients/GARMIN.webp",
+        "websiteUrl": "https://www.garmin.com",
+        "description": "CÔNG TY TNHH GARMIN VIỆT NAM",
+        "position": 22,
+        "isActive": true
+      },
+      {
+        "id": 24,
+        "name": "GOC HEALTHY",
+        "logoUrl": "/uploads/shared/images/featureclients/GOC-HEALTHY.webp",
+        "websiteUrl": "",
+        "description": "CÔNG TY TNHH GOC HEALTHY",
+        "position": 23,
+        "isActive": true
+      },
+      {
+        "id": 25,
+        "name": "WONDER LAND",
+        "logoUrl": "/uploads/shared/images/featureclients/WONDERLAND.webp",
+        "websiteUrl": "http://www.wonderlands.com.vn",
+        "description": "CÔNG TY TNHH KINH DOANH TƯ VẤN ĐẦU TƯ WONDER LAND",
+        "position": 24,
+        "isActive": true
+      },
+      {
+        "id": 26,
+        "name": "LANBENA",
+        "logoUrl": "/uploads/shared/images/featureclients/LANBENA.webp",
+        "websiteUrl": "https://lanbena.com",
+        "description": "CÔNG TY TNHH LANBENA",
+        "position": 25,
+        "isActive": true
+      },
+      {
+        "id": 27,
+        "name": "LEMAR VIỆT NAM",
+        "logoUrl": "/uploads/shared/images/featureclients/LEMAR.webp",
+        "websiteUrl": "https://lemar.com.vn",
+        "description": "CÔNG TY TNHH LEMAR VIỆT NAM",
+        "position": 26,
+        "isActive": true
+      },
+      {
+        "id": 28,
+        "name": "NOVO JAPAN",
+        "logoUrl": "/uploads/shared/images/featureclients/NOVO-JAPAN.webp",
+        "websiteUrl": "https://novojapan.com.vn",
+        "description": "CÔNG TY TNHH LIÊN DOANH DẦU NHỜN NOVO JAPAN",
+        "position": 27,
+        "isActive": true
+      },
+      {
+        "id": 29,
+        "name": "HOLDING",
+        "logoUrl": "/uploads/shared/images/featureclients/HOLDING.webp",
+        "websiteUrl": "",
+        "description": "CÔNG TY TNHH MOHODO HOLDING",
+        "position": 28,
+        "isActive": true
+      },
+      {
+        "id": 30,
+        "name": "Thế Giới In Ấn",
+        "logoUrl": "/uploads/shared/images/featureclients/TheGioiInAn.webp",
+        "websiteUrl": "",
+        "description": "CÔNG TY TNHH MỘT THÀNH VIÊN THẾ GIỚI IN ẤN",
+        "position": 29,
+        "isActive": true
+      },
+      {
+        "id": 31,
+        "name": "BIO TECH",
+        "logoUrl": "/uploads/shared/images/featureclients/BIO-TECH.webp",
+        "websiteUrl": "",
+        "description": "CÔNG TY TNHH MỸ PHẨM BIO TECH",
+        "position": 30,
+        "isActive": true
+      },
+      {
+        "id": 32,
+        "name": "ON - GIFT VIỆT NAM",
+        "logoUrl": "/uploads/shared/images/featureclients/ON-GIFT.webp",
+        "websiteUrl": "",
+        "description": "CÔNG TY TNHH ON - GIFT VIỆT NAM",
+        "position": 31,
+        "isActive": true
+      },
+      {
+        "id": 33,
+        "name": "LTV",
+        "logoUrl": "/uploads/shared/images/featureclients/LTV.webp",
+        "websiteUrl": "",
+        "description": "CÔNG TY TNHH PHẦN MỀM LTV",
+        "position": 32,
+        "isActive": true
+      },
+      {
+        "id": 34,
+        "name": "VTEDCO",
+        "logoUrl": "/uploads/shared/images/featureclients/VTEDCO.webp",
+        "websiteUrl": "",
+        "description": "CÔNG TY TNHH PHÁT TRIỂN ĐÀO TẠO GIÁO DỤC THÀNH CÔNG",
+        "position": 33,
+        "isActive": true
+      },
+      {
+        "id": 35,
+        "name": "Huơng Việt",
+        "logoUrl": "/uploads/shared/images/featureclients/HUONG-VIET.webp",
+        "websiteUrl": "",
+        "description": "CÔNG TY TNHH PHÁT TRIỂN HƯƠNG VIỆT",
+        "position": 34,
+        "isActive": true
+      },
+      {
+        "id": 36,
+        "name": "INTERPRO TRANS",
+        "logoUrl": "/uploads/shared/images/featureclients/INTERPRO-TRANS.webp",
+        "websiteUrl": "",
+        "description": "CÔNG TY TNHH PHIÊN DỊCH CHUYÊN NGHIỆP QUỐC TẾ",
+        "position": 35,
+        "isActive": true
+      },
+      {
+        "id": 37,
+        "name": "THÀNH LỘC",
+        "logoUrl": "/uploads/shared/images/featureclients/THANH-LOC.webp",
+        "websiteUrl": "",
+        "description": "CÔNG TY TNHH PHỤ GIA NHỰA THÀNH LỘC",
+        "position": 36,
+        "isActive": true
+      },
+      {
+        "id": 38,
+        "name": "PHÚ HẢI TOÀN",
+        "logoUrl": "/uploads/shared/images/featureclients/PHU-HAI-TOAN.webp",
+        "websiteUrl": "",
+        "description": "CÔNG TY TNHH PHÚ HẢI TOÀN",
+        "position": 37,
+        "isActive": true
+      },
+      {
+        "id": 39,
+        "name": "IMMIGRATION LEGAL GROUP",
+        "logoUrl": "/uploads/shared/images/featureclients/IMMIGRATION-LEGAL-GROUP.webp",
+        "websiteUrl": "",
+        "description": "CÔNG TY TNHH SOUTHWESTGATE IMMIGRATION LEGAL GROUP",
+        "position": 38,
+        "isActive": true
+      },
+      {
+        "id": 40,
+        "name": "HTC SÀI GÒN",
+        "logoUrl": "/uploads/shared/images/featureclients/HTC-SAI-GON.webp",
+        "websiteUrl": "",
+        "description": "CÔNG TY TNHH THƯƠNG MẠI HTC SÀI GÒN",
+        "position": 39,
+        "isActive": true
+      },
+      {
+        "id": 41,
+        "name": "MILANO",
+        "logoUrl": "/uploads/shared/images/featureclients/MILANO.webp",
+        "websiteUrl": "",
+        "description": "CÔNG TY TNHH THƯƠNG MẠI MILANO",
+        "position": 40,
+        "isActive": true
+      },
+      {
+        "id": 42,
+        "name": "NỘI THẤT Ô TÔ QUANG MINH",
+        "logoUrl": "/uploads/shared/images/featureclients/NHAT-OTOC.webp",
+        "websiteUrl": "",
+        "description": "CÔNG TY TNHH THƯƠNG MẠI XUẤT NHẬP KHẨU NỘI THẤT Ô TÔ QUANG MINH",
+        "position": 41,
+        "isActive": true
+      },
+      {
+        "id": 43,
+        "name": "TI NO",
+        "logoUrl": "/uploads/shared/images/featureclients/TI-NO.webp",
+        "websiteUrl": "",
+        "description": "CÔNG TY TNHH TI NO - CHI NHÁNH TI NO HÀ NỘI",
+        "position": 42,
+        "isActive": true
+      },
+      {
+        "id": 44,
+        "name": "Nguyên Bảo Foods",
+        "logoUrl": "/uploads/shared/images/featureclients/NGUYEN-BAO-FOODS.webp",
+        "websiteUrl": "",
+        "description": "Công ty TNHH Nguyên Bảo Foods",
+        "position": 43,
+        "isActive": true
+      },
+      {
+        "id": 45,
+        "name": "Becamex Hotel Thu Dau Mot",
+        "logoUrl": "/uploads/shared/images/featureclients/BECAMEX-HOTEL-THU-DAU-MOT.webp",
+        "websiteUrl": "",
+        "description": "Becamex Hotel Thu Dau Mot",
+        "position": 44,
+        "isActive": true
+      },
+      {
+        "id": 46,
+        "name": "BIODERMA",
+        "logoUrl": "/uploads/shared/images/featureclients/BIODERMA.webp",
+        "websiteUrl": "",
+        "description": "BIODERMA",
+        "position": 45,
+        "isActive": true
+      },
+      {
+        "id": 47,
+        "name": "minthacare",
+        "logoUrl": "/uploads/shared/images/featureclients/minthacare.webp",
+        "websiteUrl": "",
+        "description": "minthacare",
+        "position": 46,
+        "isActive": true
+      },
+      {
+        "id": 48,
+        "name": "nuxe",
+        "logoUrl": "/uploads/shared/images/featureclients/nuxe.webp",
+        "websiteUrl": "",
+        "description": "nuxe",
+        "position": 47,
+        "isActive": true
+      },
+      {
+        "id": 49,
+        "name": "QUAN DOAN Q12",
+        "logoUrl": "/uploads/shared/images/featureclients/QUAN-DOAN-Q12.webp",
+        "websiteUrl": "",
+        "description": "QUAN DOAN Q12",
+        "position": 48,
+        "isActive": true
+      },
+      {
+        "id": 50,
+        "name": "mien-nam",
+        "logoUrl": "/uploads/shared/images/featureclients/mien-nam.webp",
+        "websiteUrl": "",
+        "description": "mien-nam",
+        "position": 49,
+        "isActive": true
+      },
+      {
+        "id": 51,
+        "name": "final",
+        "logoUrl": "/uploads/shared/images/featureclients/final.webp",
+        "websiteUrl": "",
+        "description": "final",
+        "position": 50,
+        "isActive": true
+      }
+    ]
+  },
+  "testimonials": {
+    "items": [
+      {
+        "id": 1,
+        "name": "Chị Nhung",
+        "location": "Trưởng phòng thu mua công ty Fuji VietNam",
+        "type": "",
+        "content": "Hộp quà được đóng gói cẩn thận, đảm bảo an toàn trong quá trình vận chuyển. Chúng tôi đã tặng hộp quà này cho đối tác và nhân viên trong công ty dịp trung thu năm ngoái. Năm nay lại tiếp tục đặt bên Hafood vì siêu chất lượng nhé!",
+        "avatarUrl": "/uploads/shared/images/customers/1.webp",
+        "rating": 5,
+        "position": 0,
+        "isActive": true,
+        "createdAt": "2024-01-01T00:00:00.000Z",
+        "updatedAt": "2024-01-01T00:00:00.000Z"
+      },
+      {
+        "id": 2,
+        "name": "Chị Hà",
+        "location": "Giám Đốc Chuỗi Spa Thảo Ngọc",
+        "type": "",
+        "content": "Thiết kế hộp quà rất đẹp mắt và tinh tế, phù hợp với nhiều đối tượng khách hàng. Vị bánh phong phú và cũng có nhiều vị rất mới lạ, nhưng ngon lắm nha. Cảm ơn Hafood đã cùng tạo nên một mùa Trung Thu tuyệt vời.",
+        "avatarUrl": "/uploads/shared/images/customers/2.webp",
+        "rating": 5,
+        "position": 1,
+        "isActive": true,
+        "createdAt": "2024-01-01T00:00:00.000Z",
+        "updatedAt": "2024-01-01T00:00:00.000Z"
+      },
+      {
+        "id": 1750744075531,
+        "name": "Chị Vân",
+        "location": "Giám đốc doanh nghiệp",
+        "type": "",
+        "content": "Chúng tôi rất thích sự chăm chút tỉ mỉ trong từng chi tiết của hộp quà. Nhận bánh về mọi người trong công ty đều khen bánh sang quá, đáng tiền cực kì. Luôn ủng hộ Hafood.",
+        "avatarUrl": "/uploads/shared/images/customers/3.webp",
+        "rating": 5,
+        "position": 2,
+        "isActive": true,
+        "createdAt": "2025-06-24T05:47:55.531Z",
+        "updatedAt": "2025-06-24T05:47:55.531Z"
+      },
+      {
+        "id": 1750744102606,
+        "name": "Chị Minh Anh",
+        "location": "HR công ty thực phẩm",
+        "type": "",
+        "content": "Hộp quà Trung thu của Hafood thật sự sang trọng và tinh tế, phù hợp làm quà tặng doanh nghiệp trong các dịp lễ, tết. Đợt trước có đặt quà tết cho công ty tại đây rồi, giờ thấy quảng cáo mẫu mới cho Trung thu phải tham khảo liền. Rất ưng ý.",
+        "avatarUrl": "/uploads/shared/images/customers/4.webp",
+        "rating": 5,
+        "position": 3,
+        "isActive": true,
+        "createdAt": "2025-06-24T05:48:22.606Z",
+        "updatedAt": "2025-06-24T05:48:22.606Z"
+      },
+      {
+        "id": 1750744134225,
+        "name": "Chị Thu Hà",
+        "location": "Giám đốc doanh nghiệp",
+        "type": "",
+        "content": "Khách hàng của chúng tôi đều rất ấn tượng với hộp quà này. Tôi đã mua một số lượng để vừa trao quà dịp lễ cho nhân viên, vừa cho đối tác và khách hàng thân thiết. Vừa được ưu đãi tốt vừa chất lượng.",
+        "avatarUrl": "/uploads/shared/images/customers/5.webp",
+        "rating": 5,
+        "position": 4,
+        "isActive": true,
+        "createdAt": "2025-06-24T05:48:54.225Z",
+        "updatedAt": "2025-06-24T05:48:54.225Z"
+      },
+      {
+        "id": 1750744161446,
+        "name": "Chị Lan Chi",
+        "location": "HR Công ty công nghệ",
+        "type": "",
+        "content": "Rất hài lòng với chất lượng hộp quà, nguyên liệu tươi ngon và an toàn. Trước khi đặt số lượng lớn cho công ty thì tôi đã đặt thử bánh lẻ, ăn vị khá ngon, không bị ngọt gắt như các dòng truyền thống. Mẫu mã đa dạng, phù hợp nhiều đối tượng. Rất recommend.",
+        "avatarUrl": "/uploads/shared/images/customers/6.webp",
+        "rating": 5,
+        "position": 5,
+        "isActive": true,
+        "createdAt": "2025-06-24T05:49:21.446Z",
+        "updatedAt": "2025-06-24T05:49:21.446Z"
+      }
+    ]
+  }
+}
