@@ -128,7 +128,7 @@ const TestimonialsSection = ({ testimonials }: TestimonialSectionProps) => {
                 {/* Quote */}
                 <div className="relative">
                   <div className="text-4xl text-secondary opacity-20 absolute top-0 left-0 font-serif">
-                    "
+                    &quot;
                   </div>
                   <p className="text-lg text-primary-black mt-4 font-primary">
                     {testimonial.content}
