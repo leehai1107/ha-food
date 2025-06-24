@@ -16,8 +16,6 @@ const defaultTestimonials: Testimonial[] = [
     rating: 5,
     position: 0,
     isActive: true,
-    createdAt: "",
-    updatedAt: "",
   },
   {
     id: 2,
@@ -30,8 +28,6 @@ const defaultTestimonials: Testimonial[] = [
     rating: 5,
     position: 1,
     isActive: true,
-    createdAt: "",
-    updatedAt: "",
   },
   {
     id: 3,
@@ -44,8 +40,6 @@ const defaultTestimonials: Testimonial[] = [
     rating: 5,
     position: 2,
     isActive: true,
-    createdAt: "",
-    updatedAt: "",
   },
   {
     id: 4,
@@ -58,8 +52,6 @@ const defaultTestimonials: Testimonial[] = [
     rating: 5,
     position: 3,
     isActive: true,
-    createdAt: "",
-    updatedAt: "",
   },
   {
     id: 5,
@@ -72,8 +64,6 @@ const defaultTestimonials: Testimonial[] = [
     rating: 5,
     position: 4,
     isActive: true,
-    createdAt: "",
-    updatedAt: "",
   },
   {
     id: 6,
@@ -86,8 +76,6 @@ const defaultTestimonials: Testimonial[] = [
     rating: 5,
     position: 5,
     isActive: true,
-    createdAt: "",
-    updatedAt: "",
   },
 ];
 
