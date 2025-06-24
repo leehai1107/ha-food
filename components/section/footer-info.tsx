@@ -10,7 +10,7 @@ export default function FooterInfo() {
         width={245}
         height={69}
       />
-      <div className="flex flex-col gap-2  py-5">
+      <div className="flex flex-col gap-2 py-2">
         <h4 className="text-secondary font-semibold text-xl">
           CÔNG TY TNHH HA FOOD VN
         </h4>

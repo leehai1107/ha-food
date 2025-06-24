@@ -31,7 +31,7 @@ export default function HeroSection({ slides }: HeroSectionProps) {
   return (
     <section className="relative w-full overflow-hidden">
       {/* Slider */}
-      <div className="relative w-full aspect-video">
+      <div className="relative w-full aspect-video sm:aspect-[2.5/1] md:aspect-[2/1] lg:aspect-[5/2] xl:aspect-[21/9]">
         {slides.map((slide, index) => {
           const isActive = index === currentSlide;
           return (
@@ -70,7 +70,7 @@ export default function HeroSection({ slides }: HeroSectionProps) {
                   <h2 className="text-3xl md:text-6xl font-bold mt-6 text-shadow-lg font-heading">
                     {slide.title}
                   </h2>
-                  <p className="text-base md:text-xl mb-2 leading-relaxed text-shadow font-semibold font-primary">
+                  <p className="text-base md:text-xl my-2 leading-relaxed text-shadow font-semibold font-primary">
                     {slide.subtitle}
                   </p>
                   {slide.ctaLink && (
